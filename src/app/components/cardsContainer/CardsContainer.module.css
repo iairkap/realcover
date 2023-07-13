@@ -1,0 +1,114 @@
+.generalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10em;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 2em;
+  margin: 2em;
+}
+
+@media screen and (max-width: 1200px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 864px) {
+  .cardsContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.botonera,
+.botoneraB {
+  display: flex;
+  gap: 1.1875rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.paginationButton {
+  display: flex;
+  height: 2.25rem;
+  padding: 0.4375rem 0.3125rem;
+  align-items: flex-start;
+  gap: 0.625rem;
+  background: #56b947;
+  border: none;
+}
+
+.numberButton {
+  display: flex;
+  padding: 0.4375rem 0.75rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border: 0.5px solid #000;
+  background: #232323;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+}
+
+.numberButton:hover {
+  background: #56b947;
+  color: #000;
+  border: none;
+}
+
+.currentButton {
+  border: 0.5px solid #000;
+  background: #fff;
+  color: #000;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+}
+
+.botonOpciones {
+  display: flex;
+  width: 100%;
+  max-width: 15.9375rem;
+  height: 4.3125rem;
+  padding: 1.0625rem 3rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: #232323;
+  border: none;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+  margin-bottom: 1em;
+}
+
+.botonOpcionesActivo {
+  background: #56b947;
+  color: #000;
+}

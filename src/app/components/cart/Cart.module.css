@@ -1,0 +1,139 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.829);
+  z-index: 10;
+  backdrop-filter: blur(4.5px);
+}
+
+.modalContent {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 2rem;
+  width: 80%;
+  max-width: 30%; /* Ajusta este valor a tu gusto */
+  max-height: 90vh; /* Un poco menos que 100vh para evitar problemas con la barra de desplazamiento */
+  z-index: 20;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 900px) {
+  .modalContent {
+    width: 95%; /* Usa un ancho mayor en pantallas pequeñas */
+    max-width: none; /* Elimina el límite de ancho máximo en pantallas pequeñas */
+  }
+}
+
+.titulo {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.01375rem;
+}
+
+.line {
+  background-color: black;
+  width: 100%; /* Haz que la línea ocupe todo el ancho disponible */
+  height: 0.0625rem;
+}
+.subtitulos {
+  color: rgba(0, 0, 0, 0.56);
+  font-family: Roboto;
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.01031rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* .contenedorCard {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+} */
+.contenedorCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Añadido */
+  gap: 0.5rem;
+  width: 518px;
+}
+
+.contenedorImagen {
+  display: flex;
+  align-items: center; /* Centra la imagen verticalmente */
+}
+.subs {
+  color: #707070;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 139%;
+  letter-spacing: -0.00825rem;
+  margin: 0px;
+}
+
+/* .textoContenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6875rem;
+} */
+
+.textoContenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center; /* Centra el contenido verticalmente */
+  flex: 1; /* Ocupa todo el espacio disponible a la derecha de la imagen */
+}
+.textAlign {
+  display: flex;
+  gap: 9px;
+  margin-top: 0px;
+}
+
+.changeButton {
+  background-color: white;
+  border: none;
+  margin: 0px;
+}
+
+.changeContainer {
+  display: flex;
+  gap: 0.2rem;
+  margin: 0px;
+}
+
+.abajo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0; /* Asegúrate de que no haya relleno que pueda afectar al ancho */
+}

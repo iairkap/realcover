@@ -1,0 +1,16 @@
+.backgroundColor {
+  background-color: #232323;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+}
+
+.trapezoid {
+  width: 100vw;
+  height: 100vh;
+  background-color: #56b947;
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 30% 100%);
+  position: relative;
+}

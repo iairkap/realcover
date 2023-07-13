@@ -1,0 +1,66 @@
+.formSubs {
+  color: #000;
+  font-size: 1rem;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+}
+
+.inputContenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  min-width: 23.5rem;
+  max-width: 27.5rem;
+  height: 2.3125rem;
+  text-align: center;
+}
+
+.boton {
+  width: 100%;
+  max-width: 28.375rem;
+  height: 2.5625rem;
+  flex-shrink: 0;
+  border-radius: 0.1875rem;
+  background: #56b947;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.boton2 {
+  width: 100%;
+  max-width: 28.375rem;
+  height: 2.5625rem;
+  flex-shrink: 0;
+  border-radius: 0.1875rem;
+  background: white;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border: solid 0.5px #56b947;
+  color: #56b947;
+  font-size: 1.5rem;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.botonera {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
