@@ -1,4 +1,18 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+require("dotenv").config();
 
-module.exports = nextConfig
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  env: {
+    SECRET_COOKIE_PASSWORD: process.env.SECRET_COOKIE_PASSWORD,
+  },
+};
+
+module.exports = {
+  images: {
+    domains: [
+      "firebasestorage.googleapis.com",
+      "another-domain.com",
+      "yet-another-domain.com",
+    ],
+  },
+};
