@@ -40,19 +40,19 @@ export default NextAuth({
   },
   callbacks: {
     async jwt(token, user) {
-      // If user is sign in then add the user id to the token
       if (user) {
+        console.log("Adding user id to token", user.id);
         token.id = user.id;
       }
-
+      console.log("JWT callback - token", token);
       return token;
     },
     async session(session, token) {
-      // If token contains our user id then add it to the session object
       if (token.id) {
+        console.log("Adding user id to session", token.id);
         session.user.id = token.id;
       }
-
+      console.log("Session callback - session", session);
       return session;
     },
   },
