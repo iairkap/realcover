@@ -11,7 +11,6 @@ import { useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import EmailProvider from "next-auth/providers/email";
-
 function Fundas() {
   const { covers, isLoading, fullColor, cubrevalijas, maletines } = useContext(
     GlobalContext
@@ -19,7 +18,14 @@ function Fundas() {
 
   const { data: session, status: loading } = useSession();
 
-  console.log("Datos de la sesión:", session);
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user && user !== "undefined") {
+      console.log("Usuario desde localStorage:", JSON.parse(user));
+    } else {
+      console.log("No se encontró ningún usuario en localStorage");
+    }
+  }, []);
 
   // rest of your code
 

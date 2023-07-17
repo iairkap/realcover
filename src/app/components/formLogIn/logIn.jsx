@@ -31,6 +31,8 @@ function LogIn({ toggleForm }) {
 
         if (res.status === 200) {
           // Inicio de sesión exitoso. Redirigir al usuario a la página /store/fundas
+          localStorage.setItem("user", JSON.stringify(user));
+
           router.push("/store/fundas");
         } else {
           // El inicio de sesión falló. Mostrar un mensaje de error al usuario.
@@ -59,6 +61,7 @@ function LogIn({ toggleForm }) {
     });
     const data = await res.json();
     if (res.status === 200) {
+      localStorage.setItem("user", JSON.stringify(data.user));
       router.push("/store/fundas");
     } else {
     }

@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;900&display=swap");
+
+.titulo {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  color: #000;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.flechaDerecha {
+  transform: scaleX(-1);
+}
+.masVendidos {
+  max-height: 60%; /* Limita la altura de la imagen */
+  object-fit: contain;
+  max-width: 75%; /* Ajusta el ancho de la imagen al 75% del contenedor */
+}
+.masVendidosContenedor {
+  display: flex; /* Cambiado de block a flex */
+  flex-direction: column; /* Alinea los elementos hijos en una columna */
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+  min-height: 200px; /* Asegura que el contenedor tenga suficiente espacio para la imagen y el texto */
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: normal;
+  padding: 0.5rem;
+  color: white; /* Cambia el color del texto a negro para que sea más visible */
+}
+
+.masVendidosTitulo {
+  background-color: #56b947;
+  border-radius: 0.2rem;
+  padding: 0.5rem 1rem;
+  width: fit-content; /* Hace que el ancho del contenedor sea igual al del contenido */
+  margin: 0rem auto; /* Centra el contenedor debajo de la imagen */
+}
+
+.containerGeneral {
+  display: flex;
+  height: 50vh;
+}
+
+/* Estilos responsive */
+@media screen and (max-width: 600px) {
+  .masVendidos {
+    height: 10rem;
+  }
+}
+
+.background {
+  background-color: #f5f5f5;
+}

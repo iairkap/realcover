@@ -1,0 +1,66 @@
+.contenedor {
+  height: 600px;
+  width: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+}
+
+.titulo {
+  text-align: center;
+}
+
+.contenedorEstrellas {
+  display: flex;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textoContenedor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.subtitlos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.textGeneral {
+  display: flex;
+  flex-direction: column;
+}
+
+.parrafo {
+  width: 30rem;
+  height: 10.375rem;
+  flex-shrink: 0;
+  color: #000;
+  text-align: justify;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.contenedorDeB {
+  display: flex;
+  align-items: center;
+}
+
+.reviewsContenedor {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewGeneralContenedor {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+}

@@ -1,0 +1,20 @@
+.contenedor {
+  display: flex;
+  max-width: 100%;
+  margin-left: 0.6rem;
+  margin-top: 0;
+}
+
+.image1 {
+  flex: 7; /* 70% del espacio total */
+  position: relative;
+  width: 998px;
+  height: 702px;
+}
+
+.image2 {
+  flex: 3; /* 30% del espacio total */
+  position: relative;
+  width: 684px;
+  height: 702px;
+}
