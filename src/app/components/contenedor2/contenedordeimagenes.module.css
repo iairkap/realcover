@@ -1,20 +1,19 @@
 .contenedor {
   display: flex;
-  max-width: 100%;
-  margin-left: 0.6rem;
-  margin-top: 0;
+  width: 100vw; /* Ocupar todo el ancho de la pantalla */
+  height: 70vh; /* Ocupar todo el alto de la pantalla */
+  margin: 0;
+}
+
+.image1,
+.image2 {
+  position: relative;
 }
 
 .image1 {
-  flex: 7; /* 70% del espacio total */
-  position: relative;
-  width: 998px;
-  height: 702px;
+  flex: 5.3; /* 70% del espacio total */
 }
 
 .image2 {
   flex: 3; /* 30% del espacio total */
-  position: relative;
-  width: 684px;
-  height: 702px;
 }

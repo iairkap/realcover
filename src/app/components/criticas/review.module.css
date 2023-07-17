@@ -1,0 +1,38 @@
+.contenedorEstrellas {
+  display: flex;
+}
+
+.contenedorDeB {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contenedorParaCentrar {
+  display: flex;
+}
+
+.parrafo {
+  width: 30rem;
+  height: 10.375rem;
+  flex-shrink: 0;
+  color: #000;
+  text-align: justify;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.subtitlos {
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+  text-align: justify;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 100;
+  line-height: normal;
+}

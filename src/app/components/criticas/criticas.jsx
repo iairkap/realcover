@@ -37,7 +37,7 @@ function Criticas(props) {
             title={"Cubrevalija"}
             date={"23 may.2023"}
             content={
-              "Muy buen producto, funciona también para una valija más grande porque se estira el material. Súper útil para proteger la valija."
+              "Estas fundas de valija son increíbles, aguantaron mi último viaje sin problemas. La calidad es genial y el diseño es súper resistente. Ni un rasguño en mi valija, gracias a estas fundas. Además, son súper fáciles de identificar con esos colores llamativos. Y lo mejor de todo, ¡se pueden lavar! Estas fundas son un must-have para viajar tranquilo y con estilo.."
             }
           />
           <Review

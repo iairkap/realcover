@@ -1,5 +1,5 @@
 .generalContenedor {
-  height: 282px;
+  height: 50vh;
   width: 100%;
   background-color: #232323;
   display: flex;
@@ -44,4 +44,8 @@
   font-weight: 900;
   line-height: normal;
   margin-top: 0.5em; /* Agrega un poco de margen superior */
+}
+
+.keen-slider {
+  height: 50vh;
 }
