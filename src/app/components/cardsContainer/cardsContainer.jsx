@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CardsContainer.module.css";
-import Card from "../card/Card";
+import Card from "../card/card";
 import { aprevious, nextArrow } from "../../../../public/imagnes";
 import Image from "next/image";
 

@@ -11,6 +11,7 @@ import Categorias from "../components/categorias/categorias";
 import Contenedorimagenes from "../components/contenedor2/contenedorimagenes";
 import Elegir from "../components/elegir/elegir";
 import Criticas from "../components/criticas/criticas";
+import Contactanos from "../components/contactanos/contactanos";
 function Landing(props) {
   return (
     <div className={styles.backgroundColor}>
@@ -44,6 +45,7 @@ function Landing(props) {
       </div>
       <div>
         <Criticas />
+        <Contactanos />
       </div>
     </div>
   );

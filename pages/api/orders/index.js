@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import withSession from "@/session";
+import withSession from "../../../src/session";
 
 const prisma = new PrismaClient();
 
