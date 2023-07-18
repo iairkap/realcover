@@ -8,8 +8,7 @@ export default async function handler(req, res) {
     const { name, lastName, email, password, provider } = req.body;
 
     try {
-      const hashedPassword =
-        provider === "email" ? await hash(password, 10) : null;
+      const hashedPassword = password && (await hash(password, 10));
 
       const user = await prisma.user.create({
         data: {
@@ -20,8 +19,6 @@ export default async function handler(req, res) {
           provider,
         },
       });
-
-      user.password = undefined;
       res.status(200).json(user);
     } catch (error) {
       console.error(error);

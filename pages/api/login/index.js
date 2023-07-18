@@ -1,19 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../prisma/client";
+import jwt from "jsonwebtoken";
 import { compare } from "bcrypt";
-import withSession from "../../../src/session";
+import { serialize } from "cookie";
 
-const prisma = new PrismaClient();
-
-export default withSession(async (req, res) => {
-  if (req.method === "GET") {
-    const user = req.session.get("user");
-
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      res.status(401).json({ message: "Unauthorized" });
-    }
-  } else if (req.method === "POST") {
+export default async function loginHandler(req, res) {
+  if (req.method === "POST") {
     const { email, password } = req.body;
     const user = await prisma.user
       .findUnique({
@@ -26,7 +17,6 @@ export default withSession(async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
         return;
       });
-
     if (!user) {
       return res.status(400).json({ message: "Login failed" });
     }
@@ -34,11 +24,23 @@ export default withSession(async (req, res) => {
     if (!validate) {
       return res.status(400).json({ message: "Login failed" });
     }
-
-    req.session.set("user", { id: user.id, email: user.email });
-    await req.session.save();
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "24h",
+      }
+    );
+    const serializedCookie = serialize("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      maxAge: 86400,
+      path: "/",
+    });
+    res.setHeader("Set-Cookie", serializedCookie);
     res.status(200).json({ message: "Login successful" });
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }
-});
+}
