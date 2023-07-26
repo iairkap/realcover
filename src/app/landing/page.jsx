@@ -2,49 +2,36 @@
 
 import React from "react";
 import styles from "./landing.module.css";
-import mochila from "../../../public/mochila.jpeg";
 import Image from "next/image";
-import landing2 from "../../../public/landing2.jpg";
+
 import NavBar from "../components/navBar/navBar";
-import { logoReal } from "../../../public/imagnes";
 import Categorias from "../components/categorias/categorias";
 import Contenedorimagenes from "../components/contenedor2/contenedorimagenes";
 import Elegir from "../components/elegir/elegir";
 import Criticas from "../components/criticas/criticas";
 import Contactanos from "../components/contactanos/contactanos";
+import Pictures from "../components/pictures/pictures";
+import GridComponents from "../components/gridComponents/gridComponents";
+
 function Landing(props) {
   return (
     <div className={styles.backgroundColor}>
       <div className={styles.navBar}>
         <NavBar />
       </div>
-      <div className={styles.firstContainer}>
-        <Image
-          alt="Mochila Neoprene Real Cover"
-          src={mochila}
-          className={styles.background1}
-        ></Image>
-        <Image
-          alt="Maletin Neopren Real Cover"
-          src={landing2}
-          className={styles.background2}
-        ></Image>
-        <div className={styles.logoImage}>
-          <Image src={logoReal}></Image>
-          <h3 className={styles.subTitulo}>DISEÑO Y PROTECCION</h3>
-
-          <h4 className={styles.mayorista}>VENTA MAYORISTA</h4>
-        </div>
+      <Pictures />
+      {/*       <Categorias />
+       */}
+      <div>
+        <Elegir />
       </div>
-      <Categorias />
+      <GridComponents />{" "}
       <div>
         <Contenedorimagenes />
       </div>
       <div>
-        <Elegir />
-      </div>
-      <div>
-        <Criticas />
+        {/*         <Criticas />
+         */}{" "}
         <Contactanos />
       </div>
     </div>

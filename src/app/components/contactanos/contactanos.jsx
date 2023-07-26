@@ -81,7 +81,9 @@ function Contactanos(props) {
             >
               <Image
                 src={isWhatsappHovered ? whatsappverde : whatsapp}
-                className={styles.icon}
+                className={`${styles.icon} ${
+                  isWhatsappHovered ? styles.animatedIcon : ""
+                }`}
               />
               <p className={styles.number}>+5491154231080</p>
             </a>
@@ -92,7 +94,9 @@ function Contactanos(props) {
             >
               <Image
                 src={isEmailHovered ? emailverde : email}
-                className={styles.icon}
+                className={`${styles.icon} ${
+                  isEmailHovered ? styles.animatedIcon : ""
+                }`}
               />
               <p className={styles.number}>realcover@gmail.com</p>
             </div>

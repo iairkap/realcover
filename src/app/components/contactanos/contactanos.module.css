@@ -159,3 +159,23 @@
     transform: translateX(5px);
   }
 }
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animatedIcon {
+  animation: pulse 0.5s infinite;
+}
+
+.animatedIcon {
+  animation: pulse 0.5s ease-in-out infinite;
+}
