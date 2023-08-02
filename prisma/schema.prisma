@@ -9,6 +9,20 @@ datasource db {
   // shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+model Product {
+  id              Int               @id @default(autoincrement())
+  name            String
+  picture         String
+  price           Float
+  colors          String[]
+  productType     ProductType
+  description     String?
+  sizeNotebook    SizeNotebook[]
+  sizeTablet      SizeTablet[]
+  sizePortafolios SizePortafolios[]
+  orderDetails    OrderDetail[]
+}
+
 model User {
   id         Int     @id @default(autoincrement())
   name       String
@@ -23,115 +37,6 @@ model User {
   orders     Order[]
 }
 
-model NeopreneCover {
-  id           Int                 @id @default(autoincrement())
-  picture      String
-  price        Float
-  imageName    String?             @default("")
-  sizes        NeopreneCoverSize[]
-  orderDetails OrderDetail[]
-}
-
-model Maletines {
-  id           Int             @id @default(autoincrement())
-  picture      String
-  price        Float
-  imageName    String?         @default("")
-  size         MaletinesSize[]
-  orderDetails OrderDetail[]
-}
-
-model MaletinesSize {
-  maletinesId Int
-  sizeId      Int
-  maletines   Maletines @relation(fields: [maletinesId], references: [id])
-  size        Size      @relation(fields: [sizeId], references: [id])
-
-  @@id([maletinesId, sizeId])
-}
-
-model NeopreneCoverSize {
-  neopreneCoverId Int
-  sizeId          Int
-  neopreneCover   NeopreneCover @relation(fields: [neopreneCoverId], references: [id])
-  size            Size          @relation(fields: [sizeId], references: [id])
-
-  @@id([neopreneCoverId, sizeId])
-}
-
-model FullColorCoverSize {
-  fullColorCoverId Int
-  sizeId           Int
-  fullColorCover   maletinesFUllColor @relation(fields: [fullColorCoverId], references: [id])
-  size             Size               @relation(fields: [sizeId], references: [id])
-
-  @@id([fullColorCoverId, sizeId])
-}
-
-model maletinesFUllColor {
-  id           Int                  @id @default(autoincrement())
-  picture      String
-  price        Float
-  imageName    String?              @default("")
-  sizes        FullColorCoverSize[]
-  orderDetails OrderDetail[]
-}
-
-model Size {
-  id                  Int                  @id @default(autoincrement())
-  size                String
-  fullColorCoverSizes FullColorCoverSize[]
-  maletinesSizes      MaletinesSize[]
-  neopreneCoverSizes  NeopreneCoverSize[]
-}
-
-model tabletCover {
-  id           Int           @id @default(autoincrement())
-  size         SizeTablet
-  picture      String
-  price        Float
-  orderDetails OrderDetail[]
-}
-
-model cubrevalijas {
-  id              Int               @id @default(autoincrement())
-  picture         String
-  price           Float
-  imageName       String?           @default("")
-  cubreValijaSize CubreValijaSize[]
-  orderDetails    OrderDetail[]
-}
-
-model Sizeb {
-  id              Int               @id @default(autoincrement())
-  size            String
-  cubreValijaSize CubreValijaSize[]
-}
-
-model CubreValijaSize {
-  id             Int          @id @default(autoincrement())
-  sizeId         Int
-  cubrevalijasId Int
-  cubrevalijas   cubrevalijas @relation(fields: [cubrevalijasId], references: [id])
-  size           Sizeb        @relation(fields: [sizeId], references: [id])
-}
-
-model schoolBags {
-  id           Int           @id @default(autoincrement())
-  size         SizeNotebook
-  picture      String
-  price        Float
-  orderDetails OrderDetail[]
-}
-
-model portafolios {
-  id           Int             @id @default(autoincrement())
-  size         SizePortafolios
-  picture      String
-  price        Float
-  orderDetails OrderDetail[]
-}
-
 model Order {
   id           Int           @id @default(autoincrement())
   userId       Int
@@ -143,25 +48,24 @@ model Order {
 }
 
 model OrderDetail {
-  id                   Int                 @id @default(autoincrement())
-  orderId              Int
-  neopreneCoverId      Int?
-  tabletCoverId        Int?
-  maletinesId          Int?
-  maletinesFUllColorId Int?
-  schoolBagsId         Int?
-  portafoliosId        Int?
-  cubrevalijasId       Int?
-  quantity             Int
-  unitPrice            Float
-  cubrevalijas         cubrevalijas?       @relation(fields: [cubrevalijasId], references: [id])
-  maletinesFUllColor   maletinesFUllColor? @relation(fields: [maletinesFUllColorId], references: [id])
-  Maletines            Maletines?          @relation(fields: [maletinesId], references: [id])
-  neopreneCover        NeopreneCover?      @relation(fields: [neopreneCoverId], references: [id])
-  order                Order               @relation(fields: [orderId], references: [id])
-  portafolios          portafolios?        @relation(fields: [portafoliosId], references: [id])
-  schoolBags           schoolBags?         @relation(fields: [schoolBagsId], references: [id])
-  tabletCover          tabletCover?        @relation(fields: [tabletCoverId], references: [id])
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  unitPrice Float
+  size      String
+  products  Product @relation(fields: [productId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id])
+}
+
+enum ProductType {
+  NEOPRENE_COVER
+  MALETINES
+  MALETINES_FULL_COLOR
+  TABLET_COVER
+  CUBRE_VALIJAS
+  SCHOOL_BAGS
+  PORTAFOLIOS
 }
 
 enum SizeNotebook {
