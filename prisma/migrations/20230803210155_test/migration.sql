@@ -17,7 +17,6 @@ CREATE TABLE "Product" (
     "picture" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "colors" TEXT[],
-    "stock" INTEGER NOT NULL,
     "productType" "ProductType" NOT NULL,
     "description" TEXT,
     "sizeNotebook" "SizeNotebook"[],
@@ -61,6 +60,7 @@ CREATE TABLE "OrderDetail" (
     "productId" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
     "unitPrice" DOUBLE PRECISION NOT NULL,
+    "size" TEXT NOT NULL,
 
     CONSTRAINT "OrderDetail_pkey" PRIMARY KEY ("id")
 );

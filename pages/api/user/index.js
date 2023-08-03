@@ -16,7 +16,7 @@ export default async function handler(req, res) {
           lastName,
           email,
           password: hashedPassword,
-          provider,
+          provider: provider || "local",
         },
       });
       res.status(200).json(user);
