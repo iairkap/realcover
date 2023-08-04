@@ -78,6 +78,25 @@ export default async function handle(req, res) {
       console.error(error);
       throw new Error("Invalid cart item data");
     }
+  } else if (req.method === "GET") {
+    const { userId } = req.query;
+
+    if (!userId) {
+      res.status(400).json({ error: "User ID required." });
+      return;
+    }
+
+    try {
+      const orders = await prisma.order.findMany({
+        where: { userId: parseInt(userId) },
+        include: { orderDetail: true },
+      });
+
+      res.status(200).json(orders);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error retrieving user orders." });
+    }
   } else {
     // Maneja cualquier otro método HTTP
     res.status(405).json({ error: "Method not allowed." });

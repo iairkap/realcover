@@ -95,6 +95,7 @@ function Cart() {
       userId: user.id,
       cartItems: Object.values(cart).map((item) => ({
         id: item.id,
+        sizeId: item.sizeId, // Agrega esta línea
         type: item.type, // Asegúrate de que este campo se está guardando en el carrito
         quantity: item.quantity,
         price: item.price,

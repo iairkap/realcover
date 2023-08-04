@@ -1,9 +1,11 @@
 import React from "react";
+import PedidosContainer from "../components/PedidosCard/pedidoscardcontainer";
 
-function Profile(props) {
+function Profile() {
   return (
     <div>
-      <h1>this is my profile</h1>
+      <h1>Mis Pedidos</h1>
+      <PedidosContainer />
     </div>
   );
 }

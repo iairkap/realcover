@@ -127,7 +127,7 @@ export default function Layout({ children }) {
     });
   };
 
-  console.log("asi se ve el carrito", cart);
+  console.log("Estado actual del carrito:", cart);
 
   return (
     <GlobalContext.Provider

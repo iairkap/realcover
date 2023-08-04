@@ -67,9 +67,9 @@ function Card({
           sizes,
           imageName,
           selectedSize,
-          type,
+          type, // Aquí se está agregando el type al cartItem
         };
-        console.log(cartItem); // Imprime el contenido del carrito
+        console.log(`quiero ver si existe el type${cartItem}`); // Imprime el contenido del carrito
 
         addToCart(cartItem);
         const newAddedSizes = [...addedSizes];

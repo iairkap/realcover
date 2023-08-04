@@ -24,16 +24,20 @@ function CardsContainer({
   let items;
   switch (displayType) {
     case "covers":
-      items = covers;
+      items = covers.map((item) => ({ ...item, type: "neopreneCover" }));
+
       break;
     case "maletines":
-      items = maletines;
+      items = maletines.map((item) => ({ ...item, type: "maletines" }));
       break;
     case "fullColor":
-      items = fullColor;
+      items = fullColor.map((item) => ({
+        ...item,
+        type: "maletinesFUllColor",
+      }));
       break;
     case "cubrevalijas":
-      items = cubrevalijas;
+      items = cubrevalijas.map((item) => ({ ...item, type: "cubrevalijas" }));
       break;
     default:
       items = [];

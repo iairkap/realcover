@@ -154,6 +154,11 @@ model Order {
   cubrevalijasId       Int?
   quantity             Int
   unitPrice            Float
+  sizeId               Int?                // Añade este campo
+  neopreneCoverSizeId  Int?                // Tamaño específico para neopreneCover
+  maletinesSizeId      Int?                // Tamaño específico para maletines
+  fullColorCoverSizeId Int?                // Tamaño específico para maletinesFUllColor
+  cubrevalijasSizeId   Int?                
   cubrevalijas         cubrevalijas?       @relation(fields: [cubrevalijasId], references: [id])
   maletinesFUllColor   maletinesFUllColor? @relation(fields: [maletinesFUllColorId], references: [id])
   Maletines            Maletines?          @relation(fields: [maletinesId], references: [id])

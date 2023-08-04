@@ -31,17 +31,6 @@ export default function Layout({ children }) {
   };
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
     saveCart(cart);
   }, [cart]);
 
@@ -101,15 +90,7 @@ export default function Layout({ children }) {
   }, []);
 
   const addToCart = (cartItem) => {
-    const {
-      id,
-      picture,
-      price,
-      sizes,
-      imageName,
-      selectedSize,
-      type,
-    } = cartItem;
+    const { id, picture, price, sizes, imageName, selectedSize } = cartItem;
     setCart((prevCart) => {
       if (!selectedSize || !selectedSize.size) {
         return prevCart;
@@ -128,11 +109,9 @@ export default function Layout({ children }) {
           imageName,
           size: selectedSize.size,
           quantity: Number(selectedSize.quantity),
-          type: type, // almacenas el tipo de producto aquí
         };
       }
 
-      console.log("Nuevo carrito:", newCart);
       return newCart;
     });
   };
@@ -144,12 +123,11 @@ export default function Layout({ children }) {
 
       delete newCart[itemId];
 
-      console.log("Carrito tras eliminación:", newCart);
       return newCart;
     });
   };
 
-  console.log("Estado actual del carrito:", cart);
+  console.log("asi se ve el carrito", cart);
 
   return (
     <GlobalContext.Provider
