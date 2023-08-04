@@ -1,14 +1,8 @@
 -- CreateEnum
-CREATE TYPE "ProductType" AS ENUM ('NEOPRENE_COVER', 'MALETINES', 'MALETINES_FULL_COLOR', 'TABLET_COVER', 'CUBRE_VALIJAS', 'SCHOOL_BAGS', 'PORTAFOLIOS');
+CREATE TYPE "ProductType" AS ENUM ('NEOPRENE_COVER', 'MALETINES', 'MALETINES_FULL_COLOR', 'TABLET_COVER', 'CUBRE_VALIJAS', 'PORTAFOLIOS', 'CON_BOLSILLO');
 
 -- CreateEnum
-CREATE TYPE "SizeNotebook" AS ENUM ('Size10', 'Size12', 'Size14', 'Size156', 'Size17');
-
--- CreateEnum
-CREATE TYPE "SizeTablet" AS ENUM ('Size7', 'Size8', 'Size9', 'Size10');
-
--- CreateEnum
-CREATE TYPE "SizePortafolios" AS ENUM ('Size14', 'Size156');
+CREATE TYPE "Sizes" AS ENUM ('Size7', 'Size8', 'Size9', 'Size10', 'Size12', 'Size14', 'Size14_1', 'Size15_6', 'Size17', 'S', 'M', 'L');
 
 -- CreateTable
 CREATE TABLE "Product" (
@@ -16,12 +10,9 @@ CREATE TABLE "Product" (
     "name" TEXT NOT NULL,
     "picture" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
-    "colors" TEXT[],
     "productType" "ProductType" NOT NULL,
     "description" TEXT,
-    "sizeNotebook" "SizeNotebook"[],
-    "sizeTablet" "SizeTablet"[],
-    "sizePortafolios" "SizePortafolios"[],
+    "sizes" "Sizes"[],
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
