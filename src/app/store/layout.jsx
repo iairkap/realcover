@@ -88,9 +88,16 @@ export default function Layout({ children }) {
     };
     fetchFullColor();
   }, []);
-
   const addToCart = (cartItem) => {
-    const { id, picture, price, sizes, imageName, selectedSize } = cartItem;
+    const {
+      id,
+      picture,
+      price,
+      sizes,
+      imageName,
+      selectedSize,
+      type,
+    } = cartItem; // Agregamos 'type' aquí
     setCart((prevCart) => {
       if (!selectedSize || !selectedSize.size) {
         return prevCart;
@@ -109,6 +116,7 @@ export default function Layout({ children }) {
           imageName,
           size: selectedSize.size,
           quantity: Number(selectedSize.quantity),
+          type, // Agregamos 'type' aquí
         };
       }
 

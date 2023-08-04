@@ -95,8 +95,8 @@ function Cart() {
       userId: user.id,
       cartItems: Object.values(cart).map((item) => ({
         id: item.id,
-        sizeId: item.sizeId, // Agrega esta línea
-        type: item.type, // Asegúrate de que este campo se está guardando en el carrito
+        sizeId: item.sizeId,
+        type: item.type,
         quantity: item.quantity,
         price: item.price,
       })),
@@ -106,7 +106,6 @@ function Cart() {
       // Enviar la orden al servidor
       const response = await axios.post("/api/orders", orderData);
 
-      // Verificar si la orden se creó correctamente
       if (response.status === 200) {
         // Preparar datos para enviar por correo
         const emailData = {
