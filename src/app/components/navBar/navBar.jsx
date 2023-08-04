@@ -29,12 +29,14 @@ function NavBar(props) {
       </div>
       <div className={styles.botonera}>
         <Image src={search} alt="image" className={styles.icono} />
-        <Image
-          src={market}
-          alt="image"
-          onClick={handleCartOpen}
-          className={styles.icono}
-        />
+        <Link href="/store/fundas">
+          <Image
+            src={market}
+            alt="image"
+            onClick={handleCartOpen}
+            className={styles.icono}
+          />
+        </Link>
         <Link href="/logIn">
           <Image src={signIn} alt="image" className={styles.icono} />
         </Link>

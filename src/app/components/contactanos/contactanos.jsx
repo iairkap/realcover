@@ -49,10 +49,6 @@ function Contactanos(props) {
 
         const data = await response.json();
         if (!response.ok) throw new Error(data.error);
-
-        console.log("Correo enviado exitosamente");
-        // Manejar el éxito, como mostrar un mensaje de éxito o restablecer el formulario
-        // setState({nombre: '', email: '', mensaje: ''});
       } catch (error) {
         console.error("Error:", error);
       }

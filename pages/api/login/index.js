@@ -35,9 +35,17 @@ export default withSession(async (req, res) => {
       return res.status(400).json({ message: "Login failed" });
     }
 
-    req.session.set("user", { id: user.id, email: user.email });
+    const userToReturn = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      lastname: user.lastName,
+    }; // Definimos el objeto del usuario a devolver
+
+    req.session.set("user", userToReturn); // Lo almacenamos en la sesión
     await req.session.save();
-    res.status(200).json({ message: "Login successful" });
+
+    res.status(200).json({ message: "Login successful", user: userToReturn }); // Y también lo devolvemos en la respuesta
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }

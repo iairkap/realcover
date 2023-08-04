@@ -2,8 +2,19 @@
 import React, { useState, useContext, useEffect } from "react";
 import styles from "./Card.module.css";
 import { GlobalContext } from "../../store/layout";
+import imagenDefault from "../../../../public/fundas/loading.png";
+import NextImage from "next/image";
 
-function Card({ id, picture, price, sizes, imageName, size, cubreValijaSize }) {
+function Card({
+  id,
+  picture,
+  price,
+  sizes,
+  imageName,
+  size,
+  cubreValijaSize,
+  type,
+}) {
   const sizeNames = sizes
     ? sizes.map((sizeObject) => sizeObject.size.size)
     : size
@@ -15,7 +26,7 @@ function Card({ id, picture, price, sizes, imageName, size, cubreValijaSize }) {
     : [];
   const cleanImageName = imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "");
   const imagenDefault =
-    "https://firebasestorage.googleapis.com/v0/b/real-cover.appspot.com/o/imagenDefault.jpg?alt=media";
+    "https://firebasestorage.googleapis.com/v0/b/real-cover.appspot.com/o/loading.png?alt=media&token=56c478e1-1bd3-45b5-82df-e65695c460f4";
 
   const [imageSrc, setImageSrc] = useState(imagenDefault);
   const [mainImageSrc, setMainImageSrc] = useState(picture);
@@ -49,7 +60,17 @@ function Card({ id, picture, price, sizes, imageName, size, cubreValijaSize }) {
   const handleAddToCart = () => {
     selectedSizes.forEach((selectedSize, idx) => {
       if (selectedSize.size !== "" && selectedSize.quantity !== "") {
-        const cartItem = { id, picture, price, sizes, imageName, selectedSize };
+        const cartItem = {
+          id,
+          picture,
+          price,
+          sizes,
+          imageName,
+          selectedSize,
+          type,
+        };
+        console.log(cartItem); // Imprime el contenido del carrito
+
         addToCart(cartItem);
         const newAddedSizes = [...addedSizes];
         newAddedSizes.push(idx);
@@ -79,7 +100,7 @@ function Card({ id, picture, price, sizes, imageName, size, cubreValijaSize }) {
 
   return (
     <div className={styles.card}>
-      <img
+      <NextImage
         src={imageSrc}
         alt={cleanImageName}
         onLoad={handleImageLoad}
@@ -88,6 +109,8 @@ function Card({ id, picture, price, sizes, imageName, size, cubreValijaSize }) {
           e.target.src = imagenDefault;
         }}
         className={styles.image}
+        width={250}
+        height={250}
       />
       <div className={styles.details}>
         {/*         <h1>{cleanImageName}</h1>

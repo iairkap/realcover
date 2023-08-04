@@ -33,6 +33,7 @@ const vendidos = [
     <br><br>
     Protege tu notebook con elegancia con nuestros maletines de cordura melange, con envíos a todo Argentina.`,
     buttonLinkMenor: `https://articulo.mercadolibre.com.ar/MLA-1308107543-maletin-portafolio-morral-con-division-real-cover-_JM#position=3&search_layout=stack&type=item&tracking_id=da6c2641-5150-4eea-9440-da2ad0e65af7`,
+    buttonLinkMayor: "",
   },
   {
     id: 7,

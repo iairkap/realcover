@@ -1,3 +1,7 @@
 .NavBar {
   z-index: 5;
 }
+
+.background {
+  background-color: #d9d9d9;
+}

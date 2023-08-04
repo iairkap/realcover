@@ -3,6 +3,7 @@ import styles from "./CardsContainer.module.css";
 import Card from "../card/card";
 import { aprevious, nextArrow } from "../../../../public/imagnes";
 import Image from "next/image";
+import Loading from "../loader/loading";
 
 function CardsContainer({
   covers,
@@ -17,7 +18,7 @@ function CardsContainer({
   const maxPageButtons = 5;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   let items;
@@ -113,7 +114,7 @@ function CardsContainer({
           CUBRE VALIJAS
         </button>
       </div>
-      <div className={styles.cardsContainer}>
+      <div className={styles.cardsContainer} key={displayType}>
         {pagedItems.map((item) => (
           <Card key={item.id} {...item} />
         ))}

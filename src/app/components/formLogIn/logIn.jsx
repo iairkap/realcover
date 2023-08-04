@@ -61,12 +61,18 @@ function LogIn({ toggleForm }) {
     });
     const data = await res.json();
     if (res.status === 200) {
+      // Aquí se almacena la información en el localStorage
       localStorage.setItem("user", JSON.stringify(data.user));
+
       router.push("/store/fundas");
     } else {
+      // Aquí deberías manejar el error en caso de que la respuesta no sea 200
+      console.error(
+        "Error en el inicio de sesión:",
+        data.message || "Error desconocido"
+      ); // Mostramos el error en la consola
     }
   };
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);

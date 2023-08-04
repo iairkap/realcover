@@ -1,18 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-import { getSession } from "next-auth/client";
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   const { method } = req;
-
-  // Verifica la sesión en la petición
-  const session = await getSession({ req });
-
-  // Si el usuario no está autenticado, devuelve un error
-  if (!session) {
-    res.status(401).json({ message: "Por favor, inicia sesión primero." });
-    return;
-  }
 
   try {
     switch (method) {
@@ -24,7 +14,20 @@ export default async function handler(req, res) {
 
       case "POST":
         const newOrder = req.body;
-        const createdOrder = await prisma.order.create({ data: newOrder });
+
+        const orderDetails = newOrder.orderDetails.map((detail) => ({
+          create: detail,
+        }));
+
+        const createdOrder = await prisma.order.create({
+          data: {
+            ...newOrder,
+            orderDetails: orderDetails,
+          },
+          include: {
+            orderDetails: true,
+          },
+        });
         return res.status(201).json(createdOrder);
 
       case "PUT":

@@ -142,7 +142,7 @@ model Order {
   orderDetails OrderDetail[]
 }
 
-model OrderDetail {
+ model OrderDetail {
   id                   Int                 @id @default(autoincrement())
   orderId              Int
   neopreneCoverId      Int?
@@ -162,7 +162,8 @@ model OrderDetail {
   portafolios          portafolios?        @relation(fields: [portafoliosId], references: [id])
   schoolBags           schoolBags?         @relation(fields: [schoolBagsId], references: [id])
   tabletCover          tabletCover?        @relation(fields: [tabletCoverId], references: [id])
-}
+} 
+
 
 enum SizeNotebook {
   Size10

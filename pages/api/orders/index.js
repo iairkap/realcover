@@ -1,48 +1,85 @@
 import { PrismaClient } from "@prisma/client";
-import withSession from "../../../src/session";
 
 const prisma = new PrismaClient();
 
-export default withSession(async function(req, res) {
-  const { method } = req;
+export default async function handle(req, res) {
+  if (req.method === "POST") {
+    const { userId, cartItems } = req.body;
+    console.log(req.body);
+    // Verificación básica de los datos recibidos
+    if (!userId || !Array.isArray(cartItems)) {
+      res.status(400).json({ error: "Invalid request data" });
+      return;
+    }
 
-  // Declara la variable user una vez fuera del bloque switch
-  let user;
+    try {
+      // Inicia una transacción Prisma
+      const order = await prisma.$transaction(async (prisma) => {
+        // Crea la orden
+        const newOrder = await prisma.order.create({
+          data: {
+            userId,
+            date: new Date(),
+            total: cartItems.reduce(
+              (total, item) => total + item.price * item.quantity,
+              0
+            ),
+            status: "pending",
+          },
+        });
 
-  switch (method) {
-    case "GET":
-      // Asigna un valor a la variable user
-      user = req.session.get("user");
-      // Verifica si el usuario está autenticado
-      if (!user) {
-        return res.status(401).json({ message: "Unauthorized" });
-      }
-      const orders = await prisma.order.findMany({
-        where: {
-          userId: user.id,
-        },
+        // Crea los detalles de la orden
+        for (let item of cartItems) {
+          const data = {
+            orderId: newOrder.id,
+            quantity: item.quantity,
+            unitPrice: item.price,
+          };
+
+          // Verificación adicional de los datos de los items del carrito
+          if (!item.type || !item.id || !item.quantity || !item.price) {
+            throw new Error("Invalid cart item data");
+          }
+
+          switch (item.type) {
+            case "neopreneCover":
+              data.neopreneCoverId = item.id;
+              break;
+            case "tabletCover":
+              data.tabletCoverId = item.id;
+              break;
+            case "maletines":
+              data.maletinesId = item.id;
+              break;
+            case "maletinesFUllColor":
+              data.maletinesFUllColorId = item.id;
+              break;
+            case "schoolBags":
+              data.schoolBagsId = item.id;
+              break;
+            case "portafolios":
+              data.portafoliosId = item.id;
+              break;
+            case "cubrevalijas":
+              data.cubrevalijasId = item.id;
+              break;
+            default:
+              throw new Error(`Unknown product type: ${item.type}`);
+          }
+
+          await prisma.orderDetail.create({ data });
+        }
+
+        return newOrder;
       });
-      res.json(orders);
-      break;
-    case "POST":
-      // Asigna un valor a la variable user
-      user = req.session.get("user");
-      // Verifica si el usuario está autenticado
-      if (!user) {
-        return res.status(401).json({ message: "Unauthorized" });
-      }
-      const { total, status } = req.body; // se debe validar estos datos antes de insertarlos a la base de datos
-      const newOrder = await prisma.order.create({
-        data: {
-          userId: user.id,
-          total,
-          status,
-        },
-      });
-      res.json(newOrder);
-      break;
-    default:
-      res.setHeader("Allow", ["GET", "POST"]);
-      res.status(405).end(`Method ${method} Not Allowed`);
+
+      res.status(200).json(order);
+    } catch (error) {
+      console.error(error);
+      throw new Error("Invalid cart item data");
+    }
+  } else {
+    // Maneja cualquier otro método HTTP
+    res.status(405).json({ error: "Method not allowed." });
   }
-});
+}
