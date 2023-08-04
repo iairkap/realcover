@@ -15,6 +15,7 @@
     "@material-tailwind/react": "^2.0.6",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/client": "^5.1.0",
+    "@sendgrid/mail": "^7.7.0",
     "@types/mercadopago": "^1.5.8",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
@@ -33,6 +34,7 @@
     "firebase-admin": "^11.10.0",
     "flowbite": "^1.7.0",
     "flowbite-react": "^0.4.11",
+    "framer-motion": "^10.13.1",
     "fs": "^0.0.1-security",
     "fs-extra": "^11.1.1",
     "install": "^0.13.0",
@@ -46,6 +48,7 @@
     "next-auth": "^4.22.1",
     "next-iron-session": "^4.2.0",
     "nodemailer": "^6.9.3",
+    "nodemailer-html-to-text": "^3.2.0",
     "npm": "^9.7.2",
     "p-map": "^6.0.0",
     "postcss": "^8.4.26",
@@ -54,10 +57,13 @@
     "react-chartjs-2": "^5.2.0",
     "react-datepicker": "^4.14.0",
     "react-icons": "^4.9.0",
+    "react-intersection-observer": "^9.5.2",
     "react-modal": "^3.16.1",
     "react-responsive-carousel": "^3.2.23",
+    "react-scroll": "^1.8.9",
     "react-select": "^5.7.3",
     "react-simple-chatbot": "^0.5.0",
+    "react-svg": "^16.1.18",
     "react-table": "^7.8.0",
     "react-tooltip": "^5.15.0",
     "react-transition-group": "^4.4.5",
@@ -69,6 +75,7 @@
   },
   "devDependencies": {
     "prisma": "^5.1.0",
+    "@svgr/webpack": "^8.0.1",
     "typescript": "5.1.6"
   }
 }

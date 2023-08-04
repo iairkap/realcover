@@ -88,9 +88,16 @@ export default function Layout({ children }) {
     };
     fetchFullColor();
   }, []);
-
   const addToCart = (cartItem) => {
-    const { id, picture, price, sizes, imageName, selectedSize } = cartItem;
+    const {
+      id,
+      picture,
+      price,
+      sizes,
+      imageName,
+      selectedSize,
+      type,
+    } = cartItem; // Agregamos 'type' aquí
     setCart((prevCart) => {
       if (!selectedSize || !selectedSize.size) {
         return prevCart;
@@ -109,10 +116,10 @@ export default function Layout({ children }) {
           imageName,
           size: selectedSize.size,
           quantity: Number(selectedSize.quantity),
+          type, // Agregamos 'type' aquí
         };
       }
 
-      console.log("Nuevo carrito:", newCart);
       return newCart;
     });
   };
@@ -124,12 +131,11 @@ export default function Layout({ children }) {
 
       delete newCart[itemId];
 
-      console.log("Carrito tras eliminación:", newCart);
       return newCart;
     });
   };
 
-  console.log("Estado actual del carrito:", cart);
+  console.log("asi se ve el carrito", cart);
 
   return (
     <GlobalContext.Provider

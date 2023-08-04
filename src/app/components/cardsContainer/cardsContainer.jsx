@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styles from "./CardsContainer.module.css";
-import Card from "../card/Card";
+import Card from "../card/card";
 import { aprevious, nextArrow } from "../../../../public/imagnes";
 import Image from "next/image";
+import Loading from "../loader/loading";
 
 function CardsContainer({
   covers,
@@ -17,22 +18,26 @@ function CardsContainer({
   const maxPageButtons = 5;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   let items;
   switch (displayType) {
     case "covers":
-      items = covers;
+      items = covers.map((item) => ({ ...item, type: "neopreneCover" }));
+
       break;
     case "maletines":
-      items = maletines;
+      items = maletines.map((item) => ({ ...item, type: "maletines" }));
       break;
     case "fullColor":
-      items = fullColor;
+      items = fullColor.map((item) => ({
+        ...item,
+        type: "maletinesFUllColor",
+      }));
       break;
     case "cubrevalijas":
-      items = cubrevalijas;
+      items = cubrevalijas.map((item) => ({ ...item, type: "cubrevalijas" }));
       break;
     default:
       items = [];
@@ -113,7 +118,7 @@ function CardsContainer({
           CUBRE VALIJAS
         </button>
       </div>
-      <div className={styles.cardsContainer}>
+      <div className={styles.cardsContainer} key={displayType}>
         {pagedItems.map((item) => (
           <Card key={item.id} {...item} />
         ))}

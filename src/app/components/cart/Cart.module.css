@@ -81,7 +81,8 @@
   align-items: center;
   justify-content: space-between; /* Añadido */
   gap: 0.5rem;
-  width: 518px;
+  width: 100%;
+  min-width: 450px;
 }
 
 .contenedorImagen {
@@ -136,4 +137,8 @@
   justify-content: space-between;
   width: 100%;
   padding: 0; /* Asegúrate de que no haya relleno que pueda afectar al ancho */
+}
+
+.subtotal {
+  align-items: flex-end;
 }

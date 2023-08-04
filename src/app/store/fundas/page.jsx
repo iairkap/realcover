@@ -30,7 +30,7 @@ function Fundas() {
   // rest of your code
 
   return (
-    <div>
+    <div className={styles.background}>
       <NavBar className={styles.NavBar} />
       <CardsContainer
         covers={covers}

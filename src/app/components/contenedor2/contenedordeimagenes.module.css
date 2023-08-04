@@ -17,3 +17,8 @@
 .image2 {
   flex: 3; /* 30% del espacio total */
 }
+
+.background {
+  height: auto;
+  width: 100vw;
+}

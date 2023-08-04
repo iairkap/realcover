@@ -1,9 +1,11 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./Cart.module.css";
 import { GlobalContext } from "../../store/layout";
 import Image from "next/image";
 import { useState } from "react";
+import { StyleRegistry } from "styled-jsx";
+import axios from "axios";
 
 function Cart() {
   const {
@@ -14,6 +16,13 @@ function Cart() {
     setCart, // añade esta línea
   } = useContext(GlobalContext);
 
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
   const handleModalClose = () => {
     setCheckoutVisible(false);
   };
@@ -21,10 +30,6 @@ function Cart() {
     setCart({});
   };
   const handleQuantityChange = (itemId, size, quantityChange) => {
-    console.log(
-      `itemId: ${itemId}, size: ${size}, quantityChange: ${quantityChange}`
-    );
-
     const updatedCart = { ...cart };
 
     const key = `${itemId}-${size}`;
@@ -69,13 +74,11 @@ function Cart() {
     return totalUnits;
   };
 
+  const [hasAttemptedToOrder, setHasAttemptedToOrder] = useState(false);
   if (!checkoutVisible) {
     return null;
   }
-
-  const [hasAttemptedToOrder, setHasAttemptedToOrder] = useState(false);
-
-  const handleOrderAttempt = () => {
+  const handleOrderAttempt = async () => {
     if (calculateTotalUnits() < 24) {
       const wantsToContinue = window.confirm(
         "La compra mínima mayorista es de 24 unidades, el precio del pedido puede variar. ¿Desea continuar con el pedido igualmente?"
@@ -87,14 +90,55 @@ function Cart() {
       }
     }
 
-    // Aquí es donde iría tu lógica para procesar el pedido, pero la omitiremos por ahora
-  };
+    // Preparar los datos para la orden
+    const orderData = {
+      userId: user.id,
+      cartItems: Object.values(cart).map((item) => ({
+        id: item.id,
+        sizeId: item.sizeId,
+        type: item.type,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+    };
 
+    try {
+      // Enviar la orden al servidor
+      const response = await axios.post("/api/orders", orderData);
+
+      if (response.status === 200) {
+        // Preparar datos para enviar por correo
+        const emailData = {
+          cartData: cart,
+          email: user.email,
+          orderId: response.data.id,
+        };
+
+        // Enviar el correo
+        axios
+          .post("/api/emailorder", emailData)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className={styles.modal}>
       <div className={styles.modalBackground} onClick={handleModalClose} />
       <div className={styles.modalContent}>
         <button onClick={handleClearCart}>Borrar Carrito</button>
+        {user && (
+          <h2>
+            Hola {user.name} {user.lastname}
+          </h2>
+        )}{" "}
+        {/* Muestra el nombre del usuario */}
         <h1 className={styles.titulo}>CARRITO DE COMPRA</h1>
         <div className={styles.line}></div>
         <div className={styles.subtitulos}>
@@ -105,8 +149,6 @@ function Cart() {
         {Object.values(cart).map((items, index) => {
           const firstItem = Array.isArray(items) ? items[0] : items;
           if (firstItem && firstItem.imageName) {
-            console.log(`firstItem: ${JSON.stringify(firstItem)}`);
-
             const cleanImageName = firstItem.imageName.replace(/%2F/g, " ");
             return (
               <div key={index}>
@@ -154,7 +196,9 @@ function Cart() {
                       </div>
                     </div>
                   </div>
-                  <p>{firstItem.price * firstItem.quantity}$</p>{" "}
+                  <p className={styles.subtotal}>
+                    {firstItem.price * firstItem.quantity}$
+                  </p>{" "}
                 </div>
                 <div className={styles.line}></div>
               </div>
