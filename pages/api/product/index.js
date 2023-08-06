@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       }
     } else {
       try {
-        const checklength = await prisma.product.findMany();
+        // const checklength = await prisma.product.findMany();
 
         // const bolsillo = await mapAndSaveImages(
         //   "ConBolsillo",
@@ -54,12 +54,12 @@ export default async function handler(req, res) {
         //   ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
         //   2990
         // );
-        const fundas = await mapAndSaveImages(
-          "Fundas",
-          "NEOPRENE_COVER",
-          ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
-          3290
-        );
+        // const fundas = await mapAndSaveImages(
+        //   "Fundas",
+        //   "NEOPRENE_COVER",
+        //   ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
+        //   3290
+        // );
         // const portfolios = await mapAndSaveImages(
         //   "Portafolio",
         //   "PORTAFOLIOs",
