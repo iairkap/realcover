@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   }
   try {
     jwt.verify(token, process.env.JWT_SECRET);
-    const serializedCookie = serialize("token", null, {
+    const serializedCookie = serialize("token", "", {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       sameSite: "strict",

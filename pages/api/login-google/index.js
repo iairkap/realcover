@@ -1,34 +1,42 @@
-import { PrismaClient } from "@prisma/client";
-import { verifyIdToken } from "firebase-admin";
-import withSession from "@/session";
+//api\login-google
+import { getSession } from "next-auth/react";
+import prisma from "../../../prisma/client";
 
-const prisma = new PrismaClient();
+export default async function handler(req, res) {
+  const session = await getSession({ req });
 
-export default withSession(async (req, res) => {
-  if (req.method === "POST") {
-    const { idToken } = req.body;
-    const decodedToken = await verifyIdToken(idToken);
-    const { uid, email, name, picture } = decodedToken;
-
-    let user = await prisma.user.findUnique({
-      where: { email },
+  if (session) {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: session.user.email,
+      },
+      include: {
+        orders: true,
+      },
     });
-
     if (!user) {
-      user = await prisma.user.create({
-        data: {
-          email,
-          name,
-          picture,
-          provider: "google",
-        },
-      });
+      const onlyName = session.user.name.split(" ")[0];
+      const onlyLastName = session.user.name.split(" ")[1];
+      try {
+        const newUser = await prisma.user.create({
+          data: {
+            email: session.user.email,
+            name: onlyName,
+            password: process.env.DEFAULT_PASSWORD,
+            lastName: onlyLastName ? onlyLastName : "",
+            phone: session.user.phone ? session.user.phone : "",
+            address: session.user.address ? session.user.address : "",
+            city: session.user.city ? session.user.city : "",
+            postalCode: session.user.postalCode ? session.user.postalCode : "",
+            provider: "GOOGLE",
+          },
+        });
+      } catch (error) {
+        res.status(500).json({ message: "Error creating user" });
+      }
     }
-
-    req.session.set("user", { id: user.id, email: user.email });
-    await req.session.save();
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({ message: "Login successful", user: user });
   } else {
-    res.status(405).json({ message: "Method not allowed" });
+    res.status(401).json({ message: "Unauthorized" });
   }
-});
+}

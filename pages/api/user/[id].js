@@ -1,40 +1,77 @@
 import prisma from "../../../prisma/client";
 import jwt from "jsonwebtoken";
+import { getSession } from "next-auth/react";
 
 export default async function handler(req, res) {
   const { id } = req.query;
   const { token } = req.cookies;
-  if (!token) {
+  const { method } = req;
+  const session = await getSession({ req });
+  let verifyMethod;
+
+  if (session) {
+    verifyMethod = session.user.email;
+  } else if (token) {
+    try {
+      const { email } = jwt.verify(token, process.env.JWT_SECRET);
+      verifyMethod = email;
+    } catch (error) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+  } else {
     return res.status(401).json({ message: "Unauthorized" });
   }
-  const { id: userId } = jwt.verify(token, process.env.JWT_SECRET);
-  if (Number(id) !== userId) {
-    return res.status(403).json({ message: "Forbidden" });
-  }
-  if (req.method === "GET") {
-    try {
+
+  switch (method) {
+    case "GET":
       const user = await prisma.user.findUnique({
-        where: { id: Number(id) },
+        where: {
+          email: verifyMethod,
+        },
+        include: {
+          orders: true,
+        },
       });
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        return res.status(400).json({ message: "Login failed" });
       }
-      res.json(user);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Error getting user" });
-    }
-  } else if (req.method === "PUT") {
-    try {
-      const { name, lastName, email, password } = req.body;
+      return res.status(200).json({ message: "Login successful", user: user });
+
+    case "PUT":
+      const {
+        name,
+        lastName,
+        phone,
+        address,
+        city,
+        postalCode,
+        password,
+      } = req.body;
       const updatedUser = await prisma.user.update({
-        where: { id: Number(id) },
-        data: { name, lastName, email, password },
+        where: {
+          email: verifyMethod,
+        },
+        data: {
+          name: name,
+          lastName: lastName,
+          phone: phone,
+          address: address,
+          city: city,
+          postalCode: postalCode,
+          password: password,
+        },
       });
-      res.json(updatedUser);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Error updating user" });
-    }
+
+    case "DELETE":
+      const deletedUser = await prisma.user.delete({
+        where: {
+          email: verifyMethod,
+        },
+      });
+      return res.status(200).json({ message: "User deleted" });
+
+    default:
+      return res.status(405).json({ message: "Method not allowed" });
+      break;
   }
 }

@@ -18,11 +18,13 @@ export default async function loginHandler(req, res) {
         return;
       });
     if (!user) {
-      return res.status(400).json({ message: "Login failed" });
+      return res.status(400).json({ message: "Login failed, no user" });
     }
     const validate = await compare(password, user.password);
     if (!validate) {
-      return res.status(400).json({ message: "Login failed" });
+      return res
+        .status(400)
+        .json({ message: "Login failed, password not valide" });
     }
     const token = jwt.sign(
       { id: user.id, email: user.email },
