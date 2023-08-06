@@ -15,16 +15,11 @@ function Card({
   cubreValijaSize,
   type,
 }) {
-  const sizeNames = sizes
-    ? sizes.map((sizeObject) => sizeObject.size.size)
-    : size
-    ? size.map((sizeObject) => sizeObject.size.size)
-    : cubreValijaSize
-    ? cubreValijaSize
-        .filter((sizeObject) => sizeObject.size.id !== 4) // Excluye el objeto de tamaño con id 4
-        .map((sizeObject) => sizeObject.size.size)
-    : [];
-  const cleanImageName = imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "");
+  const sizeNames = sizes || size || cubreValijaSize || [];
+
+  const cleanImageName = imageName
+    ? imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "")
+    : "";
   const imagenDefault =
     "https://firebasestorage.googleapis.com/v0/b/real-cover.appspot.com/o/loading.png?alt=media&token=56c478e1-1bd3-45b5-82df-e65695c460f4";
 

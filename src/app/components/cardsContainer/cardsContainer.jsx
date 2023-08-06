@@ -30,6 +30,9 @@ function CardsContainer({
     case "maletines":
       items = maletines.map((item) => ({ ...item, type: "maletines" }));
       break;
+    case "tablets":
+      items = maletines.map((item) => ({ ...item, type: "tablets" }));
+      break;
     case "fullColor":
       items = fullColor.map((item) => ({
         ...item,
@@ -45,11 +48,17 @@ function CardsContainer({
 
   const sortedItems = [...items].sort((a, b) => {
     const numA = parseInt(
-      a.imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "").match(/\d+/),
+      (a.imageName
+        ? a.imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "")
+        : ""
+      ).match(/\d+/),
       10
     );
     const numB = parseInt(
-      b.imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "").match(/\d+/),
+      (b.imageName
+        ? b.imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "")
+        : ""
+      ).match(/\d+/),
       10
     );
     return numA - numB;
@@ -105,6 +114,17 @@ function CardsContainer({
           }`}
         >
           FULL COLOR
+        </button>
+        <button
+          onClick={() => {
+            setDisplayType("Tablets");
+            setPage(0);
+          }}
+          className={`${styles.botonOpciones} ${
+            displayType === "Tablets" ? styles.botonOpcionesActivo : ""
+          }`}
+        >
+          FUNDAS RIGIDAS{" "}
         </button>
         <button
           onClick={() => {

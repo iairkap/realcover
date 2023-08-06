@@ -146,49 +146,40 @@ function Cart() {
           <h2>Subtotal</h2>
         </div>
         <div className={styles.line}></div>
-        {Object.values(cart).map((items, index) => {
-          const firstItem = Array.isArray(items) ? items[0] : items;
-          if (firstItem && firstItem.imageName) {
-            const cleanImageName = firstItem.imageName.replace(/%2F/g, " ");
+        {Object.values(cart).map((item, index) => {
+          if (item && item.name) {
+            const cleanName = decodeURIComponent(item.name); // Decodifica las secuencias %2F a un espacio en blanco
             return (
               <div key={index}>
                 <div className={styles.contenedorCard}>
                   <div className={styles.contenedorImagen}>
                     <Image
-                      src={firstItem.picture}
+                      src={item.picture}
                       width={100}
                       height={100}
                       alt={"fa"}
                     />
                   </div>
                   <div className={styles.textoContenedor}>
-                    <p className={styles.subs}>{cleanImageName}</p>
+                    <p className={styles.subs}>{cleanName}</p>
                     <div className={styles.textAlign}>
-                      <p className={styles.subs}> {firstItem.size}</p>
-                      <p className={styles.subs}> {firstItem.price}$</p>
+                      <p className={styles.subs}> {item.size}</p>
+                      <p className={styles.subs}> {item.price}$</p>
                       {/* Subtotal para cada ítem */}
                       <div className={styles.changeContainer}>
                         <button
                           className={styles.changeButton}
                           onClick={() =>
-                            handleQuantityChange(
-                              firstItem.id,
-                              firstItem.size,
-                              -1
-                            )
+                            handleQuantityChange(item.id, item.size, -1)
                           }
                         >
                           -
                         </button>
-                        <p> {firstItem.quantity}</p>
+                        <p> {item.quantity}</p>
                         <button
                           className={styles.changeButton}
                           onClick={() =>
-                            handleQuantityChange(
-                              firstItem.id,
-                              firstItem.size,
-                              1
-                            )
+                            handleQuantityChange(item.id, item.size, 1)
                           }
                         >
                           +
@@ -197,7 +188,7 @@ function Cart() {
                     </div>
                   </div>
                   <p className={styles.subtotal}>
-                    {firstItem.price * firstItem.quantity}$
+                    {item.price * item.quantity}$
                   </p>{" "}
                 </div>
                 <div className={styles.line}></div>

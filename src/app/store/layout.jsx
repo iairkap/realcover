@@ -8,10 +8,10 @@ export default function Layout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [covers, setCovers] = useState([]);
   const [fullColor, setFullColor] = useState([]);
-  const [sizes, setSizes] = useState([]);
   const [cubrevalijas, setCubrevalijas] = useState([]);
   const [maletines, setMaletines] = useState([]);
   const [checkoutVisible, setCheckoutVisible] = useState(false);
+
   const loadCart = () => {
     if (typeof window !== "undefined") {
       const cart = localStorage.getItem("cart");
@@ -35,59 +35,37 @@ export default function Layout({ children }) {
   }, [cart]);
 
   useEffect(() => {
-    const fetchCovers = async () => {
+    const fetchProducts = async () => {
       setIsLoading(true);
-      const response = await axios.get("/api/fundasNeoprene");
-      setCovers(response.data);
-      setIsLoading(false);
-    };
-    fetchCovers();
-  }, []);
+      try {
+        const response = await axios.get("/api/product");
 
-  useEffect(() => {
-    const fetchSizes = async () => {
-      setIsLoading(true);
-      const response = await axios.get("/api/size");
-      setSizes(response.data);
-      setIsLoading(false);
-    };
-    fetchSizes();
-  }, []);
+        const coversData = response.data.filter(
+          (product) => product.productType === "NEOPRENE_COVER"
+        );
+        const maletinesData = response.data.filter(
+          (product) => product.productType === "MALETINES"
+        );
+        const fullColorData = response.data.filter(
+          (product) => product.productType === "MALETINES_FULL_COLOR"
+        );
+        const cubrevalijasData = response.data.filter(
+          (product) => product.productType === "CUBRE_VALIJAS"
+        );
 
-  useEffect(() => {
-    const fetchCubrevalijas = async () => {
-      setIsLoading(true);
-      const response = await axios.get("/api/cubrevalijas");
-      setCubrevalijas(response.data);
-      setIsLoading(false);
-    };
-    fetchCubrevalijas();
-  }, []);
-
-  useEffect(() => {
-    const fetchMaletines = async () => {
-      setIsLoading(true);
-      const response = await axios.get("/api/maletines");
-      setMaletines(response.data);
-      setIsLoading(false);
-    };
-    fetchMaletines();
-  }, []);
-
-  useEffect(() => {
-    const fetchFullColor = async () => {
-      setIsLoading(true);
-      const response = await axios.get("/api/FullColor");
-      if (Array.isArray(response.data)) {
-        setFullColor(response.data);
-      } else {
-        console.error("La respuesta de la API no es un array: ", response.data);
-        setFullColor([]);
+        setCovers(coversData);
+        setMaletines(maletinesData);
+        setFullColor(fullColorData);
+        setCubrevalijas(cubrevalijasData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
-    fetchFullColor();
+    fetchProducts();
   }, []);
+
   const addToCart = (cartItem) => {
     const {
       id,
@@ -98,6 +76,7 @@ export default function Layout({ children }) {
       selectedSize,
       type,
     } = cartItem; // Agregamos 'type' aquí
+
     setCart((prevCart) => {
       if (!selectedSize || !selectedSize.size) {
         return prevCart;
@@ -148,7 +127,6 @@ export default function Layout({ children }) {
         addToCart,
         removeFromCart,
         fullColor,
-        sizes,
         checkoutVisible,
         setCheckoutVisible,
         setCart, // añade esta línea
