@@ -12,6 +12,8 @@ export default function Layout({ children }) {
   const [maletines, setMaletines] = useState([]);
   const [checkoutVisible, setCheckoutVisible] = useState(false);
   const [tablets, setTablets] = useState([]);
+  const [currentOrderDetails, setCurrentOrderDetails] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const loadCart = () => {
     if (typeof window !== "undefined") {
@@ -150,6 +152,10 @@ export default function Layout({ children }) {
         checkoutVisible,
         setCheckoutVisible,
         setCart,
+        currentOrderDetails,
+        setCurrentOrderDetails,
+        isAuthenticated,
+        setIsAuthenticated,
       }}
     >
       {children}

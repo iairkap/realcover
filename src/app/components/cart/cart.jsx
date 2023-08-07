@@ -6,9 +6,14 @@ import Image from "next/image";
 import axios from "axios";
 
 function Cart() {
-  const { cart, checkoutVisible, setCheckoutVisible, setCart } = useContext(
-    GlobalContext
-  );
+  const {
+    cart,
+    checkoutVisible,
+    setCheckoutVisible,
+    setCart,
+    currentOrderDetails,
+    setCurrentOrderDetails,
+  } = useContext(GlobalContext);
 
   const [user, setUser] = useState(null);
 
@@ -21,6 +26,7 @@ function Cart() {
 
   const handleModalClose = () => {
     setCheckoutVisible(false);
+    setCurrentOrderDetails([]); // vacía los detalles de la orden anterior
   };
 
   const handleClearCart = () => {
@@ -138,7 +144,7 @@ function Cart() {
     const orderData = {
       userId: JSON.parse(userId).id,
       total: calculateTotals(),
-      status: "Pending", // or whatever default status you want to use
+      status: "En proceso", // or whatever default status you want to use
       products,
     };
 
@@ -175,6 +181,11 @@ function Cart() {
       console.error("An error occurred while dispatching the order:", error);
     }
   };
+
+  const itemsToDisplay = currentOrderDetails.length
+    ? currentOrderDetails
+    : cart;
+
   return (
     <div className={styles.modal}>
       <div className={styles.modalBackground} onClick={handleModalClose} />
@@ -192,7 +203,7 @@ function Cart() {
           <h2>Subtotal</h2>
         </div>
         <div className={styles.line}></div>
-        {Object.values(cart).map((item, index) => (
+        {Object.values(itemsToDisplay).map((item, index) => (
           <div key={index}>
             <div className={styles.contenedorImagen}>
               <Image src={item.picture} width={100} height={100} alt={"fa"} />

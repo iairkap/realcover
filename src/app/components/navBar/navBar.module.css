@@ -32,3 +32,11 @@
   gap: 1.75rem;
   margin-right: 6.54em;
 }
+
+.misCompras {
+}
+
+.icono:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}

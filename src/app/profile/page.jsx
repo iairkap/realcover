@@ -16,6 +16,8 @@ function Profile() {
       <br />
       <h1 className={styles.titulo}>Mis Pedidos</h1>
       <PedidosContainer />
+      <br />
+      <br />
     </div>
   );
 }

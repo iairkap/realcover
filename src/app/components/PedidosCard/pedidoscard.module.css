@@ -56,8 +56,8 @@
 .entregado {
   color: #56b947;
   font-family: Roboto;
-  font-size: 1rem;
   font-style: normal;
+  font-size: 1rem;
   font-weight: 900;
   line-height: 1.39rem;
   letter-spacing: -0.011rem;
@@ -76,6 +76,11 @@
   line-height: 139%; /* 1.39rem */
   letter-spacing: -0.011rem;
   background-color: #56b947;
+  transition: background-color 0.3s ease; /* Transición suave al cambiar el color de fondo */
+}
+
+.detailButton:hover {
+  background-color: #45a037; /* Cambio de color al hacer hover */
 }
 
 .repeatButton {
@@ -91,6 +96,11 @@
   line-height: 139%; /* 1.39rem */
   letter-spacing: -0.011rem;
   background-color: #cde2c3;
+  transition: background-color 0.3s ease; /* Transición suave al cambiar el color de fondo */
+}
+
+.repeatButton:hover {
+  background-color: #a4ca92; /* Cambio de color al hacer hover */
 }
 
 .leftContainer {
@@ -107,4 +117,69 @@
   font-weight: 400;
   line-height: 139%; /* 1.0425rem */
   letter-spacing: -0.00825rem;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.829);
+  z-index: 10;
+  backdrop-filter: blur(4.5px);
+}
+
+.modalContent {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 2rem;
+  width: 80%;
+  max-width: 30%; /* Ajusta este valor a tu gusto */
+  max-height: 90vh; /* Un poco menos que 100vh para evitar problemas con la barra de desplazamiento */
+  z-index: 20;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}
+.contenedorTexto {
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  background-color: black;
+  width: 100%; /* Haz que la línea ocupe todo el ancho disponible */
+  height: 0.0625rem;
+}
+
+.titulo {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.01375rem;
 }

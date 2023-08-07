@@ -12,6 +12,8 @@ import logoReal from "./logoReal.svg";
 import arrowCategories from "./arrowCategories.svg";
 import ciudades from "./ciudades.png";
 import estrellas from "./estrellas.svg";
+import pedidos from "./pedidos.svg";
+import logout from "./logout.svg";
 export {
   arrowCategories,
   logo,
@@ -27,4 +29,6 @@ export {
   logoReal,
   ciudades,
   estrellas,
+  pedidos,
+  logout,
 };
