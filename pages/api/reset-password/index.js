@@ -4,9 +4,7 @@ import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 export default async function handler(req, res) {
-  const {
-    query: { token },
-  } = req;
+  const { token } = req.cookies;
 
   if (req.method === "POST") {
     const { password } = req.body;

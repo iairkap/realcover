@@ -1,9 +1,11 @@
 //api\login-google
 import { getSession } from "next-auth/react";
 import prisma from "../../../prisma/client";
+import { hash } from "bcrypt";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
+  const hashedPassword = await hash(process.env.DEFAULT_PASSWORD, 10);
 
   if (session) {
     const user = await prisma.user.findUnique({
@@ -22,7 +24,7 @@ export default async function handler(req, res) {
           data: {
             email: session.user.email,
             name: onlyName,
-            password: process.env.DEFAULT_PASSWORD,
+            password: hashedPassword,
             lastName: onlyLastName ? onlyLastName : "",
             phone: session.user.phone ? session.user.phone : "",
             address: session.user.address ? session.user.address : "",
