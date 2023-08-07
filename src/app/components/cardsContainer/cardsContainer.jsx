@@ -117,7 +117,7 @@ function CardsContainer({
         </button>
         <button
           onClick={() => {
-            setDisplayType("Tablets");
+            setDisplayType("tablets");
             setPage(0);
           }}
           className={`${styles.botonOpciones} ${

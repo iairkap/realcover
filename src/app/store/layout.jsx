@@ -14,9 +14,17 @@ export default function Layout({ children }) {
 
   const loadCart = () => {
     if (typeof window !== "undefined") {
-      const cart = localStorage.getItem("cart");
-      if (cart) {
-        return JSON.parse(cart);
+      try {
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        return Array.isArray(cart)
+          ? cart.map((item) => ({
+              ...item,
+              selectedSizes: item.selectedSizes || [],
+            }))
+          : [];
+      } catch (error) {
+        console.error("Error loading cart from localStorage:", error);
+        return [];
       }
     }
     return [];
@@ -25,7 +33,7 @@ export default function Layout({ children }) {
   const [cart, setCart] = useState(loadCart());
 
   const saveCart = (cart) => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && Array.isArray(cart)) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   };
@@ -65,56 +73,62 @@ export default function Layout({ children }) {
     };
     fetchProducts();
   }, []);
+  const addToCart = (product, selectedSizes) => {
+    // Clone the current cart
+    const updatedCart = [...cart];
 
-  const addToCart = (cartItem) => {
-    const {
-      id,
-      picture,
-      price,
-      sizes,
-      imageName,
-      selectedSize,
-      type,
-    } = cartItem; // Agregamos 'type' aquí
+    // Loop through each selectedSize
+    selectedSizes.forEach((selectedSize) => {
+      let foundProduct = false;
+      let productIndex = -1;
 
-    setCart((prevCart) => {
-      if (!selectedSize || !selectedSize.size) {
-        return prevCart;
+      // Check if the product is already in the cart
+      for (let i = 0; i < updatedCart.length; i++) {
+        if (updatedCart[i].id === product.id) {
+          productIndex = i;
+          foundProduct = true;
+          break;
+        }
       }
 
-      const newCart = { ...prevCart };
-      const itemId = `${id}-${selectedSize.size}`;
+      if (foundProduct) {
+        const sizeIndex = updatedCart[productIndex].selectedSizes.findIndex(
+          (sizeItem) => sizeItem.size === selectedSize.size
+        );
 
-      if (newCart[itemId]) {
-        newCart[itemId].quantity += Number(selectedSize.quantity);
+        if (sizeIndex !== -1) {
+          // If size already exists for the product, update its quantity
+          updatedCart[productIndex].selectedSizes[
+            sizeIndex
+          ].quantity = parseInt(selectedSize.quantity);
+        } else {
+          // If the product exists but not the size, add the new size to the product
+          updatedCart[productIndex].selectedSizes.push(selectedSize);
+        }
       } else {
-        newCart[itemId] = {
-          id,
-          picture,
-          price,
-          imageName,
-          size: selectedSize.size,
-          quantity: Number(selectedSize.quantity),
-          type, // Agregamos 'type' aquí
-        };
+        // If product wasn't found in the cart at all, add the product with the selected size
+        updatedCart.push({
+          ...product,
+          selectedSizes: [selectedSize],
+        });
       }
-
-      return newCart;
     });
+
+    setCart(updatedCart);
   };
 
-  const removeFromCart = (id, size) => {
-    setCart((prevCart) => {
-      const newCart = { ...prevCart };
-      const itemId = `${id}-${size}`;
-
-      delete newCart[itemId];
-
-      return newCart;
-    });
+  const removeFromCart = (productId, sizeToRemove) => {
+    const updatedCart = cart.filter(
+      (item) =>
+        !(
+          item.id === productId &&
+          item.selectedSizes.some(
+            (selectedSize) => selectedSize.size === sizeToRemove
+          )
+        )
+    );
+    setCart(updatedCart);
   };
-
-  console.log("asi se ve el carrito", cart);
 
   return (
     <GlobalContext.Provider
@@ -129,7 +143,7 @@ export default function Layout({ children }) {
         fullColor,
         checkoutVisible,
         setCheckoutVisible,
-        setCart, // añade esta línea
+        setCart,
       }}
     >
       {children}

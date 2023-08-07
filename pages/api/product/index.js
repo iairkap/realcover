@@ -60,13 +60,13 @@ export default async function handler(req, res) {
           ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
           3290
         ); */
-        /*      const portfolios = await mapAndSaveImages(
+        const portfolios = await mapAndSaveImages(
           "Portafolio",
           "PORTAFOLIOS",
           ["14_1", "15_6"],
           5990
-        ); */
-        const tablet = await mapAndSaveImages(
+        );
+        /*    const tablet = await mapAndSaveImages(
           "Tablets",
           "TABLET_COVER",
           ["Size7", "Size8", "Size9", "Size10"],
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
           "MALETINES",
           ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
           3290
-        );
+        ); */
 
         res.status(200).json({ message: "Products created" });
       } catch (error) {
