@@ -11,6 +11,7 @@ export default function Layout({ children }) {
   const [cubrevalijas, setCubrevalijas] = useState([]);
   const [maletines, setMaletines] = useState([]);
   const [checkoutVisible, setCheckoutVisible] = useState(false);
+  const [tablets, setTablets] = useState([]);
 
   const loadCart = () => {
     if (typeof window !== "undefined") {
@@ -60,11 +61,15 @@ export default function Layout({ children }) {
         const cubrevalijasData = response.data.filter(
           (product) => product.productType === "CUBRE_VALIJAS"
         );
+        const tabletsData = response.data.filter(
+          (product) => product.productType === "TABLET_COVER"
+        );
 
         setCovers(coversData);
         setMaletines(maletinesData);
         setFullColor(fullColorData);
         setCubrevalijas(cubrevalijasData);
+        setTablets(tabletsData);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -136,6 +141,7 @@ export default function Layout({ children }) {
         covers,
         maletines,
         cubrevalijas,
+        tablets,
         isLoading,
         cart,
         addToCart,

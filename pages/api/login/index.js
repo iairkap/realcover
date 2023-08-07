@@ -39,7 +39,12 @@ export default async function loginHandler(req, res) {
       path: "/",
     });
     res.setHeader("Set-Cookie", serializedCookie);
-    res.status(200).json({ message: "Login successful" });
+    res
+      .status(200)
+      .json({
+        message: "Login successful",
+        user: { id: user.id, email: user.email, name: user.name },
+      }); // Puedes agregar más campos del usuario si los necesitas
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }

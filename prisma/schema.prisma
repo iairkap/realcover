@@ -9,7 +9,6 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-
 model Product {
   id           Int           @id @default(autoincrement())
   name         String
@@ -52,8 +51,8 @@ model OrderDetail {
   quantity  Int
   unitPrice Float
   size      String
-  products  Product @relation(fields: [productId], references: [id])
   order     Order   @relation(fields: [orderId], references: [id])
+  products  Product @relation(fields: [productId], references: [id])
 }
 
 enum ProductType {

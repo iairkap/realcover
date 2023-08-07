@@ -12,9 +12,14 @@ import { SessionProvider } from "next-auth/react";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import EmailProvider from "next-auth/providers/email";
 function Fundas() {
-  const { covers, isLoading, fullColor, cubrevalijas, maletines } = useContext(
-    GlobalContext
-  );
+  const {
+    covers,
+    isLoading,
+    fullColor,
+    cubrevalijas,
+    maletines,
+    tablets,
+  } = useContext(GlobalContext);
 
   const { data: session, status: loading } = useSession();
 
@@ -38,6 +43,7 @@ function Fundas() {
         maletines={maletines}
         fullColor={fullColor}
         cubrevalijas={cubrevalijas}
+        tablets={tablets}
       />
       <Cart />
     </div>

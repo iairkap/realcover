@@ -11,6 +11,7 @@ function CardsContainer({
   fullColor,
   cubrevalijas,
   isLoading,
+  tablets,
 }) {
   const [page, setPage] = useState(0);
   const [displayType, setDisplayType] = useState("covers");
@@ -31,7 +32,7 @@ function CardsContainer({
       items = maletines.map((item) => ({ ...item, type: "maletines" }));
       break;
     case "tablets":
-      items = maletines.map((item) => ({ ...item, type: "tablets" }));
+      items = tablets.map((item) => ({ ...item, type: "tablets" }));
       break;
     case "fullColor":
       items = fullColor.map((item) => ({
@@ -121,7 +122,7 @@ function CardsContainer({
             setPage(0);
           }}
           className={`${styles.botonOpciones} ${
-            displayType === "Tablets" ? styles.botonOpcionesActivo : ""
+            displayType === "tablets" ? styles.botonOpcionesActivo : ""
           }`}
         >
           FUNDAS RIGIDAS{" "}

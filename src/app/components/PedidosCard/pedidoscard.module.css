@@ -1,0 +1,110 @@
+.contenedorCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  height: 8.875rem;
+  flex-shrink: 0;
+  background: #f5f5f5;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-left: 10rem;
+  margin-right: 10rem;
+  justify-content: space-between; /* Añade esto */
+  align-items: center; /* Centra verticalmente el contenido */
+  margin-bottom: 2rem;
+}
+
+.productImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.orderInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailButton,
+.repeatButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.orderDetailHidden {
+  display: none;
+}
+
+.contenedorBotones {
+  display: flex;
+  flex-direction: column;
+}
+
+.enProceso {
+  color: #b9b447;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.39rem;
+  letter-spacing: -0.011rem;
+}
+
+.entregado {
+  color: #56b947;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.39rem;
+  letter-spacing: -0.011rem;
+}
+
+.detailButton {
+  width: 8.8125rem;
+  height: 2.3125rem;
+  flex-shrink: 0;
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  background-color: #56b947;
+}
+
+.repeatButton {
+  width: 8.8125rem;
+  height: 2.3125rem;
+  flex-shrink: 0;
+  color: #56b947;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  background-color: #cde2c3;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.detallePedido {
+  color: rgb(67, 67, 67);
+  font-family: Roboto;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 139%; /* 1.0425rem */
+  letter-spacing: -0.00825rem;
+}

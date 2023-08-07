@@ -15,10 +15,10 @@ export default async function handler(req, res) {
 
     transporter.use("compile", htmlToText.htmlToText());
 
-    // Here's the HTML for the cart items
-    let cartItemsHTML = Object.values(cartData)
-      .map(
-        (item) => `
+    let cartItemsHTML = cartData
+      .map((item) => {
+        return item.selectedSizes.map(
+          (sizeItem) => `
         <table style="width: 70%; border: 1px solid black; margin-bottom: 20px;">
           <tr>
             <td rowspan="4" style="width: 100px;">
@@ -26,33 +26,38 @@ export default async function handler(req, res) {
                 item.picture
               }" alt="Product image" style="width: 100px; height: 100px;"/>
             </td>
-            <td style="padding-left: 10px;">${item.imageName.replace(
-              /%2F/g,
-              " "
-            )}</td>
+            <td style="padding-left: 10px;">${item.name}</td>
             <td rowspan="4" style="text-align: right;">${item.price *
-              item.quantity}$</td>
+              sizeItem.quantity}$</td>
           </tr>
           <tr>
-            <td style="padding-left: 10px;">Size: ${item.size}</td>
+            <td style="padding-left: 10px;">Size: ${sizeItem.size}</td>
           </tr>
           <tr>
             <td style="padding-left: 10px;">Price: ${item.price}$</td>
           </tr>
           <tr>
-            <td style="padding-left: 10px;">Quantity: ${item.quantity}</td>
+            <td style="padding-left: 10px;">Quantity: ${sizeItem.quantity}</td>
           </tr>
         </table>
       `
-      )
+        );
+      })
+      .flat()
       .join("");
-    let total = Object.values(cartData).reduce(
-      (sum, item) => sum + item.price * item.quantity,
+
+    let total = cartData.reduce(
+      (sum, item) =>
+        sum +
+        item.selectedSizes.reduce(
+          (innerSum, sizeItem) => innerSum + item.price * sizeItem.quantity,
+          0
+        ),
       0
     );
 
     let mailOptions = {
-      from: "YOUR_GMAIL_ACCOUNT",
+      from: process.env.GMAIL_ACCOUNT, // Use the email from environment variable here
       to: `${email}, iairkap@gmail.com`,
       subject: "Orden de Compra",
       html: `

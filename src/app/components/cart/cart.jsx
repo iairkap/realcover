@@ -14,7 +14,7 @@ function Cart() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
+    if (storedUser && storedUser !== "undefined") {
       setUser(JSON.parse(storedUser));
     }
   }, []);
@@ -111,41 +111,70 @@ function Cart() {
       }
     }
 
+    dispatchOrder();
+  };
+
+  const dispatchOrder = async () => {
+    const userId = localStorage.getItem("user");
+    if (!userId) {
+      console.error("UserId not found in localStorage");
+      return;
+    }
+    console.log("UserId:", userId);
+
+    const products = cart
+      .map((item) => {
+        return item.selectedSizes.map((sizeItem) => ({
+          productId: item.id,
+          quantity: Number(sizeItem.quantity),
+          unitPrice: item.price,
+          size: sizeItem.size,
+        }));
+      })
+      .flat();
+
+    console.log("Products:", products);
+
     const orderData = {
-      userId: user.id,
-      cartItems: Object.values(cart).map((item) => ({
-        id: item.id,
-        sizeId: item.sizeId,
-        type: item.type,
-        quantity: item.quantity,
-        price: item.price,
-      })),
+      userId: JSON.parse(userId).id,
+      total: calculateTotals(),
+      status: "Pending", // or whatever default status you want to use
+      products,
     };
 
-    try {
-      const response = await axios.post("/api/orders", orderData);
+    // Añadiendo el console.log aquí para ver la data de la orden:
+    console.log("Sending order data to /api/order:", orderData);
 
+    try {
+      const response = await axios.post("/api/order", orderData);
       if (response.status === 200) {
+        console.log("Order successfully dispatched", response.data);
+
+        // Dispatch the order confirmation email
         const emailData = {
           cartData: cart,
           email: user.email,
-          orderId: response.data.id,
+          orderId: response.data.order.id, // Ensure you are accessing the ID correctly based on your response structure
         };
+
+        // Añadiendo el console.log aquí para ver la data del email:
+        console.log("Sending email data to /api/emailorder:", emailData);
 
         axios
           .post("/api/emailorder", emailData)
           .then((res) => {
-            console.log(res);
+            console.log("Email dispatched successfully:", res);
           })
           .catch((error) => {
-            console.error(error);
+            console.error("Error dispatching the email:", error);
           });
+      } else {
+        console.error("Error while dispatching the order:", response.data);
       }
     } catch (error) {
-      console.error(error);
+      console.error("An error occurred while dispatching the order:", error);
     }
   };
-
   return (
     <div className={styles.modal}>
       <div className={styles.modalBackground} onClick={handleModalClose} />

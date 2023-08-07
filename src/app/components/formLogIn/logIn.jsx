@@ -29,10 +29,9 @@ function LogIn({ toggleForm }) {
           body: JSON.stringify({ idToken }),
         });
 
-        if (res.status === 200) {
-          // Inicio de sesión exitoso. Redirigir al usuario a la página /store/fundas
-          localStorage.setItem("user", JSON.stringify(user));
-
+        if (res.status === 200 && data.user) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          console.log("data.user", data.user);
           router.push("/store/fundas");
         } else {
           // El inicio de sesión falló. Mostrar un mensaje de error al usuario.
@@ -63,6 +62,7 @@ function LogIn({ toggleForm }) {
     if (res.status === 200) {
       // Aquí se almacena la información en el localStorage
       localStorage.setItem("user", JSON.stringify(data.user));
+      console.log("data.user", data.user);
 
       router.push("/store/fundas");
     } else {
