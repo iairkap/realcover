@@ -1,8 +1,35 @@
 import prisma from "../../../prisma/client";
+import { getSession } from "next-auth/react";
+import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   const { method } = req;
-  const { userId, total, status, products } = req.body;
+  const { token } = req.cookies;
+  const { total, status, products } = req.body;
+  const session = await getSession({ req });
+
+  let verifyMethod;
+
+  if (session) {
+    verifyMethod = session.user.email;
+  } else if (token) {
+    try {
+      const { email } = jwt.verify(token, process.env.JWT_SECRET);
+      verifyMethod = email;
+    } catch (error) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+  } else {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: verifyMethod,
+    },
+  });
+
+  const userId = user.id;
 
   switch (method) {
     case "POST":
