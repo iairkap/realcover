@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+"use client";
+import React, { useState, useContext, useEffect } from "react";
 import styles from "./pedidoscard.module.css";
 import Image from "next/image";
 
@@ -15,6 +16,8 @@ function PedidosCard({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isShippingModalOpen, setIsShippingModalOpen] = useState(false);
+  const [isUpdateSuccess, setIsUpdateSuccess] = useState(false);
 
   const productCountByType = {};
   orderDetails.forEach((detail) => {
@@ -141,6 +144,71 @@ function PedidosCard({
     }
     setIsLoading(false);
   };
+
+  const [userFormData, setUserFormData] = useState({
+    address: user.address || "",
+    city: user.city || "",
+    localidad: user.localidad || "",
+    postalCode: user.postalCode || "",
+    phone: user.phone || "",
+    shopName: user.shopName || "",
+    cuit: user.cuit || "",
+  });
+
+  function updateUserField(fieldName, value) {
+    setUserFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+  }
+  const handleUpdateUserInfo = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch(`/api/user/${user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userFormData),
+    });
+
+    if (response.ok) {
+      const updatedUser = await response.json();
+      console.log("User updated successfully:", updatedUser);
+
+      // 1. Actualizar el localStorage con los datos actualizados
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
+      // 2. Actualizar el estado local para reflejar estos cambios en la UI
+      setUserFormData({
+        address: updatedUser.address || "",
+        city: updatedUser.city || "",
+        localidad: updatedUser.localidad || "",
+        postalCode: updatedUser.postalCode || "",
+        phone: updatedUser.phone || "",
+        shopName: updatedUser.shopName || "",
+        cuit: updatedUser.cuit || "",
+      });
+
+      setIsUpdateSuccess(true);
+      setIsShippingModalOpen(false);
+    } else {
+      const errorData = await response.json();
+      console.error("Error updating user:", errorData.message);
+      setIsUpdateSuccess(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      alert("Datos actualizados con éxito!");
+      setIsUpdateSuccess(false); // Reinicia el estado tras mostrar el mensaje
+    }
+  }, [isUpdateSuccess]);
+
+  const handleOpenShippingModal = () => {
+    setIsShippingModalOpen(true);
+  };
   return (
     <div className={styles.contenedorCard}>
       {/* Contenedor para Imagen + Información */}
@@ -166,8 +234,141 @@ function PedidosCard({
           ))}
         </div>
       </div>
+      <div>
+        <button
+          className={styles.repeatButton}
+          onClick={handleOpenShippingModal}
+        >
+          Modificar Datos de Envio{" "}
+        </button>
+        <p className={styles.detallePedidoB}>
+          Direccion: {user.address},Ciudad: {user.city},Localidad:{" "}
+          {user.localidad},Codigo Postal: {user.postalCode},Telefono:{" "}
+          {user.phone},Nombre del Local: {user.shopName}, CUITL {user.cuit}
+          ,Nombre: {user.name}, Apellido: {user.lastname}
+        </p>
+      </div>
+      <Modal
+        isOpen={isShippingModalOpen}
+        onRequestClose={() => setIsShippingModalOpen(false)}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backdropFilter: "blur(1px)",
+            zIndex: 10000000,
+            display: "flex",
+            justifyContent: "center", // Centrar contenido horizontalmente
+            alignItems: "center", // Centrar contenido verticalmente
+          },
+          content: {
+            background: "#232323",
 
-      {/* Contenedor de botones */}
+            overflow: "auto",
+            position: "relative", // Esto es importante para que el modal se posicione en el centro
+            top: "auto",
+            left: "auto",
+            right: "auto",
+            bottom: "auto",
+            transform: "none", // Remover la transformación anterior para centrar
+            padding: "1rem",
+            boxSizing: "border-box", // Asegurar que el padding no afecte el tamaño total
+          },
+        }}
+      >
+        <form onSubmit={handleUpdateUserInfo}>
+          <div className={styles.textContainerModal}>
+            <h1 className={styles.tituloModelo}>Datos de Envio</h1>
+            <br />
+            <div className={styles.inputsContainer}>
+              <div className={styles.inputModal}>
+                <label htmlFor="address" className={styles.modalText}>
+                  Direccion:
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  onChange={(e) => updateUserField("address", e.target.value)}
+                  value={userFormData.address}
+                />
+              </div>
+              <div className={styles.inputModal}>
+                <label htmlFor="city" className={styles.modalText}>
+                  Ciudad:
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  onChange={(e) => updateUserField("city", e.target.value)}
+                  value={userFormData.city}
+                />
+              </div>
+              <div className={styles.inputModal}>
+                <label htmlFor="localidad" className={styles.modalText}>
+                  Localidad:
+                </label>
+                <input
+                  type="text"
+                  id="localidad"
+                  onChange={(e) => updateUserField("localidad", e.target.value)}
+                  value={userFormData.localidad}
+                />
+              </div>
+              <div className={styles.inputModal}>
+                <label htmlFor="postalCode" className={styles.modalText}>
+                  Código Postal:
+                </label>
+                <input
+                  type="text"
+                  id="postalCode"
+                  onChange={(e) =>
+                    updateUserField("postalCode", e.target.value)
+                  }
+                  value={userFormData.postalCode}
+                />
+              </div>
+              <div className={styles.inputModal}>
+                <label htmlFor="phone" className={styles.modalText}>
+                  Teléfono:
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  onChange={(e) => updateUserField("phone", e.target.value)}
+                  value={userFormData.phone}
+                />
+              </div>
+
+              <div className={styles.inputModal}>
+                <label htmlFor="shopName" className={styles.modalText}>
+                  Nombre de la Tienda:
+                </label>
+                <input
+                  type="text"
+                  id="shopName"
+                  onChange={(e) => updateUserField("shopName", e.target.value)}
+                  value={userFormData.shopName}
+                />
+              </div>
+              <div className={styles.inputModal}>
+                <label htmlFor="cuit" className={styles.modalText}>
+                  CUIT:
+                </label>
+                <input
+                  type="number"
+                  id="cuit"
+                  onChange={(e) => updateUserField("cuit", e.target.value)}
+                  value={userFormData.cuit}
+                />
+              </div>
+              <br />
+            </div>
+            <button type="submit" className={styles.botonConfirmacion}>
+              Confirmar datos de Envio
+            </button>
+          </div>
+        </form>
+      </Modal>
+
       <div className={styles.contenedorBotones}>
         <button onClick={handleOpenModal} className={styles.detailButton}>
           Ver Detalle
@@ -242,10 +443,30 @@ function PedidosCard({
           onRequestClose={() => setIsConfirmModalOpen(false)}
           style={{
             overlay: {
-              //... (puedes usar el mismo estilo que tu modal anterior o uno diferente si lo prefieres)
+              position: "fixed",
+              top: 0,
+              right: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.829)",
+              zIndex: 10,
+              backdropFilter: "blur(4.5px)",
             },
             content: {
-              //... (puedes usar el mismo estilo que tu modal anterior o uno diferente si lo prefieres)
+              backgroundColor: "white",
+              position: "fixed",
+              top: 0,
+              left: "auto", // Añade esta línea
+              right: 0,
+              padding: "2rem",
+              width: "80%",
+              maxWidth: "30%",
+              maxHeight: "90vh",
+              zIndex: 20,
+              overflowY: "auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
             },
           }}
         >

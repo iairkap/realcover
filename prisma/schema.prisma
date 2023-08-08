@@ -28,8 +28,11 @@ model User {
   password   String?
   address    String?
   city       String?
+  localidad  String? 
   postalCode String?
   phone      String?
+  shopName   String? 
+  cuit       String? 
   provider   String
   orders     Order[]
 }

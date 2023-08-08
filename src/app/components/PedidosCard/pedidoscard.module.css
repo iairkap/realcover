@@ -84,7 +84,6 @@
 }
 
 .repeatButton {
-  width: 8.8125rem;
   height: 2.3125rem;
   flex-shrink: 0;
   color: #56b947;
@@ -117,6 +116,20 @@
   font-weight: 400;
   line-height: 139%; /* 1.0425rem */
   letter-spacing: -0.00825rem;
+}
+
+.detallePedidoB {
+  color: rgb(128, 127, 127);
+  font-family: Roboto;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 139%; /* 1.0425rem */
+  letter-spacing: -0.00825rem;
+  width: 207.81px; /* Establece el ancho máximo */
+  white-space: nowrap; /* Evita que el texto se divida en líneas */
+  overflow: hidden; /* Esconde el contenido que sobrepasa el límite */
+  text-overflow: ellipsis; /* Añade los puntos suspensivos al final si el contenido sobrepasa el límite */
 }
 
 .modal {
@@ -182,4 +195,71 @@
   font-weight: 900;
   line-height: 139%;
   letter-spacing: -0.01375rem;
+}
+
+.textContainerModal {
+  display: flex;
+  flex-direction: column;
+}
+
+.tituloModelo {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 2.25875rem */
+  letter-spacing: -0.01788rem;
+  align-self: center;
+}
+
+.textContainerModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputModal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.modalText {
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.botonConfirmacion {
+  height: 2.3125rem;
+  font-size: 1.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  background-color: #56b947;
+  transition: background-color 0.3s ease; /* Transición suave al cambiar el color de fondo */
+}
+
+.botonConfirmacion:hover {
+  background-color: #45a037; /* Cambio de color al hacer hover */
 }

@@ -1,6 +1,7 @@
 .background {
   background-color: #232323;
   max-height: 100%;
+  min-height: 100vh;
 }
 
 .titulo {
