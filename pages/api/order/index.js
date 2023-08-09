@@ -60,24 +60,6 @@ export default async function handler(req, res) {
         res.status(500).json({ message: "Error creating one order" });
       }
       break;
-
-    case "GET":
-      try {
-        const orders = await prisma.order.findMany({
-          include: {
-            orderDetails: {
-              include: {
-                products: true,
-              },
-            },
-          },
-        });
-        res.status(200).json(orders);
-      } catch (error) {
-        res.status(500).json({ message: "Error getting orders" });
-      }
-      break;
-
     default:
       break;
   }

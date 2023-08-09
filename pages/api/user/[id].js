@@ -1,26 +1,8 @@
 import prisma from "../../../prisma/client";
-import jwt from "jsonwebtoken";
-import { getSession } from "next-auth/react";
+import verifyMiddleware from "../jwt-session/verifyMiddleware";
 
-export default async function handler(req, res) {
-  const { id } = req.query;
-  const { token } = req.cookies;
+async function handler(req, res, verifyMethod) {
   const { method } = req;
-  const session = await getSession({ req });
-  let verifyMethod;
-
-  if (session) {
-    verifyMethod = session.user.email;
-  } else if (token) {
-    try {
-      const { email } = jwt.verify(token, process.env.JWT_SECRET);
-      verifyMethod = email;
-    } catch (error) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-  } else {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
 
   switch (method) {
     case "GET":
@@ -80,6 +62,7 @@ export default async function handler(req, res) {
 
     default:
       return res.status(405).json({ message: "Method not allowed" });
-      break;
   }
 }
+
+export default verifyMiddleware(handler);
