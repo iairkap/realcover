@@ -14,7 +14,32 @@ import ciudades from "./ciudades.png";
 import estrellas from "./estrellas.svg";
 import pedidos from "./pedidos.svg";
 import logout from "./logout.svg";
+import logoDashboard from "./logorealcover.svg";
+import clientesDash from "./clientesDash.svg";
+import mensajesDash from "./mensajesDash.svg";
+import pedidosDash from "./pedidosDash.svg";
+import preciosDash from "./preciosDash.svg";
+import stockDash from "./stockDash.svg";
+import voucherDash from "./voucherDash.svg";
+import productosDash from "./productosDash.svg";
+import ingresosDash from "./ingresosDash.svg";
+import activosDash from "./activosDash.svg";
+
+import nuevosDash from "./nuevosDash.svg";
+import deliveryDash from "./deliveryDash.svg";
+
 export {
+  activosDash,
+  nuevosDash,
+  deliveryDash,
+  ingresosDash,
+  productosDash,
+  clientesDash,
+  mensajesDash,
+  pedidosDash,
+  preciosDash,
+  stockDash,
+  voucherDash,
   arrowCategories,
   logo,
   search,
@@ -31,4 +56,5 @@ export {
   estrellas,
   pedidos,
   logout,
+  logoDashboard,
 };

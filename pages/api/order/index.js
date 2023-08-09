@@ -44,6 +44,7 @@ export default async function handler(req, res) {
         const orders = await prisma.order.findMany({
           where: userId ? { userId } : undefined,
           include: {
+            user: true, // <- Aquí estás incluyendo la relación user.
             orderDetails: {
               include: {
                 products: true,

@@ -1,0 +1,111 @@
+.Contenedor {
+  width: 22.5rem;
+  height: 35.4375rem;
+  flex-shrink: 0;
+  border: 1px solid #000;
+  background: #fff;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ContenedorRemitente,
+.destinatarioContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logoContainer {
+  margin-top: 1rem;
+}
+
+.canvas {
+  margin-top: 1rem;
+}
+.textContainer,
+.destinatarioInformation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.textContainerDes {
+  display: flex;
+}
+.text1,
+.text2 {
+  word-wrap: break-word;
+}
+
+.text1 {
+  color: #000;
+  font-family: Roboto;
+  font-size: 0.75em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.text2 {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.line {
+  background-color: black;
+  width: 100%;
+  height: 2px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.destinatarioTitleb,
+.destinatarioTitlec,
+.destinatarioTitleE,
+.destinatarioTitleD {
+  color: #000;
+  font-family: Roboto;
+  line-height: normal;
+}
+
+.destinatarioTitleb {
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.destinatarioTitlec {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.destinatarioTitleE,
+.destinatarioTitleD {
+  font-size: 1.5rem;
+}
+
+.destinatarioTitleD {
+  font-weight: 100;
+}
+
+.destinatarioTitleE {
+  font-weight: 900;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.qrCanvas {
+  margin-right: 1rem; /* Puedes ajustar este valor para dar más espacio entre el QR y el logo */
+}

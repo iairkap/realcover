@@ -2,6 +2,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import styles from "./pedidoscard.module.css";
 import Image from "next/image";
+import jwt from "jsonwebtoken";
 
 import Modal from "react-modal";
 

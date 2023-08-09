@@ -25,7 +25,18 @@ export default async function loginHandler(req, res) {
       return res.status(400).json({ message: "Login failed" });
     }
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        address: user.address,
+        city: user.city,
+        localidad: user.localidad,
+        postalCode: user.postalCode,
+        phone: user.phone,
+        shopName: user.shopName,
+        cuit: user.cuit,
+      },
       process.env.JWT_SECRET,
       {
         expiresIn: "24h",

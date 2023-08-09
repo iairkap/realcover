@@ -1,0 +1,37 @@
+.navBarContainer {
+  background-color: #56b947;
+  height: 100vh;
+  width: 13.9375rem;
+  position: sticky; /* Agrega esta línea */
+  top: 0; /* Agrega esta línea */
+}
+
+.logo {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.iconsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2.875rem 2.8125rem;
+  align-items: flex-start;
+  margin-top: 40%;
+  margin-left: 10%;
+}
+
+.iconTitle {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.titles {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+}
