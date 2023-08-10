@@ -5,7 +5,13 @@ async function handler(req, res, verifyMethod) {
   if (verifyMethod === process.env.ADMIN_EMAIL) {
     switch (req.method) {
       case "GET":
-        const orders = await prisma.order.findMany();
+        const orders = await prisma.order.findMany({
+          include: {
+            user: true,
+            orderDetails: true,
+            discount: true,
+          },
+        });
         return res.status(200).json(orders);
 
       default:

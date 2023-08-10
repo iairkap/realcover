@@ -40,8 +40,10 @@ model Order {
   date         DateTime      @default(now())
   total        Float
   status       String
+  discountCode String?
   user         User          @relation(fields: [userId], references: [id])
   orderDetails OrderDetail[]
+  discount     Discount?     @relation(fields: [discountCode], references: [code])
 }
 
 model OrderDetail {
@@ -53,6 +55,17 @@ model OrderDetail {
   size      String
   products  Product @relation(fields: [productId], references: [id])
   order     Order   @relation(fields: [orderId], references: [id])
+}
+
+model Discount {
+  id        Int       @id @default(autoincrement())
+  code      String    @unique
+  discount  Float
+  active    Boolean
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  orders    Order[]
 }
 
 enum ProductType {

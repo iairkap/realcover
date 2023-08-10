@@ -13,6 +13,7 @@ async function handler(req, res, verifyMethod) {
         include: {
           orders: {
             include: {
+              discount: true,
               orderDetails: {
                 include: {
                   products: true,

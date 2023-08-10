@@ -69,12 +69,12 @@ async function handler(req, res, verifyMethod) {
               ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
               3290
             );
-            const portfolios = await mapAndSaveImages(
-              "Portafolio",
-              "PORTAFOLIOs",
-              ["14_1", "15_6"],
-              5990
-            );
+            // const portfolios = await mapAndSaveImages(
+            //   "Portafolio",
+            //   "PORTAFOLIOs",
+            //   ["14_1", "15_6"],
+            //   5990
+            // );
             const tablet = await mapAndSaveImages(
               "Tablets",
               "TABLET_COVER",
