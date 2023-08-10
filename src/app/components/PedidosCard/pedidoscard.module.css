@@ -4,15 +4,16 @@
   align-items: center;
   border: 1px solid #ccc;
   padding: 1rem;
-  height: 8.875rem;
+  height: 10.875rem;
   flex-shrink: 0;
   background: #f5f5f5;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-left: 10rem;
-  margin-right: 10rem;
   justify-content: space-between; /* Añade esto */
   align-items: center; /* Centra verticalmente el contenido */
   margin-bottom: 2rem;
+  border-radius: 0.3125rem;
+  margin-left: 2rem;
+  margin-right: 4rem;
 }
 
 .productImage {
@@ -32,6 +33,7 @@
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  border-radius: 0.3125rem;
 }
 
 .orderDetailHidden {
@@ -262,4 +264,96 @@
 
 .botonConfirmacion:hover {
   background-color: #45a037; /* Cambio de color al hacer hover */
+}
+.titulosTabla {
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+}
+
+.table {
+  margin-top: 3rem;
+}
+
+.tablaB {
+  background-color: none;
+}
+
+.tr {
+  border-bottom: 3px solid white; /* Línea blanca debajo de cada fila */
+  height: 100px; /* Alto fijo para las filas */
+}
+
+.th,
+.td,
+.td1 {
+  border-right: 3px solid white; /* Línea blanca entre las columnas */
+  padding-left: 30px; /* Espacio a la izquierda del texto */
+  padding-right: 30px; /* Espacio a la derecha del texto */
+}
+
+.titulosTabla:last-child,
+.td:last-child {
+  border-right: none; /* Para no tener una línea blanca extra en el último encabezado o columna de datos */
+}
+
+.td,
+.td1 {
+  border-bottom: 1px solid white;
+}
+
+.tbody tr:last-child {
+  border-bottom: none;
+}
+
+.titulosTabla:nth-child(3), /* selector para el encabezado de la columna ID */
+.td:nth-child(3) {
+  width: 465px; /* Anchura fija para la columna de ID */
+}
+
+.td,
+.td1 {
+  height: 9rem;
+}
+
+.td1 {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+}
+
+.td {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+}
+
+.tdHighlighted {
+  background-color: #56b947; /* Cambia #colorDeseado por el código del color que desees */
+}
+
+.tablaB {
+  background-color: #56b947;
+  position: sticky;
+  top: 0;
+  z-index: 10; /* Para asegurar que se superponga sobre el contenido cuando se desplace */
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+}
+
+.titulosTabla {
+  border-bottom: 1px solid white;
 }

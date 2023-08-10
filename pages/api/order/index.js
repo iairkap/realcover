@@ -85,7 +85,25 @@ export default async function handler(req, res) {
           .json({ message: "Error deleting orders", error: error.message });
       }
       break;
+    case "PUT":
+      console.log("Recibiendo solicitud PUT con data:", req.body);
 
+      try {
+        const { orderId, status } = req.body;
+
+        const updatedOrder = await prisma.order.update({
+          where: { id: orderId },
+          data: { status },
+        });
+
+        res.status(200).json(updatedOrder);
+      } catch (error) {
+        res.status(500).json({
+          message: "Error updating order status",
+          error: error.message,
+        });
+      }
+      break;
     default:
       res.setHeader("Allow", ["GET", "POST", "DELETE"]);
       res.status(405).end(`Method ${method} Not Allowed`);

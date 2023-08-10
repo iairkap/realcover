@@ -11,6 +11,17 @@ function PedidosContainerDashboard() {
   const [orders, setOrders] = useState([]);
   const [isPDFVisible, setPDFVisible] = useState(false);
 
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get(`/api/order`);
+      if (response.status === 200) {
+        setOrders(response.data);
+      }
+      console.log("Orders:", response.data);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -32,8 +43,8 @@ function PedidosContainerDashboard() {
   };
   return (
     <div className={styles.container}>
-      <button onClick={handleOpenPDF}>Imprimir Datos de Envio</button>
-
+      {/*     <button onClick={handleOpenPDF}>Imprimir Datos de Envio</button>
+       */}
       <Modal
         isOpen={isPDFVisible}
         onRequestClose={() => setPDFVisible(false)}
@@ -47,9 +58,12 @@ function PedidosContainerDashboard() {
       {orders.map((order) => (
         <PedidosCardDashboard
           key={order.id}
+          order={order.id}
           orderId={order.id}
+          fetchOrders={fetchOrders} // Pasa fetchOrders como prop
           {...order}
           className={styles.separacion}
+          orders={orders.filter((order) => order.status === "En proceso")}
         />
       ))}
     </div>

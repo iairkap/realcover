@@ -15,9 +15,11 @@ function PedidosCardDashboard({
   status,
   orderDetails,
   deliveryDate,
-  orderId, // add this
-
+  orders,
   name,
+  order,
+  fetchOrders, // Recibe fetchOrders como prop
+  orderId,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,6 +27,52 @@ function PedidosCardDashboard({
   const [isShippingModalOpen, setIsShippingModalOpen] = useState(false);
   const [isUpdateSuccess, setIsUpdateSuccess] = useState(false);
   const [isPDFVisible, setPDFVisible] = useState(false);
+  const [tableOption, setTableOption] = useState(1);
+
+  const [isModalOpenShipping, setIsModalOpenShipping] = useState(false);
+  const [localStatus, setLocalStatus] = useState("En proceso");
+  const openModal = () => {
+    setIsModalOpenShipping(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpenShipping(false);
+  };
+
+  const confirmSend = async () => {
+    setIsLoading(true);
+    try {
+      console.log("Enviando orden con ID:", orderId);
+
+      const response = await fetch("api/order", {
+        // <-- Reemplaza esto con la ruta correcta
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderId: orderId, // Ahora estás usando orderId que es el ID de la orden
+          status: "Enviado",
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Respuesta del servidor:", data);
+
+      if (response.ok) {
+        setLocalStatus("Enviado");
+        await fetchOrders(); // Llama a fetchOrders después de confirmar el envío
+      } else {
+        setError(data.message || "Error actualizando la orden.");
+      }
+    } catch (error) {
+      setError("Error al enviar la solicitud.");
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+      closeModal();
+    }
+  };
 
   const productCountByType = {};
   orderDetails.forEach((detail) => {
@@ -67,26 +115,6 @@ function PedidosCardDashboard({
     return formattedName;
   }
 
-  const groupedOrderDetails = orderDetails.reduce((acc, detail) => {
-    const id = detail.products.id;
-    const size = detail.size;
-
-    if (!acc[id]) {
-      acc[id] = {
-        product: detail.products,
-        sizes: {},
-      };
-    }
-
-    if (!acc[id].sizes[size]) {
-      acc[id].sizes[size] = detail.quantity;
-    } else {
-      acc[id].sizes[size] += detail.quantity;
-    }
-
-    return acc;
-  }, {});
-
   const sizeMapping = {
     Size7: '7"',
     Size8: '8"',
@@ -101,13 +129,176 @@ function PedidosCardDashboard({
     M: "M",
     L: "L",
   };
+  const ProductType = {
+    NEOPRENE_COVER: "NEOPRENE_COVER",
+    MALETINES: "MALETINES",
+    MALETINES_FULL_COLOR: "MALETINES_FULL_COLOR",
+    TABLET_COVER: "TABLET_COVER",
+    CUBRE_VALIJAS: "CUBRE_VALIJAS",
+    PORTAFOLIOS: "PORTAFOLIOS",
+    CON_BOLSILLO: "CON_BOLSILLO",
+  };
 
+  const ProductDisplayName = {
+    [ProductType.NEOPRENE_COVER]: "Fundas",
+    [ProductType.MALETINES]: "Valijas",
+    [ProductType.MALETINES_FULL_COLOR]: "Full Color",
+    [ProductType.TABLET_COVER]: "Fundas Rigidas",
+    [ProductType.CUBRE_VALIJAS]: "Cubre Valijas",
+    [ProductType.PORTAFOLIOS]: "Portafolios",
+    [ProductType.CON_BOLSILLO]: "Con Bolsillo",
+  };
+  const groupedOrderDetails = orderDetails.reduce((acc, detail) => {
+    const size = sizeMapping[detail.size];
+    const nameParts = decodeURIComponent(detail.products.name).split("/");
+    const type = ProductDisplayName[detail.products.productType]; // Usamos el tipo de producto correcto
+    const productId = nameParts[1];
+
+    if (!acc[size]) {
+      acc[size] = {};
+    }
+
+    if (!acc[size][type]) {
+      acc[size][type] = {
+        products: {},
+      };
+    }
+
+    if (!acc[size][type].products[productId]) {
+      acc[size][type].products[productId] = {
+        count: 0,
+        price: detail.unitPrice,
+      };
+    }
+
+    acc[size][type].products[productId].count += detail.quantity;
+
+    return acc;
+  }, {});
   function formatSize(sizeEnum) {
     return sizeMapping[sizeEnum] || sizeEnum;
   }
 
   const user = JSON.parse(localStorage.getItem("user"));
+  const allSizes = Object.keys(sizeMapping);
+  function convertToCSV(data) {
+    const csvRows = [];
 
+    // Obtener los encabezados de "tipo de funda"
+    const typeHeaders = ["MODELO"].concat(Array.from(uniqueTypes));
+    csvRows.push(typeHeaders.join(","));
+
+    // Obtener los encabezados de tamaños
+    const sizeHeaders = ["MODELO"].concat(
+      Array.from(uniqueTypes).flatMap(() => Array.from(uniqueSizes))
+    );
+    csvRows.push(sizeHeaders.join(","));
+
+    // Rellenar los datos
+    for (const productId of uniqueProducts) {
+      const row = [productId];
+      for (const displayType of uniqueTypes) {
+        for (const currSize of uniqueSizes) {
+          const currProd =
+            groupedOrderDetails[currSize]?.[displayType]?.products[productId];
+          row.push(currProd ? currProd.count : "--");
+        }
+      }
+      csvRows.push(row.join(","));
+    }
+
+    return csvRows.join("\n");
+  }
+  function handleExportToCSV() {
+    const csvData = convertToCSV(groupedOrderDetails);
+    const blob = new Blob([csvData], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.setAttribute("hidden", "");
+    a.setAttribute("href", url);
+    a.setAttribute("download", "export.csv");
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  const uniqueSizes = new Set(Object.keys(groupedOrderDetails));
+  const uniqueTypes = new Set(
+    Object.values(groupedOrderDetails).flatMap((sizeDetails) =>
+      Object.keys(sizeDetails)
+    )
+  );
+
+  const uniqueProducts = new Set(
+    Object.values(groupedOrderDetails)
+      .flatMap((sizeDetails) => Object.values(sizeDetails))
+      .flatMap((typeDetails) => Object.keys(typeDetails.products))
+  );
+  function renderTable2() {
+    return (
+      <table className={styles.table}>
+        <thead className={styles.tablaB}>
+          {/* Primer fila para tipo de funda */}
+          <tr className={styles.tr}>
+            <th className={`${styles.titulosTabla} ${styles.th}`}></th>
+            {Array.from(uniqueTypes).map((type) => (
+              <th
+                key={type}
+                colSpan={Array.from(uniqueSizes).length}
+                className={`${styles.titulosTabla} ${styles.th}`}
+              >
+                {type}
+              </th>
+            ))}
+          </tr>
+          {/* Segunda fila para el modelo y tamaño */}
+          <tr className={styles.tr}>
+            <th className={`${styles.titulosTabla} ${styles.th}`}>MODELO</th>
+            {Array.from(uniqueTypes).flatMap(() =>
+              Array.from(uniqueSizes).map((size) => (
+                <th
+                  key={size}
+                  className={`${styles.titulosTabla} ${styles.th}`}
+                >
+                  {size}
+                </th>
+              ))
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from(uniqueProducts).map((productId) => (
+            <tr key={productId}>
+              <td className={styles.td1}>{productId}</td>
+              {Array.from(uniqueTypes).flatMap((displayType) =>
+                Array.from(uniqueSizes).map((currSize) => {
+                  const currProd =
+                    groupedOrderDetails[currSize]?.[displayType]?.products[
+                      productId
+                    ];
+                  return (
+                    <td
+                      key={`${productId}-${currSize}`}
+                      className={`${styles.td} ${
+                        currProd && currProd.count !== "--"
+                          ? styles.tdHighlighted
+                          : ""
+                      }`}
+                    >
+                      {currProd ? currProd.count : "--"}
+                    </td>
+                  );
+                })
+              )}
+            </tr>
+          ))}
+        </tbody>
+        <button onClick={handleExportToCSV} className={styles.exportButton}>
+          Exportar a CSV
+        </button>
+      </table>
+    );
+  }
   const handleOpenShippingModal = () => {
     setIsShippingModalOpen(true);
   };
@@ -116,6 +307,7 @@ function PedidosCardDashboard({
     setPDFVisible(true);
   };
 
+  console.log(groupedOrderDetails);
   return (
     <div className={styles.contenedorCard}>
       <div className={styles.leftContainer}>
@@ -163,7 +355,7 @@ function PedidosCardDashboard({
               },
             }}
           >
-            <Etiquetas user={user} orderId={orderId} />
+            <Etiquetas order={order} user={user} />
           </Modal>
         )}
         <p className={styles.detallePedidoB}>
@@ -184,23 +376,16 @@ function PedidosCardDashboard({
           style={{
             overlay: {
               position: "fixed",
-              top: 0,
-              right: 0,
+
               width: "100%",
               height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.829)",
+              backgroundColor: "rgba(0, 0, 0, 0.9)",
               zIndex: 10,
-              backdropFilter: "blur(4.5px)",
+              backdropFilter: "blur(10px)",
             },
             content: {
-              backgroundColor: "none",
+              backgroundColor: "#232323",
               position: "fixed",
-              top: 0,
-              left: "auto", // Añade esta línea
-              right: 0,
-              padding: "2rem",
-              width: "80%",
-              maxWidth: "30%",
               maxHeight: "90vh",
               zIndex: 20,
               overflowY: "auto",
@@ -211,77 +396,93 @@ function PedidosCardDashboard({
           }}
         >
           <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
+          <button onClick={() => setTableOption(1)}>Tabla 1</button>
+          <button onClick={() => setTableOption(2)}>Tabla 2</button>
           <h1 className={styles.titulo}>
             Pedido realizado el: {formattedOrderDate}
           </h1>
           <div className={styles.line}></div>
 
-          {Object.values(groupedOrderDetails).map((detail) => (
-            <div key={detail.product.id}>
-              <div className={styles.modalContainer}>
-                <div className={styles.contenedorImagen}>
-                  <Image
-                    src={detail.product.picture}
-                    alt={detail.product.name}
-                    width={100}
-                    height={100}
-                  />
-                </div>
-                <div className={styles.contenedorTexto}>
-                  <p>Modelo: {formatProductName(detail.product.name)}</p>
-                  {Object.entries(detail.sizes).map(([size, quantity]) => (
-                    <p key={size}>
-                      {formatSize(size)}: {quantity} unidades
-                    </p>
-                  ))}
-                </div>
-              </div>
-              <div className={styles.line}></div>
-            </div>
-          ))}
+          {/* Agregamos la tabla aquí */}
+          {/* Renderizar tabla basado en tableOption */}
+          {tableOption === 1 && (
+            <table className={styles.table}>
+              <thead className={styles.tablaB}>
+                <tr className={styles.tr}>
+                  <th className={`${styles.titulosTabla} ${styles.th}`}>
+                    Tipo
+                  </th>
+                  <th className={`${styles.titulosTabla} ${styles.th}`}>
+                    Tamaño
+                  </th>
+                  <th className={`${styles.titulosTabla} ${styles.th}`}>IDs</th>
+                  <th className={`${styles.titulosTabla} ${styles.th}`}>
+                    Cantidad
+                  </th>
+                  <th className={`${styles.titulosTabla} ${styles.th}`}>
+                    $ Unidad
+                  </th>
+                  <th className={`${styles.titulosTabla} ${styles.th}`}>
+                    $ Total
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(groupedOrderDetails).map(
+                  ([size, sizeDetails]) => {
+                    return Object.entries(sizeDetails).map(
+                      ([type, typeDetails]) => {
+                        const totalQuantity = Object.values(
+                          typeDetails.products
+                        ).reduce((sum, product) => sum + product.count, 0);
+                        const productEntries = Object.entries(
+                          typeDetails.products
+                        )
+                          .map(([id, prod]) => `${id} x (${prod.count})`)
+                          .join(", ");
+                        const pricePerUnit = Object.values(
+                          typeDetails.products
+                        )[0].price;
+                        return (
+                          <tr key={`${size}-${type}`}>
+                            <td className={styles.td1}>{type}</td>
+                            <td className={styles.td}>{size}</td>
+                            <td className={styles.td}>{productEntries}</td>
+                            <td className={styles.td}>{totalQuantity}</td>
+                            <td className={styles.td}>
+                              ${pricePerUnit.toFixed(2)}
+                            </td>
+                            <td className={styles.td}>
+                              ${(pricePerUnit * totalQuantity).toFixed(2)}
+                            </td>
+                          </tr>
+                        );
+                      }
+                    );
+                  }
+                )}
+              </tbody>
+            </table>
+          )}
+          {tableOption === 2 && renderTable2()}
+
+          {/* Fin de la tabla */}
         </Modal>
-        <button className={styles.repeatButton}>Confirmar Envio </button>{" "}
+        <button onClick={openModal} className={styles.repeatButton}>
+          Confirmar Envio
+        </button>
         <Modal
-          isOpen={isConfirmModalOpen}
-          onRequestClose={() => setIsConfirmModalOpen(false)}
-          style={{
-            overlay: {
-              position: "fixed",
-              top: 0,
-              right: 0,
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.829)",
-              zIndex: 10,
-              backdropFilter: "blur(4.5px)",
-            },
-            content: {
-              backgroundColor: "white",
-              position: "fixed",
-              top: 0,
-              left: "auto", // Añade esta línea
-              right: 0,
-              padding: "2rem",
-              width: "80%",
-              maxWidth: "30%",
-              maxHeight: "90vh",
-              zIndex: 20,
-              overflowY: "auto",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            },
-          }}
+          isOpen={isModalOpenShipping}
+          onRequestClose={closeModal}
+          contentLabel="Confirmar Envío"
         >
-          <p>Pedido realizado con éxito</p>
-          <button
-            onClick={() => {
-              setIsConfirmModalOpen(false);
-              window.location.reload(); // Recarga la página
-            }}
-          >
-            Aceptar
-          </button>
+          <h2>Confirmar Envío</h2>
+          <h1>{order.id}</h1>
+          <input placeholder="Nombre de encomienda" />
+          <input placeholder="Número de envío" />
+          <input placeholder="Costo de envío" />
+          <input type="file" placeholder="Adjuntar archivo" />
+          <button onClick={confirmSend}>Confirmar Envío</button>
         </Modal>
       </div>
     </div>

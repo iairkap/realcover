@@ -52,13 +52,13 @@ export default async function handler(req, res) {
           "FullColor",
           "MALETINES_FULL_COLOR",
           ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
-          2990
+          3490
         ); */
         /*       const fundas = await mapAndSaveImages(
           "Fundas",
           "NEOPRENE_COVER",
           ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
-          3290
+          3090
         ); */
         const portfolios = await mapAndSaveImages(
           "Portafolio",
