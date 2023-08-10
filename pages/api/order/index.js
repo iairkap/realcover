@@ -21,8 +21,11 @@ async function handler(req, res, verifyMethod) {
               code: discountCode,
             },
           });
-          if (discountCodeDB) {
+          if (discountCodeDB.active) {
             discount = (discountCodeDB.discount / 100) * total;
+          } else {
+            res.status(400).json({ message: "Discount code is not active" });
+            return;
           }
         }
 
@@ -51,8 +54,7 @@ async function handler(req, res, verifyMethod) {
 
         res.status(200).json({ message: "Order created" });
       } catch (error) {
-        res.status(500).json(error);
-        console.log(error);
+        res.status(500).json({ message: "Something went wrong" });
       }
       break;
     default:
