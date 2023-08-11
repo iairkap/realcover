@@ -59,11 +59,11 @@ async function handler(req, res, verifyMethod) {
         console.log("Recibiendo solicitud PUT con data:", req.body);
 
         try {
-          const { orderId, status } = req.body;
+          const { orderId, status, deliveryDate } = req.body;
 
           const updatedOrder = await prisma.order.update({
             where: { id: orderId },
-            data: { status },
+            data: { status, deliveryDate },
           });
 
           res.status(200).json(updatedOrder);
