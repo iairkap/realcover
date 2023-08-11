@@ -26,7 +26,57 @@ export default async function handler(req, res) {
       res.status(500).json({ message: "Error creating user" });
     }
   } else if (req.method === "GET") {
-    const users = await prisma.user.findMany();
+    const { search, orderBy } = req.query;
+    let users;
+    let orderArguments = {};
+
+    if (orderBy) {
+      switch (orderBy) {
+        case "name":
+          orderArguments = {
+            name: "asc",
+          };
+          break;
+        case "location":
+          orderArguments = {
+            city: "asc",
+          };
+          break;
+        case "orderDate":
+          orderArguments = {
+            orders: {
+              date: "desc",
+            },
+          };
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (search) {
+      users = await prisma.user.findMany({
+        where: {
+          OR: [
+            { name: { contains: search, mode: "insensitive" } },
+            { lastName: { contains: search, mode: "insensitive" } },
+            { city: { contains: search, mode: "insensitive" } },
+            // Agrega otros campos si los necesitas
+          ],
+        },
+        include: {
+          orders: true,
+        },
+      });
+    } else {
+      users = await prisma.user.findMany({
+        include: {
+          orders: true,
+        },
+        orderBy: orderArguments,
+      });
+    }
+
     users.forEach((user) => (user.password = undefined));
     res.status(200).json(users);
   } else if (req.method === "DELETE") {

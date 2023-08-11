@@ -16,6 +16,7 @@ function PedidosCardDashboard({
   orderDetails,
   deliveryDate,
   orders,
+  user,
   name,
   order,
   fetchOrders, // Recibe fetchOrders como prop
@@ -31,6 +32,11 @@ function PedidosCardDashboard({
 
   const [isModalOpenShipping, setIsModalOpenShipping] = useState(false);
   const [localStatus, setLocalStatus] = useState("En proceso");
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [encomiendaName, setEncomiendaName] = useState("");
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [selectedBank, setSelectedBank] = useState("");
+
   const openModal = () => {
     setIsModalOpenShipping(true);
   };
@@ -38,42 +44,68 @@ function PedidosCardDashboard({
   const closeModal = () => {
     setIsModalOpenShipping(false);
   };
-
   const confirmSend = async () => {
     setIsLoading(true);
     try {
       console.log("Enviando orden con ID:", orderId);
 
-      const response = await fetch("api/order", {
-        // <-- Reemplaza esto con la ruta correcta
+      // Actualizar la orden en la base de datos o donde sea necesario
+      const updateResponse = await fetch("api/order", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          orderId: orderId, // Ahora estás usando orderId que es el ID de la orden
+          orderId: orderId,
           status: "Enviado",
         }),
       });
 
-      const data = await response.json();
-      console.log("Respuesta del servidor:", data);
-
-      if (response.ok) {
-        setLocalStatus("Enviado");
-        await fetchOrders(); // Llama a fetchOrders después de confirmar el envío
-      } else {
-        setError(data.message || "Error actualizando la orden.");
+      if (!updateResponse.ok) {
+        const data = await updateResponse.json();
+        throw new Error(data.message || "Error actualizando la orden.");
       }
+
+      // Preparar datos para enviar correo
+      const emailData = {
+        shippingDetails: {
+          encomiendaName,
+          trackingNumber,
+          selectedBank,
+          // Puedes agregar más datos aquí si es necesario
+        },
+        email: user.email,
+        user: {
+          name: user.name,
+          lastName: user.lastName,
+          // Y cualquier otra información de usuario que desees enviar
+        },
+      };
+
+      // Hacer la solicitud para enviar el correo
+      const emailResponse = await fetch("api/emailDelivery", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      if (!emailResponse.ok) {
+        const data = await emailResponse.json();
+        throw new Error(data.message || "Error al enviar el correo.");
+      }
+
+      setLocalStatus("Enviado");
+      await fetchOrders();
     } catch (error) {
-      setError("Error al enviar la solicitud.");
+      setError(error.message);
       console.log(error);
     } finally {
       setIsLoading(false);
       closeModal();
     }
   };
-
   const productCountByType = {};
   orderDetails.forEach((detail) => {
     const productType = detail.products.productType;
@@ -114,6 +146,13 @@ function PedidosCardDashboard({
     }
     return formattedName;
   }
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
 
   const sizeMapping = {
     Size7: '7"',
@@ -179,7 +218,6 @@ function PedidosCardDashboard({
     return sizeMapping[sizeEnum] || sizeEnum;
   }
 
-  const user = JSON.parse(localStorage.getItem("user"));
   const allSizes = Object.keys(sizeMapping);
   function convertToCSV(data) {
     const csvRows = [];
@@ -475,14 +513,67 @@ function PedidosCardDashboard({
           isOpen={isModalOpenShipping}
           onRequestClose={closeModal}
           contentLabel="Confirmar Envío"
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.9)",
+              backdropFilter: "blur(1px)",
+              zIndex: 10000000,
+              display: "flex",
+              justifyContent: "center", // Centrar contenido horizontalmente
+              alignItems: "center", // Centrar contenido verticalmente
+            },
+            content: {
+              background: "#232323",
+
+              overflow: "auto",
+              position: "relative", // Esto es importante para que el modal se posicione en el centro
+              top: "auto",
+              left: "auto",
+              right: "auto",
+              bottom: "auto",
+              transform: "none", // Remover la transformación anterior para centrar
+              padding: "1rem",
+              boxSizing: "border-box", // Asegurar que el padding no afecte el tamaño total
+            },
+          }}
         >
-          <h2>Confirmar Envío</h2>
-          <h1>{order.id}</h1>
-          <input placeholder="Nombre de encomienda" />
-          <input placeholder="Número de envío" />
-          <input placeholder="Costo de envío" />
-          <input type="file" placeholder="Adjuntar archivo" />
-          <button onClick={confirmSend}>Confirmar Envío</button>
+          <div className={styles.contenedorModal}>
+            <h2>
+              Confirmar Envío para {user.email} {user.lastName} {user.shopName}
+            </h2>
+            <br />
+            <input
+              placeholder="Nombre de encomienda"
+              value={encomiendaName}
+              onChange={(e) => setEncomiendaName(e.target.value)}
+              className={styles.modalTextB}
+            />
+            <br />
+            <input
+              placeholder="Número de seguimiento"
+              value={trackingNumber}
+              onChange={(e) => setTrackingNumber(e.target.value)}
+              className={styles.modalTextB}
+            />
+            <br />
+            <select
+              value={selectedBank}
+              onChange={(e) => setSelectedBank(e.target.value)}
+              className={styles.modalSelect}
+            >
+              <option value="" disabled selected>
+                Transferir a{" "}
+              </option>
+              <option value="opcion1">BBVA FRANCES</option>
+              <option value="opcion2">Galicia</option>
+              <option value="opcion3">Mercado Pago</option>
+              {/* Agrega más opciones según lo necesario */}
+            </select>
+
+            <br />
+
+            <button onClick={confirmSend}>Confirmar Envío</button>
+          </div>
         </Modal>
       </div>
     </div>

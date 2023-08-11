@@ -1,0 +1,142 @@
+.cardContainer {
+  display: flex;
+  background-color: #f5f5f5;
+  flex-direction: column;
+  border-radius: 0.3125rem;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.titlesContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+}
+
+.infoText {
+  display: flex;
+  align-items: center; /* Alinea verticalmente */
+  margin-top: 2rem;
+  gap: 0.5rem;
+}
+
+.name {
+  font-family: Roboto;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  margin-right: 0.5rem; /* Espacio adicional antes del divisor */
+}
+
+.shop {
+  font-family: Roboto;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  margin-left: 0.5rem; /* Espacio adicional después del divisor */
+}
+
+.divColor {
+  width: 0.125rem;
+  height: auto;
+  flex-grow: 1;
+  background: rgba(112, 112, 112, 0.3);
+  margin: 0 0.5rem;
+}
+
+.divColorb {
+  height: 0.125rem;
+  background: rgba(112, 112, 112, 0.3);
+  margin: 0.5rem 0;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .titlesContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+  }
+
+  .divColor {
+    width: 100%;
+    height: 0.125rem;
+    margin: 0.5rem 0;
+  }
+}
+
+.iconHover:hover {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25%,
+  75% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animatedIcon:hover {
+  animation: pulse 0.5s infinite;
+}
+
+.animatedIcon:hover {
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+.emailText {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  position: relative; /* Necesario para el pseudo-elemento */
+  display: inline-block; /* Para que funcione correctamente la animación */
+}
+.emailText::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0; /* Inicialmente no tiene ancho */
+  height: 2px; /* Espesor de la línea de subrayado */
+  background-color: #000; /* Color de la línea */
+  transition: width 0.3s; /* Animación para la aparición de la línea */
+}
+
+.emailText:hover::before {
+  width: 100%; /* Al hacer hover, la línea ocupa el ancho completo del texto */
+}

@@ -19,30 +19,44 @@ function DashNav(props) {
       <div className={styles.logo}></div>
       <br /> <Image src={logoDashboard} className={styles.logo} />
       <div className={styles.iconsContainer}>
-        <div className={styles.iconTitle}>
-          <Image src={pedidosDash} />
-          <h4 className={styles.titles}>Pedidos</h4>
-        </div>
-        <div className={styles.iconTitle}>
-          <Image src={clientesDash} />
-          <h4 className={styles.titles}>Clientes</h4>
-        </div>
-        <div className={styles.iconTitle}>
-          <Image src={preciosDash} />
-          <h4 className={styles.titles}>Precios</h4>
-        </div>
-        <div className={styles.iconTitle}>
-          <Image src={stockDash} />
-          <h4 className={styles.titles}>Stock</h4>
-        </div>
-        <div className={styles.iconTitle}>
-          <Image src={productosDash} />
-          <h4 className={styles.titles}>Productos</h4>
-        </div>
-        <div className={styles.iconTitle}>
-          <Image src={voucherDash} />
-          <h4 className={styles.titles}>Cupones</h4>
-        </div>
+        <Link href="/dashboard">
+          <div className={styles.iconTitle}>
+            <div>
+              <Image src={pedidosDash} />
+            </div>
+            <h4 className={styles.titles}>Pedidos</h4>
+          </div>
+        </Link>
+        <Link href="/dashboard/clientes">
+          <div className={styles.iconTitle}>
+            <Image src={clientesDash} />
+            <h4 className={styles.titles}>Clientes</h4>
+          </div>
+        </Link>
+        <Link href="/dashboard/precios">
+          <div className={styles.iconTitle}>
+            <Image src={preciosDash} />
+            <h4 className={styles.titles}>Precios</h4>
+          </div>
+        </Link>
+        <Link href="/dashboard/stock">
+          <div className={styles.iconTitle}>
+            <Image src={stockDash} />
+            <h4 className={styles.titles}>Stock</h4>
+          </div>
+        </Link>
+        <Link href="/dashboard/productos">
+          <div className={styles.iconTitle}>
+            <Image src={productosDash} />
+            <h4 className={styles.titles}>Productos</h4>
+          </div>
+        </Link>
+        <Link href="/dashboard/cupones">
+          <div className={styles.iconTitle}>
+            <Image src={voucherDash} />
+            <h4 className={styles.titles}>Cupones</h4>
+          </div>
+        </Link>
       </div>
     </div>
   );

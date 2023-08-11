@@ -357,3 +357,82 @@
 .titulosTabla {
   border-bottom: 1px solid white;
 }
+
+.contenedorModal {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.modalTextB {
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  background-color: #56b947;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 0.5rem;
+  border-radius: 0.3125rem;
+}
+
+.modalTextB::placeholder {
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+.modalTextB:-ms-input-placeholder {
+  color: white;
+}
+
+.modalTextB::-ms-input-placeholder {
+  color: white;
+}
+
+/* Firefox < 19 */
+.modalTextB:-moz-placeholder {
+  color: white;
+  opacity: 1;
+}
+
+/* Firefox > 19 */
+.modalTextB::-moz-placeholder {
+  color: white;
+  opacity: 1;
+}
+
+/* Internet Explorer 10-11 */
+.modalTextB:-ms-input-placeholder {
+  color: white;
+}
+
+/* Edge */
+.modalTextB::-ms-input-placeholder {
+  color: white;
+}
+
+/* Safari and Chrome */
+.modalTextB::-webkit-input-placeholder {
+  color: white;
+}
+
+.modalSelect {
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  background-color: #56b947;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 0.5rem;
+  border-radius: 0.3125rem;
+}

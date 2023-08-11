@@ -59,6 +59,7 @@ function PedidosContainerDashboard() {
         <PedidosCardDashboard
           key={order.id}
           order={order.id}
+          user={order.user} // Pasa el usuario relacionado al pedido
           orderId={order.id}
           fetchOrders={fetchOrders} // Pasa fetchOrders como prop
           {...order}

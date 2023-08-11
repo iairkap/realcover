@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       try {
         const checklength = await prisma.product.findMany();
 
-        /*    const bolsillo = await mapAndSaveImages(
+        const bolsillo = await mapAndSaveImages(
           "ConBolsillo",
           "CON_BOLSILLO",
           ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
@@ -53,20 +53,20 @@ export default async function handler(req, res) {
           "MALETINES_FULL_COLOR",
           ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
           3490
-        ); */
-        /*       const fundas = await mapAndSaveImages(
+        );
+        const fundas = await mapAndSaveImages(
           "Fundas",
           "NEOPRENE_COVER",
           ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
           3090
-        ); */
+        );
         const portfolios = await mapAndSaveImages(
           "Portafolio",
           "PORTAFOLIOS",
           ["14_1", "15_6"],
           5990
         );
-        /*    const tablet = await mapAndSaveImages(
+        const tablet = await mapAndSaveImages(
           "Tablets",
           "TABLET_COVER",
           ["Size7", "Size8", "Size9", "Size10"],
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
           "MALETINES",
           ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
           3290
-        ); */
+        );
 
         res.status(200).json({ message: "Products created" });
       } catch (error) {

@@ -18,6 +18,7 @@ model Product {
   description  String?
   sizes        Sizes[]
   orderDetails OrderDetail[]
+  stock       Int? @default(0)
 }
 
 model User {
@@ -67,6 +68,9 @@ enum ProductType {
   CUBRE_VALIJAS
   PORTAFOLIOS
   CON_BOLSILLO
+  SCHOOL_BAGS
+  BAGS
+  LONCHERAS
 }
 
 enum Sizes {

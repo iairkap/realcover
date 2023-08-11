@@ -1,0 +1,39 @@
+.cardContainer {
+  display: flex;
+  background-color: #f5f5f5;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.3125rem;
+  box-sizing: border-box;
+  width: 17.25rem;
+  height: 22.375rem;
+  margin-bottom: 2rem;
+}
+
+.button {
+  background-color: #56b947;
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.1875rem;
+}
+
+.prices {
+  color: #000;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
