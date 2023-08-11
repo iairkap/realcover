@@ -4,3 +4,19 @@
   gap: 1rem; /* Esto define el espacio entre las cards */
   margin-left: 4rem;
 }
+
+.modalPrices {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  background-color: #232323;
+  color: white;
+}
+
+.button {
+  background-color: red;
+  border-radius: 1rem;
+  width: 70%;
+}
