@@ -8,15 +8,26 @@ export default function Layout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [covers, setCovers] = useState([]);
   const [fullColor, setFullColor] = useState([]);
-  const [sizes, setSizes] = useState([]);
   const [cubrevalijas, setCubrevalijas] = useState([]);
   const [maletines, setMaletines] = useState([]);
   const [checkoutVisible, setCheckoutVisible] = useState(false);
+  const [tablets, setTablets] = useState([]);
+  const [currentOrderDetails, setCurrentOrderDetails] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const loadCart = () => {
     if (typeof window !== "undefined") {
-      const cart = localStorage.getItem("cart");
-      if (cart) {
-        return JSON.parse(cart);
+      try {
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        return Array.isArray(cart)
+          ? cart.map((item) => ({
+              ...item,
+              selectedSizes: item.selectedSizes || [],
+            }))
+          : [];
+      } catch (error) {
+        console.error("Error loading cart from localStorage:", error);
+        return [];
       }
     }
     return [];
@@ -25,7 +36,7 @@ export default function Layout({ children }) {
   const [cart, setCart] = useState(loadCart());
 
   const saveCart = (cart) => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && Array.isArray(cart)) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   };
@@ -35,107 +46,96 @@ export default function Layout({ children }) {
   }, [cart]);
 
   useEffect(() => {
-    const fetchCovers = async () => {
+    const fetchProducts = async () => {
       setIsLoading(true);
-      const response = await axios.get("/api/fundasNeoprene");
-      setCovers(response.data);
-      setIsLoading(false);
-    };
-    fetchCovers();
-  }, []);
+      try {
+        const response = await axios.get("/api/product");
 
-  useEffect(() => {
-    const fetchSizes = async () => {
-      setIsLoading(true);
-      const response = await axios.get("/api/size");
-      setSizes(response.data);
-      setIsLoading(false);
-    };
-    fetchSizes();
-  }, []);
+        const coversData = response.data.filter(
+          (product) => product.productType === "NEOPRENE_COVER"
+        );
+        const maletinesData = response.data.filter(
+          (product) => product.productType === "MALETINES"
+        );
+        const fullColorData = response.data.filter(
+          (product) => product.productType === "MALETINES_FULL_COLOR"
+        );
+        const cubrevalijasData = response.data.filter(
+          (product) => product.productType === "CUBRE_VALIJAS"
+        );
+        const tabletsData = response.data.filter(
+          (product) => product.productType === "TABLET_COVER"
+        );
 
-  useEffect(() => {
-    const fetchCubrevalijas = async () => {
-      setIsLoading(true);
-      const response = await axios.get("/api/cubrevalijas");
-      setCubrevalijas(response.data);
-      setIsLoading(false);
+        setCovers(coversData);
+        setMaletines(maletinesData);
+        setFullColor(fullColorData);
+        setCubrevalijas(cubrevalijasData);
+        setTablets(tabletsData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
-    fetchCubrevalijas();
+    fetchProducts();
   }, []);
+  const addToCart = (product, selectedSizes) => {
+    // Clone the current cart
+    const updatedCart = [...cart];
 
-  useEffect(() => {
-    const fetchMaletines = async () => {
-      setIsLoading(true);
-      const response = await axios.get("/api/maletines");
-      setMaletines(response.data);
-      setIsLoading(false);
-    };
-    fetchMaletines();
-  }, []);
+    // Loop through each selectedSize
+    selectedSizes.forEach((selectedSize) => {
+      let foundProduct = false;
+      let productIndex = -1;
 
-  useEffect(() => {
-    const fetchFullColor = async () => {
-      setIsLoading(true);
-      const response = await axios.get("/api/FullColor");
-      if (Array.isArray(response.data)) {
-        setFullColor(response.data);
+      // Check if the product is already in the cart
+      for (let i = 0; i < updatedCart.length; i++) {
+        if (updatedCart[i].id === product.id) {
+          productIndex = i;
+          foundProduct = true;
+          break;
+        }
+      }
+
+      if (foundProduct) {
+        const sizeIndex = updatedCart[productIndex].selectedSizes.findIndex(
+          (sizeItem) => sizeItem.size === selectedSize.size
+        );
+
+        if (sizeIndex !== -1) {
+          // If size already exists for the product, update its quantity
+          updatedCart[productIndex].selectedSizes[
+            sizeIndex
+          ].quantity = parseInt(selectedSize.quantity);
+        } else {
+          // If the product exists but not the size, add the new size to the product
+          updatedCart[productIndex].selectedSizes.push(selectedSize);
+        }
       } else {
-        console.error("La respuesta de la API no es un array: ", response.data);
-        setFullColor([]);
+        // If product wasn't found in the cart at all, add the product with the selected size
+        updatedCart.push({
+          ...product,
+          selectedSizes: [selectedSize],
+        });
       }
-      setIsLoading(false);
-    };
-    fetchFullColor();
-  }, []);
-  const addToCart = (cartItem) => {
-    const {
-      id,
-      picture,
-      price,
-      sizes,
-      imageName,
-      selectedSize,
-      type,
-    } = cartItem; // Agregamos 'type' aquí
-    setCart((prevCart) => {
-      if (!selectedSize || !selectedSize.size) {
-        return prevCart;
-      }
-
-      const newCart = { ...prevCart };
-      const itemId = `${id}-${selectedSize.size}`;
-
-      if (newCart[itemId]) {
-        newCart[itemId].quantity += Number(selectedSize.quantity);
-      } else {
-        newCart[itemId] = {
-          id,
-          picture,
-          price,
-          imageName,
-          size: selectedSize.size,
-          quantity: Number(selectedSize.quantity),
-          type, // Agregamos 'type' aquí
-        };
-      }
-
-      return newCart;
     });
+
+    setCart(updatedCart);
   };
 
-  const removeFromCart = (id, size) => {
-    setCart((prevCart) => {
-      const newCart = { ...prevCart };
-      const itemId = `${id}-${size}`;
-
-      delete newCart[itemId];
-
-      return newCart;
-    });
+  const removeFromCart = (productId, sizeToRemove) => {
+    const updatedCart = cart.filter(
+      (item) =>
+        !(
+          item.id === productId &&
+          item.selectedSizes.some(
+            (selectedSize) => selectedSize.size === sizeToRemove
+          )
+        )
+    );
+    setCart(updatedCart);
   };
-
-  console.log("asi se ve el carrito", cart);
 
   return (
     <GlobalContext.Provider
@@ -143,15 +143,19 @@ export default function Layout({ children }) {
         covers,
         maletines,
         cubrevalijas,
+        tablets,
         isLoading,
         cart,
         addToCart,
         removeFromCart,
         fullColor,
-        sizes,
         checkoutVisible,
         setCheckoutVisible,
-        setCart, // añade esta línea
+        setCart,
+        currentOrderDetails,
+        setCurrentOrderDetails,
+        isAuthenticated,
+        setIsAuthenticated,
       }}
     >
       {children}

@@ -1,0 +1,69 @@
+.container {
+  border-radius: 0.3125rem;
+  background-color: #f5f5f5;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  height: 12.375rem;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  width: 10rem;
+  flex: 1; /* Nuevo: hace que ocupe el espacio restante */
+  flex-grow: 2;
+  margin-right: 3rem;
+  align-items: center;
+  /* Ocupará el doble de espacio sobrante que otros elementos con flex-grow: 1 */
+}
+
+.title {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 2.085rem */
+  letter-spacing: -0.0165rem;
+  margin-left: 1rem;
+  padding-top: 2rem;
+}
+
+.partContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.subtitles {
+  color: #000;
+  font-family: Roboto;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 139%; /* 1.0425rem */
+  letter-spacing: -0.00825rem;
+  margin-bottom: -0.5rem;
+}
+
+.titleb {
+  color: #000;
+  font-family: Roboto;
+  font-size: 4.0625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 139%; /* 5.64688rem */
+  letter-spacing: -0.04469rem;
+  margin-top: 0;
+}
+
+.iconsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}

@@ -12,7 +12,47 @@ import logoReal from "./logoReal.svg";
 import arrowCategories from "./arrowCategories.svg";
 import ciudades from "./ciudades.png";
 import estrellas from "./estrellas.svg";
+import pedidos from "./pedidos.svg";
+import logout from "./logout.svg";
+import logoDashboard from "./logorealcover.svg";
+import clientesDash from "./clientesDash.svg";
+import mensajesDash from "./mensajesDash.svg";
+import pedidosDash from "./pedidosDash.svg";
+import preciosDash from "./preciosDash.svg";
+import stockDash from "./stockDash.svg";
+import voucherDash from "./voucherDash.svg";
+import productosDash from "./productosDash.svg";
+import ingresosDash from "./ingresosDash.svg";
+import activosDash from "./activosDash.svg";
+import emailDashboardContact from "./emailDashboardContcts.svg";
+import locationDashboardContact from "./locationDashboardContact.svg";
+import shopsDashboardContact from "./shopsDashboardContact.svg";
+import whatsappDashboardContact from "./whatsappDashboardContacts.svg";
+import nuevosDash from "./nuevosDash.svg";
+import deliveryDash from "./deliveryDash.svg";
+import searchBarContact from "./searchBarDashboard.svg";
+import productosDashContacts from "./productosDashContacts.svg";
+import printDashContacts from "./printDashContacts.svg";
+
 export {
+  printDashContacts,
+  productosDashContacts,
+  searchBarContact,
+  emailDashboardContact,
+  locationDashboardContact,
+  shopsDashboardContact,
+  whatsappDashboardContact,
+  activosDash,
+  nuevosDash,
+  deliveryDash,
+  ingresosDash,
+  productosDash,
+  clientesDash,
+  mensajesDash,
+  pedidosDash,
+  preciosDash,
+  stockDash,
+  voucherDash,
   arrowCategories,
   logo,
   search,
@@ -27,4 +67,7 @@ export {
   logoReal,
   ciudades,
   estrellas,
+  pedidos,
+  logout,
+  logoDashboard,
 };

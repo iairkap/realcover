@@ -6,8 +6,12 @@ import { Google } from "../../../../public/imagnes";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; // import Firebase auth modules
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation"; // Importa esto
+import { useContext } from "react";
+import { GlobalContext } from "./../../store/layout";
 
 function LogIn({ toggleForm }) {
+  const { setIsAuthenticated } = useContext(GlobalContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter(); // Obtiene la instancia de router
@@ -29,11 +33,11 @@ function LogIn({ toggleForm }) {
           body: JSON.stringify({ idToken }),
         });
 
-        if (res.status === 200) {
-          // Inicio de sesión exitoso. Redirigir al usuario a la página /store/fundas
-          localStorage.setItem("user", JSON.stringify(user));
-
+        if (res.status === 200 && data.user) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          console.log("data.user", data.user);
           router.push("/store/fundas");
+          setIsAuthenticated(true);
         } else {
           // El inicio de sesión falló. Mostrar un mensaje de error al usuario.
           const resData = await res.json();
@@ -63,8 +67,10 @@ function LogIn({ toggleForm }) {
     if (res.status === 200) {
       // Aquí se almacena la información en el localStorage
       localStorage.setItem("user", JSON.stringify(data.user));
+      console.log("data.user", data.user);
 
       router.push("/store/fundas");
+      setIsAuthenticated(true);
     } else {
       // Aquí deberías manejar el error en caso de que la respuesta no sea 200
       console.error(

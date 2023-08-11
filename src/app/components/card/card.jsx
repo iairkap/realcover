@@ -11,20 +11,16 @@ function Card({
   price,
   sizes,
   imageName,
+  name,
   size,
   cubreValijaSize,
-  type,
+  productType,
 }) {
-  const sizeNames = sizes
-    ? sizes.map((sizeObject) => sizeObject.size.size)
-    : size
-    ? size.map((sizeObject) => sizeObject.size.size)
-    : cubreValijaSize
-    ? cubreValijaSize
-        .filter((sizeObject) => sizeObject.size.id !== 4) // Excluye el objeto de tamaño con id 4
-        .map((sizeObject) => sizeObject.size.size)
-    : [];
-  const cleanImageName = imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "");
+  const sizeNames = sizes || size || cubreValijaSize || [];
+
+  const cleanImageName = imageName
+    ? imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "")
+    : "";
   const imagenDefault =
     "https://firebasestorage.googleapis.com/v0/b/real-cover.appspot.com/o/loading.png?alt=media&token=56c478e1-1bd3-45b5-82df-e65695c460f4";
 
@@ -40,7 +36,7 @@ function Card({
 
   useEffect(() => {
     if (selectedSizeSubmitted) {
-      setSelectedSizes([...selectedSizes, { size: "", quantity: "" }]);
+      // setSelectedSizes([...selectedSizes, { size: "", quantity: "" }]);
       setSelectedSizeSubmitted(false);
     }
     ``;
@@ -57,35 +53,6 @@ function Card({
     newSelectedSizes[idx].quantity = event.target.value;
     setSelectedSizes(newSelectedSizes);
   };
-  const handleAddToCart = () => {
-    selectedSizes.forEach((selectedSize, idx) => {
-      if (selectedSize.size !== "" && selectedSize.quantity !== "") {
-        const cartItem = {
-          id,
-          picture,
-          price,
-          sizes,
-          imageName,
-          selectedSize,
-          type, // Aquí se está agregando el type al cartItem
-        };
-        console.log(`quiero ver si existe el type${cartItem}`); // Imprime el contenido del carrito
-
-        addToCart(cartItem);
-        const newAddedSizes = [...addedSizes];
-        newAddedSizes.push(idx);
-        setAddedSizes(newAddedSizes);
-        setSelectedSizeSubmitted(true);
-      }
-    });
-  };
-
-  const handleRemoveFromCart = (idx) => {
-    removeFromCart(id, selectedSizes[idx].size);
-    const newSelectedSizes = [...selectedSizes];
-    newSelectedSizes.splice(idx, 1);
-    setSelectedSizes(newSelectedSizes);
-  };
   const handleImageLoad = () => {
     setImageSrc(mainImageSrc);
   };
@@ -97,6 +64,25 @@ function Card({
       setMainImageSrc(picture);
     };
   }, [picture]);
+  const handleAddToCart = () => {
+    // Filtrar tamaños que no están vacíos
+    const sizesToAdd = selectedSizes.filter((ss) => ss.size && ss.quantity);
+
+    addToCart({ id, picture, price, productType, name }, sizesToAdd);
+    setSelectedSizeSubmitted(true);
+  };
+
+  const handleRemoveFromCart = (idx) => {
+    const sizeToRemove = selectedSizes[idx].size;
+    removeFromCart(id, sizeToRemove);
+    const updatedSelectedSizes = [...selectedSizes];
+    updatedSelectedSizes.splice(idx, 1);
+    setSelectedSizes(updatedSelectedSizes);
+  };
+
+  const addAnotherSize = () => {
+    setSelectedSizes([...selectedSizes, { size: "", quantity: "" }]);
+  };
 
   return (
     <div className={styles.card}>
@@ -113,8 +99,6 @@ function Card({
         height={250}
       />
       <div className={styles.details}>
-        {/*         <h1>{cleanImageName}</h1>
-         */}{" "}
         {selectedSizes.map((selectedSize, idx) => (
           <div key={idx} className={styles.optionContainer}>
             <div className={styles.pruebaContenedor}>
@@ -125,7 +109,7 @@ function Card({
                 onChange={(event) => handleSizeChange(idx, event)}
               >
                 <option className={styles.option} value="">
-                  TAMAÑO{" "}
+                  TAMAÑO
                 </option>
                 {sizeNames.map((sizeName, sizeIdx) => (
                   <option key={sizeIdx} value={sizeName}>
@@ -151,6 +135,9 @@ function Card({
             </div>
           </div>
         ))}
+        <button onClick={addAnotherSize} className={styles.addButton}>
+          Agregar otro tamaño
+        </button>
         <div className={styles.botonera}>
           <button onClick={handleAddToCart} className={styles.button}>
             Agregar al Carrito

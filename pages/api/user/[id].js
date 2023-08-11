@@ -23,6 +23,7 @@ async function handler(req, res, verifyMethod) {
           },
         },
       });
+
       if (!user) {
         return res.status(400).json({ message: "Login failed" });
       }

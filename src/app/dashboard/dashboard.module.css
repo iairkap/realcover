@@ -1,0 +1,25 @@
+.navBar {
+  position: sticky; /* Agrega esta línea */
+  top: 0; /* Agrega esta línea */
+}
+
+.generalBody {
+  background-color: #232323;
+  display: flex;
+}
+
+.generalContaier {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Esto hará que el contenedor tome todo el espacio restante */
+}
+
+.firstPart {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+}
+
+.secondPart {
+  margin-top: 5rem;
+}

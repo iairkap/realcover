@@ -35,6 +35,20 @@
   flex-direction: column;
   align-items: flex-start;
 }
+.modalContentB {
+  background-color: #232323;
+  position: fixed;
+  top: 25%;
+  left: 36%;
+  padding: 2rem;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: center;
+  margin-left: 5rem; /* This will center it vertically in the parent .modal class */
+  margin-right: 5rem; /* This will center it vertically in the parent .modal class */
+}
 
 @media screen and (max-width: 900px) {
   .modalContent {
@@ -141,4 +155,62 @@
 
 .subtotal {
   align-items: flex-end;
+}
+
+.tituloModelo {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 2.25875rem */
+  letter-spacing: -0.01788rem;
+  align-self: center;
+}
+
+.textContainerModal {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputModal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.modalText {
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.botonConfirmacion {
+  height: 2.3125rem;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  background-color: #56b947;
+  transition: background-color 0.3s ease; /* Transición suave al cambiar el color de fondo */
+}
+
+.botonConfirmacion:hover {
+  background-color: #45a037; /* Cambio de color al hacer hover */
 }

@@ -1,0 +1,112 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem; /* Esto define el espacio entre las cards */
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.titleHeader {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  margin-left: 2rem;
+  margin-right: 3rem;
+}
+
+.ordenamientoFilters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  gap: 1rem;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  margin-right: 3rem;
+}
+
+.paginationButton {
+  display: flex;
+  height: 2.25rem;
+  padding: 0.4375rem 0.3125rem;
+  align-items: flex-start;
+  gap: 0.625rem;
+  background: #56b947;
+  border: none;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.numberButton {
+  display: flex;
+  padding: 0.4375rem 0.75rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border: 0.5px solid #000;
+  background: white;
+  color: #56b947;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+  height: 2.25rem;
+}
+
+.numberButton:hover {
+  background: #56b947;
+  color: #000;
+  border: none;
+}
+
+.currentButton {
+  border: 0.5px solid #000;
+  background: #fff;
+  color: #000;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  padding: 0.4375rem 0.75rem;
+
+  letter-spacing: -0.011rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.gridContainer {
+  flex: 1; /* Esto hace que el .gridContainer ocupe todo el espacio disponible, empujando la paginación hacia abajo */
+}
+
+.pagination {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 1rem;
+}

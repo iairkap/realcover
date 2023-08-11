@@ -1,10 +1,8 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Cart.module.css";
 import { GlobalContext } from "../../store/layout";
 import Image from "next/image";
-import { useState } from "react";
-import { StyleRegistry } from "styled-jsx";
 import axios from "axios";
 
 function Cart() {
@@ -12,54 +10,82 @@ function Cart() {
     cart,
     checkoutVisible,
     setCheckoutVisible,
-    removeFromCart,
-    setCart, // añade esta línea
+    setCart,
+    currentOrderDetails,
+    setCurrentOrderDetails,
   } = useContext(GlobalContext);
 
+  const [infoModalVisible, setInfoModalVisible] = useState(false);
   const [user, setUser] = useState(null);
+  const [orderSuccess, setOrderSuccess] = useState(false);
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
+    if (storedUser && storedUser !== "undefined") {
       setUser(JSON.parse(storedUser));
     }
   }, []);
+
   const handleModalClose = () => {
     setCheckoutVisible(false);
+    setCurrentOrderDetails([]);
   };
+
   const handleClearCart = () => {
-    setCart({});
+    setCart([]);
   };
+
   const handleQuantityChange = (itemId, size, quantityChange) => {
-    const updatedCart = { ...cart };
+    console.log("Original cart:", cart);
 
-    const key = `${itemId}-${size}`;
+    const updatedCart = [...cart];
+    const itemIndex = updatedCart.findIndex((item) => item.id === itemId);
 
-    if (!updatedCart[key]) {
+    if (itemIndex === -1) {
+      console.log(`El ítem con ID ${itemId} no se encontró en el carrito`);
+      return;
+    }
+
+    const sizeIndex = updatedCart[itemIndex].selectedSizes.findIndex(
+      (s) => s.size === size
+    );
+    if (sizeIndex === -1) {
       console.log(
-        `El ítem con ID ${itemId} y tamaño ${size} no se encontró en el carrito`
+        `El tamaño ${size} no se encontró para el ítem con ID ${itemId}`
       );
       return;
     }
 
-    const updatedItem = {
-      ...updatedCart[key],
-      quantity: updatedCart[key].quantity + quantityChange,
-    };
+    console.log(
+      "Before change:",
+      updatedCart[itemIndex].selectedSizes[sizeIndex].quantity
+    );
 
-    if (updatedItem.quantity <= 0) {
-      delete updatedCart[key];
-    } else {
-      updatedCart[key] = updatedItem;
+    // Asegurarse de que ambos valores sean números antes de sumarlos
+    updatedCart[itemIndex].selectedSizes[sizeIndex].quantity =
+      Number(updatedCart[itemIndex].selectedSizes[sizeIndex].quantity) +
+      Number(quantityChange);
+
+    console.log(
+      "After change:",
+      updatedCart[itemIndex].selectedSizes[sizeIndex].quantity
+    );
+
+    if (updatedCart[itemIndex].selectedSizes[sizeIndex].quantity <= 0) {
+      updatedCart[itemIndex].selectedSizes.splice(sizeIndex, 1);
+      if (updatedCart[itemIndex].selectedSizes.length === 0) {
+        updatedCart.splice(itemIndex, 1);
+      }
     }
 
     setCart(updatedCart);
   };
-
-  // Calcula el subtotal para cada ítem y el total del carrito
   const calculateTotals = () => {
     let total = 0;
-    Object.values(cart).forEach((item) => {
-      total += item.quantity * item.price;
+    cart.forEach((item) => {
+      item.selectedSizes.forEach((sizeItem) => {
+        total += sizeItem.quantity * item.price;
+      });
     });
 
     return total;
@@ -67,8 +93,10 @@ function Cart() {
 
   const calculateTotalUnits = () => {
     let totalUnits = 0;
-    Object.values(cart).forEach((item) => {
-      totalUnits += item.quantity;
+    cart.forEach((item) => {
+      item.selectedSizes.forEach((sizeItem) => {
+        totalUnits += sizeItem.quantity;
+      });
     });
 
     return totalUnits;
@@ -78,6 +106,22 @@ function Cart() {
   if (!checkoutVisible) {
     return null;
   }
+
+  const handleOrderAttempUserInformation = async () => {
+    if (
+      !user.address ||
+      !user.city ||
+      !user.localidad ||
+      !user.postalCode ||
+      !user.shopName ||
+      !user.cuit
+    ) {
+      setInfoModalVisible(true);
+      return;
+    }
+    handleOrderAttempt();
+  };
+
   const handleOrderAttempt = async () => {
     if (calculateTotalUnits() < 24) {
       const wantsToContinue = window.confirm(
@@ -90,44 +134,76 @@ function Cart() {
       }
     }
 
-    // Preparar los datos para la orden
+    dispatchOrder();
+  };
+  const dispatchOrder = async () => {
+    const userId = localStorage.getItem("user");
+    if (!userId) {
+      console.error("UserId not found in localStorage");
+      return;
+    }
+    console.log("UserId:", userId);
+
+    const products = cart
+      .map((item) => {
+        return item.selectedSizes.map((sizeItem) => ({
+          productId: item.id,
+          quantity: Number(sizeItem.quantity),
+          unitPrice: item.price,
+          size: sizeItem.size,
+        }));
+      })
+      .flat();
+
+    console.log("Products:", products);
+
     const orderData = {
-      userId: user.id,
-      cartItems: Object.values(cart).map((item) => ({
-        id: item.id,
-        sizeId: item.sizeId,
-        type: item.type,
-        quantity: item.quantity,
-        price: item.price,
-      })),
+      userId: JSON.parse(userId).id,
+      total: calculateTotals(),
+      status: "En proceso", // or whatever default status you want to use
+      products,
     };
 
-    try {
-      // Enviar la orden al servidor
-      const response = await axios.post("/api/orders", orderData);
+    // Añadiendo el console.log aquí para ver la data de la orden:
+    console.log("Sending order data to /api/order:", orderData);
 
+    try {
+      const response = await axios.post("/api/order", orderData);
       if (response.status === 200) {
-        // Preparar datos para enviar por correo
+        console.log("Order successfully dispatched", response.data);
+        setOrderSuccess(true); // Mostrar mensaje de éxito
         const emailData = {
           cartData: cart,
           email: user.email,
-          orderId: response.data.id,
+          orderId: response.data.order.id, // Ensure you are accessing the ID correctly based on your response structure
         };
 
-        // Enviar el correo
+        // Añadiendo el console.log aquí para ver la data del email:
+        console.log("Sending email data to /api/emailorder:", emailData);
+
         axios
           .post("/api/emailorder", emailData)
           .then((res) => {
-            console.log(res);
+            console.log("Email dispatched successfully:", res);
           })
           .catch((error) => {
-            console.error(error);
+            console.error("Error dispatching the email:", error);
           });
+      } else {
+        console.error("Error while dispatching the order:", response.data);
       }
     } catch (error) {
-      console.error(error);
+      console.error("An error occurred while dispatching the order:", error);
     }
   };
+
+  const itemsToDisplay = currentOrderDetails.length
+    ? currentOrderDetails
+    : cart;
+
+  if (orderSuccess) {
+    return <div className={styles.modal}>Orden realizada con éxito!</div>;
+  }
   return (
     <div className={styles.modal}>
       <div className={styles.modalBackground} onClick={handleModalClose} />
@@ -137,8 +213,7 @@ function Cart() {
           <h2>
             Hola {user.name} {user.lastname}
           </h2>
-        )}{" "}
-        {/* Muestra el nombre del usuario */}
+        )}
         <h1 className={styles.titulo}>CARRITO DE COMPRA</h1>
         <div className={styles.line}></div>
         <div className={styles.subtitulos}>
@@ -146,79 +221,50 @@ function Cart() {
           <h2>Subtotal</h2>
         </div>
         <div className={styles.line}></div>
-        {Object.values(cart).map((items, index) => {
-          const firstItem = Array.isArray(items) ? items[0] : items;
-          if (firstItem && firstItem.imageName) {
-            const cleanImageName = firstItem.imageName.replace(/%2F/g, " ");
-            return (
-              <div key={index}>
-                <div className={styles.contenedorCard}>
-                  <div className={styles.contenedorImagen}>
-                    <Image
-                      src={firstItem.picture}
-                      width={100}
-                      height={100}
-                      alt={"fa"}
-                    />
+        {Object.values(itemsToDisplay).map((item, index) => (
+          <div key={index}>
+            <div className={styles.contenedorImagen}>
+              <Image src={item.picture} width={100} height={100} alt={"fa"} />
+            </div>
+            <p className={styles.subs}>{item.name}</p>
+            {item.selectedSizes.map((sizeItem, sizeIndex) => (
+              <div key={sizeIndex} className={styles.contenedorCard}>
+                <div className={styles.textAlign}>
+                  <p className={styles.subs}>{sizeItem.size}</p>
+                  <p className={styles.subs}>{item.price}$</p>
+                  <div className={styles.changeContainer}>
+                    <button
+                      className={styles.changeButton}
+                      onClick={() =>
+                        handleQuantityChange(item.id, sizeItem.size, -1)
+                      }
+                    >
+                      -
+                    </button>
+                    <p>{sizeItem.quantity}</p>
+                    <button
+                      className={styles.changeButton}
+                      onClick={() =>
+                        handleQuantityChange(item.id, sizeItem.size, 1)
+                      }
+                    >
+                      +
+                    </button>
                   </div>
-                  <div className={styles.textoContenedor}>
-                    <p className={styles.subs}>{cleanImageName}</p>
-                    <div className={styles.textAlign}>
-                      <p className={styles.subs}> {firstItem.size}</p>
-                      <p className={styles.subs}> {firstItem.price}$</p>
-                      {/* Subtotal para cada ítem */}
-                      <div className={styles.changeContainer}>
-                        <button
-                          className={styles.changeButton}
-                          onClick={() =>
-                            handleQuantityChange(
-                              firstItem.id,
-                              firstItem.size,
-                              -1
-                            )
-                          }
-                        >
-                          -
-                        </button>
-                        <p> {firstItem.quantity}</p>
-                        <button
-                          className={styles.changeButton}
-                          onClick={() =>
-                            handleQuantityChange(
-                              firstItem.id,
-                              firstItem.size,
-                              1
-                            )
-                          }
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <p className={styles.subtotal}>
-                    {firstItem.price * firstItem.quantity}$
-                  </p>{" "}
                 </div>
-                <div className={styles.line}></div>
+                <p className={styles.subtotal}>
+                  {item.price * sizeItem.quantity}$
+                </p>
               </div>
-            );
-          }
-          return null;
-        })}
+            ))}
+          </div>
+        ))}
         <br />
         <br />
         <div className={styles.abajo}>
-          <button onClick={handleOrderAttempt}>Ordenar</button>
-          {/* Mensaje de error */}
-          {/*     {hasAttemptedToOrder && calculateTotalUnits() < 24 && (
-            <span style={{ color: "red" }}>
-              La compra mínima mayorista es de 24 unidades.
-            </span>
-          )} */}
+          <button onClick={dispatchOrder}>Ordenar</button>
           <p>Total: {calculateTotals()}$</p>
-        </div>{" "}
-        {/* Total del carrito */}
+        </div>
       </div>
     </div>
   );

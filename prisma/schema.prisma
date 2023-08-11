@@ -3,10 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
-  // directUrl         = env("POSTGRES_URL_NON_POOLING")
-  // shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Product {
@@ -18,6 +18,7 @@ model Product {
   description  String?
   sizes        Sizes[]
   orderDetails OrderDetail[]
+  stock        Int?          @default(0)
 }
 
 model User {
@@ -28,8 +29,11 @@ model User {
   password   String?
   address    String?
   city       String?
+  localidad  String?
   postalCode String?
   phone      String?
+  shopName   String?
+  cuit       String?
   provider   String
   orders     Order[]
 }
@@ -41,6 +45,7 @@ model Order {
   total        Float
   status       String
   discountCode String?
+  deliveryDate DateTime?
   user         User          @relation(fields: [userId], references: [id])
   orderDetails OrderDetail[]
   discount     Discount?     @relation(fields: [discountCode], references: [code])
@@ -53,8 +58,8 @@ model OrderDetail {
   quantity  Int
   unitPrice Float
   size      String
-  products  Product @relation(fields: [productId], references: [id])
   order     Order   @relation(fields: [orderId], references: [id])
+  products  Product @relation(fields: [productId], references: [id])
 }
 
 model Discount {
