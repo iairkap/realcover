@@ -81,8 +81,7 @@ function PreciosCardContainer(props) {
         style={{
           overlay: {
             position: "fixed",
-            top: 0,
-            right: 0,
+
             width: "100%",
             height: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.829)",
@@ -90,9 +89,11 @@ function PreciosCardContainer(props) {
             backdropFilter: "blur(4.5px)",
           },
           content: {
+            left: "50%",
+            top: "30%",
             width: "fit-content",
             height: "fit-content",
-            backgroundColor: "#232323;",
+            backgroundColor: "#F5F5F5",
           },
         }}
       >
@@ -105,6 +106,7 @@ function PreciosCardContainer(props) {
             className={styles.input}
             ref={newPriceInputRef} // <-- Asigna la referencia al elemento input
           />
+          <br />
           <button className={styles.button} onClick={handleConfirmPriceUpdate}>
             Confirmar
           </button>
