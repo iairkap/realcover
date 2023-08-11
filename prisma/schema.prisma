@@ -76,6 +76,9 @@ enum ProductType {
   CUBRE_VALIJAS
   PORTAFOLIOS
   CON_BOLSILLO
+  SCHOOL_BAGS
+  BAGS
+  LONCHERAS
 }
 
 enum Sizes {
