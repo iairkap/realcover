@@ -25,7 +25,9 @@ async function handler(req, res, verifyMethod) {
       });
 
       if (!user) {
-        return res.status(400).json({ message: "Login failed" });
+        return res
+          .status(400)
+          .json({ message: "Login failed, no user with ", verifyMethod });
       }
       return res.status(200).json({ message: "Login successful", user: user });
 
