@@ -11,7 +11,7 @@ function MoneyDashboard(props) {
   const [earnings, setEarnings] = useState(0);
 
   useEffect(() => {
-    fetch("/api/order")
+    fetch("/api/admin/orders")
       .then((response) => response.json())
       .then((data) => {
         setOrders(data);

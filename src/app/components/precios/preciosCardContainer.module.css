@@ -16,7 +16,17 @@
 }
 
 .button {
-  background-color: red;
-  border-radius: 1rem;
+  color: #56b947;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  border-radius: 0.1875rem;
+  background-color: #cde2c3;
+  width: 8.8125rem;
+  height: 2.3125rem;
   width: 70%;
 }

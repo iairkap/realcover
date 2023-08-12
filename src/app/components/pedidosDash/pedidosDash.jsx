@@ -14,7 +14,7 @@ function PedidosDash(props) {
   const [isLoading, setIsLoading] = useState(true); // Nuevo estado
 
   useEffect(() => {
-    fetch("/api/order")
+    fetch("/api/admin/orders")
       .then((response) => response.json())
       .then((data) => {
         setOrders(data);

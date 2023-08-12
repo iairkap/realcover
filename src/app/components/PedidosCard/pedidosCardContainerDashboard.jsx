@@ -13,7 +13,7 @@ function PedidosContainerDashboard() {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`/api/order`);
+      const response = await axios.get(`/api/admin/orders`);
       if (response.status === 200) {
         setOrders(response.data);
       }
@@ -25,7 +25,7 @@ function PedidosContainerDashboard() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`/api/order`);
+        const response = await axios.get(`/api/admin/orders`);
         if (response.status === 200) {
           setOrders(response.data);
         }

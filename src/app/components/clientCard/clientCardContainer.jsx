@@ -11,7 +11,7 @@ function ClientCardContainer(props) {
   const itemsPerPage = 8;
   const handleOrder = async (orderBy) => {
     try {
-      const response = await fetch(`/api/user?orderBy=${orderBy}`);
+      const response = await fetch(`/api/admin/users?orderBy=${orderBy}`);
       if (!response.ok) {
         throw new Error("Failed to fetch clients");
       }
@@ -23,7 +23,7 @@ function ClientCardContainer(props) {
   };
   const handleSearch = async (searchTerm) => {
     try {
-      const response = await fetch(`/api/user?search=${searchTerm}`);
+      const response = await fetch(`/api/admin/users?search=${searchTerm}`);
       if (!response.ok) {
         throw new Error("Failed to fetch clients");
       }
