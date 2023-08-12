@@ -5,7 +5,7 @@ import styles from "./landing.module.css";
 import Image from "next/image";
 
 import NavBar from "../components/navBar/navBar";
-import Categorias from "../components/categorias/categorias";
+// import Categorias from "../components/categorias/categorias";
 import Contenedorimagenes from "../components/contenedor2/contenedorimagenes";
 import Elegir from "../components/elegir/elegir";
 import Criticas from "../components/criticas/criticas";
