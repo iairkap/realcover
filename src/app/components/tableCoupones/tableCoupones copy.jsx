@@ -7,6 +7,8 @@ import styles from "./table.module.css";
 function TableCouponesDashboard({ coupons = [] }) {
   const [selectedCoupons, setSelectedCoupons] = useState({});
 
+  console.log(coupons);
+
   const columns = React.useMemo(
     () => [
       {

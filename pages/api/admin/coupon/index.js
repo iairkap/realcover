@@ -4,7 +4,12 @@ export default async function handler(req, res) {
   switch (req.method) {
     case "GET":
       try {
-        const coupons = await prisma.coupon.findMany();
+        const coupons = await prisma.coupon.findMany({
+          include: {
+            user: true,
+          },
+        });
+
         res.status(200).json(coupons);
       } catch (error) {
         res.status(500).json({ error: "Error al obtener los cupones." });

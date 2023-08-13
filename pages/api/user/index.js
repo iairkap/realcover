@@ -20,11 +20,20 @@ export default async function handler(req, res) {
         },
       });
 
+      // Obtener el valor de descuento de la tabla de configuraciones
+      const discountConfig = await prisma.configuration.findUnique({
+        where: { name: "discountValue" },
+      });
+
+      // Si no se encuentra un valor de descuento, se usará 5000 como predeterminado
+      const discountValue = discountConfig
+        ? parseFloat(discountConfig.value)
+        : 5000;
+
       const couponData = {
-        code: `AUTO${user.id}`, // Genera un código único basado en el ID del usuario.
-        discountValue: 5000,
-        description:
-          "Descuento de $5000 para compras que superen las 35 unidades.",
+        code: `AUTO${user.id}`,
+        discountValue: discountValue,
+        description: `Descuento de $${discountValue} para compras que superen las 35 unidades.`,
         useOnce: true,
         userId: user.id,
         used: false,
