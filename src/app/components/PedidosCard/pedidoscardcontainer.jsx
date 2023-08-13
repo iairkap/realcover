@@ -11,7 +11,7 @@ function PedidosContainer({ user }) {
   useEffect(() => {
     const fetchOrders = async (userId) => {
       try {
-        const response = await axios.get(`/api/admin/orders?userId=${userId}`);
+        const response = await axios.get(`/api/user/orders?userId=${userId}`);
         if (response.status === 200) {
           setOrders(response.data);
         }
