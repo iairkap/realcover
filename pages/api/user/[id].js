@@ -55,15 +55,28 @@ async function handler(req, res, verifyMethod) {
       });
 
     case "DELETE":
-      const deletedUser = await prisma.user.delete({
-        where: {
-          email: verifyMethod,
-        },
-      });
-      return res.status(200).json({ message: "User deleted" });
-
-    default:
-      return res.status(405).json({ message: "Method not allowed" });
+      const userId = req.query.id;
+      if (userId) {
+        try {
+          const deletedUser = await prisma.user.delete({
+            where: {
+              id: parseInt(userId),
+            },
+          });
+          return res
+            .status(200)
+            .json({ message: `User with ID ${userId} deleted` });
+        } catch (error) {
+          console.error("Error deleting user:", error);
+          return res
+            .status(500)
+            .json({ message: `Error deleting user with ID ${userId}` });
+        }
+      } else {
+        return res
+          .status(400)
+          .json({ message: "No user ID provided in query" });
+      }
   }
 }
 
