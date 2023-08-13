@@ -1,5 +1,5 @@
-import prisma from "../../../prisma/client";
-import verifyMiddleware from "../jwt-session/verifyMiddleware";
+import prisma from "../../../../prisma/client";
+import verifyMiddleware from "../../jwt-session/verifyMiddleware";
 import { v4 as uuidv4 } from "uuid";
 
 async function handler(req, res, verifyMethod) {
