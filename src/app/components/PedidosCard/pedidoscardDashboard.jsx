@@ -4,7 +4,7 @@ import styles from "./pedidoscard.module.css";
 import Image from "next/image";
 import jwt from "jsonwebtoken";
 import ShippingLabel from "../etiquetasEnvio/etiquetasEnvio";
-import Etiquetas from "../etiquetasEnvio/page";
+import Etiquetas from "../etiquetasEnvio/etiquta";
 import { PDFViewer } from "@react-pdf/renderer";
 
 import Modal from "react-modal";

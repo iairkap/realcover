@@ -100,9 +100,13 @@ function TableCouponesDashboard({ coupons = [] }) {
       <table {...getTableProps()} className={styles.table}>
         <thead className={styles.tableHeader}>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr {...headerGroup.getHeaderGroupProps()} key={index}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()} th className={styles.title}>
+                <th
+                  {...column.getHeaderProps()}
+                  key={index}
+                  className={styles.title}
+                >
                   {column.render("Header")}
                 </th>
               ))}
@@ -113,9 +117,17 @@ function TableCouponesDashboard({ coupons = [] }) {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} className={styles.filas}>
+              <tr
+                {...row.getRowProps()}
+                key={rowIndex}
+                className={styles.filas}
+              >
                 {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()} className={styles.celda}>
+                  <td
+                    {...cell.getCellProps()}
+                    key={cellIndex}
+                    className={styles.celda}
+                  >
                     {cell.render("Cell")}
                   </td>
                 ))}

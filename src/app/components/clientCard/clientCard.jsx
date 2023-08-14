@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import React from "react";
 import styles from "./clientCard.module.css";
-import Etiquetas from "../etiquetasEnvio/page";
+import Etiquetas from "../etiquetasEnvio/etiquta";
 import { useState } from "react";
 import Modal from "react-modal";
 import PedidosContainer from "../PedidosCard/pedidoscardcontainer";

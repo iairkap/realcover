@@ -11,8 +11,7 @@ function Dashboard(props) {
       <div className={styles.generalContaier}>
         <div className={styles.firstPart}></div>
         <div className={styles.secondPart}></div>
-        <ClientCardContainer />
-        {/*   <ArgentinaMap /> */}
+        <ClientCardContainer />z{/*   <ArgentinaMap /> */}
       </div>
     </div>
   );

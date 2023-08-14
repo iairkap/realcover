@@ -216,7 +216,7 @@ function PedidosCard({
       <div className={styles.leftContainer}>
         {/* Imagen del primer producto */}
         <div className={styles.contenedorImagen}>
-          <img
+          <Image
             src={imageUrl}
             alt={orderDetails[0].products.name}
             className={styles.productImage}

@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-export default async (req, res) => {
+const handleRequest = async (req, res) => {
   const prisma = new PrismaClient();
 
   if (req.method === "POST") {
@@ -29,3 +29,5 @@ export default async (req, res) => {
     res.status(405).end(); // Método no permitido
   }
 };
+
+export default handleRequest;

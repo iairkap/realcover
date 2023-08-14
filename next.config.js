@@ -1,13 +1,9 @@
 require("dotenv").config();
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
     SECRET_COOKIE_PASSWORD: process.env.SECRET_COOKIE_PASSWORD,
   },
-};
-
-module.exports = {
   webpack5: true,
   webpack: (config) => {
     config.resolve.fallback = {
@@ -17,10 +13,8 @@ module.exports = {
       child_process: false,
       tls: false,
     };
-
     return config;
   },
-
   images: {
     domains: [
       "firebasestorage.googleapis.com",
@@ -29,3 +23,5 @@ module.exports = {
     ],
   },
 };
+
+module.exports = nextConfig;

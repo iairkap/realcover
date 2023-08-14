@@ -50,8 +50,12 @@ function Fundas() {
   );
 }
 
-export default () => (
+const FundasWrapper = () => (
   <SessionProvider>
     <Fundas />
   </SessionProvider>
 );
+
+FundasWrapper.displayName = "FundasWrapper";
+
+export default FundasWrapper;

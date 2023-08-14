@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from "react";
 import styles from "./etiquetasEnvio.module.css";
 import Image from "next/image";
 import QRCode from "qrcode";
+
 function Etiquetas({ order, orders = [], user }) {
   const qrCanvasRef = useRef(null);
 

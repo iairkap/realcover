@@ -5,7 +5,7 @@ import axios from "axios";
 import PedidosCardDashboard from "./pedidoscardDashboard";
 import styles from "./pedidoscontainer.module.css";
 import Modal from "react-modal";
-import Etiquetas from "../etiquetasEnvio/page";
+import Etiquetas from "../etiquetasEnvio/etiquta";
 
 function PedidosContainerDashboard() {
   const [orders, setOrders] = useState([]);

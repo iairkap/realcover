@@ -48,30 +48,35 @@ function CuponDashboard(props) {
     );
   });
   return (
-    <div className={styles.generalBody}>
-      <DashNav className={styles.navBar} />
-      <div className={styles.generalContaier}>
-        <div className={styles.firstPart}>
-          <button onClick={handleOpenModal} className={styles.button}>
-            Crear Cupón
-          </button>
-          <button className={styles.button} onClick={handleOpenModalUpdate}>
-            Modificar Cupones general{" "}
-          </button>
-          <SearchBar onSearch={handleSearch} />
+    <Layout>
+      <div className={styles.generalBody}>
+        <DashNav className={styles.navBar} />
+        <div className={styles.generalContaier}>
+          <div className={styles.firstPart}>
+            <button onClick={handleOpenModal} className={styles.button}>
+              Crear Cupón
+            </button>
+            <button className={styles.button} onClick={handleOpenModalUpdate}>
+              Modificar Cupones general{" "}
+            </button>
+            <SearchBar onSearch={handleSearch} />
+          </div>
+          <div className={styles.secondPart}></div>
+          <CreateCoupon
+            isOpen={isModalOpen}
+            onRequestClose={handleCloseModal}
+          />
+          <UpdateCoupon
+            isOpen={isModalOpenUpdate}
+            onRequestClose={handleCloseModal}
+          />
+          <TableCouponesDashboard
+            coupons={filteredCoupons}
+            className={styles.table}
+          />
         </div>
-        <div className={styles.secondPart}></div>
-        <CreateCoupon isOpen={isModalOpen} onRequestClose={handleCloseModal} />
-        <UpdateCoupon
-          isOpen={isModalOpenUpdate}
-          onRequestClose={handleCloseModal}
-        />
-        <TableCouponesDashboard
-          coupons={filteredCoupons}
-          className={styles.table}
-        />
       </div>
-    </div>
+    </Layout>
   );
 }
 
