@@ -1,4 +1,4 @@
-//api\login-google
+/* //api\login-google
 import { getSession } from "next-auth/react";
 import prisma from "../../../prisma/client";
 import { hash } from "bcrypt";
@@ -42,3 +42,4 @@ export default async function handler(req, res) {
     res.status(401).json({ message: "Unauthorized" });
   }
 }
+ */
