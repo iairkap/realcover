@@ -4,7 +4,7 @@ const Layout = ({ children }) => {
   return (
     <CouponProvider>
       {/* Aquí puedes agregar otros componentes relacionados con el diseño si lo deseas */}
-      {children}
+      {children}§
     </CouponProvider>
   );
 };

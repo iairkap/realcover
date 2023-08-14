@@ -3,7 +3,6 @@ import styles from "./logIn.module.css";
 import ForgotPasswordModal from "../ForgetPasswordModal/ForgetPasswordModal";
 import Modal from "react-modal";
 import { Google } from "../../../../public/imagnes";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; // import Firebase auth modules
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation"; // Importa esto
 import { useContext } from "react";
@@ -15,7 +14,7 @@ function LogIn({ toggleForm }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter(); // Obtiene la instancia de router
-  const handleGoogleLogin = async () => {
+  /*  const handleGoogleLogin = async () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
@@ -52,7 +51,7 @@ function LogIn({ toggleForm }) {
       console.error("Error al iniciar sesión con Google:", error);
       alert(`Error al iniciar sesión con Google: ${error.message}`);
     }
-  };
+  }; */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -116,7 +115,8 @@ function LogIn({ toggleForm }) {
             Crear Cuenta Nueva
           </button>
           <div className={styles.logInContainerThird}>
-            <Image src={Google} alt="image" onClick={handleGoogleLogin} />
+            {/*             <Image src={Google} alt="image" onClick={handleGoogleLogin} />
+             */}{" "}
           </div>
           <div>
             <span onClick={openModal}>Olvidaste la contraseña?</span>
