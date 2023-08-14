@@ -250,7 +250,10 @@ function PedidosCardDashboard({
   function handleExportToCSV() {
     const csvData = convertToCSV(groupedOrderDetails);
     const blob = new Blob([csvData], { type: "text/csv" });
-    const url = window.URL.createObjectURL(blob);
+    let url;
+    if (typeof window !== "undefined") {
+      url = window.URL.createObjectURL(blob);
+    }
     const a = document.createElement("a");
     a.setAttribute("hidden", "");
     a.setAttribute("href", url);

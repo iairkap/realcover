@@ -60,7 +60,11 @@ function ClientCard({ user }) {
       <div className={styles.infoContainer}>
         <div
           className={styles.infoText}
-          onClick={() => window.open(`mailto:${user.email}`)}
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              window.open(`mailto:${user.email}`);
+            }
+          }}
         >
           <Image
             src={emailDashboardContact}
@@ -70,12 +74,14 @@ function ClientCard({ user }) {
         </div>
         <div
           className={styles.infoText}
-          onClick={() =>
-            window.open(
-              `https://wa.me/${user.phone}?text=Hola ${user.name},`,
-              "_blank"
-            )
-          }
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              window.open(
+                `https://wa.me/${user.phone}?text=Hola ${user.name},`,
+                "_blank"
+              );
+            }
+          }}
         >
           <Image
             src={whatsappDashboardContact}

@@ -144,9 +144,12 @@ function Cart() {
 
   const handleOrderAttempt = async () => {
     if (calculateTotalUnits() < 24) {
-      const wantsToContinue = window.confirm(
-        "La compra mínima mayorista es de 24 unidades, el precio del pedido puede variar. ¿Desea continuar con el pedido igualmente?"
-      );
+      let wantsToContinue = false;
+      if (typeof window !== "undefined") {
+        wantsToContinue = window.confirm(
+          "La compra mínima mayorista es de 24 unidades, el precio del pedido puede variar. ¿Desea continuar con el pedido igualmente?"
+        );
+      }
 
       if (!wantsToContinue) {
         setHasAttemptedToOrder(true);

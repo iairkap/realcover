@@ -475,7 +475,9 @@ function PedidosCard({
           <button
             onClick={() => {
               setIsConfirmModalOpen(false);
-              window.location.reload(); // Recarga la página
+              if (typeof window !== "undefined") {
+                window.location.reload();
+              }
             }}
           >
             Aceptar
