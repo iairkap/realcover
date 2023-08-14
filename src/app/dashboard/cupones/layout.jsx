@@ -30,6 +30,7 @@ export default function Layout({ children }) {
       const data = await getAllCoupons();
       setCoupons(data);
     } catch (err) {
+      console.error("Error fetching coupons:", err);
       setError("Error fetching coupons: " + err.message);
     }
     setIsLoading(false);
@@ -41,6 +42,8 @@ export default function Layout({ children }) {
       const data = await getCouponById(id);
       setCoupon(data);
     } catch (err) {
+      console.error("Error fetching coupon by ID: ", err);
+
       setError("Error fetching coupon by ID: " + err.message);
     }
     setIsLoading(false);
@@ -52,6 +55,7 @@ export default function Layout({ children }) {
       const newCoupon = await createCoupon(couponData);
       setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
     } catch (err) {
+      console.error("Error creating new coupon: ", err);
       setError("Error creating new coupon: " + err.message);
     }
     setIsLoading(false);
@@ -65,6 +69,7 @@ export default function Layout({ children }) {
         prevCoupons.map((coupon) => (coupon.id === id ? updatedCoupon : coupon))
       );
     } catch (err) {
+      console.error("Error updating coupon: ", err);
       setError("Error updating coupon: " + err.message);
     }
     setIsLoading(false);
@@ -78,6 +83,7 @@ export default function Layout({ children }) {
         prevCoupons.filter((coupon) => coupon.id !== id)
       );
     } catch (err) {
+      console.error("Error deleting coupon: ", err);
       setError("Error deleting coupon: " + err.message);
     }
     setIsLoading(false);
@@ -89,6 +95,7 @@ export default function Layout({ children }) {
       const newCoupons = await bulkCreateCoupons();
       setCoupons((prevCoupons) => [...prevCoupons, ...newCoupons]);
     } catch (err) {
+      console.error("Error bulk creating coupons: ", err);
       setError("Error bulk creating coupons: " + err.message);
     }
     setIsLoading(false);

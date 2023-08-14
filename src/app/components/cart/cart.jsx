@@ -18,6 +18,24 @@ function Cart() {
   const [infoModalVisible, setInfoModalVisible] = useState(false);
   const [user, setUser] = useState(null);
   const [orderSuccess, setOrderSuccess] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+
+  const handleCouponApply = async () => {
+    try {
+      const response = await axios.post("/api/validate-coupon", {
+        code: couponCode,
+      });
+      if (response.data.isValid) {
+        setDiscount(response.data.discountValue);
+        alert("Cupón aplicado exitosamente!");
+      } else {
+        alert("Cupón inválido o ya ha sido usado.");
+      }
+    } catch (error) {
+      console.error("Error al validar el cupón:", error);
+    }
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -90,6 +108,8 @@ function Cart() {
 
     return total;
   };
+
+  const totalAfterDiscount = calculateTotals() - discount;
 
   const calculateTotalUnits = () => {
     let totalUnits = 0;
@@ -263,7 +283,17 @@ function Cart() {
         <br />
         <div className={styles.abajo}>
           <button onClick={dispatchOrder}>Ordenar</button>
-          <p>Total: {calculateTotals()}$</p>
+          <p>Total original: {calculateTotals()}$</p>
+          <p>Descuento: {discount}$</p>
+          <p>Total después del descuento: {totalAfterDiscount}$</p>{" "}
+        </div>
+        <div className={styles.couponContainer}>
+          <input
+            value={couponCode}
+            onChange={(e) => setCouponCode(e.target.value)}
+            placeholder="Ingresa tu cupón aquí"
+          />
+          <button onClick={handleCouponApply}>Aplicar Cupón</button>
         </div>
       </div>
     </div>

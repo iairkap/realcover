@@ -1,11 +1,10 @@
 .table {
   width: 75%; /* Esto permitirá que la tabla se expanda al ancho del contenedor */
-  table-layout: fixed; /* Esto asegura que las columnas se ajusten al contenido */
+  table-layout: auto; /* Esto asegura que las columnas se ajusten al contenido */
   border-collapse: collapse; /* Esto eliminará los espacios entre celdas */
 }
 
-.title,
-.celda {
+.title {
   padding: 0 2rem; /* Agregar padding de 2rem a cada lado */
   color: #fff;
   font-family: "Roboto", sans-serif;
@@ -25,5 +24,42 @@
   background: #232323;
   text-align: center;
   height: 3rem;
-  border: solid white 1px;
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+}
+
+.tableContainer {
+  display: flex;
+  place-content: center;
+}
+
+.used {
+  color: #b94747;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+}
+
+.notUsed {
+  color: #56b947;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+}
+
+.celda {
+  padding: 2rem 2rem; /* Agregar padding de 2rem a cada lado */
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.39rem;
+  letter-spacing: -0.011rem;
 }

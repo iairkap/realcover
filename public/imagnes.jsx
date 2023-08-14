@@ -33,8 +33,9 @@ import deliveryDash from "./deliveryDash.svg";
 import searchBarContact from "./searchBarDashboard.svg";
 import productosDashContacts from "./productosDashContacts.svg";
 import printDashContacts from "./printDashContacts.svg";
-
+import threeDotsDashboard from "./threeDotsDashboard.svg";
 export {
+  threeDotsDashboard,
   printDashContacts,
   productosDashContacts,
   searchBarContact,

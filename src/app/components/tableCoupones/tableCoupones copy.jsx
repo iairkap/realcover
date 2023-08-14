@@ -3,11 +3,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useTable } from "react-table";
 import styles from "./table.module.css";
+import { threeDotsDashboard } from "../../../../public/imagnes";
+import Image from "next/image";
 
 function TableCouponesDashboard({ coupons = [] }) {
   const [selectedCoupons, setSelectedCoupons] = useState({});
 
   console.log(coupons);
+  function formatDate(inputDate) {
+    const date = new Date(inputDate);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Los meses en JavaScript son 0-indexed
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
 
   const columns = React.useMemo(
     () => [
@@ -23,6 +33,10 @@ function TableCouponesDashboard({ coupons = [] }) {
         ),
       },
       {
+        Header: "Código",
+        accessor: "code",
+      },
+      {
         Header: "Tipo de Cupon",
         accessor: "description",
       },
@@ -30,29 +44,36 @@ function TableCouponesDashboard({ coupons = [] }) {
         Header: "ID",
         accessor: "id",
       },
+
       {
         Header: "Fecha de vencimiento",
         accessor: "expiryDate",
+        Cell: ({ value }) => formatDate(value),
       },
       {
         Header: "Estado",
         accessor: "used",
-        Cell: ({ value }) => (value ? "Usado" : "No usado"),
+        Cell: ({ value }) => (
+          <span className={value ? styles.used : styles.notUsed}>
+            {value ? "Usado" : "Activo"}
+          </span>
+        ),
       },
       {
         Header: "Cliente",
         accessor: (data) =>
-          `${data.user?.name} ${data.user?.lastName} ${data.user?.shopName}` ||
-          "N/A",
+          `${data.user?.name} ${data.user?.lastName}` || "N/A",
       },
       {
         Header: "Acciones",
         accessor: "actions",
         Cell: () => (
-          <>
-            <button>Editar</button>
-            <button>Eliminar</button>
-          </>
+          <Image
+            src={threeDotsDashboard}
+            alt="Más acciones"
+            width="5"
+            height="5"
+          />
         ),
       },
     ],
@@ -75,7 +96,7 @@ function TableCouponesDashboard({ coupons = [] }) {
   };
 
   return (
-    <div>
+    <div className={styles.tableContainer}>
       <table {...getTableProps()} className={styles.table}>
         <thead className={styles.tableHeader}>
           {headerGroups.map((headerGroup) => (

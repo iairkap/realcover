@@ -69,6 +69,7 @@
     "react-scroll": "^1.8.9",
     "react-select": "^5.7.3",
     "react-simple-chatbot": "^0.5.0",
+    "react-simple-maps": "^3.0.0",
     "react-svg": "^16.1.18",
     "react-table": "^7.8.0",
     "react-tooltip": "^5.15.0",

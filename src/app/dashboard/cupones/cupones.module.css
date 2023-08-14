@@ -18,8 +18,29 @@
   display: flex;
   flex-direction: row;
   margin-top: 2rem;
+  justify-content: space-around;
 }
 
 .secondPart {
   margin-top: 5rem;
+}
+
+.table {
+  display: flex;
+  place-content: center;
+}
+
+.button {
+  display: inline-flex;
+  padding: 0.625rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.1875rem;
+  background: #56b947;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }

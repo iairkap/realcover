@@ -1,5 +1,3 @@
-import React from "react";
-
 export function validateCoupon(formData) {
   let errors = {};
 
@@ -13,5 +11,6 @@ export function validateCoupon(formData) {
     errors.description = "La descripción es requerida";
   }
 
+  console.log("Validation errors:", errors);
   return errors;
 }
