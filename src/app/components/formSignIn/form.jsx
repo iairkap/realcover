@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styles from "./form.module.css";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../../firebase/firebase.config";
 
 function FormSignIn({ toggleForm }) {
   const [name, setName] = useState("");
@@ -21,45 +19,6 @@ function FormSignIn({ toggleForm }) {
 
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
-
-  const handleGoogleSignup = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      const [firstName, lastName] = user.displayName.split(" ");
-      const response = await fetch("/api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: firstName,
-          lastName: lastName,
-          email: user.email,
-          phone: user.phoneNumber || "",
-          provider: "google",
-        }),
-      });
-
-      const contentType = response.headers.get("content-type");
-
-      const data = await response.json();
-
-      if (contentType && contentType.includes("application/json")) {
-        // Process your JSON data here
-      } else {
-        console.log("Oops, we haven't got JSON!");
-      }
-      if (!response.ok) {
-        console.error(data);
-        throw new Error("Failed to save user data");
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -122,7 +81,6 @@ function FormSignIn({ toggleForm }) {
           email,
           password,
           phone,
-          provider: "email",
         }),
       });
 
@@ -213,16 +171,6 @@ function FormSignIn({ toggleForm }) {
       <div className={styles.botonera}>
         <button className={styles.boton} type="submit">
           Crear
-        </button>
-        <button
-          className={styles.boton}
-          type="button"
-          onClick={handleGoogleSignup}
-        >
-          Crear con Google
-        </button>
-        <button className={styles.boton} type="submit">
-          Crear con Facebook
         </button>
         <span onClick={toggleForm}>Ya tiene un usuario? ingrese aqui </span>
       </div>
