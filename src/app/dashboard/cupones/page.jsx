@@ -2,8 +2,7 @@
 import React from "react";
 import TableCouponesDashboard from "../../components/tableCoupones/tableCoupones copy";
 import CreateCoupon from "./cupon";
-import Layout from "./layout";
-import { GlobalContext } from "./layout";
+import Layout from "./layout.js";
 import { useContext } from "react";
 import { useState } from "react";
 import DashNav from "../../components/Dashboard/dashnav";
@@ -11,9 +10,10 @@ import styles from "./cupones.module.css";
 import { useEffect } from "react";
 import SearchBar from "../../components/searchBar/searchBar";
 import UpdateCoupon from "./modificarCupones";
+import { CouponContext, CouponProvider } from "./CouponContext"; // Assuming CouponContext is exported from "./CouponContext"
 
 function CuponDashboard(props) {
-  const { coupons, fetchCoupons } = useContext(GlobalContext);
+  const { coupons, fetchCoupons } = useContext(CouponContext);
 
   const [isModalOpenUpdate, setModalOpenUpdate] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
