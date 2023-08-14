@@ -13,12 +13,12 @@ const firebaseConfig = {
   measurementId: "G-RQFL8DH01N",
 };
 
+let app;
 let analytics;
 
 if (typeof window !== "undefined" && !firebase.apps.length) {
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-
+  app = initializeApp(firebaseConfig);
   analytics = getAnalytics(app);
 }
 
