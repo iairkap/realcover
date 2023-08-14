@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import PedidosCard from "./PedidosCard";
+import PedidosCard from "./pedidoscard";
 import styles from "./pedidoscontainer.module.css";
 
 function PedidosContainer({ user }) {
