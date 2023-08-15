@@ -1,5 +1,9 @@
 require("dotenv").config();
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
 const nextConfig = {
   env: {
     SECRET_COOKIE_PASSWORD: process.env.SECRET_COOKIE_PASSWORD,
@@ -24,4 +28,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
