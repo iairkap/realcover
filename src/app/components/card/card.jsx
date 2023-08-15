@@ -85,63 +85,62 @@ function Card({
   };
 
   return (
-    <div className={styles.card}>
-      <NextImage
-        src={imageSrc}
-        alt={cleanImageName}
-        onLoad={handleImageLoad}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = imagenDefault;
-        }}
-        className={styles.image}
-        width={250}
-        height={250}
-      />
-      <div className={styles.details}>
-        {selectedSizes.map((selectedSize, idx) => (
-          <div key={idx} className={styles.optionContainer}>
-            <div className={styles.pruebaContenedor}>
-              <select
-                className={styles.selector}
-                style={addedSizes.includes(idx) ? { borderColor: "green" } : {}}
-                value={selectedSize.size}
-                onChange={(event) => handleSizeChange(idx, event)}
-              >
-                <option className={styles.option} value="">
-                  TAMAÑO
-                </option>
-                {sizeNames.map((sizeName, sizeIdx) => (
-                  <option key={sizeIdx} value={sizeName}>
-                    {sizeName}
+    <div className={styles.cardContainer}>
+      <div className={styles.imageContainer}>
+        <NextImage
+          src={imageSrc}
+          alt={cleanImageName}
+          onLoad={handleImageLoad}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = imagenDefault;
+          }}
+          className={styles.image}
+          width={350}
+          height={350}
+        />
+      </div>
+      <div>
+        <div className={styles.details}>
+          {selectedSizes.map((selectedSize, idx) => (
+            <div key={idx} className={styles.optionContainer}>
+              <div className={styles.pruebaContenedor}>
+                <select
+                  className={styles.selector}
+                  style={
+                    addedSizes.includes(idx) ? { borderColor: "green" } : {}
+                  }
+                  value={selectedSize.size}
+                  onChange={(event) => handleSizeChange(idx, event)}
+                >
+                  <option className={styles.option} value="">
+                    TAMAÑO
                   </option>
-                ))}
-              </select>
-              <input
-                type="number"
-                min="1"
-                value={selectedSize.quantity}
-                onChange={(event) => handleQuantityChange(idx, event)}
-                placeholder="Cantidad"
-                className={styles.input}
-              />
-              <button
-                onClick={() => handleRemoveFromCart(idx)}
-                className={styles.removeButton}
-                disabled={selectedSizes.length <= 1}
-              >
-                X
-              </button>
+                  {sizeNames.map((sizeName, sizeIdx) => (
+                    <option key={sizeIdx} value={sizeName}>
+                      {sizeName}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="number"
+                  min="1"
+                  value={selectedSize.quantity}
+                  onChange={(event) => handleQuantityChange(idx, event)}
+                  placeholder="Cantidad"
+                  className={styles.input}
+                />
+              </div>
             </div>
+          ))}
+          <div className={styles.botonera}>
+            <button onClick={addAnotherSize} className={styles.addButton}>
+              Agregar otro tamaño
+            </button>
+            <button onClick={handleAddToCart} className={styles.button}>
+              Agregar al Carrito
+            </button>
           </div>
-        ))}
-        <button onClick={addAnotherSize} className={styles.addButton}>
-          Agregar otro tamaño
-        </button>
-        <div className={styles.botonera}>
-          <button onClick={handleAddToCart} className={styles.button}>
-            Agregar al Carrito
-          </button>
         </div>
       </div>
     </div>

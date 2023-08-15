@@ -83,6 +83,20 @@ function CardsContainer({
   return (
     <div className={styles.generalContainer}>
       <div className={styles.botoneraB}>
+        <select
+          className={styles.mobileSelector}
+          value={displayType}
+          onChange={(e) => {
+            setDisplayType(e.target.value);
+            setPage(0);
+          }}
+        >
+          <option value="covers">FUNDAS NEOPRENE</option>
+          <option value="maletines">MALETINES</option>
+          <option value="fullColor">FULL COLOR</option>
+          <option value="tablets">FUNDAS RIGIDAS</option>
+          <option value="cubrevalijas">CUBRE VALIJAS</option>
+        </select>
         <button
           onClick={() => {
             setDisplayType("covers");

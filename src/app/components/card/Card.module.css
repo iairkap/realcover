@@ -1,11 +1,10 @@
-.image {
-  width: 18.9375rem;
+/* .image {
+  width: 75%;
 }
 
 .card {
   display: flex;
-  width: 20rem;
-  min-width: 23rem;
+  min-width: 20%;
   padding: 1.375rem 0.5625rem;
   align-items: flex-start;
   gap: -4.8125rem;
@@ -16,7 +15,6 @@
 
 .optionContainer {
   display: flex;
-  gap: 1.875rem;
 }
 
 .details {
@@ -27,7 +25,6 @@
 
 .option {
   display: flex;
-  width: 9.125rem;
   justify-content: center;
   align-items: center;
   background-color: #56b947;
@@ -51,7 +48,7 @@
 
 .removeButton {
   display: inline-block;
-  width: 1em; /* ajusta esto según tus necesidades */
+  width: 1em; /*
   height: 98%;
   background: transparent;
   font-family: Roboto;
@@ -59,7 +56,7 @@
   font-style: normal;
   font-weight: 900;
   border: none;
-  color: black; /* color de la "X", ajústalo a tus necesidades */
+  color: black; 
   cursor: pointer;
   margin-left: -3.3em;
 }
@@ -68,14 +65,13 @@
   display: flex;
   align-items: flex-start;
   gap: 1.1875rem;
-  height: 2.9rem;
   margin-bottom: 1rem;
 }
 
-.button {
+.button,
+.addButton {
   background-color: #232323;
   height: 100%;
-  width: 19.125rem;
   color: #fff;
   font-family: Roboto;
   font-size: 1rem;
@@ -86,10 +82,17 @@
   border: none;
 }
 
+.button,
+.addButton:hover {
+  background-color: #56b947;
+  color: #000;
+}
+
 .botonera {
   display: flex;
   gap: 1rem;
   flex-direction: column;
+  flex-direction: row;
 }
 
 .selector.addedToCart {
@@ -98,22 +101,22 @@
 
 .input {
   display: flex;
-  width: 8.125rem;
+  width: 50%;
   height: 2.875rem;
   padding: 0.5625rem 0.6875rem;
   align-items: center;
   gap: 0.625rem;
   border: 0.5px solid #56b947;
   background: #fff;
+  border-radius: 0.3rem;
 }
 
 .selector {
   display: flex;
-  width: 8.625rem;
-  padding: 0.75rem 2.0625rem;
+  width: 50%;
+  padding: 0.75rem 1.5rem;
   justify-content: center;
   align-items: center;
-  gap: -0.1875rem;
   flex-shrink: 0;
   background: #56b947;
   border: none;
@@ -123,18 +126,117 @@
   font-size: 0.9rem;
   font-style: normal;
   font-weight: 800;
-  line-height: 139%; /* 1.39rem */
-  letter-spacing: -0.011rem;
+  border-radius: 0.3rem;
 }
 
-.button {
-  width: 18rem;
-  margin-left: 1rem;
+.button,
+.addButton {
+  width: 50%;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  border-radius: 0.3rem;
 }
 
 .details {
   margin-left: -1rem;
   margin-top: -1rem;
+}
+ */
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.image {
+  width: 80%;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.optionContainer {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  text-align-last: center;
+}
+
+.selector {
+  padding-left: 0.5rem;
+  width: 40%;
+  height: 120%;
+  background-color: #56b947;
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  border-radius: 0.3rem;
+}
+.input {
+  padding-left: 0.5rem;
+  width: 40%;
+  height: 120%;
+  border-radius: 0.3rem;
+  border: 1px solid #56b947;
+}
+
+.pruebaContenedor {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  height: 1.75rem;
+}
+
+.botonera {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  width: 85%;
+  align-self: center;
+  gap: 0.5rem;
+}
+
+.addButton {
+  background-color: #56b947;
+  color: white;
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+}
+
+.button {
+  background-color: #535353;
+  color: #56b947;
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
 }

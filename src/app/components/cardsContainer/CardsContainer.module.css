@@ -9,27 +9,9 @@
 .cardsContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 2em;
-  margin: 2em;
-}
-
-@media screen and (max-width: 1200px) {
-  .cardsContainer {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .cardsContainer {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (max-width: 864px) {
-  .cardsContainer {
-    grid-template-columns: 1fr;
-  }
+  gap: 2rem;
+  width: 80%;
+  margin-bottom: 3rem;
 }
 
 .botonera,
@@ -42,37 +24,42 @@
   margin-top: 3rem;
 }
 
-.paginationButton {
+.paginationButton,
+.numberButton {
   display: flex;
+  padding: 0.4375rem 0.75rem;
   height: 2.25rem;
-  padding: 0.4375rem 0.3125rem;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.625rem;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+}
+
+.paginationButton {
   background: #56b947;
   border: none;
   margin-bottom: 2rem;
 }
 
 .numberButton {
-  display: flex;
-  padding: 0.4375rem 0.75rem;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
   border: 0.5px solid #000;
   background: #232323;
   color: #fff;
-  font-family: Roboto;
-  font-size: 1rem;
   font-style: normal;
-  font-weight: 900;
-  line-height: 139%;
-  letter-spacing: -0.011rem;
-  height: 2.25rem;
 }
 
-.numberButton:hover {
+.numberButton:hover,
+.botonOpcionesActivo {
+  background: #56b947;
+  color: #000;
+  border: none;
+}
+
+.botonOpcionesActivo {
   background: #56b947;
   color: #000;
   border: none;
@@ -82,12 +69,7 @@
   border: 0.5px solid #000;
   background: #fff;
   color: #000;
-  font-family: Roboto;
-  font-size: 1rem;
   font-style: normal;
-  font-weight: 900;
-  line-height: 139%;
-  letter-spacing: -0.011rem;
 }
 
 .botonOpciones {
@@ -102,16 +84,60 @@
   background: #232323;
   border: none;
   color: #fff;
-  font-family: Roboto;
-  font-size: 1rem;
   font-style: normal;
   font-weight: 900;
-  line-height: 139%;
-  letter-spacing: -0.011rem;
   margin-bottom: 1em;
+  border-radius: 0.5rem;
+  transition: ease-in-out 0.1s;
 }
 
-.botonOpcionesActivo {
-  background: #56b947;
-  color: #000;
+.botonOpciones:hover {
+  color: #56b947;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 864px) {
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    align-self: center;
+  }
+}
+
+.mobileSelector {
+  display: none; /* Por defecto no se muestra */
+  width: 100%;
+  max-width: 16rem;
+  padding: 1rem;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: 900;
+  background: #232323;
+  color: #fff;
+  border-radius: 0.5rem;
+  border: none;
+  transition: ease-in-out 0.1s;
+  cursor: pointer;
+}
+
+.mobileSelector:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 864px) {
+  /* Oculta la botonera para móvil */
+  .botoneraB .botonOpciones {
+    display: none;
+  }
+
+  /* Muestra el selector para móvil */
+  .mobileSelector {
+    display: block;
+  }
 }
