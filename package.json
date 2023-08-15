@@ -63,6 +63,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
+    "autoprefixer": "^10.4.15",
     "prisma": "^5.1.0",
     "typescript": "5.1.6"
   }
