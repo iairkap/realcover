@@ -1,5 +1,5 @@
 /* import prisma from "../../../prisma/client";
-import jwt from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import { serialize } from "cookie";
 
