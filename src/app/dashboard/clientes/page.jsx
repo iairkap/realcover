@@ -2,8 +2,8 @@ import React from "react";
 import DashNav from "../../components/Dashboard/dashnav";
 import styles from "./clients.module.css";
 import ClientCardContainer from "../../components/clientCard/clientCardContainer";
-import ArgentinaMap from "../../components/clientCard/mapsDemo";
-
+/* import ArgentinaMap from "../../components/clientCard/mapsDemo";
+ */
 function Dashboard(props) {
   return (
     <div className={styles.generalBody}>
