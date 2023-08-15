@@ -1,31 +1,54 @@
-/* import { PrismaClient } from "@prisma/client";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import { PrismaClient } from "@prisma/client";
+import { verify } from "jsonwebtoken";
+import { hash } from "bcrypt";
 
-const prisma = new PrismaClient();
+// Prisma Client Initialization
+let prisma;
+
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient();
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
+  }
+  prisma = global.prisma;
+}
+
 export default async function handler(req, res) {
   const { token } = req.cookies;
 
   if (req.method === "POST") {
     const { password } = req.body;
 
-    let decodedToken;
-    try {
-      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    } catch {
-      return res.status(400).send("Enlace inválido o expirado.");
+    if (!token) {
+      return res.status(400).send("No token provided.");
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    let decodedToken;
+    try {
+      decodedToken = verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      if (err.name === "TokenExpiredError") {
+        return res.status(400).send("Enlace expirado.");
+      }
+      return res.status(400).send("Enlace inválido.");
+    }
 
-    await prisma.user.update({
-      where: { id: decodedToken.id },
-      data: { password: hashedPassword },
-    });
+    try {
+      const hashedPassword = await hash(password, 10);
 
-    res.send("Tu contraseña ha sido restablecida.");
+      await prisma.user.update({
+        where: { id: decodedToken.id },
+        data: { password: hashedPassword },
+      });
+
+      res.clearCookie("token");
+      res.status(200).json({ message: "Tu contraseña ha sido restablecida." });
+    } catch (error) {
+      console.error("Error updating user password:", error);
+      res.status(500).send("Error al restablecer la contraseña.");
+    }
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }
 }
- */

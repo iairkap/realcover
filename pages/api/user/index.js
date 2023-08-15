@@ -1,9 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
 
+const prisma = new PrismaClient();
 export default async function handler(req, res) {
-  const prisma = new PrismaClient();
-
   if (req.method === "POST") {
     const { name, lastName, email, password, provider } = req.body;
 
