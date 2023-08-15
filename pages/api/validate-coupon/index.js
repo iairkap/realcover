@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 const handleRequest = async (req, res) => {
-  const prisma = new PrismaClient();
-
   if (req.method === "POST") {
     const { code } = req.body;
 
