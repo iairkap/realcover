@@ -65,9 +65,8 @@
 }
 .input {
   display: inline-block;
-  width: calc(
-    9.125rem - 2em
-  ); /* Resta el ancho del botón X y un poco de espacio */
+  width: calc(9.125rem - 2em);
+
   height: 98%;
   width: 9.125rem;
   height: 98%;
@@ -79,7 +78,7 @@
 
 .removeButton {
   display: inline-block;
-  width: 1em; /* ajusta esto según tus necesidades */
+  width: 1em;
   height: 98%;
   background: transparent;
   font-family: Roboto;

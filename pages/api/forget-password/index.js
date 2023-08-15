@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import jwt from "jsonwebtoken";
+/* import { PrismaClient } from "@prisma/client";
+import { sign } from "jsonwebtoken";
 import nodemailer from "nodemailer";
 
 const prisma = new PrismaClient();
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
 
     // Crear un token de restablecimiento de contraseña
-    const token = jwt.sign(
+    const token = sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
@@ -52,3 +52,4 @@ export default async function handler(req, res) {
     res.status(405).json({ message: "Method not allowed" });
   }
 }
+ */

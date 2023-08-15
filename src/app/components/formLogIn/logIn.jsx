@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./logIn.module.css";
-import ForgotPasswordModal from "../ForgetPasswordModal/ForgetPasswordModal";
-import Modal from "react-modal";
-import { Google } from "../../../../public/imagnes";
-import Image from "next/image";
+/* import ForgotPasswordModal from "../ForgetPasswordModal/ForgetPasswordModal";
+ */
 import { useRouter, usePathname } from "next/navigation"; // Importa esto
 import { useContext } from "react";
 import { GlobalContext } from "./../../store/layout";
@@ -78,10 +76,8 @@ function LogIn({ toggleForm }) {
       ); // Mostramos el error en la consola
     }
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div>
@@ -110,7 +106,6 @@ function LogIn({ toggleForm }) {
           <button onClick={handleSubmit} className={styles.boton}>
             Iniciar Sesion
           </button>
-          <ForgotPasswordModal isOpen={isModalOpen} closeModal={closeModal} />
           <button onClick={toggleForm} className={styles.boton2}>
             Crear Cuenta Nueva
           </button>

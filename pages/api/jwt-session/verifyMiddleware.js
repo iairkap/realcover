@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import jwt from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
 
 const verifyMiddleware = (handler) => async (req, res) => {
   const { token } = req.cookies;
@@ -10,7 +10,7 @@ const verifyMiddleware = (handler) => async (req, res) => {
     verifyMethod = session.user.email;
   } else if (token) {
     try {
-      const { email } = jwt.verify(token, process.env.JWT_SECRET);
+      const { email } = verify(token, process.env.JWT_SECRET);
       verifyMethod = email;
     } catch (error) {
       return res.status(401).json({ message: "Unauthorized, no token" });
