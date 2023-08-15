@@ -10,7 +10,6 @@ import styles from "./general.module.css";
 import { useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import EmailProvider from "next-auth/providers/email";
 function Fundas() {
   const {
     covers,
@@ -20,8 +19,6 @@ function Fundas() {
     maletines,
     tablets,
   } = useContext(GlobalContext);
-
-  const { data: session, status: loading } = useSession();
 
   useEffect(() => {
     const user = localStorage.getItem("user");
