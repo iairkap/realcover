@@ -28,4 +28,14 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.alias["@next/swc-linux-x64-musl"] = false;
+      config.resolve.alias["@next/swc-linux-x64-gnu"] = false;
+      config.resolve.alias["node_modules/typescript/lib"] = false;
+    }
+
+    return config;
+  },
+};
