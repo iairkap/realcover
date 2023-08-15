@@ -1,4 +1,4 @@
-import prisma from "../../../prisma/client";
+/* import prisma from "../../../prisma/client";
 import jwt from "jsonwebtoken";
 import { compare } from "bcrypt";
 import { serialize } from "cookie";
@@ -71,3 +71,4 @@ export default async function loginHandler(req, res) {
     res.status(405).json({ message: "Method not allowed" });
   }
 }
+ */
