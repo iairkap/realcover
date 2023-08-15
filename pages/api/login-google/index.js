@@ -4,7 +4,7 @@ import { hash } from "bcrypt";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
-  const hashedPassword = await hash(process.env.DEFAULT_PASSWORD, 10);
+  const hashedPassword = hash(process.env.DEFAULT_PASSWORD, 10);
 
   if (session) {
     const user = await prisma.user.findUnique({
