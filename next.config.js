@@ -33,8 +33,14 @@ module.exports = {
     if (!isServer) {
       config.resolve.alias["@next/swc-linux-x64-musl"] = false;
       config.resolve.alias["@next/swc-linux-x64-gnu"] = false;
-      config.resolve.alias["node_modules/typescript/lib"] = false;
     }
+
+    if (!config.resolve.fallback) {
+      config.resolve.fallback = {};
+    }
+    config.resolve.fallback.net = false;
+    config.resolve.fallback.dns = false;
+    config.resolve.fallback.fs = false;
 
     return config;
   },
