@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
 .generalContainer {
   display: flex;
   flex-direction: column;
@@ -31,7 +33,7 @@
   height: 2.25rem;
   align-items: center;
   gap: 0.625rem;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-weight: 900;
   line-height: 139%;
@@ -115,7 +117,7 @@
   width: 100%;
   max-width: 16rem;
   padding: 1rem;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-weight: 900;
   background: #232323;

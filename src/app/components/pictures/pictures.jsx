@@ -15,7 +15,8 @@ function Pictures(props) {
           alt="Maletin Neopren Real Cover"
           src={bacoground}
           className={styles.background2}
-        ></Image>
+        />
+
         <motion.div
           className={styles.logoImage}
           initial={{ opacity: 0, y: -100 }}
@@ -27,9 +28,11 @@ function Pictures(props) {
             damping: 30,
           }}
         >
-          <Image src={logoReal}></Image>
-          <h3 className={styles.subTitulo}>DISEÑO Y PROTECCION</h3>
-          <h4 className={styles.mayorista}>VENTA MAYORISTA</h4>
+          <div className={styles.center}>
+            <Image src={logoReal}></Image>
+            <h3 className={styles.subTitulo}>DISEÑO Y PROTECCION</h3>
+            <h4 className={styles.mayorista}>VENTA MAYORISTA</h4>
+          </div>
         </motion.div>
       </div>
     </div>
