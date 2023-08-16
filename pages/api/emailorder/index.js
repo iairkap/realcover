@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+/* import nodemailer from "nodemailer";
 import htmlToText from "nodemailer-html-to-text";
 
 export default async function handler(req, res) {
@@ -86,3 +86,4 @@ export default async function handler(req, res) {
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
+ */
