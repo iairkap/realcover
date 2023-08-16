@@ -14,6 +14,9 @@ function Pictures(props) {
         <Image
           alt="Maletin Neopren Real Cover"
           src={bacoground}
+          layout="fill"
+          objectFit="cover"
+          objectPosition="top"
           className={styles.background2}
         />
 
@@ -29,7 +32,7 @@ function Pictures(props) {
           }}
         >
           <div className={styles.center}>
-            <Image src={logoReal}></Image>
+            <Image src={logoReal} className={styles.logoReal} />
             <h3 className={styles.subTitulo}>DISEÑO Y PROTECCION</h3>
             <h4 className={styles.mayorista}>VENTA MAYORISTA</h4>
           </div>
