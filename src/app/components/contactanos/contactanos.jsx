@@ -97,43 +97,44 @@ function Contactanos(props) {
               <p className={styles.number}>realcover@gmail.com</p>
             </div>
           </div>
-          <Image src={trapecio} className={styles.trapecio} />
         </div>
 
         <div className={styles.derContainer}>
-          <h1 className={styles.titleForm}>Estamos aca para ayudar </h1>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Ingresa tu nombre"
-              name="nombre"
-              value={state.nombre}
-              onChange={handleChange}
-              className={styles.inputs}
-            />
-            <p>{error.nombre}</p>
-            <input
-              type="text"
-              placeholder="Ingresa tu email"
-              name="email"
-              value={state.email}
-              onChange={handleChange}
-              className={styles.inputsb}
-            />
-            <p>{error.email}</p>
-            <input
-              type="text"
-              placeholder="Mensaje..."
-              name="mensaje"
-              value={state.mensaje}
-              onChange={handleChange}
-              className={styles.mensaje}
-            />
-            <p>{error.mensaje}</p>
-            <button type="submit" className={styles.enviar}>
-              ENVIAR
-            </button>
-          </form>
+          <div className={styles.formContainer}>
+            <h1 className={styles.titleForm}>ESTAMOS PARA AYUDAR!</h1>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Ingresa tu nombre"
+                name="nombre"
+                value={state.nombre}
+                onChange={handleChange}
+                className={styles.inputs}
+              />
+              <p>{error.nombre}</p>
+              <input
+                type="text"
+                placeholder="Ingresa tu email"
+                name="email"
+                value={state.email}
+                onChange={handleChange}
+                className={styles.inputsb}
+              />
+              <p>{error.email}</p>
+              <input
+                type="text"
+                placeholder="Mensaje..."
+                name="mensaje"
+                value={state.mensaje}
+                onChange={handleChange}
+                className={styles.mensaje}
+              />
+              <p>{error.mensaje}</p>
+              <button type="submit" className={styles.enviar}>
+                ENVIAR
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

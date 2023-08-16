@@ -25,13 +25,11 @@ function Landing(props) {
       <div>
         <Elegir />
       </div>
-      <GridComponents />{" "}
+      <GridComponents />
       <div>
         <Contenedorimagenes />
       </div>
-      <div>
-        {/*         <Criticas />
-         */}{" "}
+      <div className={styles.contactanos}>
         <Contactanos />
       </div>
     </div>

@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import styles from "./gridComponent.module.css";
 
 function GridItem({
   item,
+  index,
+  hoverImgIndices,
   handleMouseEnter,
   handleMouseLeave,
   handleItemClick,

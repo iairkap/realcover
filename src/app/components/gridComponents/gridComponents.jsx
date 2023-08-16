@@ -7,7 +7,8 @@ import Modal from "react-modal";
 import vendidosb from "./vendidos.js";
 import trapeciob from "../../../../public/trapeciob.svg";
 import Link from "next/link";
-import GridItem from "./gridHook.jsx";
+import GridItem from "./gridHook";
+
 export default function GridComponents(props) {
   const vendidos = vendidosb;
   const vendidosOrdenados = vendidos.sort((a, b) => a.id - b.id);
@@ -51,15 +52,17 @@ export default function GridComponents(props) {
     <div className={styles.contenedor}>
       <h1 className={styles.titulo}>Nuestro Catalogo</h1>
       <div className={styles.background}>
-        {vendidosOrdenados.map((item, index) => {
+        {vendidosOrdenados.map((item, index) => (
           <GridItem
             key={item.id}
             item={item}
+            index={index}
+            hoverImgIndices={hoverImgIndices}
             handleMouseEnter={() => handleMouseEnter(index)}
             handleMouseLeave={() => handleMouseLeave(index)}
             handleItemClick={() => handleItemClick(item)}
-          />;
-        })}
+          />
+        ))}
         <Modal
           isOpen={isModalOpen}
           onRequestClose={() => setModalOpen(false)}
