@@ -102,7 +102,7 @@ function Contactanos(props) {
         <div className={styles.derContainer}>
           <div className={styles.formContainer}>
             <h1 className={styles.titleForm}>ESTAMOS PARA AYUDAR!</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={styles.form}>
               <input
                 type="text"
                 placeholder="Ingresa tu nombre"
