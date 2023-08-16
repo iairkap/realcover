@@ -106,6 +106,7 @@ a {
   }
 }
  */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -114,4 +115,8 @@ a {
 body {
   width: 100vw;
   margin: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
 }
