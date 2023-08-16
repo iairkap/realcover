@@ -1,40 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-
+/* 
 .generalContainer {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .izqContainer {
   display: flex;
   flex-direction: column;
   background-color: #d9d9d9;
-  gap: 1rem;
+  width: 50%;
   padding-left: 6rem;
 }
 
+.textContainer {
+  width: 80%;
+}
 .titulo {
   color: #232323;
   font-family: "Roboto", sans-serif;
   font-size: 2.5rem;
-
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   margin-top: 3.5rem;
-
   font-family: "Roboto", sans-serif;
   font-size: 2.5rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 139%; /* 1.91125rem */
+  line-height: 139%; 
   letter-spacing: -0.01513rem;
 }
-.iconosForm {
-  margin-top: 1.5rem;
-}
+
 .parrafo {
-  width: 29.625rem;
   height: 9.0625rem;
   color: #232323;
   font-family: "Roboto", sans-serif;
@@ -43,6 +40,7 @@
   font-weight: 900;
   line-height: normal;
   margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .whatsappContainer {
@@ -57,7 +55,7 @@
   font-size: 1.375rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 139%; /* 1.91125rem */
+  line-height: 139%;
   letter-spacing: -0.01513rem;
 }
 
@@ -66,6 +64,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 4rem;
+  width: 50%;
 }
 
 .titleForm {
@@ -75,7 +74,7 @@
   font-size: 2.5rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 139%; /* 1.91125rem */
+  line-height: 139%; 
   letter-spacing: -0.01513rem;
   width: 80%;
 }
@@ -139,11 +138,6 @@
   margin-top: -4.5rem;
 }
 
-.trapecio {
-  left: 0;
-  bottom: 0;
-}
-
 .icon {
   transition: transform 0.1s ease-in-out;
 }
@@ -195,45 +189,123 @@
 @media (max-width: 768px) {
   .generalContainer {
     flex-direction: column;
-    height: auto; /* Ajustar la altura automáticamente en dispositivos más pequeños */
+    height: auto;
   }
 
   .izqContainer,
   .derContainer {
-    width: 100%; /* Ambos contenedores tomarán el 100% del ancho en dispositivos más pequeños */
+    width: 100%; 
   }
 
   .izqContainer {
-    padding-left: 2rem; /* Reducir el padding en dispositivos más pequeños */
+    padding-left: 2rem; 
   }
 }
-
-/* Para pantallas de móvil hacia abajo */
 @media (max-width: 480px) {
   .titulo,
   .titleForm {
-    font-size: 2rem; /* Reducir el tamaño de la fuente en dispositivos muy pequeños */
+    font-size: 2rem; /* Reducir el tamaño de la fuente en dispositivos muy pequeños 
   }
 
   .parrafo {
-    font-size: 1rem; /* Reducir el tamaño de la fuente del párrafo en dispositivos muy pequeños */
+    font-size: 1rem; /* Reducir el tamaño de la fuente del párrafo en dispositivos muy pequeños 
   }
 }
+ */
+.generalContainer {
+  display: flex;
+  height: 70vh;
+  width: 100%;
+  background: #242424 url("/background-form.png") center/cover no-repeat;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
-.form,
+.contactanosInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .formContainer {
-  max-width: 100%; /* Ensure the form never exceeds the width of its container */
-  overflow: auto; /* In case there's any overflow, show a scrollbar */
-  padding-right: 1rem; /* Add some padding to ensure content doesn't touch the edge */
+  background-color: #d9d9d9;
+  border-radius: 0.5rem;
+  height: 75%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
 }
 
-.inputs,
-.inputsb,
+.enviar {
+  width: 30%;
+  background-color: #a4ca92;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #56b947;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+}
+.botonContenedor {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2rem;
+}
+
+.inputsContainerGeneral {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.inputs {
+  background-color: #d9d9d9;
+  border: solid 0.2px #000000;
+  border-radius: 0.2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.25rem;
+}
+.inputs:focus {
+  outline: solid 2px #a4ca92;
+  border: none; /* Cambia 'tuColorDeseado' por el color que prefieras, por ejemplo #FF5733. */
+}
+
+.naming {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 1rem;
+}
+
 .mensaje {
-  max-width: 100%; /* This ensures the inputs don't exceed their container's width */
+  background-color: #bababa;
+  border: none;
+  border-radius: 0.2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.25rem;
+  height: 10rem;
 }
 
-.izqContainer,
-.derContainer {
-  width: 50%;
+.mensaje:focus {
+  outline: solid 2px #a4ca92;
+  border: none;
 }
