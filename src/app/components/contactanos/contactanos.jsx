@@ -19,41 +19,43 @@ function Contactanos(props) {
   return (
     <div className={styles.generalContainer}>
       <div className={styles.contactanosInfo}>
-        <h1 className={styles.titulo}>CONTACTANOS!</h1>
-        <div className={styles.circulo}></div>
-        <div className={styles.circulo}></div>
-        <p className={styles.parrafo}>
-          Completa el formulario y con gusto te responderemos en las proximas 24
-          horas.
-        </p>
-        <a
-          className={styles.whatsappContainer}
-          href="https://wa.me/5491154231080?text=Hola%20estoy%20interesado%20en%20hacer%20un%20pedido"
-          target="_blank"
-          rel="noopener noreferrer"
-          onMouseEnter={() => setIsWhatsappHovered(true)}
-          onMouseLeave={() => setIsWhatsappHovered(false)}
-        >
-          <Image
-            src={isWhatsappHovered ? whatsappverde : whatsapp}
-            className={`${styles.icon} ${
-              isWhatsappHovered ? styles.animatedIcon : ""
-            }`}
-          />
-          <p className={styles.number}>+5491154231080</p>
-        </a>
-        <div
-          className={styles.whatsappContainer}
-          onMouseEnter={() => setIsEmailHovered(true)}
-          onMouseLeave={() => setIsEmailHovered(false)}
-        >
-          <Image
-            src={isEmailHovered ? emailverde : email}
-            className={`${styles.icon} ${
-              isEmailHovered ? styles.animatedIcon : ""
-            }`}
-          />
-          <p className={styles.number}>realcover@gmail.com</p>
+        <div className={styles.textContainer}>
+          <h1 className={styles.titulo}>CONTACTANOS!</h1>
+          <p className={styles.parrafo}>
+            Completa el formulario y con gusto te responderemos en las proximas
+            24 horas.
+          </p>
+        </div>
+        <div className={styles.iconsContainer}>
+          <a
+            className={styles.whatsappContainer}
+            href="https://wa.me/5491154231080?text=Hola%20estoy%20interesado%20en%20hacer%20un%20pedido"
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={() => setIsWhatsappHovered(true)}
+            onMouseLeave={() => setIsWhatsappHovered(false)}
+          >
+            <Image
+              src={isWhatsappHovered ? whatsappverde : whatsapp}
+              className={`${styles.icon} ${
+                isWhatsappHovered ? styles.animatedIcon : ""
+              }`}
+            />
+            <p className={styles.number}>+5491154231080</p>
+          </a>
+          <div
+            className={styles.whatsappContainer}
+            onMouseEnter={() => setIsEmailHovered(true)}
+            onMouseLeave={() => setIsEmailHovered(false)}
+          >
+            <Image
+              src={isEmailHovered ? emailverde : email}
+              className={`${styles.icon} ${
+                isEmailHovered ? styles.animatedIcon : ""
+              }`}
+            />
+            <p className={styles.number}>realcover@gmail.com</p>
+          </div>
         </div>
       </div>
 
@@ -91,7 +93,7 @@ function Contactanos(props) {
             </div>
             <div className={styles.inputContainer}>
               <h4 className={styles.naming}>Mensaje</h4>
-              <input
+              <textarea
                 type="text"
                 name="mensaje"
                 id="mensaje"

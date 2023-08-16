@@ -48,3 +48,70 @@
 .contactanos {
   margin-top: -1rem;
 }
+
+@media screen and (max-width: 1024px) {
+  .generalContainer {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .formContainer {
+    width: 80%; /* Ajustar según tus preferencias */
+    margin-top: 1rem;
+  }
+}
+
+/* Para pantallas pequeñas como 768 */
+@media screen and (max-width: 768px) {
+  .generalContainer {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .formContainer {
+    width: 90%; /* Ajustar según tus preferencias */
+    margin-top: 1rem;
+  }
+}
+
+/* Para dispositivos móviles (425, 375, 320) */
+@media screen and (max-width: 425px) {
+  .generalContainer {
+    height: auto;
+  }
+
+  .formContainer {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .contactanosInfo {
+    gap: 2rem;
+  }
+
+  .inputContainer {
+    gap: 0.5rem;
+  }
+
+  .iconsContainer {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .whatsappContainer {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .parrafo {
+    width: 90%;
+    font-size: 1rem;
+  }
+
+  .titulo {
+    font-size: 2rem;
+  }
+}
