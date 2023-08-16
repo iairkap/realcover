@@ -2,16 +2,13 @@
 
 .generalContainer {
   display: flex;
-
-  height: 80vh;
+  flex-wrap: wrap;
 }
 
 .izqContainer {
   display: flex;
   flex-direction: column;
   background-color: #d9d9d9;
-  height: 80vh;
-  width: 50vw;
   gap: 1rem;
   padding-left: 6rem;
 }
@@ -66,7 +63,6 @@
 
 .derContainer {
   background: #232323;
-  width: 50vw;
   display: flex;
   flex-direction: column;
   padding-bottom: 4rem;
@@ -81,6 +77,7 @@
   font-weight: 700;
   line-height: 139%; /* 1.91125rem */
   letter-spacing: -0.01513rem;
+  width: 80%;
 }
 
 .inputs {
@@ -128,6 +125,7 @@
   font-weight: 900;
   line-height: normal;
   border: none;
+  margin-bottom: 2rem;
 }
 
 .form {
@@ -220,4 +218,22 @@
   .parrafo {
     font-size: 1rem; /* Reducir el tamaño de la fuente del párrafo en dispositivos muy pequeños */
   }
+}
+
+.form,
+.formContainer {
+  max-width: 100%; /* Ensure the form never exceeds the width of its container */
+  overflow: auto; /* In case there's any overflow, show a scrollbar */
+  padding-right: 1rem; /* Add some padding to ensure content doesn't touch the edge */
+}
+
+.inputs,
+.inputsb,
+.mensaje {
+  max-width: 100%; /* This ensures the inputs don't exceed their container's width */
+}
+
+.izqContainer,
+.derContainer {
+  width: 50%;
 }
