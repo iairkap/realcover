@@ -1,15 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
 .generalContainer {
   display: flex;
 
-  height: 70vh;
+  height: 80vh;
 }
 
 .izqContainer {
   display: flex;
   flex-direction: column;
   background-color: #d9d9d9;
-  height: 70vh;
+  height: 80vh;
   width: 50vw;
   gap: 1rem;
   padding-left: 6rem;
@@ -84,7 +85,7 @@
 }
 
 .inputs {
-  width: 33rem;
+  width: 100%;
   height: 3.3125rem;
   flex-shrink: 0;
   border-radius: 0.25rem;
@@ -94,7 +95,7 @@
 }
 
 .inputsb {
-  width: 33rem;
+  width: 100%;
   height: 3.3125rem;
   flex-shrink: 0;
   border-radius: 0.25rem;
@@ -104,7 +105,7 @@
 }
 
 .mensaje {
-  width: 33rem;
+  width: 100%;
   height: 13.1875rem;
   flex-shrink: 0;
   border-radius: 0.25rem;
@@ -115,7 +116,7 @@
 
 .enviar {
   margin-top: 1rem;
-  width: 33.125rem;
+  width: 100%;
   height: 4.375rem;
   flex-shrink: 0;
   border-radius: 0.1875rem;
@@ -186,4 +187,32 @@
 
 .formContainer {
   margin-left: 6rem;
+}
+
+@media (max-width: 768px) {
+  .generalContainer {
+    flex-direction: column;
+    height: auto; /* Ajustar la altura automáticamente en dispositivos más pequeños */
+  }
+
+  .izqContainer,
+  .derContainer {
+    width: 100%; /* Ambos contenedores tomarán el 100% del ancho en dispositivos más pequeños */
+  }
+
+  .izqContainer {
+    padding-left: 2rem; /* Reducir el padding en dispositivos más pequeños */
+  }
+}
+
+/* Para pantallas de móvil hacia abajo */
+@media (max-width: 480px) {
+  .titulo,
+  .titleForm {
+    font-size: 2rem; /* Reducir el tamaño de la fuente en dispositivos muy pequeños */
+  }
+
+  .parrafo {
+    font-size: 1rem; /* Reducir el tamaño de la fuente del párrafo en dispositivos muy pequeños */
+  }
 }
