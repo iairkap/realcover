@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .container {
   border-radius: 0.3125rem;
   background-color: #f5f5f5;
@@ -15,7 +16,7 @@
 
 .title {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 900;
@@ -38,7 +39,7 @@
 
 .subtitles {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 400;
@@ -49,7 +50,7 @@
 
 .titleb {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 4.0625rem;
   font-style: normal;
   font-weight: 700;

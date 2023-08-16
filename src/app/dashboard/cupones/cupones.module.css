@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .navBar {
   position: sticky; /* Agrega esta línea */
   top: 0; /* Agrega esta línea */
@@ -38,7 +39,7 @@
   border-radius: 0.1875rem;
   background: #56b947;
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 700;

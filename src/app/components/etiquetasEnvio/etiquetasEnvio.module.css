@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .Contenedor {
   width: 22.5rem;
   height: 35.4375rem;
@@ -43,7 +44,7 @@
 
 .text1 {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75em;
   font-style: normal;
   font-weight: 400;
@@ -52,7 +53,7 @@
 
 .text2 {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.5em;
   font-style: normal;
   font-weight: 700;
@@ -72,7 +73,7 @@
 .destinatarioTitleE,
 .destinatarioTitleD {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   line-height: normal;
 }
 

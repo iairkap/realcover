@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .modal {
   position: fixed;
   top: 0;
@@ -59,7 +60,7 @@
 
 .titulo {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 900;
@@ -74,7 +75,7 @@
 }
 .subtitulos {
   color: rgba(0, 0, 0, 0.56);
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.9375rem;
   font-style: normal;
   font-weight: 900;
@@ -105,7 +106,7 @@
 }
 .subs {
   color: #707070;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
@@ -159,7 +160,7 @@
 
 .tituloModelo {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.625rem;
   font-style: normal;
   font-weight: 900;
@@ -190,7 +191,7 @@
 .modalText {
   flex-shrink: 0;
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 900;
@@ -201,7 +202,7 @@
   height: 2.3125rem;
   flex-shrink: 0;
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;

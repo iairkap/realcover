@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .contenedorEstrellas {
   display: flex;
 }
@@ -19,7 +20,7 @@
   flex-shrink: 0;
   color: #000;
   text-align: justify;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -31,7 +32,7 @@
   justify-content: space-between;
   color: #000;
   text-align: justify;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 100;

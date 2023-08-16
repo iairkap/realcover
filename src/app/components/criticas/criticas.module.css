@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .contenedor {
   display: flex;
   justify-content: center; /* add this */
@@ -10,7 +11,7 @@
   justify-content: space-around;
   color: #000;
   text-align: center;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 2rem;
   font-style: normal;
   font-weight: 900;

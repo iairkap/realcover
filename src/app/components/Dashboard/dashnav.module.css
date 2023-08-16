@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .navBarContainer {
   background-color: #56b947;
   height: 100vh;
@@ -28,7 +29,7 @@
 
 .titles {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;

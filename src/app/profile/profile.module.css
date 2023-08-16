@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .background {
   background-color: #232323;
   max-height: 100%;
@@ -7,7 +8,7 @@
 .titulo {
   margin-top: 8rem;
   color: #f5f5f5;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 2.25rem;
   font-style: normal;
   font-weight: 900;

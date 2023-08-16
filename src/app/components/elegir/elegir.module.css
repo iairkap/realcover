@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .generalContenedor {
   height: 50vh;
   width: 100%;
@@ -15,7 +16,7 @@
 .numeracion {
   color: #56b947;
   text-align: center;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 18.75rem;
   font-style: normal;
   font-weight: 900;
@@ -24,7 +25,7 @@
 
 .pregunta {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 2rem;
   font-style: normal;
   font-weight: 900;
@@ -37,7 +38,7 @@
   width: 51.5rem;
   color: #fff;
   text-align: justify;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.5625rem;
   font-style: normal;
   font-weight: 900;

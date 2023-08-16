@@ -1,7 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .formSubs {
   color: #000;
   font-size: 1rem;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 900;
   line-height: 139%;
@@ -34,7 +35,7 @@
   border: none;
   color: #fff;
   font-size: 1.5rem;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -51,7 +52,7 @@
   border: solid 0.5px #56b947;
   color: #56b947;
   font-size: 1.5rem;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
   line-height: normal;

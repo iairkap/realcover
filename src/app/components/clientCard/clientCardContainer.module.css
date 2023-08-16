@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -14,7 +15,7 @@
 
 .titleHeader {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -31,7 +32,7 @@
   margin-left: auto;
   gap: 1rem;
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -62,7 +63,7 @@
   border: 0.5px solid #000;
   background: white;
   color: #56b947;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -81,7 +82,7 @@
   border: 0.5px solid #000;
   background: #fff;
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .contenedorCard {
   display: flex;
   flex-direction: row;
@@ -47,7 +48,7 @@
 
 .enProceso {
   color: #b9b447;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -57,7 +58,7 @@
 
 .entregado {
   color: #56b947;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-size: 1rem;
   font-weight: 900;
@@ -71,7 +72,7 @@
   flex-shrink: 0;
   color: #fff;
   text-align: center;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -90,7 +91,7 @@
   flex-shrink: 0;
   color: #56b947;
   text-align: center;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -112,7 +113,7 @@
 
 .detallePedido {
   color: rgb(67, 67, 67);
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 400;
@@ -122,7 +123,7 @@
 
 .detallePedidoB {
   color: rgb(128, 127, 127);
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 400;
@@ -191,7 +192,7 @@
 
 .titulo {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 900;
@@ -206,7 +207,7 @@
 
 .tituloModelo {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.625rem;
   font-style: normal;
   font-weight: 900;
@@ -238,7 +239,7 @@
 .modalText {
   flex-shrink: 0;
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 900;
@@ -252,7 +253,7 @@
   padding-right: 1rem;
   flex-shrink: 0;
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -268,7 +269,7 @@
 .titulosTabla {
   color: #fff;
   text-align: center;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -323,7 +324,7 @@
 
 .td1 {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -333,7 +334,7 @@
 
 .td {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 200;
@@ -370,7 +371,7 @@
 .modalTextB {
   flex-shrink: 0;
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 900;
@@ -425,7 +426,7 @@
 .modalSelect {
   flex-shrink: 0;
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 900;

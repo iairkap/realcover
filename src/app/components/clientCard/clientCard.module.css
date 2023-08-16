@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .cardContainer {
   display: flex;
   background-color: #f5f5f5;
@@ -30,7 +31,7 @@
 }
 
 .name {
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.1rem;
   font-style: normal;
   font-weight: 900;
@@ -39,7 +40,7 @@
 }
 
 .shop {
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.1rem;
   font-style: normal;
   font-weight: 200;
@@ -118,7 +119,7 @@
 
 .emailText {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;

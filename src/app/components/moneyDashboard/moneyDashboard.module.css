@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .container {
   display: flex;
   flex-direction: column;
@@ -32,7 +33,7 @@
 .boton {
   color: #fff;
   text-align: center;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 500;
@@ -49,7 +50,7 @@
 
 .plata {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 4.0625rem;
   font-style: normal;
   font-weight: 700;
@@ -62,7 +63,7 @@
 
 .titulo {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 900;

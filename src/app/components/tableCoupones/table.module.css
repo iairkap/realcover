@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .table {
   width: 75%; /* Esto permitirá que la tabla se expanda al ancho del contenedor */
   table-layout: auto; /* Esto asegura que las columnas se ajusten al contenido */
@@ -35,7 +36,7 @@
 
 .used {
   color: #b94747;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -45,7 +46,7 @@
 
 .notUsed {
   color: #56b947;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
