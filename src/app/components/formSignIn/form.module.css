@@ -1,6 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-s .formSubs {
-  color: #000;
+
+.contenedorGeneral {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 2rem; */
+  margin-right: 2rem;
+}
+
+.form {
+  margin: 3rem;
+}
+
+.formSubs {
+  color: white;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -24,55 +36,53 @@ s .formSubs {
   align-items: center;
 }
 
-.contenedorGeneral {
-  display: flex;
-  justify-content: space-between;
-  gap: 2em;
-  margin-top: -5em;
-}
-
 .columna {
   display: flex;
   flex-direction: column;
-}
-
-.inputContenedor {
-  margin-bottom: 20px;
+  gap: 2rem;
 }
 
 .input {
   width: 100%;
-  min-width: 23.5rem;
-  max-width: 27.5rem;
-  height: 2.3125rem;
+
+  background-color: #d9d9d9;
+  border: solid 0.2px #000000;
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.25rem 0.5rem 2.2rem; /* Simplificado */
 }
 
 .boton {
-  width: 100%;
-  max-width: 28.375rem;
-  height: 2.5625rem;
-  flex-shrink: 0;
-  border-radius: 0.1875rem;
-  background: #56b947;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: #a4ca92;
   border: none;
-  color: #fff;
-  font-size: 1.5rem;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  color: #56b947;
+  text-align: center;
   font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+  transition: 0.2s;
+  width: 15rem;
+  cursor: pointer;
 }
 
-/* Media Queries */
-@media screen and (max-width: 600px) {
-  .contenedorGeneral {
-    flex-direction: column;
-    margin-top: 0;
-  }
+.boton:hover {
+  background-color: #459539;
+  cursor: pointer;
+}
 
-  .input,
-  .boton {
-    width: 100%;
-  }
+.tlte {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  color: white;
+}
+
+.subtitles {
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  font-size: 1.5rem;
+  color: white;
 }

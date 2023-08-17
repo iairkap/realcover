@@ -95,14 +95,18 @@ function FormSignIn({ toggleForm }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <h1 className={styles.tlte}>Bienvenido!</h1>
+      <h2 className={styles.subtitles}>
+        Cree una cuenta para proseguir con la compra
+      </h2>
       <div className={styles.contenedorGeneral}>
         <div className={styles.columna}>
           <div className={styles.inputContenedor}>
             <span className={styles.formSubs}>Nombre</span>
             <input
               type="text"
-              placeholder="Ingrese su nombre"
+              placeholder=""
               className={styles.input}
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -113,7 +117,7 @@ function FormSignIn({ toggleForm }) {
             <span className={styles.formSubs}>Apellido</span>
             <input
               type="text"
-              placeholder="Ingrese su apellido"
+              placeholder=""
               value={lastName}
               className={styles.input}
               onChange={(e) => setLastName(e.target.value)}
@@ -124,7 +128,7 @@ function FormSignIn({ toggleForm }) {
             <span className={styles.formSubs}>Email</span>
             <input
               type="email"
-              placeholder="Ingrese su email"
+              placeholder=""
               value={email}
               className={styles.input}
               onChange={(e) => setEmail(e.target.value)}
@@ -137,7 +141,7 @@ function FormSignIn({ toggleForm }) {
             <span className={styles.formSubs}>Contraseña</span>
             <input
               type="password"
-              placeholder="Ingrese su contraseña"
+              placeholder=""
               value={password}
               className={styles.input}
               onChange={(e) => setPassword(e.target.value)}
@@ -148,7 +152,7 @@ function FormSignIn({ toggleForm }) {
             <span className={styles.formSubs}>Repita su contraseña</span>
             <input
               type="password"
-              placeholder="Confirme su contraseña"
+              placeholder=""
               value={confirmPassword}
               className={styles.input}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -159,7 +163,7 @@ function FormSignIn({ toggleForm }) {
             <span className={styles.formSubs}>Teléfono</span>
             <input
               type="text"
-              placeholder="Ingrese su teléfono"
+              placeholder=""
               value={phone}
               className={styles.input}
               onChange={(e) => setPhone(e.target.value)}
@@ -169,7 +173,7 @@ function FormSignIn({ toggleForm }) {
         </div>
       </div>
       <div className={styles.botonera}>
-        <button className={styles.boton} type="submit">
+        <button className={styles.boton} type="">
           Crear
         </button>
         <span onClick={toggleForm}>Ya tiene un usuario? ingrese aqui </span>
