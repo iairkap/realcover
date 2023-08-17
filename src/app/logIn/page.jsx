@@ -5,6 +5,8 @@ import NavBar from "../components/navBar/navBar";
 import Fondo from "../components/fondo/fondo";
 import FormSignIn from "../components/formSignIn/form";
 import LogIn from "../components/formLogIn/logIn";
+import ResetPassword from "../reset-password/[token]/page";
+
 import { GlobalContext } from "../store/layout";
 import { useContext } from "react";
 import Image from "next/image";
@@ -17,6 +19,10 @@ function SignIn(props) {
     setShowForm(showForm === "LogIn" ? "FormSignIn" : "LogIn");
   };
 
+  const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
+  const toggleResetPasswordModal = () => {
+    setShowResetPasswordModal(!showResetPasswordModal);
+  };
   return (
     <div className={styles.container}>
       <NavBar />
