@@ -51,7 +51,6 @@
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  height: calc(100% - 44px); /* Corregido */
   background-color: #d9d9d9;
   width: 100%;
 }
