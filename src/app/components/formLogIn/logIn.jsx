@@ -3,6 +3,7 @@ import styles from "./logIn.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Cambiado de "next/navigation" a "next/router"
 import { GlobalContext } from "./../../store/layout";
+import { signIn, getSession } from "next-auth/react";
 
 import namecontact from "../../../../public/name-contact-form.svg";
 import mailcontact from "../../../../public/mail-contact-form.svg";
@@ -92,7 +93,17 @@ function LogIn({ toggleForm }) {
           Crear Cuenta Nueva
         </button>
         <div className={styles.logInContainerThird}>
-          {/* Aquí podrías agregar el login de Google nuevamente si es necesario */}
+          <button
+            className={styles.boton3}
+            onClick={async () => {
+              const res = await signIn("google", {
+                callbackUrl: "http://localhost:3000/store/fundas",
+              });
+              setIsAuthenticated(true);
+            }}
+          >
+            Iniciar Sesion con Google
+          </button>
         </div>
         <div>
           <span className={styles.olvidaste} onClick={openModal}>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, use } from "react";
 import { GlobalContext } from "../layout";
 import { getLayout } from "../layout";
 import CardsContainer from "../../components/cardsContainer/cardsContainer";
@@ -10,15 +10,30 @@ import styles from "./general.module.css";
 import { useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { getSession } from "next-auth/react";
 function Fundas() {
-  const {
-    covers,
-    isLoading,
-    fullColor,
-    cubrevalijas,
-    maletines,
-    tablets,
-  } = useContext(GlobalContext);
+  const { covers, isLoading, fullColor, cubrevalijas, maletines, tablets } =
+    useContext(GlobalContext);
+
+  useEffect(() => {
+    //peticion para registrar correo de google en bdd
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/login-google");
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Login exitoso:", data);
+        } else {
+          console.error("Error en el login:", data);
+        }
+      } catch (error) {
+        console.error("Error en la solicitud:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const user = localStorage.getItem("user");

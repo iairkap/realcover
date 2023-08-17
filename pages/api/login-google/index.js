@@ -4,7 +4,7 @@ import { hash } from "bcrypt";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
-  const hashedPassword = hash(process.env.DEFAULT_PASSWORD, 10);
+  const hashedPassword = await hash(process.env.DEFAULT_PASSWORD, 10); // Wait for the hash to complete
 
   if (session) {
     const user = await prisma.user.findUnique({
@@ -25,19 +25,17 @@ export default async function handler(req, res) {
             name: onlyName,
             password: hashedPassword,
             lastName: onlyLastName ? onlyLastName : "",
-            phone: session.user.phone ? session.user.phone : "",
-            address: session.user.address ? session.user.address : "",
-            city: session.user.city ? session.user.city : "",
-            postalCode: session.user.postalCode ? session.user.postalCode : "",
             provider: "GOOGLE",
           },
         });
+        res.status(200).json({ message: "Login successful", user: newUser }); // Send the response here
       } catch (error) {
-        res.status(500).json({ message: "Error creating user" });
+        res.status(500).json({ message: "Error creating user" }); // Send an error response here
       }
+    } else {
+      res.status(200).json({ message: "Login successful", user: user }); // Send the response here
     }
-    res.status(200).json({ message: "Login successful", user: user });
   } else {
-    res.status(401).json({ message: "Unauthorized" });
+    res.status(401).json({ message: "Unauthorized" }); // Send the response here
   }
 }
