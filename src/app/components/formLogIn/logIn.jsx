@@ -3,12 +3,11 @@ import styles from "./logIn.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Cambiado de "next/navigation" a "next/router"
 import { GlobalContext } from "./../../store/layout";
-
 import namecontact from "../../../../public/name-contact-form.svg";
 import mailcontact from "../../../../public/mail-contact-form.svg";
 import namecontactverde from "../../../../public/name-contact-form-verde.svg";
 import mailcontactverde from "../../../../public/mail-contact-form-verde.svg";
-
+import ForgotPasswordModal from "../ForgetPasswordModal/ForgetPasswordModal";
 function LogIn({ toggleForm }) {
   const { setIsAuthenticated } = useContext(GlobalContext);
 
@@ -39,6 +38,7 @@ function LogIn({ toggleForm }) {
       );
     }
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true); // Esta función parece que necesita más contexto.
 
@@ -99,6 +99,10 @@ function LogIn({ toggleForm }) {
             Olvidaste la contraseña?
           </span>
         </div>
+        <ForgotPasswordModal
+          isOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-/* import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { sign } from "jsonwebtoken";
 import nodemailer from "nodemailer";
 
@@ -52,4 +52,3 @@ export default async function handler(req, res) {
     res.status(405).json({ message: "Method not allowed" });
   }
 }
- */
