@@ -8,15 +8,18 @@ import email from "../../../../public/email.svg";
 import emailverde from "../../../../public/emailverde.svg";
 import facebook from "../../../../public/facebook.svg";
 import instagram from "../../../../public/instagram.svg";
-import { instagramverde } from "../../../../public/imagnes";
-import { facebookverde } from "../../../../public/imagnes";
-
+import namecontact from "../../../../public/name-contact-form.svg";
+import mailcontact from "../../../../public/mail-contact-form.svg";
+import namecontactverde from "../../../../public/name-contact-form-verde.svg";
+import mailcontactverde from "../../../../public/mail-contact-form-verde.svg";
 function Contactanos(props) {
   const [state, handleSubmit] = useForm("xzbleqar");
   const [isWhatsappHovered, setIsWhatsappHovered] = useState(false);
   const [isEmailHovered, setIsEmailHovered] = useState(false);
   const [isFacebookHovered, setIsFacebookHovered] = useState(false);
   const [isInstagramHovered, setIsInstagramHovered] = useState(false);
+  const [nombreFocused, setNombreFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
 
   if (state.succeeded) {
     return <p>¡Gracias por contactarnos! Hemos recibido tu mensaje.</p>;
@@ -78,12 +81,22 @@ function Contactanos(props) {
           <div className={styles.inputsContainerGeneral}>
             <div className={styles.inputContainer}>
               <h4 className={styles.naming}>Nombre</h4>
-              <input
-                type="text"
-                name="nombre"
-                id="nombre"
-                className={styles.inputs}
-              />
+              <div className={styles.inputContainer}>
+                <input
+                  type="text"
+                  name="nombre"
+                  id="nombre"
+                  className={styles.inputs}
+                  placeholder=""
+                  onFocus={() => setNombreFocused(true)}
+                  onBlur={() => setNombreFocused(false)}
+                />
+                <Image
+                  src={nombreFocused ? namecontactverde : namecontact}
+                  alt="Nombre"
+                  className={styles.inputImagePlaceholder}
+                />
+              </div>
               <ValidationError
                 prefix="Nombre"
                 field="nombre"
@@ -93,12 +106,22 @@ function Contactanos(props) {
             <div className={styles.inputContainer}>
               <h4 className={styles.naming}>Email</h4>
 
-              <input
-                type="text"
-                name="email"
-                id="email"
-                className={styles.inputs}
-              />
+              <div className={styles.inputContainer}>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  className={styles.inputs}
+                  placeholder=""
+                  onFocus={() => setEmailFocused(true)}
+                  onBlur={() => setEmailFocused(false)}
+                />
+                <Image
+                  src={emailFocused ? mailcontactverde : mailcontact}
+                  alt="Email"
+                  className={styles.inputImagePlaceholder}
+                />
+              </div>
               <ValidationError
                 prefix="Email"
                 field="email"

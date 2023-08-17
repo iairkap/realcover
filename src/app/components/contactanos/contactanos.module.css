@@ -49,7 +49,14 @@
   font-weight: 900;
   line-height: 139%; /* 1.39rem */
   letter-spacing: -0.011rem;
+  transition: 0.2s;
 }
+
+.enviar:hover {
+  background-color: #8eb37d;
+  color: #3e9031;
+}
+
 .botonContenedor {
   display: flex;
   justify-content: flex-end;
@@ -232,4 +239,23 @@
 .textContainer {
   display: flex;
   flex-direction: column;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.inputs {
+  background-color: transparent; /* o el color de fondo que desees */
+  padding-left: 40px; /* suficiente espacio para la imagen */
+  /* demás estilos */
+}
+
+.inputImagePlaceholder {
+  position: absolute;
+  left: 10px; /* ajusta según necesites */
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px; /* ajusta según el tamaño de tu imagen */
+  width: auto;
 }

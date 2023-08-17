@@ -38,7 +38,12 @@ import facebook from "./facebook.svg";
 import instagram from "./instagram.svg";
 import instagramverde from "./instagram-hover.svg";
 import facebookverde from "./facebook-hover.svg";
+import mailcontact from "./mail-contact-form.svg";
+import namecontact from "./name-contact-form.svg";
+
 export {
+  namecontact,
+  mailcontact,
   instagramverde,
   facebookverde,
   facebook,

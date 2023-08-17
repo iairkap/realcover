@@ -1,5 +1,5 @@
-import prisma from "../../../prisma/client";
-import verifyMiddleware from "../jwt-session/verifyMiddleware";
+import prisma from "../../../../prisma/client";
+import verifyMiddleware from "../../jwt-session/verifyMiddleware";
 
 async function handler(req, res, verifyMethod) {
   const { method } = req;
@@ -30,15 +30,9 @@ async function handler(req, res, verifyMethod) {
       return res.status(200).json({ message: "Login successful", user: user });
 
     case "PUT":
-      const {
-        name,
-        lastName,
-        phone,
-        address,
-        city,
-        postalCode,
-        password,
-      } = req.body;
+      const { name, lastName, phone, address, city, postalCode, password } =
+        req.body;
+
       const updatedUser = await prisma.user.update({
         where: {
           email: verifyMethod,
@@ -53,6 +47,10 @@ async function handler(req, res, verifyMethod) {
           password: password,
         },
       });
+
+      return res
+        .status(200)
+        .json({ message: "User updated successfully", user: updatedUser });
 
     case "DELETE":
       const userId = req.query.id;
@@ -77,7 +75,10 @@ async function handler(req, res, verifyMethod) {
           .status(400)
           .json({ message: "No user ID provided in query" });
       }
+
+    default:
+      return res.status(405).json({ message: "Method not allowed" });
   }
 }
 
-export default verifyMiddleware(handler);
+export default handler;
