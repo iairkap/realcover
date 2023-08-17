@@ -54,11 +54,11 @@
   border: none;
 }
 .boton {
-  background-color: #a4ca92;
+  background-color: #56b947;
+  color: white;
   border: none;
   border-radius: 0.2rem;
   padding: 0.5rem;
-  color: #56b947;
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
@@ -66,8 +66,8 @@
   line-height: 139%;
   letter-spacing: -0.011rem;
   transition: 0.2s;
-  width: 15rem;
   cursor: pointer;
+  width: 100%;
 }
 
 .boton:hover {
