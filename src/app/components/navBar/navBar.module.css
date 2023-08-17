@@ -1,5 +1,5 @@
 .contenedor {
-  z-index: 0;
+  z-index: 10000;
   height: 44px;
   background: #232323e2;
 
