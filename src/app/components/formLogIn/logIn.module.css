@@ -127,3 +127,86 @@
   max-width: 15rem;
   width: 100%;
 }
+
+@media screen and (max-width: 1199px) {
+  .signInFormContainer {
+    width: 85%;
+  }
+
+  .titulo {
+    font-size: 2rem;
+  }
+
+  .input {
+    font-size: 0.9rem;
+  }
+
+  .boton,
+  .boton2 {
+    font-size: 0.9rem;
+  }
+
+  .tlte {
+    font-size: 2.5rem;
+  }
+
+  .subtitles {
+    font-size: 1.3rem;
+  }
+}
+
+/* Para pantallas de tablets */
+@media screen and (max-width: 991px) {
+  .signInFormContainer {
+    width: 80%;
+  }
+
+  .titulo {
+    font-size: 1.75rem;
+  }
+
+  .input {
+    font-size: 0.85rem;
+  }
+
+  .boton,
+  .boton2 {
+    font-size: 0.85rem;
+  }
+
+  .tlte {
+    font-size: 2.2rem;
+  }
+
+  .subtitles {
+    font-size: 1.2rem;
+  }
+}
+
+/* Para pantallas de móviles */
+@media screen and (max-width: 767px) {
+  .signInFormContainer {
+    width: 95%;
+  }
+
+  .titulo {
+    font-size: 1.5rem;
+  }
+
+  .input {
+    font-size: 0.8rem;
+  }
+
+  .boton,
+  .boton2 {
+    font-size: 0.8rem;
+  }
+
+  .tlte {
+    font-size: 2rem;
+  }
+
+  .subtitles {
+    font-size: 1.1rem;
+  }
+}
