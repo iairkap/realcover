@@ -4,8 +4,8 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   background-color: #d9d9d9;
-  gap: 2rem;
-  height: calc(100% - 97px); /* Subtract the height of the navbar */
+  height: calc(100vh - 150px);
+  width: 90%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -55,7 +55,7 @@
   margin-top: 1rem;
   border-radius: 0.1875rem;
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
   background: #56b947;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
 }

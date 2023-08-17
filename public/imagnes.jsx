@@ -34,7 +34,15 @@ import searchBarContact from "./searchBarDashboard.svg";
 import productosDashContacts from "./productosDashContacts.svg";
 import printDashContacts from "./printDashContacts.svg";
 import threeDotsDashboard from "./threeDotsDashboard.svg";
+import facebook from "./facebook.svg";
+import instagram from "./instagram.svg";
+import instagramverde from "./instagram-hover.svg";
+import facebookverde from "./facebook-hover.svg";
 export {
+  instagramverde,
+  facebookverde,
+  facebook,
+  instagram,
   threeDotsDashboard,
   printDashContacts,
   productosDashContacts,

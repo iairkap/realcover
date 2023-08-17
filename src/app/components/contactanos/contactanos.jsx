@@ -6,11 +6,17 @@ import whatsapp from "../../../../public/whatsapp.svg";
 import whatsappverde from "../../../../public/whatsapp-verde.svg";
 import email from "../../../../public/email.svg";
 import emailverde from "../../../../public/emailverde.svg";
+import facebook from "../../../../public/facebook.svg";
+import instagram from "../../../../public/instagram.svg";
+import { instagramverde } from "../../../../public/imagnes";
+import { facebookverde } from "../../../../public/imagnes";
 
 function Contactanos(props) {
   const [state, handleSubmit] = useForm("xzbleqar");
   const [isWhatsappHovered, setIsWhatsappHovered] = useState(false);
   const [isEmailHovered, setIsEmailHovered] = useState(false);
+  const [isFacebookHovered, setIsFacebookHovered] = useState(false);
+  const [isInstagramHovered, setIsInstagramHovered] = useState(false);
 
   if (state.succeeded) {
     return <p>¡Gracias por contactarnos! Hemos recibido tu mensaje.</p>;
@@ -55,6 +61,14 @@ function Contactanos(props) {
               }`}
             />
             <p className={styles.number}>realcover@gmail.com</p>
+          </div>
+        </div>
+        <div className={styles.socialMedia}>
+          <div className={styles.iconFacebookB}>
+            <Image src={facebook} className={styles.iconFacebook} />
+          </div>
+          <div className={styles.iconFacebookB}>
+            <Image src={instagram} className={styles.iconInstagram} />
           </div>
         </div>
       </div>

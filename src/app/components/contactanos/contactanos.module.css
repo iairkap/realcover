@@ -27,9 +27,10 @@
   width: 30%;
   display: flex;
   flex-direction: column;
-  margin-top: 4rem;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
+  height: 44.125rem;
+  margin-top: 6rem;
 }
 
 .enviar {
@@ -42,7 +43,7 @@
   padding-bottom: 0.5rem;
   color: #56b947;
   text-align: center;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 900;
@@ -77,7 +78,7 @@
 
 .naming {
   color: #000;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
@@ -92,7 +93,7 @@
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 0.25rem;
-  height: 10rem;
+  height: 24rem;
   border: solid 0.2px #000000;
 }
 
@@ -103,7 +104,7 @@
 
 .titulo {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 3.125rem;
   font-style: normal;
   font-weight: 900;
@@ -113,7 +114,7 @@
 .parrafo {
   color: #fff;
   text-align: justify;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
@@ -126,7 +127,7 @@
   flex-direction: row;
   color: #fff;
   text-align: center;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 1.375rem;
   font-style: normal;
   font-weight: 400;
@@ -135,7 +136,6 @@
   align-items: center;
   gap: 2rem;
   transition: 0.2s;
-  padding-left: 1rem;
   text-decoration: none;
 }
 
@@ -151,6 +151,7 @@
 .iconsContainer {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 }
 
 .number {
@@ -165,7 +166,6 @@
 
   .formContainer {
     width: 80%; /* Ajustar según tus preferencias */
-    margin-top: 1rem;
   }
 }
 
@@ -205,4 +205,31 @@
   .generalContainer {
     flex-direction: column;
   }
+}
+.socialMedia {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.iconFacebookB {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 1rem;
+  border: solid 0.5rem transparent; /* Asignamos un borde transparente en su estado normal */
+  transition: 0.1s;
+}
+
+.iconFacebookB:hover {
+  border-color: #5ebe4f;
+  background-color: #5ebe4f; /* Solo cambiamos el color del borde en el estado hover */
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
 }
