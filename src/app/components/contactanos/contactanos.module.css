@@ -3,7 +3,9 @@
 .generalContainer {
   display: flex;
   width: 100%;
+  background: url("/background-form-3.png");
   background-color: #232323;
+
   align-items: center;
   justify-content: center;
   position: relative;

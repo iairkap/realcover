@@ -17,17 +17,19 @@
 }
 
 .signInFormContainer {
+  background-color: #d9d9d9;
+  border-radius: 0.5rem;
   width: 100%;
-  max-width: 61.5625rem;
-  height: auto;
-  min-height: 38.6875rem;
-  flex-shrink: 0;
-  background: #f5f5f5;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  height: fit-content;
+  margin-top: 2rem;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 .titulo {

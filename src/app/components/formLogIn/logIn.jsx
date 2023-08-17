@@ -5,13 +5,20 @@ import styles from "./logIn.module.css";
 import { useRouter, usePathname } from "next/navigation"; // Importa esto
 import { useContext } from "react";
 import { GlobalContext } from "./../../store/layout";
-
+import namecontact from "../../../../public/name-contact-form.svg";
+import mailcontact from "../../../../public/mail-contact-form.svg";
+import namecontactverde from "../../../../public/name-contact-form-verde.svg";
+import mailcontactverde from "../../../../public/mail-contact-form-verde.svg";
+import Image from "next/image";
 function LogIn({ toggleForm }) {
   const { setIsAuthenticated } = useContext(GlobalContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter(); // Obtiene la instancia de router
+  const router = useRouter();
+  const [nombreFocused, setNombreFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+
   /*  const handleGoogleLogin = async () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
@@ -84,22 +91,38 @@ function LogIn({ toggleForm }) {
       <div>
         <div className={styles.inputContenedor}>
           <span className={styles.formSubs}>Email</span>
-          <input
-            type="email"
-            placeholder="Ingrese su email"
-            value={email}
-            className={styles.input}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <div className={styles.inputContainer}>
+            <input
+              type="email"
+              placeholder=""
+              value={email}
+              className={styles.input}
+              onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setEmailFocused(true)}
+              onBlur={() => setEmailFocused(false)}
+            />
+            <Image
+              src={emailFocused ? mailcontactverde : mailcontact}
+              alt="Email"
+              className={styles.inputImagePlaceholder}
+            />
+          </div>
         </div>
         <div className={styles.inputContenedor}>
           <span className={styles.formSubs}>Contraseña</span>
           <input
             type="password"
-            placeholder="Ingrese su contraseña"
+            placeholder=""
             value={password}
             className={styles.input}
             onChange={(e) => setPassword(e.target.value)}
+            onFocus={() => setNombreFocused(true)}
+            onBlur={() => setNombreFocused(false)}
+          />
+          <Image
+            src={nombreFocused ? namecontactverde : namecontact}
+            alt="Nombre"
+            className={styles.inputImagePlaceholder}
           />
         </div>
         <div className={styles.botonera}>

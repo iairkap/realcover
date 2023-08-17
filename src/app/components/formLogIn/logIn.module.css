@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .formSubs {
   color: #000;
-  font-size: 1rem;
   font-family: "Roboto", sans-serif;
+  font-size: 1rem;
   font-style: normal;
-  font-weight: 900;
-  line-height: 139%;
-  letter-spacing: -0.011rem;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .inputContenedor {
@@ -17,45 +16,50 @@
 }
 
 .input {
+  background-color: #d9d9d9;
+  border: solid 0.2px #000000;
+  border-radius: 0.2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.25rem;
+  padding-left: 2rem; /* Adjust this value based on the image width and desired spacing */
+}
+
+.input:focus {
+  outline: solid 2px #a4ca92;
+  border: none; /* Cambia 'tuColorDeseado' por el color que prefieras, por ejemplo #FF5733. */
+}
+.boton2,
+.boton {
   width: 100%;
-  min-width: 23.5rem;
-  max-width: 27.5rem;
-  height: 2.3125rem;
+  background-color: #a4ca92;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #56b947;
   text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.39rem */
+  letter-spacing: -0.011rem;
+  transition: 0.2s;
+}
+
+.boton2:hover {
+  background-color: #8eb37d;
+  color: #3e9031;
 }
 
 .boton {
-  width: 100%;
-  max-width: 28.375rem;
-  height: 2.5625rem;
-  flex-shrink: 0;
-  border-radius: 0.1875rem;
-  background: #56b947;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  background-color: #56b947;
+  color: white;
 }
-
-.boton2 {
-  width: 100%;
-  max-width: 28.375rem;
-  height: 2.5625rem;
-  flex-shrink: 0;
-  border-radius: 0.1875rem;
-  background: white;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
-  border: solid 0.5px #56b947;
-  color: #56b947;
-  font-size: 1.5rem;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+.boton:hover {
+  background-color: #459539;
 }
 
 .botonera {
@@ -64,4 +68,22 @@
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputImagePlaceholder {
+  position: absolute;
+  left: 10px; /* Adjust this value according to your needs */
+  height: 1rem; /* Adjust this value according to your needs */
+  width: auto;
+  pointer-events: none; /* Makes the image non-clickable, allowing clicks to go through to the input */
 }
