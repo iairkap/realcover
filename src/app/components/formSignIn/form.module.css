@@ -44,13 +44,15 @@
 
 .input {
   width: 100%;
-
   background-color: #d9d9d9;
   border: solid 0.2px #000000;
   border-radius: 0.2rem;
   padding: 0.5rem 0.25rem 0.5rem 2.2rem; /* Simplificado */
 }
-
+.input:focus {
+  outline: solid 2px #a4ca92;
+  border: none;
+}
 .boton {
   background-color: #a4ca92;
   border: none;
@@ -85,4 +87,13 @@
   font-weight: 200;
   font-size: 1.5rem;
   color: white;
+}
+
+.toggle {
+  color: white;
+  transition: 0.2s;
+}
+
+.toggle:hover {
+  color: #56b947;
 }

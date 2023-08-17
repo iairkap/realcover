@@ -172,11 +172,14 @@ function FormSignIn({ toggleForm }) {
           </div>
         </div>
       </div>
+      <br />
       <div className={styles.botonera}>
         <button className={styles.boton} type="">
           Crear
         </button>
-        <span onClick={toggleForm}>Ya tiene un usuario? ingrese aqui </span>
+        <span onClick={toggleForm} className={styles.toggle}>
+          Ya tiene un usuario? ingrese aqui{" "}
+        </span>
       </div>
     </form>
   );
