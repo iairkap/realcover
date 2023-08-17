@@ -3,9 +3,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  padding: 2rem;
   background-color: #d9d9d9;
   gap: 2rem;
+  height: calc(100% - 97px); /* Subtract the height of the navbar */
 }
 
 @media screen and (max-width: 1200px) {
@@ -35,16 +35,8 @@
 }
 
 .gridItem img {
-  width: 100%;
+  width: 80%;
   height: auto;
-}
-
-.light {
-  background-color: #d9d9d9;
-}
-
-.dark {
-  background-color: #d9d9d9;
 }
 
 .container {
@@ -52,7 +44,6 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
 }
 
 .title {
@@ -63,6 +54,8 @@
   text-align: center;
   margin-top: 1rem;
   border-radius: 0.1875rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   background: #56b947;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
 }

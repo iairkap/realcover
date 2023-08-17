@@ -1,4 +1,4 @@
-import logo from "./logo-realcover.png";
+import logo from "./logonav.svg";
 import search from "./search.svg";
 import market from "./market.svg";
 import signIn from "./sign-in.svg";

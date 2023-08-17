@@ -13,7 +13,7 @@ import Link from "next/link";
 import { GlobalContext } from "../../store/layout";
 import { getLayout } from "../../store/layout";
 import { useRouter, usePathname } from "next/navigation"; // Importa esto
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function NavBar(props) {
   const { setCheckoutVisible } = useContext(GlobalContext);
@@ -61,6 +61,7 @@ function NavBar(props) {
     }
     router.push("/profile");
   };
+
   return (
     <div className={styles.contenedor}>
       <div className={styles.trapezoid}>

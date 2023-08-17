@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
 .generalContenedor {
-  height: 50vh;
+  height: calc(100% - 97px); /* Subtract the height of the navbar */
   width: 100%;
   background-color: #232323;
   display: flex;
