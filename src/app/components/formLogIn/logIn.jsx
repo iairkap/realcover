@@ -87,29 +87,31 @@ function LogIn({ toggleForm }) {
   const openModal = () => setIsModalOpen(true);
 
   return (
-    <div>
-      <div>
-        <div className={styles.inputContenedor}>
-          <span className={styles.formSubs}>Email</span>
-          <div className={styles.inputContainer}>
-            <input
-              type="email"
-              placeholder=""
-              value={email}
-              className={styles.input}
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => setEmailFocused(true)}
-              onBlur={() => setEmailFocused(false)}
-            />
-            <Image
-              src={emailFocused ? mailcontactverde : mailcontact}
-              alt="Email"
-              className={styles.inputImagePlaceholder}
-            />
-          </div>
+    <div className={styles.generalContainer}>
+      <h1 className={styles.tlte}>Bienvenido de vuelta a Real Cover!</h1>
+      <div className={styles.inputContenedor}>
+        <h2>Inicia sesion para proseguir con la compra</h2>
+        <span className={styles.formSubs}>Email</span>
+        <div className={styles.inputContainer}>
+          <input
+            type="email"
+            placeholder=""
+            value={email}
+            className={styles.input}
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setEmailFocused(true)}
+            onBlur={() => setEmailFocused(false)}
+          />
+          <Image
+            src={emailFocused ? mailcontactverde : mailcontact}
+            alt="Email"
+            className={styles.inputImagePlaceholder}
+          />
         </div>
-        <div className={styles.inputContenedor}>
-          <span className={styles.formSubs}>Contraseña</span>
+      </div>
+      <div className={styles.inputContenedor}>
+        <span className={styles.formSubs}>Contraseña</span>
+        <div className={styles.inputContainer}>
           <input
             type="password"
             placeholder=""
@@ -125,20 +127,20 @@ function LogIn({ toggleForm }) {
             className={styles.inputImagePlaceholder}
           />
         </div>
-        <div className={styles.botonera}>
-          <button onClick={handleSubmit} className={styles.boton}>
-            Iniciar Sesion
-          </button>
-          <button onClick={toggleForm} className={styles.boton2}>
-            Crear Cuenta Nueva
-          </button>
-          <div className={styles.logInContainerThird}>
-            {/*             <Image src={Google} alt="image" onClick={handleGoogleLogin} />
-             */}{" "}
-          </div>
-          <div>
-            <span onClick={openModal}>Olvidaste la contraseña?</span>
-          </div>
+      </div>
+      <div className={styles.botonera}>
+        <button onClick={handleSubmit} className={styles.boton}>
+          Iniciar Sesion
+        </button>
+        <button onClick={toggleForm} className={styles.boton2}>
+          Crear Cuenta Nueva
+        </button>
+        <div className={styles.logInContainerThird}>
+          {/*             <Image src={Google} alt="image" onClick={handleGoogleLogin} />
+           */}{" "}
+        </div>
+        <div>
+          <span onClick={openModal}>Olvidaste la contraseña?</span>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import FormSignIn from "../components/formSignIn/form";
 import LogIn from "../components/formLogIn/logIn";
 import { GlobalContext } from "../store/layout";
 import { useContext } from "react";
-
+import Image from "next/image";
 function SignIn(props) {
   const [showForm, setShowForm] = useState("LogIn"); // Inicialmente mostramos el formulario de inicio de sesión
   /*   const { setCheckoutVisible } = useContext(GlobalContext);
@@ -20,19 +20,30 @@ function SignIn(props) {
   return (
     <div className={styles.container}>
       <NavBar />
-      <Fondo />
-      <div className={styles.mainContent}>
-        {showForm === "LogIn" ? (
+      <div className={styles.generalContainer}>
+        <Image
+          src={"/DSC_8736.png"}
+          width={617}
+          height={925}
+          className={styles.picture}
+        />
+        <div className={styles.mainContent}>
+          {/*    {showForm === "LogIn" ? (
           <h1 className={styles.titulo}>INICIAR SESION</h1>
-        ) : (
-          <h1 className={styles.titulo}>CREAR USUARIO</h1>
-        )}
-        <div className={styles.signInFormContainer}>
-          {showForm === "LogIn" ? (
-            <LogIn className={styles.formLogIn} toggleForm={toggleForm} />
           ) : (
-            <FormSignIn className={styles.formSignIn} toggleForm={toggleForm} />
-          )}
+            <h1 className={styles.titulo}>CREAR USUARIO</h1>
+          )} */}
+
+          <div className={styles.signInFormContainer}>
+            {showForm === "LogIn" ? (
+              <LogIn className={styles.formLogIn} toggleForm={toggleForm} />
+            ) : (
+              <FormSignIn
+                className={styles.formSignIn}
+                toggleForm={toggleForm}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

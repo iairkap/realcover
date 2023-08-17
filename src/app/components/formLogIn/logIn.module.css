@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .formSubs {
-  color: #000;
+  color: #d9d9d9;
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-style: normal;
@@ -11,18 +11,20 @@
 .inputContenedor {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .input {
   background-color: #d9d9d9;
+  width: 20rem;
   border: solid 0.2px #000000;
   border-radius: 0.2rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 0.25rem;
-  padding-left: 2rem; /* Adjust this value based on the image width and desired spacing */
+  padding-left: 2.2rem; /* Adjust this value based on the image width and desired spacing */
 }
 
 .input:focus {
@@ -31,7 +33,6 @@
 }
 .boton2,
 .boton {
-  width: 100%;
   background-color: #a4ca92;
   border: none;
   border-radius: 0.2rem;
@@ -47,6 +48,7 @@
   line-height: 139%; /* 1.39rem */
   letter-spacing: -0.011rem;
   transition: 0.2s;
+  width: 15rem;
 }
 
 .boton2:hover {
@@ -86,4 +88,20 @@
   height: 1rem; /* Adjust this value according to your needs */
   width: auto;
   pointer-events: none; /* Makes the image non-clickable, allowing clicks to go through to the input */
+}
+
+.generalContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 2rem;
+  color: #d9d9d9;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+.tlte {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
 }
