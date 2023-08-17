@@ -1,11 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-.formSubs {
+
+.generalContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
   color: #d9d9d9;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.subtitles {
   font-family: "Roboto", sans-serif;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  font-weight: 200;
+  font-size: 1.5rem;
+}
+
+.tlte {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
 }
 
 .inputContenedor {
@@ -16,52 +31,40 @@
   margin-bottom: 1rem;
 }
 
+.formSubs {
+  color: #d9d9d9;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  font-size: 1rem;
+}
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 .input {
+  width: 100%;
+
   background-color: #d9d9d9;
-  width: 20rem;
   border: solid 0.2px #000000;
   border-radius: 0.2rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.25rem;
-  padding-left: 2.2rem; /* Adjust this value based on the image width and desired spacing */
+  padding: 0.5rem 0.25rem 0.5rem 2.2rem; /* Simplificado */
 }
 
 .input:focus {
   outline: solid 2px #a4ca92;
-  border: none; /* Cambia 'tuColorDeseado' por el color que prefieras, por ejemplo #FF5733. */
-}
-.boton2,
-.boton {
-  background-color: #a4ca92;
   border: none;
-  border-radius: 0.2rem;
-  padding: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  color: #56b947;
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 139%; /* 1.39rem */
-  letter-spacing: -0.011rem;
-  transition: 0.2s;
-  width: 15rem;
 }
 
-.boton2:hover {
-  background-color: #8eb37d;
-  color: #3e9031;
-}
-
-.boton {
-  background-color: #56b947;
-  color: white;
-}
-.boton:hover {
-  background-color: #459539;
+.inputImagePlaceholder {
+  position: absolute;
+  left: 10px;
+  height: 1rem;
+  width: auto;
+  pointer-events: none;
 }
 
 .botonera {
@@ -69,39 +72,44 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  align-items: center;
+  align-items: flex-end;
 }
 
-.inputContainer {
-  position: relative;
-}
-
-.inputContainer {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.inputImagePlaceholder {
-  position: absolute;
-  left: 10px; /* Adjust this value according to your needs */
-  height: 1rem; /* Adjust this value according to your needs */
-  width: auto;
-  pointer-events: none; /* Makes the image non-clickable, allowing clicks to go through to the input */
-}
-
-.generalContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 2rem;
-  color: #d9d9d9;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  margin-bottom: 2rem;
-}
-
-.tlte {
+.boton,
+.boton2 {
+  background-color: #a4ca92;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  color: #56b947;
+  text-align: center;
   font-family: "Roboto", sans-serif;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+  transition: 0.2s;
+  width: 15rem;
+  cursor: pointer;
+}
+
+.boton {
+  background-color: #56b947;
+  color: white;
+}
+
+.boton:hover {
+  background-color: #459539;
+  cursor: pointer;
+}
+
+.boton2:hover {
+  background-color: #8eb37d;
+  color: #3e9031;
+  cursor: pointer;
+}
+
+.olvidaste:hover {
+  color: #3e9031;
+  cursor: pointer;
 }
