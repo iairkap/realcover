@@ -9,7 +9,9 @@ import namecontact from "../../../../public/name-contact-form.svg";
 import mailcontact from "../../../../public/mail-contact-form.svg";
 import namecontactverde from "../../../../public/name-contact-form-verde.svg";
 import mailcontactverde from "../../../../public/mail-contact-form-verde.svg";
-import ForgotPasswordModal from "../ForgetPasswordModal/ForgetPasswordModal";
+
+//!TO DO cuando me redirecciona al login tengo que hacer un fetch a /user/login y con esa respuesta setear el estado global a traves de la respuesta
+
 function LogIn({ toggleForm }) {
   const { setIsAuthenticated } = useContext(GlobalContext);
 
@@ -18,6 +20,7 @@ function LogIn({ toggleForm }) {
   const router = useRouter();
   const [nombreFocused, setNombreFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
+  const [user, setUser] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +43,7 @@ function LogIn({ toggleForm }) {
       );
     }
   };
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true); // Esta función parece que necesita más contexto.
@@ -93,28 +97,24 @@ function LogIn({ toggleForm }) {
         <button onClick={toggleForm} className={styles.boton2}>
           Crear Cuenta Nueva
         </button>
-        <div className={styles.logInContainerThird}>
-          <button
-            className={styles.boton3}
-            onClick={async () => {
-              const res = await signIn("google", {
-                callbackUrl: "http://localhost:3000/store/fundas",
-              });
-              setIsAuthenticated(true);
-            }}
-          >
-            Iniciar Sesion con Google
-          </button>
+      </div>
+      <button
+        className={styles.button3}
+        onClick={async () => {
+          const res = await signIn("google", {
+            callbackUrl: "http://localhost:3000/store/fundas",
+          });
+          setIsAuthenticated(true);
+        }}
+      >
+        <div className={styles.buttonFlex}>
+          <Image src={"./googlelog.svg"} width={25} height={25} />
         </div>
-        <div>
-          <span className={styles.olvidaste} onClick={openModal}>
-            Olvidaste la contraseña?
-          </span>
-        </div>
-        <ForgotPasswordModal
-          isOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}
-        />
+      </button>
+      <div>
+        <span className={styles.olvidaste} onClick={openModal}>
+          Olvidaste la contraseña?
+        </span>
       </div>
     </div>
   );

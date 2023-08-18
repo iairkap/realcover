@@ -171,6 +171,17 @@ function FormSignIn({ toggleForm }) {
             {phoneError && <span>{phoneError}</span>}
           </div>
         </div>
+        <button
+          className={styles.boton3}
+          onClick={async () => {
+            const res = await signIn("google", {
+              callbackUrl: "http://localhost:3000/store/fundas",
+            });
+            setIsAuthenticated(true);
+          }}
+        >
+          Iniciar Sesion con Google
+        </button>
       </div>
       <br />
       <div className={styles.botonera}>

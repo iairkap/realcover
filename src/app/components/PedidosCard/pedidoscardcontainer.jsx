@@ -21,11 +21,9 @@ function PedidosContainer({ user }) {
       }
     };
 
-    // Intenta obtener el ID del usuario desde el prop user si está presente.
     if (user && user.id) {
       fetchOrders(user.id);
     } else {
-      // Si el ID no está en el prop user, búscalo en localStorage.
       const storedUser = localStorage.getItem("user");
       if (storedUser && storedUser !== "undefined") {
         const userId = JSON.parse(storedUser).id;

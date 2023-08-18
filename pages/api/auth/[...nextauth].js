@@ -1,7 +1,6 @@
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-
-//login con gmail y facebook
+import { postUserRegistration } from "../utils/postUserRegistration"; // Importa la función
 
 export default NextAuth({
   providers: [
@@ -14,4 +13,10 @@ export default NextAuth({
     //     clientSecret: process.env.FACEBOOK_SECRET,
     //   }),
   ],
+  events: {
+    async signIn(message) {
+      console.log("Event signIn triggered", message);
+      postUserRegistration(message);
+    },
+  },
 });

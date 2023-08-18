@@ -210,3 +210,11 @@
     font-size: 1.1rem;
   }
 }
+
+.button3 {
+  background-color: white;
+  border-radius: 50px;
+  padding: 1rem;
+  border: none;
+  width: 15%;
+}

@@ -34,12 +34,6 @@ function SignIn(props) {
           className={styles.picture}
         />
         <div className={styles.mainContent}>
-          {/*    {showForm === "LogIn" ? (
-          <h1 className={styles.titulo}>INICIAR SESION</h1>
-          ) : (
-            <h1 className={styles.titulo}>CREAR USUARIO</h1>
-          )} */}
-
           <div className={styles.signInFormContainer}>
             {showForm === "LogIn" ? (
               <LogIn className={styles.formLogIn} toggleForm={toggleForm} />

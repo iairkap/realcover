@@ -15,6 +15,8 @@ function Fundas() {
   const { covers, isLoading, fullColor, cubrevalijas, maletines, tablets } =
     useContext(GlobalContext);
 
+  const [userData, setUserData] = useState(null);
+
   useEffect(() => {
     //peticion para registrar correo de google en bdd
     const fetchData = async () => {
@@ -35,6 +37,27 @@ function Fundas() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/user/fafa");
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("User data:", data);
+        } else {
+          console.error("Error fetching user data:", data);
+        }
+      } catch (error) {
+        console.error("Error during the request:", error);
+      }
+      if (response.ok) {
+        setUserData(data);
+      }
+    };
+
+    fetchUserData();
+  }, []);
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user && user !== "undefined") {

@@ -10,18 +10,6 @@ async function handler(req, res, verifyMethod) {
         where: {
           email: verifyMethod,
         },
-        include: {
-          orders: {
-            include: {
-              discount: true,
-              orderDetails: {
-                include: {
-                  products: true,
-                },
-              },
-            },
-          },
-        },
       });
 
       if (!user) {
@@ -81,4 +69,4 @@ async function handler(req, res, verifyMethod) {
   }
 }
 
-export default handler;
+export default verifyMiddleware(handler);
