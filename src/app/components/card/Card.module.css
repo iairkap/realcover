@@ -2,9 +2,10 @@
 
 .cardContainer {
   display: flex;
+  padding: 0.625rem;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: -2rem;
 }
 
 .image {
@@ -19,85 +20,73 @@
 .details {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.optionContainer {
-  display: flex;
-  height: 100%;
-  flex-direction: row;
-  text-align-last: center;
-}
-
-.selector {
-  padding-left: 0.5rem;
-  width: 40%;
-  height: 120%;
-  background-color: #56b947;
-  color: #fff;
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 139%; /* 1.39rem */
-  letter-spacing: -0.011rem;
-  border-radius: 0.3rem;
-  border: none;
-}
-.input {
-  padding-left: 0.5rem;
-  width: 40%;
-  height: 120%;
-  border-radius: 0.3rem;
-  border: 1px solid #56b947;
-  border: none;
-}
-
-.pruebaContenedor {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  height: 1.75rem;
-}
-
-.botonera {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-  width: 90%;
-  align-self: center;
   gap: 0.5rem;
 }
 
-.addButton {
-  background-color: #56b947;
-  color: white;
-  color: #fff;
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 139%; /* 1.39rem */
-  letter-spacing: -0.011rem;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
-  border: none;
+.optionContainer,
+.pruebaContenedor {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  height: 3rem;
+  justify-content: space-between;
 }
 
-.button {
-  background-color: #535353;
-  color: #56b947;
+.selector {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 0.1575rem;
+  background: #70b756;
+  border: none;
   color: #fff;
-  text-align: center;
   font-family: "Roboto", sans-serif;
+  font-weight: 900;
   font-size: 1rem;
   font-style: normal;
-  font-weight: 900;
-  line-height: 139%; /* 1.39rem */
+  line-height: 139%;
   letter-spacing: -0.011rem;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
+  height: 100%;
+  padding-left: 0.5rem;
+}
+
+.selector:hover {
+  cursor: pointer;
+  background-color: #58a43c;
+}
+
+.input {
+  display: flex;
+  width: 50%;
+  border-radius: 0.1875rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: #d9d9d9;
+  height: 95%;
+  padding-left: 0.5rem;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid #70b756;
+}
+.botonera {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12rem;
+}
+
+.addButton,
+.button {
+  background-color: transparent;
   border: none;
+  color: #70b756; /* color original del SVG */
+}
+
+.addButton:hover,
+.button:hover {
+  cursor: pointer;
+  color: red; /* o cualquier otro color que quieras al hacer hover */
 }

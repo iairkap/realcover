@@ -4,6 +4,8 @@ import styles from "./Card.module.css";
 import { GlobalContext } from "../../store/layout";
 import imagenDefault from "../../../../public/fundas/loading.png";
 import NextImage from "next/image";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 function Card({
   id,
@@ -86,6 +88,8 @@ function Card({
 
   return (
     <div className={styles.cardContainer}>
+      <Tooltip />
+
       <div className={styles.imageContainer}>
         <NextImage
           src={imageSrc}
@@ -96,52 +100,65 @@ function Card({
             e.target.src = imagenDefault;
           }}
           className={styles.image}
-          width={350}
-          height={350}
+          width={290}
+          height={290}
         />
       </div>
       <div>
         <div className={styles.details}>
           {selectedSizes.map((selectedSize, idx) => (
             <div key={idx} className={styles.optionContainer}>
-              <div className={styles.pruebaContenedor}>
-                <select
-                  className={styles.selector}
-                  style={
-                    addedSizes.includes(idx) ? { borderColor: "green" } : {}
-                  }
-                  value={selectedSize.size}
-                  onChange={(event) => handleSizeChange(idx, event)}
-                >
-                  <option className={styles.option} value="">
-                    TAMAÑO
+              <select
+                className={styles.selector}
+                style={addedSizes.includes(idx) ? { borderColor: "green" } : {}}
+                value={selectedSize.size}
+                onChange={(event) => handleSizeChange(idx, event)}
+              >
+                <option className={styles.option} value="">
+                  TAMAÑO
+                </option>
+                {sizeNames.map((sizeName, sizeIdx) => (
+                  <option key={sizeIdx} value={sizeName}>
+                    {sizeName}
                   </option>
-                  {sizeNames.map((sizeName, sizeIdx) => (
-                    <option key={sizeIdx} value={sizeName}>
-                      {sizeName}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="number"
-                  min="1"
-                  value={selectedSize.quantity}
-                  onChange={(event) => handleQuantityChange(idx, event)}
-                  placeholder="Cantidad"
-                  className={styles.input}
-                />
-              </div>
+                ))}
+              </select>
+              <input
+                type="number"
+                min="1"
+                value={selectedSize.quantity}
+                onChange={(event) => handleQuantityChange(idx, event)}
+                placeholder="Cantidad"
+                className={styles.input}
+              />
             </div>
           ))}
           <div className={styles.botonera}>
-            <button onClick={addAnotherSize} className={styles.addButton}>
-              Agregar otro tamaño
+            <button
+              onClick={addAnotherSize}
+              className={styles.addButton}
+              data-tip="Agregar un nuevo tamaño"
+            >
+              <NextImage
+                src={"/agregarsize.svg"}
+                width={30}
+                height={30}
+                data-tooltip-id="agregar-size"
+                data-tooltip-content=" Agregar un nuevo tamaño"
+              />
             </button>
-            <button onClick={handleAddToCart} className={styles.button}>
-              Agregar al Carrito
+            <button
+              onClick={handleAddToCart}
+              className={styles.button}
+              data-tooltip-id="agregar-carrito"
+              data-tooltip-content=" Agregar al carrito"
+            >
+              <NextImage src={"/agregarcarrito.svg"} width={30} height={30} />
             </button>
           </div>
         </div>
+        <Tooltip id="agregar-size" place="right" />
+        <Tooltip id="agregar-carrito" place="left" />
       </div>
     </div>
   );
