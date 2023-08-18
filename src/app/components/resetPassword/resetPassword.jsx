@@ -5,14 +5,15 @@ function ResetPassword({ toggleForm }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== verifyPassword) {
+      setErrorMessage("Las contraseñas no coinciden.");
       return;
     }
-
     const res = await fetch("api/reset-password", {
       method: "POST",
       headers: {
@@ -65,6 +66,7 @@ function ResetPassword({ toggleForm }) {
           </button>
         </div>
       </div>
+      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 }

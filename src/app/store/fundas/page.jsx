@@ -12,10 +12,17 @@ import { SessionProvider } from "next-auth/react";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { getSession } from "next-auth/react";
 function Fundas() {
-  const { covers, isLoading, fullColor, cubrevalijas, maletines, tablets } =
-    useContext(GlobalContext);
-
-  const [userData, setUserData] = useState(null);
+  const {
+    covers,
+    isLoading,
+    fullColor,
+    cubrevalijas,
+    maletines,
+    tablets,
+    userData,
+    setUserData,
+    setIsAuthenticated,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     //peticion para registrar correo de google en bdd
@@ -37,35 +44,14 @@ function Fundas() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("/api/user/fafa");
-        const data = await response.json();
-
-        if (response.ok) {
-          console.log("User data:", data);
-        } else {
-          console.error("Error fetching user data:", data);
-        }
-      } catch (error) {
-        console.error("Error during the request:", error);
-      }
-      if (response.ok) {
-        setUserData(data);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user && user !== "undefined") {
-      console.log("Usuario desde localStorage:", JSON.parse(user));
-    } else {
-      console.log("No se encontró ningún usuario en localStorage");
-    }
-  }, []);
+  // useEffect(() => {
+  // const user = localStorage.getItem("user");
+  // if (user && user !== "undefined") {
+  // console.log("Usuario desde localStorage:", JSON.parse(user));
+  //} else {
+  // console.log("No se encontró ningún usuario en localStorage");
+  // }
+  //}, []);
 
   // rest of your code
 

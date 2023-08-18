@@ -14,21 +14,19 @@ import { GlobalContext } from "../../store/layout";
 import { getLayout } from "../../store/layout";
 import { useRouter, usePathname } from "next/navigation"; // Importa esto
 import { useState, useEffect } from "react";
+import { signOut } from "next-auth/react";
 
 function NavBar(props) {
-  const { setCheckoutVisible } = useContext(GlobalContext);
+  const {
+    setCheckoutVisible,
+    isUserAuthenticated,
+    userData,
+    setUserData,
+    setIsAuthenticated,
+  } = useContext(GlobalContext);
   const [showLogoutMenu, setShowLogoutMenu] = useState(false);
 
-  const initializeAuthStatus = () => {
-    if (typeof window !== "undefined") {
-      const user = JSON.parse(localStorage.getItem("user"));
-      return user ? true : false;
-    }
-    return false;
-  };
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    initializeAuthStatus()
-  ); // Hacerlo parte del estado del componente
+  const isAuthenticated = Boolean(userData); // Suponiendo que userData es null si el usuario no está autenticado
 
   const router = useRouter(); // Añade esto
   const pathName = usePathname();
@@ -48,12 +46,34 @@ function NavBar(props) {
       router.push("/logIn");
     }
   };
+  const handleLogout = async () => {
+    if (userData?.provider === "GOOGLE") {
+      // Cierre de sesión para usuarios de Google usando next-auth del lado del cliente
+      signOut({ callbackUrl: "/" }); // Redirige al inicio después de cerrar sesión
+    } else {
+      // Cierre de sesión para usuarios que no son de Google usando tu ruta personalizada
+      try {
+        const response = await fetch("/api/logout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // Asegúrate de enviar las cookies
+        });
 
-  const handleLogout = () => {
-    localStorage.removeItem("user"); // Eliminar el usuario del localStorage
-    setIsAuthenticated(false); // Actualizar el estado para reflejar que el usuario no está autenticado
+        const data = await response.json();
+
+        if (response.ok) {
+          setUserData(null);
+          setIsAuthenticated(false);
+        } else {
+          console.error("Error logging out:", data.message);
+        }
+      } catch (error) {
+        console.error("Error logging out:", error);
+      }
+    }
   };
-
   const handlePedidosClick = () => {
     if (!isAuthenticated) {
       router.push("/logIn");

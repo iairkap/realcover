@@ -15,7 +15,7 @@ async function handler(req, res, verifyMethod) {
       if (!user) {
         return res.status(400).json({ message: "Login failed" });
       }
-      return res.status(200).json({ message: "Login successful", user: user });
+      return res.status(200).json(user);
 
     case "PUT":
       const { name, lastName, phone, address, city, postalCode, password } =

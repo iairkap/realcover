@@ -13,10 +13,11 @@ function Cart() {
     setCart,
     currentOrderDetails,
     setCurrentOrderDetails,
+    userData,
+    setUserData,
   } = useContext(GlobalContext);
 
   const [infoModalVisible, setInfoModalVisible] = useState(false);
-  const [user, setUser] = useState(null);
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -37,12 +38,27 @@ function Cart() {
     }
   };
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser && storedUser !== "undefined") {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  /* useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/user/fafa");
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Esto es el cart:", data);
+          setIsUserAuthenticated(true); // Aquí seteamos el valor a true
+        } else {
+          console.error("Error fetching user data:", data);
+          setIsUserAuthenticated(false); // Aquí seteamos el valor a false
+        }
+      } catch (error) {
+        console.error("Error during the request:", error);
+        setIsUserAuthenticated(false); // Aquí seteamos el valor a false
+      }
+    };
+
+    fetchUserData();
+  }, []); */
 
   const handleModalClose = () => {
     setCheckoutVisible(false);
@@ -129,12 +145,12 @@ function Cart() {
 
   const handleOrderAttempUserInformation = async () => {
     if (
-      !user.address ||
-      !user.city ||
-      !user.localidad ||
-      !user.postalCode ||
-      !user.shopName ||
-      !user.cuit
+      !userData.address ||
+      !userData.city ||
+      !userData.localidad ||
+      !userData.postalCode ||
+      !userData.shopName ||
+      !userData.cuit
     ) {
       setInfoModalVisible(true);
       return;
@@ -181,12 +197,11 @@ function Cart() {
     console.log("Products:", products);
 
     const orderData = {
-      userId: JSON.parse(userId).id,
+      [userData.id]: JSON.parse(userData.id),
       total: calculateTotals(),
       status: "En proceso", // or whatever default status you want to use
       products,
     };
-
     // Añadiendo el console.log aquí para ver la data de la orden:
     console.log("Sending order data to /api/order:", orderData);
 
@@ -232,9 +247,9 @@ function Cart() {
       <div className={styles.modalBackground} onClick={handleModalClose} />
       <div className={styles.modalContent}>
         <button onClick={handleClearCart}>Borrar Carrito</button>
-        {user && (
+        {userData && (
           <h2>
-            Hola {user.name} {user.lastname}
+            Hola {userData.name} {userData.lastName}
           </h2>
         )}
         <h1 className={styles.titulo}>CARRITO DE COMPRA</h1>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./form.module.css";
+import Confirmacion from "../confirmationRegister/Confirmacion.jsx";
 
 function FormSignIn({ toggleForm }) {
   const [name, setName] = useState("");
@@ -19,6 +20,11 @@ function FormSignIn({ toggleForm }) {
 
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
+
+  const [isRegistered, setIsRegistered] = useState(false);
+  const handleSuccessfulRegistration = () => {
+    setIsRegistered(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,6 +94,11 @@ function FormSignIn({ toggleForm }) {
 
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
+      }
+
+      if (response.ok) {
+        // Esta es la línea movida
+        handleSuccessfulRegistration();
       }
     } catch (error) {
       alert(error.message);
@@ -171,27 +182,21 @@ function FormSignIn({ toggleForm }) {
             {phoneError && <span>{phoneError}</span>}
           </div>
         </div>
-        <button
-          className={styles.boton3}
-          onClick={async () => {
-            const res = await signIn("google", {
-              callbackUrl: "http://localhost:3000/store/fundas",
-            });
-            setIsAuthenticated(true);
-          }}
-        >
-          Iniciar Sesion con Google
-        </button>
       </div>
       <br />
       <div className={styles.botonera}>
-        <button className={styles.boton} type="">
+        <button className={styles.boton} type="submit">
           Crear
         </button>
         <span onClick={toggleForm} className={styles.toggle}>
           Ya tiene un usuario? ingrese aqui{" "}
         </span>
       </div>
+      <Confirmacion
+        isOpen={isRegistered}
+        closeModal={() => setIsRegistered(false)}
+        toggleForm={toggleForm}
+      />
     </form>
   );
 }

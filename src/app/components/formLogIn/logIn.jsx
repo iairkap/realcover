@@ -4,13 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation"; // Cambiado de "next/navigation" a "next/router"
 import { GlobalContext } from "./../../store/layout";
 import { signIn, getSession } from "next-auth/react";
-
+import ForgotPasswordModal from "./../ForgetPasswordModal/ForgetPasswordModal";
 import namecontact from "../../../../public/name-contact-form.svg";
 import mailcontact from "../../../../public/mail-contact-form.svg";
 import namecontactverde from "../../../../public/name-contact-form-verde.svg";
 import mailcontactverde from "../../../../public/mail-contact-form-verde.svg";
-
-//!TO DO cuando me redirecciona al login tengo que hacer un fetch a /user/login y con esa respuesta setear el estado global a traves de la respuesta
 
 function LogIn({ toggleForm }) {
   const { setIsAuthenticated } = useContext(GlobalContext);
@@ -46,8 +44,7 @@ function LogIn({ toggleForm }) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true); // Esta función parece que necesita más contexto.
-
+  const openModal = () => setIsModalOpen(true);
   return (
     <div className={styles.generalContainer}>
       <h1 className={styles.tlte}>Bienvenido!</h1>
@@ -89,33 +86,63 @@ function LogIn({ toggleForm }) {
             className={styles.inputImagePlaceholder}
           />
         </div>
-      </div>
-      <div className={styles.botonera}>
-        <button onClick={handleSubmit} className={styles.boton}>
-          Iniciar Sesion
-        </button>
-        <button onClick={toggleForm} className={styles.boton2}>
-          Crear Cuenta Nueva
-        </button>
-      </div>
-      <button
-        className={styles.button3}
-        onClick={async () => {
-          const res = await signIn("google", {
-            callbackUrl: "http://localhost:3000/store/fundas",
-          });
-          setIsAuthenticated(true);
-        }}
-      >
-        <div className={styles.buttonFlex}>
-          <Image src={"./googlelog.svg"} width={25} height={25} />
-        </div>
-      </button>
-      <div>
         <span className={styles.olvidaste} onClick={openModal}>
           Olvidaste la contraseña?
         </span>
       </div>
+      <div className={styles.botoneraGeneral}>
+        <div className={styles.botonera}>
+          <button onClick={handleSubmit} className={styles.boton}>
+            Iniciar Sesion
+          </button>
+          {/*   <button onClick={toggleForm} className={styles.boton2}>
+            Crear Cuenta Nueva
+          </button> */}
+          <br />
+          <div className={styles.orContainer}>
+            <div className={styles.line}></div>
+            <span className={styles.center}>O Ingresa con</span>
+            <div className={styles.line}></div>
+          </div>
+          <br />
+          <div className={styles.authcontainer}>
+            <button
+              className={styles.button3}
+              onClick={async () => {
+                const res = await signIn("google", {
+                  callbackUrl: "http://localhost:3000/store/fundas",
+                });
+                setIsAuthenticated(true);
+              }}
+            >
+              <Image src={"./googlelog.svg"} width={25} height={25} />
+              Google
+            </button>
+            <button
+              className={styles.button3}
+              onClick={async () => {
+                const res = await signIn("google", {
+                  callbackUrl: "http://localhost:3000/store/fundas",
+                });
+                setIsAuthenticated(true);
+              }}
+            >
+              <Image src={"./facebooklog.svg"} width={25} height={25} />
+              Facebook
+            </button>
+          </div>
+          <br />
+          <br />
+          <button onClick={toggleForm} className={styles.botonNuevo}>
+            Todavia no tienes ninguna cuenta? Haz click aqui{" "}
+          </button>
+        </div>
+      </div>
+      <div></div>
+      <ForgotPasswordModal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

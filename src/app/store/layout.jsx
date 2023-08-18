@@ -14,6 +14,7 @@ export default function Layout({ children }) {
   const [tablets, setTablets] = useState([]);
   const [currentOrderDetails, setCurrentOrderDetails] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   const loadCart = () => {
     if (typeof window !== "undefined") {
@@ -41,6 +42,25 @@ export default function Layout({ children }) {
     }
   };
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/user/fafa");
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Esto es el cart:", data);
+          setUserData(data);
+        } else {
+          console.error("Error fetching user data:", data);
+        }
+      } catch (error) {
+        console.error("Error during the request:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
   useEffect(() => {
     saveCart(cart);
   }, [cart]);
@@ -105,9 +125,8 @@ export default function Layout({ children }) {
 
         if (sizeIndex !== -1) {
           // If size already exists for the product, update its quantity
-          updatedCart[productIndex].selectedSizes[
-            sizeIndex
-          ].quantity = parseInt(selectedSize.quantity);
+          updatedCart[productIndex].selectedSizes[sizeIndex].quantity =
+            parseInt(selectedSize.quantity);
         } else {
           // If the product exists but not the size, add the new size to the product
           updatedCart[productIndex].selectedSizes.push(selectedSize);
@@ -154,6 +173,10 @@ export default function Layout({ children }) {
         setCart,
         currentOrderDetails,
         setCurrentOrderDetails,
+        isAuthenticated,
+        setIsAuthenticated,
+        userData,
+        setUserData,
         isAuthenticated,
         setIsAuthenticated,
       }}
