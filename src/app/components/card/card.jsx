@@ -140,7 +140,7 @@ function Card({
               data-tip="Agregar un nuevo tamaño"
             >
               <NextImage
-                src={"/agregarsize.svg"}
+                src={"/size.svg"}
                 width={30}
                 height={30}
                 data-tooltip-id="agregar-size"
