@@ -4,7 +4,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   background-color: #d9d9d9;
-  height: calc(100vh - 150px);
+  
   width: 90%;
 }
 

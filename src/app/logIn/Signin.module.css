@@ -4,8 +4,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   width: 100vw;
+  height: 100vh ;
 }
 
 .mainContent {
@@ -23,6 +23,8 @@
   object-fit: contain; /* Hace que la imagen mantenga su aspecto y se ajuste al contenedor */
   height: auto;
   flex-direction: column;
+   position: relative;
+   top: 50px;
 }
 
 .titulo {
@@ -47,12 +49,21 @@
   }
 }
 
+  @media screen and (max-width: 1240px){
+    .signInFormContainer{
+      position: relative;
+      top: 50px;
+    }
+  }
+
+
 .generalContainer {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
   background-color: #d9d9d9;
   width: 100%;
+  padding-bottom: 100px;
 }
 
 .picture {
@@ -159,3 +170,20 @@
     font-size: 1.1rem;
   }
 }
+
+
+@media screen and (max-height: 758px) {
+  .generalContainer {
+    margin-top: 0px;
+    position: relative;
+top: 14px;
+    padding-bottom: 0px;
+  }
+  .mainContent{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+} 
