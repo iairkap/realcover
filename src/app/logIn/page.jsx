@@ -27,12 +27,15 @@ function SignIn(props) {
     <div className={styles.container}>
       <NavBar />
       <div className={styles.generalContainer}>
-        <Image
-          src={"/DSC_8736.png"}
-          width={617}
-          height={925}
-          className={styles.picture}
-        />
+        <div className={styles.aspectRatio}>
+          <Image
+            src={"/DSC_8736.png"}
+            width={617}
+            height={925}
+            className={styles.picture}
+          />
+        </div>
+
         <div className={styles.mainContent}>
           <div className={styles.signInFormContainer}>
             {showForm === "LogIn" ? (
