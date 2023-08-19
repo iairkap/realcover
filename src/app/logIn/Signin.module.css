@@ -250,3 +250,15 @@
     height: 690px;
   }
 }
+
+@media only screen and (min-width: 3072px) and (max-width: 3240px) and (min-height: 1920px) and (max-height: 2100px) {
+  .generalContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 70px;
+  }
+  .mainContent {
+    margin-top: 2rem;
+  }
+}
