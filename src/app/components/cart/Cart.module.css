@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 .modal {
   position: fixed;
-  top: 0;
   right: 0;
   width: 100%;
   height: 100%;
@@ -24,194 +23,271 @@
 .modalContent {
   background-color: white;
   position: fixed;
-  top: 0;
+  top: 44px;
   right: 0;
   padding: 2rem;
-  width: 80%;
-  max-width: 30%; /* Ajusta este valor a tu gusto */
-  max-height: 90vh; /* Un poco menos que 100vh para evitar problemas con la barra de desplazamiento */
+  width: 30%;
   z-index: 20;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-.modalContentB {
-  background-color: #232323;
-  position: fixed;
-  top: 25%;
-  left: 36%;
-  padding: 2rem;
-  z-index: 100000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: center;
-  margin-left: 5rem; /* This will center it vertically in the parent .modal class */
-  margin-right: 5rem; /* This will center it vertically in the parent .modal class */
+  height: calc(100vh - 44px); /* Resta el alto de la barra de navegación */
 }
 
-@media screen and (max-width: 900px) {
-  .modalContent {
-    width: 95%; /* Usa un ancho mayor en pantallas pequeñas */
-    max-width: none; /* Elimina el límite de ancho máximo en pantallas pequeñas */
-  }
+.button {
+  background-color: #a4ca92;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  color: white;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #459539;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #8eb37d;
+  color: white;
+  cursor: pointer;
+}
+
+.name {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .titulo {
-  color: #000;
   font-family: "Roboto", sans-serif;
-  font-size: 1.25rem;
-  font-style: normal;
   font-weight: 900;
-  line-height: 139%;
-  letter-spacing: -0.01375rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.line {
+  height: 0.1rem;
+  background-color: #00000094;
+  width: 100%;
 }
 
-.line {
-  background-color: black;
-  width: 100%; /* Haz que la línea ocupe todo el ancho disponible */
-  height: 0.0625rem;
+.line2 {
+  height: 0.03rem;
+  background-color: #10e02f94;
+  width: 100%;
 }
+
 .subtitulos {
-  color: rgba(0, 0, 0, 0.56);
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9375rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 139%;
-  letter-spacing: -0.01031rem;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
 
-/* .contenedorCard {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-} */
-.contenedorCard {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Añadido */
-  gap: 0.5rem;
-  width: 100%;
-  min-width: 450px;
-}
-
-.contenedorImagen {
-  display: flex;
-  align-items: center; /* Centra la imagen verticalmente */
-}
 .subs {
-  color: #707070;
   font-family: "Roboto", sans-serif;
+  font-weight: 900;
   font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 139%;
-  letter-spacing: -0.00825rem;
-  margin: 0px;
+  margin-bottom: 1rem;
 }
 
-/* .textoContenedor {
+.singleProductContaine {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.6875rem;
-} */
-
-.textoContenedor {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center; /* Centra el contenido verticalmente */
-  flex: 1; /* Ocupa todo el espacio disponible a la derecha de la imagen */
-}
-.textAlign {
-  display: flex;
-  gap: 9px;
-  margin-top: 0px;
-}
-
-.changeButton {
-  background-color: white;
-  border: none;
-  margin: 0px;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .changeContainer {
   display: flex;
-  gap: 0.2rem;
-  margin: 0px;
+  flex-direction: row;
 }
 
-.abajo {
+.alo {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0; /* Asegúrate de que no haya relleno que pueda afectar al ancho */
 }
 
-.subtotal {
-  align-items: flex-end;
-}
-
-.tituloModelo {
-  color: #fff;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.625rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 139%; /* 2.25875rem */
-  letter-spacing: -0.01788rem;
-  align-self: center;
-}
-
-.textContainerModal {
-  display: flex;
-  flex-direction: column;
-}
-
-.inputModal {
+.palurdo {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 10px; /* Añadir un margen para separar cada tamaño */
+}
+.containerGen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: black;
+  width: 50%;
+}
+
+.sub {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.price {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+.singleProductContaine {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.changeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
 }
 
-.inputsContainer {
+.alo {
+  display: flex;
+  flex-direction: column; /* Cambiado a column para que los items se muestren verticalmente */
+  align-items: flex-start; /* Alineamos a la izquierda */
+  width: 100%;
+}
+
+.changeButton {
+  background: none;
+  border: none;
+  color: #70b756;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+.palurdo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.containerGen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.ab {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 1rem;
+  width: 100%;
 }
 
-.modalText {
-  flex-shrink: 0;
-  color: #fff;
+.contenedorImagen {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  align-items: center;
+}
+
+.nombre {
   font-family: "Roboto", sans-serif;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: normal;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: black;
 }
 
-.botonConfirmacion {
-  height: 2.3125rem;
-  flex-shrink: 0;
-  color: #fff;
+.abajo {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.generalAbajo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.button2 {
+  background-color: #56b947;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
-  font-style: normal;
   font-weight: 900;
-  line-height: 139%; /* 1.39rem */
+  line-height: 139%;
   letter-spacing: -0.011rem;
-  background-color: #56b947;
-  transition: background-color 0.3s ease; /* Transición suave al cambiar el color de fondo */
+  transition: 0.2s;
+  cursor: pointer;
 }
 
-.botonConfirmacion:hover {
-  background-color: #45a037; /* Cambio de color al hacer hover */
+.button2:hover {
+  background-color: #459539;
+  cursor: pointer;
+}
+
+.total {
+  color: green;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+}
+
+.codigo {
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: black;
+  transition: 0.1s;
+  align-self: flex-end;
+}
+
+.codigo:hover {
+  color: #70b756;
+}
+
+.discount {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+}
+
+.numberdisc {
+  color: rgb(118, 11, 11);
 }

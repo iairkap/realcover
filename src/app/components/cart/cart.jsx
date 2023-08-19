@@ -4,6 +4,7 @@ import styles from "./Cart.module.css";
 import { GlobalContext } from "../../store/layout";
 import Image from "next/image";
 import axios from "axios";
+import ModalApply from "../applyCoupon/Coupon";
 
 function Cart() {
   const {
@@ -21,6 +22,7 @@ function Cart() {
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleCouponApply = async () => {
     try {
@@ -38,27 +40,9 @@ function Cart() {
     }
   };
 
-  /* useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("/api/user/fafa");
-        const data = await response.json();
-
-        if (response.ok) {
-          console.log("Esto es el cart:", data);
-          setIsUserAuthenticated(true); // Aquí seteamos el valor a true
-        } else {
-          console.error("Error fetching user data:", data);
-          setIsUserAuthenticated(false); // Aquí seteamos el valor a false
-        }
-      } catch (error) {
-        console.error("Error during the request:", error);
-        setIsUserAuthenticated(false); // Aquí seteamos el valor a false
-      }
-    };
-
-    fetchUserData();
-  }, []); */
+  const handleModalOpen = () => {
+    setIsOpen(true);
+  };
 
   const handleModalClose = () => {
     setCheckoutVisible(false);
@@ -95,15 +79,9 @@ function Cart() {
       updatedCart[itemIndex].selectedSizes[sizeIndex].quantity
     );
 
-    // Asegurarse de que ambos valores sean números antes de sumarlos
     updatedCart[itemIndex].selectedSizes[sizeIndex].quantity =
       Number(updatedCart[itemIndex].selectedSizes[sizeIndex].quantity) +
       Number(quantityChange);
-
-    console.log(
-      "After change:",
-      updatedCart[itemIndex].selectedSizes[sizeIndex].quantity
-    );
 
     if (updatedCart[itemIndex].selectedSizes[sizeIndex].quantity <= 0) {
       updatedCart[itemIndex].selectedSizes.splice(sizeIndex, 1);
@@ -176,13 +154,6 @@ function Cart() {
     dispatchOrder();
   };
   const dispatchOrder = async () => {
-    const userId = localStorage.getItem("user");
-    if (!userId) {
-      console.error("UserId not found in localStorage");
-      return;
-    }
-    console.log("UserId:", userId);
-
     const products = cart
       .map((item) => {
         return item.selectedSizes.map((sizeItem) => ({
@@ -197,12 +168,11 @@ function Cart() {
     console.log("Products:", products);
 
     const orderData = {
-      [userData.id]: JSON.parse(userData.id),
+      userId: JSON.parse(userData.id),
       total: calculateTotals(),
-      status: "En proceso", // or whatever default status you want to use
+      status: "En proceso",
       products,
     };
-    // Añadiendo el console.log aquí para ver la data de la orden:
     console.log("Sending order data to /api/order:", orderData);
 
     try {
@@ -212,7 +182,7 @@ function Cart() {
         setOrderSuccess(true); // Mostrar mensaje de éxito
         const emailData = {
           cartData: cart,
-          email: user.email,
+          email: userData.email,
           orderId: response.data.order.id, // Ensure you are accessing the ID correctly based on your response structure
         };
 
@@ -234,10 +204,43 @@ function Cart() {
       console.error("An error occurred while dispatching the order:", error);
     }
   };
-
   const itemsToDisplay = currentOrderDetails.length
     ? currentOrderDetails
     : cart;
+  console.log(itemsToDisplay);
+  const sizeMapping = {
+    Size7: '7"',
+    Size8: '8"',
+    Size9: '9"',
+    Size10: '10"',
+    Size12: '12"',
+    Size14: '14"',
+    Size14_1: '14.1"',
+    Size15_6: '15.6"',
+    Size17: '17"',
+    S: "S",
+    M: "M",
+    L: "L",
+  };
+  const ProductType = {
+    NEOPRENE_COVER: "NEOPRENE_COVER",
+    MALETINES: "MALETINES",
+    MALETINES_FULL_COLOR: "MALETINES_FULL_COLOR",
+    TABLET_COVER: "TABLET_COVER",
+    CUBRE_VALIJAS: "CUBRE_VALIJAS",
+    PORTAFOLIOS: "PORTAFOLIOS",
+    CON_BOLSILLO: "CON_BOLSILLO",
+  };
+
+  const ProductDisplayName = {
+    [ProductType.NEOPRENE_COVER]: "Funda de neoprene",
+    [ProductType.MALETINES]: "Maletin",
+    [ProductType.MALETINES_FULL_COLOR]: "Full Color",
+    [ProductType.TABLET_COVER]: "Fundas Rigidas",
+    [ProductType.CUBRE_VALIJAS]: "Cubre Valijas",
+    [ProductType.PORTAFOLIOS]: "Portafolios",
+    [ProductType.CON_BOLSILLO]: "Con Bolsillo",
+  };
 
   if (orderSuccess) {
     return <div className={styles.modal}>Orden realizada con éxito!</div>;
@@ -246,30 +249,40 @@ function Cart() {
     <div className={styles.modal}>
       <div className={styles.modalBackground} onClick={handleModalClose} />
       <div className={styles.modalContent}>
-        <button onClick={handleClearCart}>Borrar Carrito</button>
-        {userData && (
-          <h2>
-            Hola {userData.name} {userData.lastName}
-          </h2>
-        )}
+        <div className={styles.nameContainer}>
+          {userData && (
+            <h2 className={styles.name}>
+              Hola {userData.name} {userData.lastName}
+            </h2>
+          )}
+          <button onClick={handleClearCart} className={styles.button}>
+            Borrar Carrito
+          </button>
+        </div>
         <h1 className={styles.titulo}>CARRITO DE COMPRA</h1>
         <div className={styles.line}></div>
         <div className={styles.subtitulos}>
-          <h2>Producto</h2>
-          <h2>Subtotal</h2>
+          <h2 className={styles.subs}>Producto</h2>
+          <h2 className={styles.subs}>Subtotal</h2>
         </div>
         <div className={styles.line}></div>
+
         {Object.values(itemsToDisplay).map((item, index) => (
-          <div key={index}>
+          <div key={index} className={styles.ab}>
             <div className={styles.contenedorImagen}>
               <Image src={item.picture} width={100} height={100} alt={"fa"} />
+              <h2 className={styles.nombre}>
+                {ProductDisplayName[item.productType] || item.productType}
+              </h2>
             </div>
-            <p className={styles.subs}>{item.name}</p>
+
             {item.selectedSizes.map((sizeItem, sizeIndex) => (
-              <div key={sizeIndex} className={styles.contenedorCard}>
-                <div className={styles.textAlign}>
-                  <p className={styles.subs}>{sizeItem.size}</p>
-                  <p className={styles.subs}>{item.price}$</p>
+              <div key={sizeIndex} className={styles.palurdo}>
+                <div className={styles.containerGen}>
+                  <p className={styles.sub}>
+                    {sizeMapping[sizeItem.size] || sizeItem.size}
+                  </p>
+                  <p className={styles.sub}>{item.price}$</p>
                   <div className={styles.changeContainer}>
                     <button
                       className={styles.changeButton}
@@ -290,29 +303,51 @@ function Cart() {
                     </button>
                   </div>
                 </div>
-                <p className={styles.subtotal}>
-                  {item.price * sizeItem.quantity}$
-                </p>
+                <div className={styles.price}>
+                  <p className={styles.subtotal}>
+                    {item.price * sizeItem.quantity}$
+                  </p>
+                </div>
               </div>
             ))}
+            <div className={styles.line2}></div>
           </div>
         ))}
+
         <br />
         <br />
-        <div className={styles.abajo}>
-          <button onClick={dispatchOrder}>Ordenar</button>
-          <p>Total original: {calculateTotals()}$</p>
-          <p>Descuento: {discount}$</p>
-          <p>Total después del descuento: {totalAfterDiscount}$</p>{" "}
+        <div className={styles.generalAbajo}>
+          <div className={styles.abajo}>
+            <button onClick={dispatchOrder} className={styles.button2}>
+              Ordenar
+            </button>
+            <p className={styles.total}> {calculateTotals()}$</p>
+          </div>
+
+          {discount > 0 && (
+            <>
+              <div className={styles.discount}>
+                <p>Descuento:</p>
+                <p className={styles.numberdisc}>-{discount}$</p>
+              </div>
+              <div className={styles.discount}>
+                <p>Total después del descuento:</p>
+                <p> {totalAfterDiscount}$</p>
+              </div>
+              <br />
+            </>
+          )}
         </div>
-        <div className={styles.couponContainer}>
-          <input
-            value={couponCode}
-            onChange={(e) => setCouponCode(e.target.value)}
-            placeholder="Ingresa tu cupón aquí"
-          />
-          <button onClick={handleCouponApply}>Aplicar Cupón</button>
-        </div>
+        <button onClick={handleModalOpen} className={styles.codigo}>
+          + CODIGO PROMOCION
+        </button>
+        <ModalApply
+          isOpen={isOpen}
+          closeModal={() => setIsOpen(false)}
+          couponCode={couponCode}
+          setCouponCode={setCouponCode}
+          handleCouponApply={handleCouponApply}
+        />
       </div>
     </div>
   );

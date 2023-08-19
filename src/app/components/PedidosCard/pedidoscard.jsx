@@ -221,6 +221,8 @@ function PedidosCard({
             alt={orderDetails[0].products.name}
             className={styles.productImage}
             style={{ height: isCubreValijas ? "130px" : "150px" }}
+            width={isCubreValijas ? 130 : 150}
+            height={isCubreValijas ? 130 : 150}
           />
         </div>
         {/* Status y Detalle General */}

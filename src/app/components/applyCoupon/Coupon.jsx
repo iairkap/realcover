@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import styles from "./ForgetPasswordModal.module.css";
 
-function Confirmacion({ isOpen, closeModal, toggleForm }) {
-  const [email, setEmail] = useState("");
-
+function ModalApply({
+  isOpen,
+  closeModal,
+  couponCode,
+  setCouponCode,
+  handleCouponApply,
+}) {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.70)",
@@ -40,12 +44,15 @@ function Confirmacion({ isOpen, closeModal, toggleForm }) {
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
             placeholder="Ingresa tu cupón aquí"
+            className={styles.input}
           />
-          <button onClick={handleCouponApply}>Aplicar Cupón</button>
+          <button onClick={handleCouponApply} className={styles.boton}>
+            Aplicar Cupón
+          </button>
         </div>
       </Modal>
     </div>
   );
 }
 
-export default Confirmacion;
+export default ModalApply;
