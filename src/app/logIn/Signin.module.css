@@ -207,10 +207,36 @@
 
 .picture {
   object-fit: contain;
+  width: 100%; /* Hacer que la imagen ocupe todo el ancho del contenedor */
+  height: 100%; /* Hacer que la imagen ocupe toda la altura del contenedor */
+}
+
+/* Estilos específicos para MacBook Pro 13" */
+@media only screen and (min-width: 1280px) and (max-width: 1440px) {
+  .aspect-ratio {
+    /* Ajusta el tamaño del contenedor de la imagen según lo necesites */
+    max-width: 70%;
+    margin: 0 auto; /* Centrar el contenedor si es más pequeño que su contenedor padre */
+  }
 }
 
 /* Estilos específicos para tabletas y dispositivos móviles */
 @media only screen and (max-width: 768px) {
+  .aspect-ratio {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 66.67%; /* Proporción de aspecto 2:3 */
+  }
+
+  .aspect-ratio img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   .picture {
     display: none; /* Oculta la imagen en tablets y dispositivos móviles */
   }
@@ -219,18 +245,8 @@
   }
 }
 
-.aspect-ratio {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%; /* Proporción de aspecto 16:9; ajusta según necesites */
-}
-
-.aspect-ratio img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+@media screen and (max-height: 758px) {
+  .picture {
+    height: 690px;
+  }
 }

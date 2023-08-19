@@ -30,8 +30,8 @@ function SignIn(props) {
         <div className={styles.aspectRatio}>
           <Image
             src={"/DSC_8736.png"}
-            width={617}
-            height={925}
+            width={505}
+            height={605}
             className={styles.picture}
           />
         </div>
