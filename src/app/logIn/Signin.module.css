@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 100vh ;
+  height: 100vh;
 }
 
 .mainContent {
@@ -20,11 +20,11 @@
   background-color: #242424;
   border-radius: 0.5rem;
   display: flex;
-  object-fit: contain; /* Hace que la imagen mantenga su aspecto y se ajuste al contenedor */
+  object-fit: contain; /
   height: auto;
   flex-direction: column;
-   position: relative;
-   top: 50px;
+  position: relative;
+  top: 50px;
 }
 
 .titulo {
@@ -37,7 +37,6 @@
   letter-spacing: -0.02475rem;
 }
 
-/* Media Queries */
 @media screen and (max-width: 600px) {
   .signInFormContainer {
     width: 90%;
@@ -49,13 +48,12 @@
   }
 }
 
-  @media screen and (max-width: 1240px){
-    .signInFormContainer{
-      position: relative;
-      top: 50px;
-    }
+@media screen and (max-width: 1240px) {
+  .signInFormContainer {
+    position: relative;
+    top: 50px;
   }
-
+}
 
 .generalContainer {
   display: flex;
@@ -69,12 +67,12 @@
 .picture {
   flex: 0;
   padding-top: 1rem;
-  max-height: calc(100vh - 44px);
+
   width: auto;
-  object-fit: contain; /* Hace que la imagen mantenga su aspecto y se ajuste al contenedor */
+  object-fit: contain; 
 }
 .generalContainer {
-  margin-top: 44px; /* Esto evitará que el navbar cubra tu imagen */
+  margin-top: 44px; /
 }
 
 @media screen and (max-width: 768px) {
@@ -114,7 +112,6 @@
   }
 }
 
-/* Para pantallas de tablets */
 @media screen and (max-width: 991px) {
   .signInFormContainer {
     width: 80%;
@@ -143,7 +140,6 @@
   }
 }
 
-/* Para pantallas de móviles */
 @media screen and (max-width: 767px) {
   .signInFormContainer {
     width: 95%;
@@ -171,19 +167,41 @@
   }
 }
 
-
 @media screen and (max-height: 758px) {
   .generalContainer {
     margin-top: 0px;
     position: relative;
-top: 14px;
+    top: 14px;
     padding-bottom: 0px;
   }
-  .mainContent{
+  .mainContent {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
   }
-} 
+}
+ */
+
+.container {
+  background-color: rgb(208, 208, 208);
+  height: 100vh;
+}
+
+.generalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-top: 50px;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #232323;
+  height: fit-content;
+  border-radius: 0.5rem;
+}
