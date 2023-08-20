@@ -12,7 +12,7 @@ const vendidos = [
   {
     id: 6,
     src: portfolioImages.portfolio1,
-    title: "Portafolio",
+    title: "PORTAFOLIO",
     hover: [
       portfolioImages.portfolio1,
       portfolioImages.portfolio3,
@@ -38,7 +38,7 @@ const vendidos = [
   {
     id: 7,
     src: fullcolorImages.full1,
-    title: "Fundas Full Color",
+    title: "FULL COLOR",
     hover: [
       fullcolorImages.full1,
       fullcolorImages.full2,
@@ -68,7 +68,7 @@ const vendidos = [
   {
     id: 1,
     src: valijaImages.valija1,
-    title: "Maletines",
+    title: "MALETINES",
     hover: [
       valijaImages.valija1,
       valijaImages.valija2,
@@ -117,7 +117,7 @@ const vendidos = [
       cubrevalijasImages.cubrevalijas12,
     ],
 
-    title: "Cubrevalija",
+    title: "CUBREVALIJA",
     descriptionModal: `Descubre nuestros cubrevalijas, disponibles para toda Argentina.<br>
     Realizadas con tela de Lycra de primera calidad, estas cubiertas no solo protegen tus valijas de golpes y rayones, sino que también te permiten identificarlas rápidamente en cualquier situación.<br>
     Se colocan como una camiseta que se ajusta perfectamente al formato de la valija, ofreciendo una protección integral.<br>
@@ -136,7 +136,7 @@ const vendidos = [
   {
     id: 5,
     src: bolsilloImages.bolsillo1,
-    title: "Fundas con Bolsillo",
+    title: "FUNDAS CON BOLSILLO",
     hover: [
       bolsilloImages.bolsillo1,
       bolsilloImages.bolsillo2,
@@ -177,7 +177,7 @@ const vendidos = [
       tableImages.table16,
       tableImages.table17,
     ],
-    title: "Fundas Rigidas",
+    title: "FUNDAS RIGIDAS",
     imagenesModal: [
       tableImages.table18,
       tableImages.table19,
@@ -204,7 +204,7 @@ const vendidos = [
       fundasImages.funda9,
       fundasImages.funda10,
     ],
-    title: "PortaNotebooks",
+    title: "PORTANOTEBOOKS",
     descriptionModal: `Descubre nuestras fundas para notebook, disponibles para toda Argentina. Fabricadas con neoprene auténtico de 3 mm de espesor, superan la calidad de las fundas de neoprene sintético o goma espuma comunes.
    <br> <br> Estampadas en ambas caras para un estilo inigualable Destacan por su resistencia y durabilidad, nuestras fundas son además completamente lavables. 
    <br><br>Protege tu notebook con estilo con nuestras fundas de neopreno, con envíos a todo Argentina.`,
@@ -220,7 +220,7 @@ const vendidos = [
   {
     id: 8,
     src: personalizadasImages.p1,
-    title: "Personalizadas",
+    title: "PERSONALIZADAS",
     hover: [
       personalizadasImages.p1,
       personalizadasImages.p2,

@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+.generalContainer {
+  background-image: url("/backgroundprueba.png");
+
+  height: 100vh;
+  width: 100vw;
+  margin-top: none;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  align-self: stretch;
+  color: #fff;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 3.125rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.containerG {
+  display: flex;
+  flex-direction: column;
+}
+
+.motivosContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4.62rem;
+}
+
+.motivoIndividual {
+  display: flex;
+  padding: 1.6875rem 2.875rem;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0.9375rem;
+  background: #395c34;
+}
+
+.titleDescription {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 1.7375rem */
+  letter-spacing: -0.01375rem;
+}
+
+.description {
+  width: 15rem;
+  height: 10.125rem;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}

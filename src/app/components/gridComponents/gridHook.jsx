@@ -25,6 +25,7 @@ function GridItem({
 
   const isDark =
     Math.floor(index / 4) % 2 === 0 ? index % 2 === 0 : index % 2 === 1;
+  console.log(item);
 
   return (
     <div
@@ -36,14 +37,16 @@ function GridItem({
     >
       <div className={styles.container}>
         <motion.div animate={controls}>
-          <Image
-            src={item.hover ? item.hover[hoverImgIndices[index]] : item.src}
-            alt={item.title}
-            className={styles.imagen}
-            width={300}
-            height={300}
-          />
-          <h1 className={styles.title}>{item.title}</h1>
+          <div className={styles.containerd}>
+            <Image
+              src={item.hover ? item.hover[hoverImgIndices[index]] : item.src}
+              alt={item.title}
+              className={styles.imagen}
+              width={300}
+              height={300}
+            />
+            <button className={styles.title}>{item.title}</button>
+          </div>
         </motion.div>{" "}
       </div>
     </div>

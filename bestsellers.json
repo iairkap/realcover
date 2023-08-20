@@ -1,0 +1,109 @@
+{
+  "query_data": {
+    "highlight_type": "BEST_SELLER",
+    "criteria": "CATEGORY",
+    "id": "MLA17957"
+  },
+  "content": [
+    {
+      "id": "MLA1114140733",
+      "position": 1,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA749658795",
+      "position": 2,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA747092062",
+      "position": 3,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA908384528",
+      "position": 4,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1112600779",
+      "position": 5,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA827007750",
+      "position": 6,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA924028845",
+      "position": 7,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA920126458",
+      "position": 8,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1131090276",
+      "position": 9,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1173072240",
+      "position": 10,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1174043923",
+      "position": 11,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA884583116",
+      "position": 12,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1131152908",
+      "position": 13,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1122506164",
+      "position": 14,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1360763117",
+      "position": 15,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA915330811",
+      "position": 16,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1181152200",
+      "position": 17,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA859215182",
+      "position": 18,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1166991804",
+      "position": 19,
+      "type": "ITEM"
+    },
+    {
+      "id": "MLA1130120678",
+      "position": 20,
+      "type": "ITEM"
+    }
+  ]
+}

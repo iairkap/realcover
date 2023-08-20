@@ -4,7 +4,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   background-color: #d9d9d9;
-  
+
   width: 90%;
 }
 
@@ -46,18 +46,34 @@
   width: 100%;
 }
 
+.containerd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .title {
   color: #fff;
   font-family: "Roboto", sans-serif;
-  font-size: 1.625rem;
-  font-weight: 900;
+  font-size: 1rem;
+  font-weight: 600;
   text-align: center;
   margin-top: 1rem;
   border-radius: 0.1875rem;
-  padding-top: 0.5rem;
-  padding-top: 0.5rem;
   background: #56b947;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  cursor: pointer;
+  transition: transform 2s ease-in-out;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 12rem;
+}
+
+.title:hover {
+  background-color: #3d8d30;
 }
 .titulo {
   color: #232323;
