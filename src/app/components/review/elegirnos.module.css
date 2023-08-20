@@ -26,6 +26,10 @@
 .containerG {
   display: flex;
   flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .motivosContainer {
@@ -62,4 +66,18 @@
   font-style: normal;
   font-weight: 900;
   line-height: normal;
+}
+
+.marcasContainer {
+  display: flex;
+  justify-content: center;
+  width: 55%;
+}
+
+.motivosContainer,
+.marcasContainer {
+  max-width: 1143.83px; /* El valor máximo que mencionaste */
+  width: 100%; /* Ocupará el 100% del contenedor padre, pero no excederá el valor max-width */
+  margin: 0 auto; /* Esto centrará el contenedor si su ancho es menor que el ancho de la pantalla */
+  /* ...otros estilos... */
 }

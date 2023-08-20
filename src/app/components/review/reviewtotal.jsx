@@ -1,10 +1,12 @@
+"use client";
 import cubrevalijas from "../../../../cubrevalijas.json";
 import fullcolor from "../../../../fullcolorrev.json";
 import fundas from "../../../../fundaestampadarev.json";
 import maletines from "../../../../maletin.json";
 import portafolios from "../../../../portafolio.json";
+import MLA747092062 from "../../../../public/r";
 
-const ReviewTotal = () => {
+export const getReviewTotal = () => {
   const dataSources = [cubrevalijas, fullcolor, fundas, maletines, portafolios];
 
   let totalKvs = 0;
@@ -40,5 +42,3 @@ const ReviewTotal = () => {
     excellentReviews,
   };
 };
-
-export default ReviewTotal;

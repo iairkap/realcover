@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  const apiKey = "AIzaSyCmKpjAQd0_hwiHHwr39aFuAuPiS4_Cz4c";
+  const apiKey = "AIzaSyCcb74pgijfKaHBxDNqOBGfI_76Ft3722Q";
   const { address, placeId } = req.query;
 
   if (address) {
