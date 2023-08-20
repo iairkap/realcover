@@ -43,7 +43,12 @@ export default async function handler(req, res) {
       );
 
       const responseData = response.data.result.address_components;
-      //mappear solo lo siguiente route, streetnumber, locality, administrative_area_level_1, postal_code, si no hay el tipo, muestra el nombre del tipo que falta mas "no hay tipo"
+      //Modificar schema user para incorporar lo siguiente
+      // route,
+      // streetnumber,
+      // locality,
+      // administrative_area_level_1,
+      // postal_code,
       const mappedComponents = responseData.map((item) => {
         const types = item.types;
         const longName = item.long_name;
