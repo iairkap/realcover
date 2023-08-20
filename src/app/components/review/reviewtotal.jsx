@@ -4,7 +4,6 @@ import fullcolor from "../../../../fullcolorrev.json";
 import fundas from "../../../../fundaestampadarev.json";
 import maletines from "../../../../maletin.json";
 import portafolios from "../../../../portafolio.json";
-import MLA747092062 from "../../../../public/r";
 
 export const getReviewTotal = () => {
   const dataSources = [cubrevalijas, fullcolor, fundas, maletines, portafolios];
