@@ -71,6 +71,8 @@ function ReviewCardContainer(props) {
           {">"}
         </button>
       </div>
+      <br />
+      <br />
     </div>
   );
 }

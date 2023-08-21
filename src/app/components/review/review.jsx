@@ -1,13 +1,30 @@
+"use client";
+
 import React from "react";
 import ReviewTotal from "./reviewtotal";
 import ElegirnosMotivos from "./elegirnos";
 import styles from "./elegirnos.module.css";
 import Marcas from "./marcas";
 import ReviewCardContainer from "./reviewCardContainer";
-
+import Image from "next/image";
+import { useState } from "react";
 import Contactanos from "../contactanos/contactanos";
 
 function Review(props) {
+  const [zoom, setZoom] = useState("none");
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const isTopHalf = e.clientY < rect.top + rect.height / 2;
+
+    // Set zoom based on mouse position
+    setZoom(isTopHalf ? "out" : "in");
+  };
+
+  const handleMouseLeave = () => {
+    setZoom("none");
+  };
+
   return (
     <div className={styles.generalContainer}>
       <div className={styles.containerG}>
@@ -34,8 +51,41 @@ function Review(props) {
         <div className={styles.downContainer}>
           <ReviewCardContainer className={styles.reviewCardContainer} />
         </div>
+        <div
+          className={styles.contenedorImagenes}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          <Image
+            src={"/imagen2.jpeg"}
+            width={778}
+            height={519}
+            className={styles.imagen}
+            style={{
+              transform:
+                zoom === "in"
+                  ? "scale(1.04)"
+                  : zoom === "out"
+                  ? "scale(1.0)"
+                  : "none",
+            }}
+          />
+          <Image
+            src={"/imagen1.jpeg"}
+            width={778}
+            height={519}
+            className={styles.imagen}
+            style={{
+              transform:
+                zoom === "in"
+                  ? "scale(1.04)"
+                  : zoom === "out"
+                  ? "scale(1.0)"
+                  : "none",
+            }}
+          />
+        </div>
       </div>
-
       <Contactanos />
     </div>
   );
@@ -47,6 +97,8 @@ export default Review;
   /*        <br />
         <br />
         <div className={styles.marcasContainer}>
+                  <h1 className={styles.titleb}>Marcas que nos han elegido</h1>
+
           <Marcas />
         </div>
         <br />
