@@ -62,7 +62,7 @@
   text-align: center;
   margin-top: 1rem;
   border-radius: 0.1875rem;
-  background: #56b947;
+  background: #21331e;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
   border: none;
   cursor: pointer;
@@ -75,7 +75,7 @@
 }
 
 .title:hover {
-  background-color: #3d8d30;
+  background-color: #254120;
 }
 .titulo {
   color: white;

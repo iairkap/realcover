@@ -24,6 +24,8 @@ function Landing(props) {
       {/* Contenedor con el fondo deseado */}
       <div className={styles.backgroundContainer}>
         <GridComponents />
+        <br />
+        <br />
         <Review />
         <div></div>
         <div className={styles.contactanos}>
