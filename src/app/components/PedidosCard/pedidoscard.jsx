@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import styles from "./pedidoscard.module.css";
 import Image from "next/image";
 import jwt from "jsonwebtoken";
-
+import ModalDireccion from "./modal";
 import Modal from "react-modal";
 
 function PedidosCard({
@@ -107,13 +107,13 @@ function PedidosCard({
     setError(null);
 
     const newOrderData = {
-      userId: user.id, // Deberías obtener esto de alguna forma, por ejemplo de una variable de estado o de una variable global, o incluso de un contexto.
+      userId: user.id,
       total: total,
       status: status,
       products: orderDetails.map((detail) => ({
         productId: detail.products.id,
         quantity: detail.quantity,
-        unitPrice: detail.products.price, // Asumiendo que el producto tiene un precio. Si no es así, ajusta esto.
+        unitPrice: detail.products.price,
         size: detail.size,
       })),
     };
@@ -251,127 +251,13 @@ function PedidosCard({
           ,Nombre: {user.name}, Apellido: {user.lastname}
         </p>
       </div>
-      <Modal
-        isOpen={isShippingModalOpen}
-        onRequestClose={() => setIsShippingModalOpen(false)}
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-            backdropFilter: "blur(1px)",
-            zIndex: 10000000,
-            display: "flex",
-            justifyContent: "center", // Centrar contenido horizontalmente
-            alignItems: "center", // Centrar contenido verticalmente
-          },
-          content: {
-            background: "#232323",
-
-            overflow: "auto",
-            position: "relative", // Esto es importante para que el modal se posicione en el centro
-            top: "auto",
-            left: "auto",
-            right: "auto",
-            bottom: "auto",
-            transform: "none", // Remover la transformación anterior para centrar
-            padding: "1rem",
-            boxSizing: "border-box", // Asegurar que el padding no afecte el tamaño total
-          },
-        }}
-      >
-        <form onSubmit={handleUpdateUserInfo}>
-          <div className={styles.textContainerModal}>
-            <h1 className={styles.tituloModelo}>Datos de Envio</h1>
-            <br />
-            <div className={styles.inputsContainer}>
-              <div className={styles.inputModal}>
-                <label htmlFor="address" className={styles.modalText}>
-                  Direccion:
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  onChange={(e) => updateUserField("address", e.target.value)}
-                  value={userFormData.address}
-                />
-              </div>
-              <div className={styles.inputModal}>
-                <label htmlFor="city" className={styles.modalText}>
-                  Ciudad:
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  onChange={(e) => updateUserField("city", e.target.value)}
-                  value={userFormData.city}
-                />
-              </div>
-              <div className={styles.inputModal}>
-                <label htmlFor="localidad" className={styles.modalText}>
-                  Localidad:
-                </label>
-                <input
-                  type="text"
-                  id="localidad"
-                  onChange={(e) => updateUserField("localidad", e.target.value)}
-                  value={userFormData.localidad}
-                />
-              </div>
-              <div className={styles.inputModal}>
-                <label htmlFor="postalCode" className={styles.modalText}>
-                  Código Postal:
-                </label>
-                <input
-                  type="text"
-                  id="postalCode"
-                  onChange={(e) =>
-                    updateUserField("postalCode", e.target.value)
-                  }
-                  value={userFormData.postalCode}
-                />
-              </div>
-              <div className={styles.inputModal}>
-                <label htmlFor="phone" className={styles.modalText}>
-                  Teléfono:
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  onChange={(e) => updateUserField("phone", e.target.value)}
-                  value={userFormData.phone}
-                />
-              </div>
-
-              <div className={styles.inputModal}>
-                <label htmlFor="shopName" className={styles.modalText}>
-                  Nombre de la Tienda:
-                </label>
-                <input
-                  type="text"
-                  id="shopName"
-                  onChange={(e) => updateUserField("shopName", e.target.value)}
-                  value={userFormData.shopName}
-                />
-              </div>
-              <div className={styles.inputModal}>
-                <label htmlFor="cuit" className={styles.modalText}>
-                  CUIT:
-                </label>
-                <input
-                  type="number"
-                  id="cuit"
-                  onChange={(e) => updateUserField("cuit", e.target.value)}
-                  value={userFormData.cuit}
-                />
-              </div>
-              <br />
-            </div>
-            <button type="submit" className={styles.botonConfirmacion}>
-              Confirmar datos de Envio
-            </button>
-          </div>
-        </form>
-      </Modal>
-
+      <ModalDireccion
+        userFormData={userFormData}
+        setUserFormData={setUserFormData}
+        isShippingModalOpen={isShippingModalOpen}
+        handleUpdateUserInfo={handleUpdateUserInfo}
+        setIsShippingModalOpen={setIsShippingModalOpen}
+      />
       <div className={styles.contenedorBotones}>
         <button onClick={handleOpenModal} className={styles.detailButton}>
           Ver Detalle

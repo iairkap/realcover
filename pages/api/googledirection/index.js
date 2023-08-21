@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  const apiKey = "AIzaSyCcb74pgijfKaHBxDNqOBGfI_76Ft3722Q";
+  const apiKey = process.env.GOOGLE_API;
   const { address, placeId } = req.query;
 
   if (address) {
@@ -43,12 +43,32 @@ export default async function handler(req, res) {
       );
 
       const responseData = response.data.result.address_components;
+      //Modificar schema user para incorporar lo siguiente
+      // route,
+      // streetnumber,
+      // locality,
+      // administrative_area_level_1,
+      // postal_code,
       const mappedComponents = responseData.map((item) => {
-        return {
-          long_name: item.long_name,
-          short_name: item.short_name,
-          types: item.types,
-        };
+        const types = item.types;
+        const longName = item.long_name;
+        let mappedItem = {};
+
+        if (types.includes("route")) {
+          mappedItem.route = longName;
+        } else if (types.includes("street_number")) {
+          mappedItem.street_number = longName;
+        } else if (types.includes("locality")) {
+          mappedItem.locality = longName;
+        } else if (types.includes("administrative_area_level_1")) {
+          mappedItem.administrative_area_level_1 = longName;
+        } else if (types.includes("postal_code")) {
+          mappedItem.postal_code = longName;
+        } else {
+          mappedItem = null;
+        }
+
+        return mappedItem;
       });
 
       res.status(200).json(mappedComponents);
