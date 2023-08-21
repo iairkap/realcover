@@ -1,13 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 .generalContainer {
-  background-image: url("/backgroundprueba.png");
-
-  height: 100vh;
-  width: 100vw;
-  margin-top: none;
-  position: absolute;
-  top: 0;
+  background-image: url("/background-elegirnos.png");
+  background-size: cover;
+  background-repeat: no-repeat; /* Asegúrate de que tu imagen no se repita */
+  background-position: center center; /* Centrar la imagen */
+  min-height: 100vh;
   display: flex;
   justify-content: center;
 }
@@ -29,7 +27,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .motivosContainer {
@@ -80,4 +78,17 @@
   width: 100%; /* Ocupará el 100% del contenedor padre, pero no excederá el valor max-width */
   margin: 0 auto; /* Esto centrará el contenedor si su ancho es menor que el ancho de la pantalla */
   /* ...otros estilos... */
+}
+
+.downContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 1143.83px; /* El valor máximo que mencionaste */
+  width: 100%; /* Ocupará el 100% del contenedor padre, pero no excederá el valor max-width */
+}
+
+.reviewCardContainer {
+  min-height: 200px; /* Puedes ajustar este valor según tus necesidades */
+  max-height: 300px; /* Puedes ajustar este valor según tus necesidades */
+  overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado para la altura máxima */
 }

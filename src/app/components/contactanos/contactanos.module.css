@@ -3,9 +3,9 @@
 .generalContainer {
   display: flex;
   width: 100%;
-  background: url("/background-form-3.png");
+  background: url("/background-contactanos.png");
   background-color: #232323;
-
+  height: 100vh;
   align-items: center;
   justify-content: center;
   position: relative;

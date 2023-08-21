@@ -12,6 +12,7 @@ import Criticas from "../components/criticas/criticas";
 import Contactanos from "../components/contactanos/contactanos";
 import Pictures from "../components/pictures/pictures";
 import GridComponents from "../components/gridComponents/gridComponents";
+import Review from "../components/review/review";
 
 function Landing(props) {
   return (
@@ -22,13 +23,10 @@ function Landing(props) {
       <Pictures />
       {/*       <Categorias />
        */}
-      <div>
-        <Elegir />
-      </div>
+      <div></div>
       <GridComponents />
-      <div>
-        <Contenedorimagenes />
-      </div>
+      <Review />
+      <div></div>
       <div className={styles.contactanos}>
         <Contactanos />
       </div>

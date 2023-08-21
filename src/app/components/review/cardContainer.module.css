@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+.generalContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.generalReviews {
+  display: flex;
+  flex-direction: row;
+  place-self: self-end;
+  color: #fff;
+  gap: 1;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 139%; /* 1.21625rem */
+  letter-spacing: -0.00963rem;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: 900;
+}
+
+.reviewCard {
+  min-height: 250px; /* Ajusta según tus necesidades */
+  max-height: 250px;
+  overflow-y: auto; /* Esto permitirá que el contenido se desplace si es demasiado largo para la tarjeta */
+}

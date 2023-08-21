@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+.generalContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9375rem;
+  width: 20rem;
+  max-height: 12rem;
+}
+
+.imgReview {
+  width: 6.875rem;
+  height: 10.125rem;
+}
+
+.content,
+.contentB {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 100;
+  line-height: 139%; /* 1.0425rem */
+  letter-spacing: -0.00825rem;
+}
+
+.title {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 139%; /* 1.7375rem */
+  letter-spacing: -0.01375rem;
+}
+
+.cardReviewTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.contentB {
+  align-items: flex-end;
+  font-size: 0.7rem;
+}
