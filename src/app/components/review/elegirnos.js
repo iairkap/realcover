@@ -9,13 +9,13 @@ const Elegirnos = [
     id: 2,
     title: "DISEÑO",
     description:
-      "La amplia variedad de diseños hace casi imposible no encontrar el indicado para las necesidades de sus clientes.También realizamos pedidos especiales con diseños exclusivos. Esto incluye el desarrollo de productos de merchandising y regalos empresariales.",
+      "Ofrecemos más de 200 diseños únicos y exclusivos. Personalizamos con logos e imágenes para que cada funda refleje la esencia y estilo de nuestros clientes.",
   },
   {
     id: 3,
     title: "GARANTIA",
     description:
-      "Nuestros productos están garantizados contra cualquier falla del material o fabricación.",
+      "Con más de 10 años liderando el mercado y siendo el producto #1 en MercadoLibre. Garantizamos contra fallos de material o fabricación para su tranquilidad.",
   },
 ];
 

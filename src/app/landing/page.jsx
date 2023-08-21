@@ -21,14 +21,14 @@ function Landing(props) {
         <NavBar />
       </div>
       <Pictures />
-      {/*       <Categorias />
-       */}
-      <div></div>
-      <GridComponents />
-      <Review />
-      <div></div>
-      <div className={styles.contactanos}>
-        <Contactanos />
+      {/* Contenedor con el fondo deseado */}
+      <div className={styles.backgroundContainer}>
+        <GridComponents />
+        <Review />
+        <div></div>
+        <div className={styles.contactanos}>
+          {/* <Contactanos /> */}
+        </div>
       </div>
     </div>
   );

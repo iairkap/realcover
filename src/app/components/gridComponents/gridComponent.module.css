@@ -98,7 +98,6 @@
 }
 
 .contenedor {
-  background: url("/background-contactanos.png");
   display: flex;
   align-items: center;
   flex-direction: column;

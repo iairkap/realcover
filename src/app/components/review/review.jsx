@@ -5,6 +5,8 @@ import styles from "./elegirnos.module.css";
 import Marcas from "./marcas";
 import ReviewCardContainer from "./reviewCardContainer";
 
+import Contactanos from "../contactanos/contactanos";
+
 function Review(props) {
   return (
     <div className={styles.generalContainer}>
@@ -18,13 +20,25 @@ function Review(props) {
             </div>
           ))}
         </div>
+        <br />
+        <br />
         <div className={styles.marcasContainer}>
+
+
           <Marcas />
         </div>
+        <br />
+        <br />
+        <br />
         <div className={styles.downContainer}>
           <ReviewCardContainer className={styles.reviewCardContainer} />
         </div>
+
       </div>
+      <br />
+      <br />
+
+        <Contactanos />
     </div>
   );
 }

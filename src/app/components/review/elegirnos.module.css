@@ -1,12 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 .generalContainer {
-  background-image: url("/background-elegirnos.png");
   background-size: cover;
   background-repeat: no-repeat; /* Asegúrate de que tu imagen no se repita */
   background-position: center center; /* Centrar la imagen */
-  min-height: 100vh;
-  display: flex;
   justify-content: center;
 }
 
@@ -28,21 +25,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  min-height: 100vh;
 }
 
 .motivosContainer {
   display: flex;
   flex-direction: row;
-  gap: 4.62rem;
+    justify-content: space-around;
+
 }
 
 .motivoIndividual {
   display: flex;
-  padding: 1.6875rem 2.875rem;
   flex-direction: column;
   align-items: flex-start;
   border-radius: 0.9375rem;
   background: #395c34;
+  padding: 1rem;
 }
 
 .titleDescription {
@@ -57,7 +56,6 @@
 
 .description {
   width: 15rem;
-  height: 10.125rem;
   color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
