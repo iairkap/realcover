@@ -5,6 +5,10 @@
   background-repeat: no-repeat; /* Asegúrate de que tu imagen no se repita */
   background-position: center center; /* Centrar la imagen */
   justify-content: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
@@ -12,7 +16,7 @@
   color: #fff;
   text-align: center;
   font-family: "Roboto", sans-serif;
-  font-size: 3.125rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
@@ -21,27 +25,26 @@
 .containerG {
   display: flex;
   flex-direction: column;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   min-height: 100vh;
+  width: 1144px;
 }
 
 .motivosContainer {
   display: flex;
-  flex-direction: row;
-    justify-content: space-around;
-
+  height: 11.625rem;
+  align-items: flex-start;
+  gap: 7.625rem;
+  justify-content: center;
 }
 
 .motivoIndividual {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-radius: 0.9375rem;
-  background: #395c34;
-  padding: 1rem;
+  /*   gap: 1.625rem;
+ */ /*   border-radius: 0.9375rem;
+ */ /*   background: #395c34;
+ */
+  width: 30%;
 }
 
 .titleDescription {
@@ -72,7 +75,7 @@
 
 .motivosContainer,
 .marcasContainer {
-  max-width: 1143.83px; /* El valor máximo que mencionaste */
+  max-width: 1143.83px;
   width: 100%; /* Ocupará el 100% del contenedor padre, pero no excederá el valor max-width */
   margin: 0 auto; /* Esto centrará el contenedor si su ancho es menor que el ancho de la pantalla */
   /* ...otros estilos... */
@@ -81,12 +84,75 @@
 .downContainer {
   display: flex;
   flex-direction: column;
-  max-width: 1143.83px; /* El valor máximo que mencionaste */
-  width: 100%; /* Ocupará el 100% del contenedor padre, pero no excederá el valor max-width */
+  width: 100%;
 }
 
 .reviewCardContainer {
   min-height: 200px; /* Puedes ajustar este valor según tus necesidades */
   max-height: 300px; /* Puedes ajustar este valor según tus necesidades */
   overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado para la altura máxima */
+}
+
+.card {
+  perspective: 1000px;
+  height: 100%; /* Aseguramos que el contenedor ocupe todo el espacio disponible */
+}
+
+.cardInner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.999s;
+}
+
+.card:hover .cardInner {
+  transform: rotateY(180deg);
+}
+
+.cardFront,
+.cardBack {
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.9375rem; /* Agregamos el borde redondeado aquí */
+}
+
+.cardFront {
+  background-color: #395c34; /* Colores y estilos que ya tienes definidos */
+  transform: rotateY(0deg);
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  height: 50%;
+
+  justify-content: space-evenly;
+}
+
+.cardBack {
+  background-color: #395c34; /* Igual que el front para mantener el mismo color de fondo */
+  transform: rotateY(180deg);
+  width: 100%;
+  height: 50%;
+  padding: 1rem;
+}
+
+.titlecard {
+  color: #395c34;
+  font-family: "Roboto", sans-serif;
+  font-size: 3rem;
+  background-color: #fff;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  padding: 1rem;
+}
+
+.firstPart {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
 }

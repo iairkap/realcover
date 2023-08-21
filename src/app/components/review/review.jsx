@@ -11,36 +11,45 @@ function Review(props) {
   return (
     <div className={styles.generalContainer}>
       <div className={styles.containerG}>
-        <h1 className={styles.title}>Por qué Elegirnos?</h1>
-        <div className={styles.motivosContainer}>
-          {ElegirnosMotivos.map((motivo) => (
-            <div key={motivo.id} className={styles.motivoIndividual}>
-              <h3 className={styles.titleDescription}>{motivo.title}</h3>
-              <p className={styles.description}>{motivo.description}</p>
-            </div>
-          ))}
+        <div className={styles.firstPart}>
+          <h1 className={styles.title}>Por qué Elegirnos?</h1>
+          <div className={styles.motivosContainer}>
+            {ElegirnosMotivos.map((motivo) => (
+              <div
+                key={motivo.id}
+                className={`${styles.motivoIndividual} ${styles.card}`}
+              >
+                <div className={styles.cardInner}>
+                  <div className={styles.cardFront}>
+                    <h3 className={styles.titleDescription}>{motivo.title}</h3>
+                  </div>
+                  <div className={styles.cardBack}>
+                    <p className={styles.description}>{motivo.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        <br />
-        <br />
-        <div className={styles.marcasContainer}>
-
-
-          <Marcas />
-        </div>
-        <br />
-        <br />
-        <br />
         <div className={styles.downContainer}>
           <ReviewCardContainer className={styles.reviewCardContainer} />
         </div>
-
       </div>
-      <br />
-      <br />
 
-        <Contactanos />
+      <Contactanos />
     </div>
   );
 }
 
 export default Review;
+
+{
+  /*        <br />
+        <br />
+        <div className={styles.marcasContainer}>
+          <Marcas />
+        </div>
+        <br />
+        <br />
+        <br /> */
+}

@@ -38,6 +38,10 @@ function ReviewCardContainer(props) {
 
   return (
     <div className={styles.generalContainer}>
+      <div className={styles.divisor}></div>
+      <h2 className={styles.title}>
+        No solo escuches lo que decimos, mira lo que nuestros clientes opinan
+      </h2>
       <div className={styles.generalReviews}>
         <h5>
           <StarRating rating={averageRating} />

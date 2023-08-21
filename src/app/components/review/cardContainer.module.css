@@ -32,7 +32,25 @@
 }
 
 .reviewCard {
-  min-height: 250px; /* Ajusta según tus necesidades */
-  max-height: 250px;
+  min-height: 350px; /* Ajusta según tus necesidades */
+  max-height: 350px;
   overflow-y: auto; /* Esto permitirá que el contenido se desplace si es demasiado largo para la tarjeta */
+}
+
+.title {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 9.21875rem;
+  place-self: center;
+}
+
+.divisor {
+  align-self: center;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.513);
+  margin-top: 3rem;
 }
