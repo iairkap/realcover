@@ -1,13 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import PedidosCard from "./pedidoscard";
 import styles from "./pedidoscontainer.module.css";
+import { GlobalContext } from "../../store/layout";
 
-function PedidosContainer({ user }) {
+function PedidosContainer() {
   const [orders, setOrders] = useState([]);
-  console.log(orders);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 4; // 4 pedidos por página
+
+  const { userData, setUserData } = useContext(GlobalContext);
+
   useEffect(() => {
     const fetchOrders = async (userId) => {
       try {
@@ -21,22 +26,40 @@ function PedidosContainer({ user }) {
       }
     };
 
-    if (user && user.id) {
-      fetchOrders(user.id);
-    } else {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser && storedUser !== "undefined") {
-        const userId = JSON.parse(storedUser).id;
-        fetchOrders(userId);
-      }
+    if (userData && userData.id) {
+      fetchOrders(userData.id);
     }
-  }, [user]);
+  }, [userData]);
+
+  // Lógica para mostrar pedidos de acuerdo con la paginación
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+  // Actualiza la página actual
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className={styles.container}>
-      {orders.map((order) => (
-        <PedidosCard key={order.id} {...order} className={styles.separacion} />
+      <h1 className={styles.titulo}>Mis Pedidos</h1>
+
+      {currentOrders.map((order) => (
+        <PedidosCard
+          key={order.id}
+          {...order}
+          className={styles.separacion}
+          userData={userData}
+        />
       ))}
+      <div className={styles.pagination}>
+        {Array(Math.ceil(orders.length / ordersPerPage))
+          .fill()
+          .map((_, idx) => (
+            <button key={idx} onClick={() => paginate(idx + 1)}>
+              {idx + 1}
+            </button>
+          ))}
+      </div>
     </div>
   );
 }
