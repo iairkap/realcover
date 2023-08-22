@@ -1,0 +1,125 @@
+.inputWrapper {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute; /* Usamos posición absoluta para que aparezca sobre otros elementos */
+  top: 100%; /* Se posiciona justo debajo del input */
+  left: 0; /* Alineado a la izquierda */
+  width: 100%;
+  max-height: 200px;
+  overflow-y: scroll;
+  z-index: 10000000000000; /* Asegurémonos de que tenga un z-index alto para superponerse a otros elementos */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade una sombra para distinguirlo del fondo */
+}
+
+.dropdownItem {
+  cursor: pointer;
+  z-index: 10000; /* Aunque el elemento padre tiene un z-index, también podemos dar un z-index al hijo para garantizar su apilamiento */
+}
+
+.dropdownItem:hover {
+  background-color: #f5f5f5;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  align-self: flex-end;
+}
+
+.modalText {
+  z-index: 0;
+}
+
+.textContainerModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.tituloModelo {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%; /* 2.25875rem */
+  letter-spacing: -0.01788rem;
+  align-self: center;
+}
+
+.inputsContainer,
+.restodelModal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  width: fit-content;
+  width: 100%;
+}
+
+.modalText {
+  flex-shrink: 0;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.errorMsg {
+  color: red;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  width: fit-content;
+  font-family: "Roboto", sans-serif;
+  white-space: normal; /* Allows text to wrap to next line */
+  word-break: break-word; /* Breaks long words */
+}
+
+.input {
+  width: 100%;
+  width: 100%;
+
+  background-color: #d9d9d9;
+  border: solid 0.2px #000000;
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.25rem 0.5rem 0.25rem; /* Simplificado */
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid #70b756;
+}
+
+.inputModal,
+.inputWrpper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.botonConfirmacion {
+  background-color: #56b947;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.botonConfirmacion:hover {
+  background-color: #296520;
+  color: white;
+}

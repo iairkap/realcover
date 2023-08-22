@@ -284,19 +284,17 @@
   color: #56b947;
 }
 
-
-@media screen and (max-height:758px){
-  .generalContainer{
+@media screen and (max-height: 758px) {
+  .generalContainer {
     height: fit-content;
     margin: 0em;
     gap: 0.8rem;
-
   }
-  .inputContenedor{
-    margin: 0px; 
-    gap:0px
+  .inputContenedor {
+    margin: 0px;
+    gap: 0px;
   }
-  .botonera{
-    gap:0px;
+  .botonera {
+    gap: 0px;
   }
 }

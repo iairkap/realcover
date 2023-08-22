@@ -17,6 +17,7 @@ function PedidosCard({
   deliveryDate,
   name,
   userData,
+  setUserData,
 }) {
   const {
     setIsShippingModalOpen,
@@ -93,6 +94,8 @@ function PedidosCard({
         isShippingModalOpen={isShippingModalOpen}
         handleUpdateUserInfo={handleUpdateUserInfo}
         setIsShippingModalOpen={setIsShippingModalOpen}
+        userData={userData}
+        setUserData={setUserData}
       />
       <div className={styles.contenedorBotones}>
         <button onClick={handleOpenModal} className={styles.detailButton}>

@@ -161,38 +161,39 @@ export const useOrderLogic = (
   }
   const handleUpdateUserInfo = async (e) => {
     e.preventDefault();
+    console.log("Attempting to update user with data:", userFormData);
 
-    const response = await fetch(`/api/user/${userData.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userFormData),
-    });
-
-    if (response.ok) {
-      const updatedUser = await response.json();
-      console.log("User updated successfully:", updatedUser);
-
-      // 1. Actualizar el localStorage con los datos actualizados
-      localStorage.setItem("userData", JSON.stringify(updatedUser));
-
-      // 2. Actualizar el estado local para reflejar estos cambios en la UI
-      setUserFormData({
-        address: updatedUser.address || "",
-        city: updatedUser.city || "",
-        localidad: updatedUser.localidad || "",
-        postalCode: updatedUser.postalCode || "",
-        phone: updatedUser.phone || "",
-        shopName: updatedUser.shopName || "",
-        cuit: updatedUser.cuit || "",
+    try {
+      const response = await fetch(`/api/user/fafa`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userFormData),
+        credentials: "include", // Include cookies in the request
       });
 
-      setIsUpdateSuccess(true);
-      setIsShippingModalOpen(false);
-    } else {
-      const errorData = await response.json();
-      console.error("Error updating user:", errorData.message);
+      const responseData = await response.json();
+
+      if (response.ok) {
+        console.log("User updated successfully:", responseData);
+        setUserFormData({
+          address: responseData.address || "",
+          city: responseData.city || "",
+          localidad: responseData.localidad || "",
+          postalCode: responseData.postalCode || "",
+          phone: responseData.phone || "",
+          shopName: responseData.shopName || "",
+          cuit: responseData.cuit || "",
+        });
+        setIsUpdateSuccess(true);
+        setIsShippingModalOpen(false);
+      } else {
+        console.error("Error updating user:", responseData.message);
+        setIsUpdateSuccess(false);
+      }
+    } catch (error) {
+      console.error("Unexpected error during update:", error);
       setIsUpdateSuccess(false);
     }
   };
@@ -230,5 +231,10 @@ export const useOrderLogic = (
     setUserFormData,
     handleUpdateUserInfo,
     handleOpenShippingModal,
+    setIsModalOpen,
+    setIsConfirmModalOpen,
+    setIsShippingModalOpen,
+    userData,
+    setUserData,
   };
 };
