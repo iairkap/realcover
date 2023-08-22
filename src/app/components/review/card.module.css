@@ -19,7 +19,7 @@
 
   flex-direction: column;
   justify-content: center;
-  color: #fff;
+  color: #232323;
   font-family: Roboto;
   font-size: 1rem;
   font-style: italic;
@@ -29,7 +29,7 @@
 }
 
 .title {
-  color: #fff;
+  color: #232323;
   font-family: Roboto;
   font-size: 1.25rem;
   font-style: normal;

@@ -28,9 +28,7 @@ function Landing(props) {
         <br />
         <Review />
         <div></div>
-        <div className={styles.contactanos}>
-          {/* <Contactanos /> */}
-        </div>
+        <div className={styles.contactanos}>{/* <Contactanos /> */}</div>
       </div>
     </div>
   );

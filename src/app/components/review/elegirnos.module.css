@@ -13,7 +13,7 @@
 
 .title {
   align-self: stretch;
-  color: #fff;
+  color: #232323;
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-size: 2rem;
@@ -24,12 +24,12 @@
 
 .titleb {
   align-self: stretch;
-  color: #fff;
+  color: #232323;
   text-align: center;
   font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 900;
   line-height: normal;
 }
 
@@ -132,7 +132,7 @@
 }
 
 .cardFront {
-  background-color: #395c34; /* Colores y estilos que ya tienes definidos */
+  background-color: #232323; /* Colores y estilos que ya tienes definidos */
   transform: rotateY(0deg);
   width: 100%;
   padding: 1rem;
@@ -142,7 +142,7 @@
 }
 
 .cardBack {
-  background-color: #395c34; /* Igual que el front para mantener el mismo color de fondo */
+  background-color: #56b947; /* Igual que el front para mantener el mismo color de fondo */
   transform: rotateY(180deg);
   width: 100%;
   height: 50%;
@@ -150,7 +150,7 @@
 }
 
 .titlecard {
-  color: #395c34;
+  color: #56b947;
   font-family: "Roboto", sans-serif;
   font-size: 3rem;
   background-color: #fff;
@@ -192,4 +192,13 @@
   right: 0;
   bottom: 50%; /* Splitting the container into top and bottom halves */
   pointer-events: none; /* So it doesn't interfere with any other interactions */
+}
+
+.marcasContainer {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.marcasContainerb {
+  margin-top: 4rem;
 }

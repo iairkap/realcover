@@ -3,11 +3,12 @@
 .generalContainer {
   display: flex;
   width: 100%;
-/*   background: url("/background-contactanos.png");
+  /*   background: url("/background-contactanos.png");
   background-color: #232323; */
   align-items: center;
   justify-content: center;
   position: relative;
+  background-color: #232323;
 }
 
 .contactanosInfo {

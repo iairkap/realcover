@@ -9,14 +9,14 @@ const StarRating = ({ rating }) => {
     <div style={{ display: "inline-block", position: "relative" }}>
       {[...Array(5)].map((_, index) => {
         if (index < fullStars) {
-          return <FaStar key={index} color="#395C34" />;
+          return <FaStar key={index} color="#56B947" />;
         } else if (index === fullStars && hasHalfStar) {
           return (
             <div
               key={index}
               style={{ position: "relative", display: "inline-block" }}
             >
-              <FaStar color="#737473" />
+              <FaStar color="#6F796E" />
               <div
                 style={{
                   position: "absolute",
@@ -27,7 +27,7 @@ const StarRating = ({ rating }) => {
                   zIndex: 1,
                 }}
               >
-                <FaStar color="#395C34" />
+                <FaStar color="#56B947" />
               </div>
             </div>
           );

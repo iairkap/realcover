@@ -48,15 +48,12 @@ function Review(props) {
             ))}
           </div>
         </div>
-        <div className={styles.downContainer}>
-          <ReviewCardContainer className={styles.reviewCardContainer} />
-        </div>
         <div
           className={styles.contenedorImagenes}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          <Image
+          {/*   <Image
             src={"/imagen2.jpeg"}
             width={778}
             height={519}
@@ -83,10 +80,19 @@ function Review(props) {
                   ? "scale(1.0)"
                   : "none",
             }}
-          />
+          /> */}
+        </div>
+        <div className={styles.downContainer}>
+          <ReviewCardContainer className={styles.reviewCardContainer} />
         </div>
       </div>
       <Contactanos />
+      <div className={styles.marcasContainerb}>
+        <h1 className={styles.titleb}>Marcas que confiaron en nosotros</h1>
+        <div className={styles.marcasContainer}>
+          <Marcas />
+        </div>
+      </div>
     </div>
   );
 }

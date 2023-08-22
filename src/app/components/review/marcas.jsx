@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { useEffect } from "react";
+import styles from "./cardContainer.module.css";
 
 function Marcas() {
   const logos = [
@@ -15,6 +16,7 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
     "techint 1.png",
     "amsel.png",
     "1.png",
@@ -27,6 +29,8 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
+
     "techint 1.png",
     "amsel.png",
     "fibertel.png",
@@ -39,6 +43,8 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
+
     "techint 1.png",
     "amsel.png",
     "fibertel.png",
@@ -51,6 +57,8 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
+
     "techint 1.png",
     "amsel.png",
     "fibertel.png",
@@ -63,6 +71,8 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
+
     "techint 1.png",
     "amsel.png",
     "fibertel.png",
@@ -75,6 +85,8 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
+
     "techint 1.png",
     "amsel.png",
     "fibertel.png",
@@ -87,6 +99,8 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
+
     "techint 1.png",
     "amsel.png",
     "fibertel.png",
@@ -99,6 +113,8 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
+
     "techint 1.png",
     "amsel.png",
     "fibertel.png",
@@ -111,6 +127,8 @@ function Marcas() {
     "msuenergy.png",
     "oia 1.png",
     "sebigus.png",
+    "remax.png",
+
     "techint 1.png",
   ];
   const scrollContainer = useRef(null);
@@ -152,7 +170,7 @@ function Marcas() {
       style={{
         position: "relative",
         overflow: "hidden",
-        width: "fit-content", // Usamos el ancho pasado como prop o "fit-content" como valor por defecto
+        width: "fit-content",
       }}
     >
       <div
@@ -163,8 +181,9 @@ function Marcas() {
           scrollBehavior: "smooth",
           width: "100%",
           height: "55px",
-          scrollbarWidth: "none", // Para Firefox
-          msOverflowStyle: "none", // Para Internet Explorer y Edge
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          margin: "0px 0px 100px 0px",
         }}
       >
         {logos.map((logo, index) => (
@@ -172,10 +191,10 @@ function Marcas() {
             src={`/quienestrabajaron/${logo}`}
             alt={`Logo ${index + 1}`}
             style={{
-              margin: "0 4.5px",
               height: "100%",
             }}
             key={index}
+            className={styles.fafa}
           />
         ))}
       </div>
@@ -184,6 +203,10 @@ function Marcas() {
         /* Oculta la barra de desplazamiento para Chrome, Safari y Opera */
         ::-webkit-scrollbar {
           display: none;
+        }
+
+        /* Estilos para .fafa, en caso de que necesites agregar estilos adicionales */
+        .fafa {
         }
       `}</style>
     </div>
