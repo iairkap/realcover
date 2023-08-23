@@ -1,9 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+.marcasContainer {
+  max-width: 1143.83px;
+  width: 100%;
+  margin: 0 auto;
+}
+.marcasContainer {
+  display: flex;
+  justify-content: center;
+  width: 55%;
+}
 
+/* 
 .generalContainer {
   background-size: cover;
-  background-repeat: no-repeat; /* Asegúrate de que tu imagen no se repita */
-  background-position: center center; /* Centrar la imagen */
+  background-repeat: no-repeat;
+  background-position: center center;
   justify-content: center;
   display: flex;
   justify-content: center;
@@ -33,38 +44,13 @@
   line-height: normal;
 }
 
-.containerG {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  width: 1144px;
-}
-
-.motivosContainer {
-  display: flex;
-  height: 11.625rem;
-  align-items: flex-start;
-  gap: 7.625rem;
-  justify-content: center;
-}
-
-.motivoIndividual {
-  /*   gap: 1.625rem;
- */ /*   border-radius: 0.9375rem;
- */ /*   background: #395c34;
- */
-  width: 30%;
-}
-
 .titleDescription {
   color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 900;
-  line-height: 139%; /* 1.7375rem */
+  line-height: 139%; 
   letter-spacing: -0.01375rem;
 }
 
@@ -84,13 +70,7 @@
   width: 55%;
 }
 
-.motivosContainer,
-.marcasContainer {
-  max-width: 1143.83px;
-  width: 100%; /* Ocupará el 100% del contenedor padre, pero no excederá el valor max-width */
-  margin: 0 auto; /* Esto centrará el contenedor si su ancho es menor que el ancho de la pantalla */
-  /* ...otros estilos... */
-}
+
 
 .downContainer {
   display: flex;
@@ -99,54 +79,9 @@
 }
 
 .reviewCardContainer {
-  min-height: 200px; /* Puedes ajustar este valor según tus necesidades */
-  max-height: 300px; /* Puedes ajustar este valor según tus necesidades */
-  overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado para la altura máxima */
-}
-
-.card {
-  perspective: 1000px;
-  height: 100%; /* Aseguramos que el contenedor ocupe todo el espacio disponible */
-}
-
-.cardInner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.999s;
-}
-
-.card:hover .cardInner {
-  transform: rotateY(180deg);
-}
-
-.cardFront,
-.cardBack {
-  position: absolute;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.9375rem; /* Agregamos el borde redondeado aquí */
-}
-
-.cardFront {
-  background-color: #232323; /* Colores y estilos que ya tienes definidos */
-  transform: rotateY(0deg);
-  width: 100%;
-  padding: 1rem;
-  display: flex;
-  height: 50%;
-  justify-content: space-evenly;
-}
-
-.cardBack {
-  background-color: #56b947; /* Igual que el front para mantener el mismo color de fondo */
-  transform: rotateY(180deg);
-  width: 100%;
-  height: 50%;
-  padding: 1rem;
+  min-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .titlecard {
@@ -173,25 +108,24 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100vw;
-  position: relative; /* So that we can position the pseudo-element properly */
-  overflow: hidden; /* Hide the overflow from the zoom effect */
+  position: relative;
+  overflow: hidden;
 }
 
 .imagen {
   width: 50%;
   height: fit-content;
-  transition: transform 0.6s ease; /* For smooth zooming */
+  transition: transform 0.6s ease;
 }
 
-/* Adding a pseudo-element for detecting the mouse position over the whole container */
 .contenedorImagenes::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 50%; /* Splitting the container into top and bottom halves */
-  pointer-events: none; /* So it doesn't interfere with any other interactions */
+  bottom: 50%;
+  pointer-events: none;
 }
 
 .marcasContainer {
@@ -202,3 +136,17 @@
 .marcasContainerb {
   margin-top: 4rem;
 }
+
+.image {
+  width: 67.5rem;
+  height: 67.5rem;
+}
+
+.elegirnosContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 0rem;
+}
+ */

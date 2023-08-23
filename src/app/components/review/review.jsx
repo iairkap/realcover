@@ -30,22 +30,34 @@ function Review(props) {
       <div className={styles.containerG}>
         <div className={styles.firstPart}>
           <h1 className={styles.title}>Por qué Elegirnos?</h1>
-          <div className={styles.motivosContainer}>
-            {ElegirnosMotivos.map((motivo) => (
-              <div
-                key={motivo.id}
-                className={`${styles.motivoIndividual} ${styles.card}`}
-              >
-                <div className={styles.cardInner}>
-                  <div className={styles.cardFront}>
-                    <h3 className={styles.titleDescription}>{motivo.title}</h3>
-                  </div>
-                  <div className={styles.cardBack}>
-                    <p className={styles.description}>{motivo.description}</p>
+          <div className={styles.elegirnosContainer}>
+            <div className={styles.pictureContainer}>
+              <Image
+                src={"/portafolio/portafolio5.png"}
+                width={400}
+                height={400}
+                className={styles.image}
+              />
+            </div>
+            <div className={styles.motivosContainer}>
+              {ElegirnosMotivos.map((motivo) => (
+                <div
+                  key={motivo.id}
+                  className={`${styles.motivoIndividual} ${styles.card}`}
+                >
+                  <div className={styles.cardInner}>
+                    <div className={styles.cardFront}>
+                      <h3 className={styles.titleDescription}>
+                        {motivo.title}
+                      </h3>
+                    </div>
+                    <div className={styles.cardBack}>
+                      <p className={styles.description}>{motivo.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
         <div

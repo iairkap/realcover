@@ -36,7 +36,7 @@ model User {
   localidad  String?
   shopName   String?
   coupons    Coupon[]
-  orders     Order[]
+  orders     Order[] 
 }
 
 model Order {
