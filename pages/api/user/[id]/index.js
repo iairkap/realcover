@@ -1,9 +1,9 @@
 import prisma from "../../../../prisma/client";
 import { verifyMiddleware } from "../../jwt-session/verifyMiddleware";
 
-const handler = async (req, res) => {
+const handler = async (req, res, verifyMethod) => {
   const { method } = req;
-  const verifyEmail = req.verifiedEmail; // extrae el email verificado
+  const verifyEmail = verifyMethod; // extrae el email verificado
   switch (method) {
     case "GET":
       try {
@@ -96,8 +96,4 @@ const handler = async (req, res) => {
   }
 };
 
-export default (req, res) => {
-  verifyMiddleware(req, res, () => {
-    handler(req, res);
-  });
-};
+export default verifyMiddleware(handler);

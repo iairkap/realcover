@@ -1,40 +1,74 @@
-import { getSession } from "next-auth/react";
 import jwt from "jsonwebtoken";
-import cookie from "cookie";
+import { decode } from "next-auth/jwt";
 
-export const verifyMiddleware = async (req, res, next) => {
-  const cookies = cookie.parse(req.headers.cookie || "");
-  const token = cookies["next-auth.session-token"];
-  const JWT_SECRET = "Re@L123abcP@lermo3805101214680500"; // Considera mover esto a variables de entorno.
-
-  console.log("Checking Session...", token);
-
-  const session = await getSession({ req });
-
+export const verifyMiddleware = (handler) => async (req, res) => {
+  const googleToken = req.cookies["next-auth.session-token"];
+  const emailToken = req.cookies["token"];
+  const JWT_SECRET = process.env.JWT_SECRET;
+  const NEXT_SECRET = process.env.NEXTAUTH_SECRET;
   let verifyMethod;
 
-  if (session && session.user.email) {
-    console.log("Session found:", session);
-    verifyMethod = session.user.email;
-  } else if (token) {
-    console.log("Token found:", token);
-    try {
-      const decodedToken = jwt.verify(token, JWT_SECRET);
+  try {
+    if (googleToken) {
+      const decodedToken = await decode({
+        token: googleToken,
+        secret: NEXT_SECRET,
+      });
       const { email } = decodedToken;
-
       verifyMethod = email;
-      console.log("Token verified for:", email);
-    } catch (error) {
-      console.error("Token verification failed:", error);
-      return res.status(401).json(error);
+    } else if (emailToken) {
+      const decodedToken = jwt.verify(emailToken, JWT_SECRET);
+      const { email } = decodedToken;
+      verifyMethod = email;
+    } else {
+      throw new Error("No valid session or token available.");
     }
-  } else {
-    console.warn("No session or token found");
+    return handler(req, res, verifyMethod);
+  } catch (error) {
+    console.error("Error in middleware verification:", error.message);
     return res.status(401).json({ message: "Unauthorized, please SignIn" });
   }
-  req.verifiedEmail = verifyMethod;
-  next();
 };
+
+//! ************************ IAIR PREVIOUS CODE ************************
+// import { getSession } from "next-auth/react";
+// import jwt from "jsonwebtoken";
+// import cookie from "cookie";
+
+// export const verifyMiddleware = async (req, res, next) => {
+//   const cookies = cookie.parse(req.headers.cookie || "");
+//   const token = cookies["next-auth.session-token"];
+//   const JWT_SECRET = "Re@L123abcP@lermo3805101214680500"; // Considera mover esto a variables de entorno.
+
+//   console.log("Checking Session...", token);
+
+//   const session = await getSession({ req });
+
+//   let verifyMethod;
+
+//   if (session && session.user.email) {
+//     console.log("Session found:", session);
+//     verifyMethod = session.user.email;
+//   } else if (token) {
+//     console.log("Token found:", token);
+//     try {
+//       const decodedToken = jwt.verify(token, JWT_SECRET);
+//       const { email } = decodedToken;
+
+//       verifyMethod = email;
+//       console.log("Token verified for:", email);
+//     } catch (error) {
+//       console.error("Token verification failed:", error);
+//       return res.status(401).json(error);
+//     }
+//   } else {
+//     console.warn("No session or token found");
+//     return res.status(401).json({ message: "Unauthorized, please SignIn" });
+//   }
+//   req.verifiedEmail = verifyMethod;
+//   next();
+// };
+//! ************************ IAIR PREVIOUS CODE ************************
 
 /* import { getSession } from "next-auth/react";
 

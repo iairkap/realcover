@@ -3,10 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("POSTGRES_PRISMA_URL")
-  directUrl         = env("POSTGRES_URL_NON_POOLING")
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+  // directUrl         = env("POSTGRES_URL_NON_POOLING")
+  // shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Product {
@@ -36,7 +36,7 @@ model User {
   localidad  String?
   shopName   String?
   coupons    Coupon[]
-  orders     Order[] 
+  orders     Order[]
 }
 
 model Order {

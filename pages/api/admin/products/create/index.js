@@ -31,13 +31,13 @@ async function handler(req, res, verifyMethod) {
         try {
           const checklength = await prisma.product.findMany();
 
-          /*  if (checklength.length > 0) {
-            return res
-              .status(400)
-              .json({ message: "Products already created" });
-          }
- */
-          /*       const bolsillo = await mapAndSaveImages(
+          // if (checklength.length > 0) {
+          //   return res
+          //     .status(400)
+          //     .json({ message: "Products already created" });
+          // }
+
+          const bolsillo = await mapAndSaveImages(
             "ConBolsillo",
             "CON_BOLSILLO",
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
@@ -48,31 +48,31 @@ async function handler(req, res, verifyMethod) {
             "CUBRE_VALIJAS",
             ["S", "M", "L"],
             6290
-          ); */
-          /*     const maletinesfc = await mapAndSaveImages(
+          );
+          const maletinesfc = await mapAndSaveImages(
             "FullColor",
             "MALETINES_FULL_COLOR",
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
             2990
-          ); */
-          /*        const fundas = await mapAndSaveImages(
+          );
+          const fundas = await mapAndSaveImages(
             "Fundas",
             "NEOPRENE_COVER",
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
             3290
-          ); */
+          );
           // const portfolios = await mapAndSaveImages(
           //   "Portafolio",
           //   "PORTAFOLIOs",
           //   ["14_1", "15_6"],
           //   5990
           // );
-          /*   const tablet = await mapAndSaveImages(
+          const tablet = await mapAndSaveImages(
             "Tablets",
             "TABLET_COVER",
             ["Size7", "Size8", "Size9", "Size10"],
             3290
-          ); */
+          );
           const maletines = await mapAndSaveImages(
             "Valijas",
             "MALETINES",
