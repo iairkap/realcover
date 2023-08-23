@@ -54,6 +54,7 @@ export default async function loginHandler(req, res) {
     res.setHeader("Set-Cookie", serializedCookie);
     res.status(200).json({
       message: "Login successful",
+      token,
       user: {
         id: user.id,
         email: user.email,

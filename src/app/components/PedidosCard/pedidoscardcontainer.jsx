@@ -49,8 +49,6 @@ function PedidosContainer() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.titulo}>Mis Pedidos</h1>
-
       {currentOrders.map((order) => (
         <PedidosCard
           key={order.id}

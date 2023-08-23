@@ -1,14 +1,14 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  /*   margin-left: 10rem;
+  margin-right: 10rem; */
 }
 
 @media screen and (min-width: 1440px) {
   .container {
-    margin-left: 20rem;
-    margin-right: 20rem;
+    /*     margin-left: 20rem;
+    margin-right: 20rem; */
   }
 }
 

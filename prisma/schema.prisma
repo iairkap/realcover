@@ -24,7 +24,7 @@ model Product {
 model User {
   id         Int      @id @default(autoincrement())
   name       String
-  lastName   String
+  lastName   String?
   email      String   @unique
   password   String?
   address    String?
@@ -36,7 +36,7 @@ model User {
   localidad  String?
   shopName   String?
   coupons    Coupon[]
-  orders     Order[] 
+  orders     Order[]
 }
 
 model Order {

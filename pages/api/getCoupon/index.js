@@ -1,24 +1,46 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../prisma/client";
+import verifyMiddleware from "../jwt-session/verifyMiddleware";
 
-export default async (req, res) => {
-  // Asegúrate de que el usuario está autenticado
-  const session = await getSession({ req });
-  if (!session) {
-    return res
-      .status(401)
-      .json({ error: "Por favor, inicie sesión para obtener cupones." });
+const handler = async (req, res, verifyMethod) => {
+  // Si verifyMethod es el email, usamos ese email para obtener el userId
+  const user = await prisma.user.findUnique({
+    where: {
+      email: verifyMethod,
+    },
+    select: {
+      id: true, // Sólo seleccionamos el id para optimizar la consulta
+    },
+  });
+
+  if (!user) {
+    return res.status(401).json({ message: "Not authenticated" });
   }
 
-  try {
-    const coupons = await prisma.coupon.findMany({
-      where: {
-        userId: session.userId,
-      },
-    });
+  const userId = user.id;
 
-    res.json(coupons);
-  } catch (error) {
-    console.error("Error obteniendo cupones:", error);
-    res.status(500).json({ error: "Error interno del servidor." });
+  switch (req.method) {
+    case "GET":
+      try {
+        const coupons = await prisma.coupon.findMany({
+          where: { userId },
+          include: {
+            user: true,
+          },
+        });
+
+        res.status(200).json(coupons);
+      } catch (error) {
+        res.status(500).json({
+          message: "Error fetching coupons",
+          error: error.message,
+        });
+      }
+      break;
+
+    default:
+      res.status(405).end(); // Método no permitido
+      break;
   }
 };
+
+export default verifyMiddleware(handler);

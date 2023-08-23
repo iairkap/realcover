@@ -6,13 +6,34 @@
 }
 
 .titulo {
-  margin-top: 8rem;
+  margin-top: 2rem;
   color: #f5f5f5;
   font-family: "Roboto", sans-serif;
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 300;
   line-height: 139%; /* 3.1275rem */
   letter-spacing: -0.02475rem;
-  margin-left: 10rem;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  margin-left: 12%;
+  margin-right: 12%;
+}
+
+@media screen and (min-width: 1440px) and (max-width: 2560px) {
+  .titleContainer {
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+}
+
+.cardContainer {
+  margin-left: 12%;
+  margin-right: 12%;
 }

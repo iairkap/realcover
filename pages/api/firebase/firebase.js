@@ -1,8 +1,9 @@
-import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { initializeApp } from "firebase/app";
+import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.FIRE_API_KEY,
+  apiKey: "AIzaSyCbJBIAFDUphzN2s8KxvVFM1eQTva4U-LE",
   authDomain: "real-cover.firebaseapp.com",
   projectId: "real-cover",
   storageBucket: "real-cover.appspot.com",
@@ -13,6 +14,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
+const auth = getAuth(app); // <-- Importante: Usar getAuth con el app
+const googleProvider = new GoogleAuthProvider();
 
 function extractImageNameFromURL(url) {
   let urlParts = url.split("/");
@@ -21,4 +24,12 @@ function extractImageNameFromURL(url) {
   return imageNameParts[0];
 }
 
-export { storage, ref, listAll, getDownloadURL, extractImageNameFromURL };
+export {
+  storage,
+  ref,
+  listAll,
+  getDownloadURL,
+  extractImageNameFromURL,
+  auth,
+  googleProvider,
+};

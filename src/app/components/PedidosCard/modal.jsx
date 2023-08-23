@@ -139,6 +139,7 @@ function ModalDireccion({
           phone: responseData.phone || "",
           shopName: responseData.shopName || "",
           cuit: responseData.cuit || "",
+          id: userData.id,
         });
         setIsUpdateSuccess(true);
         setIsShippingModalOpen(false);

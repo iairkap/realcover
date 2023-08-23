@@ -3,12 +3,13 @@ import styles from "./logIn.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Cambiado de "next/navigation" a "next/router"
 import { GlobalContext } from "./../../store/layout";
-import { signIn, getSession } from "next-auth/react";
 import ForgotPasswordModal from "./../ForgetPasswordModal/ForgetPasswordModal";
 import namecontact from "../../../../public/name-contact-form.svg";
 import mailcontact from "../../../../public/mail-contact-form.svg";
 import namecontactverde from "../../../../public/name-contact-form-verde.svg";
 import mailcontactverde from "../../../../public/mail-contact-form-verde.svg";
+import { auth, googleProvider } from "../../../../pages/api/firebase/firebase";
+import { signInWithPopup } from "firebase/auth"; // Ensure you've imported this function
 
 function LogIn({ toggleForm }) {
   const { setIsAuthenticated } = useContext(GlobalContext);
@@ -19,6 +20,45 @@ function LogIn({ toggleForm }) {
   const [nombreFocused, setNombreFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [user, setUser] = useState(null);
+  const signInWithGoogle = async () => {
+    try {
+      // Authenticate with Firebase
+      const result = await signInWithPopup(auth, googleProvider);
+      const firebaseUser = result.user;
+
+      const [firstName, ...lastNameParts] = (
+        firebaseUser.displayName || ""
+      ).split(" ");
+      const lastName = lastNameParts.join(" ") || "Not provided";
+      // Call your API endpoint to register/get the user
+      const response = await fetch("/api/fire", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: firebaseUser.email,
+          name: firebaseUser.displayName,
+          lastName: lastName,
+          provider: "GOOGLE", // Make sure this is correct; using "floripondio" as provider is unusual
+        }),
+      });
+
+      // Ensure the response is valid before parsing
+      if (response.ok) {
+        const data = await response.json();
+        // Save data to your local/global state or handle it however you want
+        setUser(data);
+        setIsAuthenticated(true);
+        router.push("/store/fundas");
+      } else {
+        const data = await response.text(); // Attempt to get the response text in case it's not JSON
+        console.error("Error registering/logging in via your API:", data);
+      }
+    } catch (error) {
+      console.error("Error authenticating with Google:", error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,29 +146,9 @@ function LogIn({ toggleForm }) {
           </div>
           <br />
           <div className={styles.authcontainer}>
-            <button
-              className={styles.button3}
-              onClick={async () => {
-                const res = await signIn("google", {
-                  callbackUrl: "http://localhost:3000/store/fundas",
-                });
-                setIsAuthenticated(true);
-              }}
-            >
+            <button className={styles.button3} onClick={signInWithGoogle}>
               <Image src={"./googlelog.svg"} width={25} height={25} />
               Google
-            </button>
-            <button
-              className={styles.button3}
-              onClick={async () => {
-                const res = await signIn("google", {
-                  callbackUrl: "http://localhost:3000/store/fundas",
-                });
-                setIsAuthenticated(true);
-              }}
-            >
-              <Image src={"./facebooklog.svg"} width={25} height={25} />
-              Facebook
             </button>
           </div>
           <br />
