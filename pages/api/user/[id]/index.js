@@ -23,6 +23,7 @@ const handler = async (req, res, verifyMethod) => {
       }
 
     case "PUT":
+      console.log("Updating user with email:", verifyMethod);
       try {
         const {
           name,

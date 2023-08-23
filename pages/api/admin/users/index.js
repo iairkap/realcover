@@ -61,10 +61,28 @@ async function handler(req, res, verifyMethod) {
     const userId = req.query.id;
 
     if (!userId) {
-      res.status(400).json({ message: "User ID required" });
+      return res.status(400).json({ message: "User ID required" });
     }
 
     try {
+      const orders = await prisma.order.findMany({
+        where: { userId: Number(userId) },
+        select: { id: true },
+      });
+
+      for (let order of orders) {
+        await prisma.orderDetail.deleteMany({
+          where: { orderId: order.id },
+        });
+      }
+      await prisma.order.deleteMany({
+        where: { userId: Number(userId) },
+      });
+
+      await prisma.coupon.deleteMany({
+        where: { userId: Number(userId) },
+      });
+
       const user = await prisma.user.delete({
         where: { id: Number(userId) },
       });
@@ -73,7 +91,7 @@ async function handler(req, res, verifyMethod) {
       res.status(200).json(user);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Error deleting user" });
+      res.status(500).json({ message: error.message });
     }
   } else {
     res.status(403).json({ message: "Not authorized" });

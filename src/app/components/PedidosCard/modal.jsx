@@ -1,26 +1,30 @@
 "use client";
 
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import styles from "./backup.module.css";
+import { useSession } from "next-auth/react";
 function ModalDireccion({
   userFormData,
   setUserFormData,
   isShippingModalOpen,
-  handleUpdateUserInfo,
   setIsShippingModalOpen,
   userData,
 }) {
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(null);
+  const [isUpdateSuccess, setIsUpdateSuccess] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const closeDropdown = () => {
     setIsOpen(false);
   };
+
+  const { data: session } = useSession();
+  console.log(session);
 
   const updateUserField = (field, value) => {
     setUserFormData((prevData) => ({
@@ -88,7 +92,6 @@ function ModalDireccion({
       );
     }
   };
-  
 
   const handleInputBlur = () => {
     setTimeout(() => {
@@ -105,6 +108,60 @@ function ModalDireccion({
     label: s.description,
   }));
 
+  const handleUpdateUserInfo = async (e) => {
+    e.preventDefault();
+    console.log("Attempting to update user with data:", userFormData);
+
+    try {
+      const response = await fetch(`/api/user/fafa`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userFormData),
+        credentials: "include", // Include cookies in the request
+      });
+
+      const responseData = await response.json();
+      if (!session) {
+        console.error("User is not authenticated. Please sign in first.");
+        return;
+      }
+      console.log("Attempting to update user with data:", userFormData);
+
+      if (response.ok) {
+        console.log("User updated successfully:", responseData);
+        setUserFormData({
+          address: responseData.address || "",
+          city: responseData.city || "",
+          localidad: responseData.localidad || "",
+          postalCode: responseData.postalCode || "",
+          phone: responseData.phone || "",
+          shopName: responseData.shopName || "",
+          cuit: responseData.cuit || "",
+        });
+        setIsUpdateSuccess(true);
+        setIsShippingModalOpen(false);
+      } else {
+        console.error("Error updating user:", responseData.message);
+        setIsUpdateSuccess(false);
+      }
+    } catch (error) {
+      console.error("Unexpected error during update:", error);
+      setIsUpdateSuccess(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      alert("Datos actualizados con éxito!");
+      setIsUpdateSuccess(false); // Reinicia el estado tras mostrar el mensaje
+    }
+  }, [isUpdateSuccess]);
+
+  const handleOpenShippingModal = () => {
+    setIsShippingModalOpen(true);
+  };
   return (
     <div>
       <Modal

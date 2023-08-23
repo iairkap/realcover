@@ -3,6 +3,7 @@
 import { useState, useEffect, useContext } from "react";
 import styles from "../pedidoscard.module.css";
 import { GlobalContext } from "../../../store/layout";
+import { useSession } from "next-auth/react";
 
 export const useOrderLogic = (
   date,
@@ -19,6 +20,7 @@ export const useOrderLogic = (
   const [isUpdateSuccess, setIsUpdateSuccess] = useState(false);
   const productCountByType = {};
   const { userData, setUserData } = useContext(GlobalContext);
+  const { data: session } = useSession();
 
   orderDetails.forEach((detail) => {
     const productType = detail.products.productType;
@@ -174,6 +176,11 @@ export const useOrderLogic = (
       });
 
       const responseData = await response.json();
+      if (!session) {
+        console.error("User is not authenticated. Please sign in first.");
+        return;
+      }
+      console.log("Attempting to update user with data:", userFormData);
 
       if (response.ok) {
         console.log("User updated successfully:", responseData);

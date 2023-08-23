@@ -36,7 +36,7 @@ model User {
   localidad  String?
   shopName   String?
   coupons    Coupon[]
-  orders     Order[]
+  orders     Order[] 
 }
 
 model Order {
@@ -45,9 +45,9 @@ model Order {
   date         DateTime      @default(now())
   total        Float
   status       String
-  deliveryDate DateTime?
   discountCode String?
   couponId     Int?
+  deliveryDate DateTime?
   coupon       Coupon?       @relation(fields: [couponId], references: [id])
   Discount     Discount?     @relation(fields: [discountCode], references: [code])
   user         User          @relation(fields: [userId], references: [id])
