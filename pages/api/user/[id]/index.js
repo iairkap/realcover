@@ -1,25 +1,24 @@
 import prisma from "../../../../prisma/client";
-import verifyMiddleware from "../../jwt-session/verifyMiddleware";
+import { verifyMiddleware } from "../../jwt-session/verifyMiddleware";
 
-const handler = async (req, res, verifyMethod) => {
+const handler = async (req, res) => {
   const { method } = req;
-
+  const verifyEmail = req.verifiedEmail; // extrae el email verificado
   switch (method) {
     case "GET":
       try {
         const user = await prisma.user.findUnique({
           where: {
-            email: verifyMethod,
+            email: verifyEmail,
           },
         });
-
         if (!user) {
           return res.status(400).json({ message: "User not found" });
         }
         return res.status(200).json(user);
       } catch (error) {
         console.error("Error fetching user:", error);
-        return res.status(500).json({ message: "Unexpected error occurred" });
+        return res.status(500).json(error.message);
       }
 
     case "PUT":
@@ -40,7 +39,7 @@ const handler = async (req, res, verifyMethod) => {
 
         const updatedUser = await prisma.user.update({
           where: {
-            email: verifyMethod,
+            email: verifyEmail, // use verifyEmail instead of verifyMethod
           },
           data: {
             name,
@@ -97,4 +96,8 @@ const handler = async (req, res, verifyMethod) => {
   }
 };
 
-export default verifyMiddleware(handler);
+export default (req, res) => {
+  verifyMiddleware(req, res, () => {
+    handler(req, res);
+  });
+};

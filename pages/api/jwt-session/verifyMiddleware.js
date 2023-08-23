@@ -1,4 +1,66 @@
 import { getSession } from "next-auth/react";
+import jwt from "jsonwebtoken";
+import cookie from "cookie";
+
+export const verifyMiddleware = async (req, res, next) => {
+  const cookies = cookie.parse(req.headers.cookie || "");
+  const token = cookies["next-auth.session-token"];
+  const JWT_SECRET = "Re@L123abcP@lermo3805101214680500"; // Considera mover esto a variables de entorno.
+
+  console.log("Checking Session...", token);
+
+  const session = await getSession({ req });
+
+  let verifyMethod;
+
+  if (session && session.user.email) {
+    console.log("Session found:", session);
+    verifyMethod = session.user.email;
+  } else if (token) {
+    console.log("Token found:", token);
+    try {
+      const decodedToken = jwt.verify(token, JWT_SECRET);
+      const { email } = decodedToken;
+
+      verifyMethod = email;
+      console.log("Token verified for:", email);
+    } catch (error) {
+      console.error("Token verification failed:", error);
+      return res.status(401).json(error);
+    }
+  } else {
+    console.warn("No session or token found");
+    return res.status(401).json({ message: "Unauthorized, please SignIn" });
+  }
+  req.verifiedEmail = verifyMethod;
+  next();
+};
+
+/* import { getSession } from "next-auth/react";
+
+export const verifyMiddleware = async (req, res, next) => {
+  const session = await getSession({ req });
+
+  if (session && session.user.email) {
+    console.log("Session found:", session);
+    req.verifiedEmail = session.user.email;
+    next();
+  } else {
+    console.warn("No session found");
+    return res.status(401).json({ message: "Unauthorized, please SignIn" });
+  }
+}; 
+
+ */
+
+/*
+
+
+
+
+
+
+/* import { getSession } from "next-auth/react";
 
 const verifyMiddleware = (handler) => async (req, res) => {
   console.log("Checking Session...");
@@ -7,7 +69,7 @@ const verifyMiddleware = (handler) => async (req, res) => {
   if (session && session.user.email) {
     console.log("Session found:", session);
 
-    if (session.provider === "google") {
+    if (session.provider === "GOOGLE") {
       console.log("Google session detected.");
       // Aquí puedes manejar cualquier lógica específica para sesiones de Google
     }
@@ -20,13 +82,16 @@ const verifyMiddleware = (handler) => async (req, res) => {
 };
 
 export default verifyMiddleware;
-
-/* import { getSession } from "next-auth/react";
+ 
+import { getSession } from "next-auth/react";
 import { verify } from "jsonwebtoken";
 
 const verifyMiddleware = (handler) => async (req, res) => {
-  const { token } = req.cookies;
-  console.log("Checking Session...");
+  // const { token } = req.cookies;
+  const token = req.cookies["next-auth.session-token"];
+  const JWT_SECRET = "Re@L123abcP@lermo3805101214680500";
+
+  console.log("Checking Session... ", token);
   const session = await getSession({ req });
 
   let verifyMethod;
@@ -36,12 +101,14 @@ const verifyMiddleware = (handler) => async (req, res) => {
   } else if (token) {
     console.log("Token found:", token);
     try {
-      const { email } = verify(token, process.env.JWT_SECRET);
+      const { email } = verify(token, JWT_SECRET);
       verifyMethod = email;
       console.log("Token verified for:", email);
     } catch (error) {
       console.error("Token verification failed:", error);
-      return res.status(401).json({ message: "Unauthorized, invalid token" });
+      return res
+        .status(401)
+        .json({ message: `Unauthorized: ${error.message}` });
     }
   } else {
     console.warn("No session or token found");
@@ -50,9 +117,49 @@ const verifyMiddleware = (handler) => async (req, res) => {
   return handler(req, res, verifyMethod);
 };
 
-export default verifyMiddleware; */
+export default verifyMiddleware; 
 
-/* 
+import { getSession } from "next-auth/react";
+import jwt from "jsonwebtoken";
+import cookie from "cookie";
+
+export const verifyMiddleware = async (req, res, next) => {
+  const cookies = cookie.parse(req.headers.cookie || "");
+  const token = cookies["next-auth.session-token"];
+  const JWT_SECRET = "Re@L123abcP@lermo3805101214680500"; // Considera mover esto a variables de entorno.
+
+  console.log("Checking Session...", token);
+
+  const session = await getSession({ req });
+
+  let verifyMethod;
+
+  if (session && session.user.email) {
+    console.log("Session found:", session);
+    verifyMethod = session.user.email;
+  } else if (token) {
+    console.log("Token found:", token);
+    try {
+      const decodedToken = jwt.verify(token, JWT_SECRET);
+      const { email } = decodedToken;
+
+      verifyMethod = email;
+      console.log("Token verified for:", email);
+    } catch (error) {
+      console.error("Token verification failed:", error);
+      return res.status(401).json(error);
+    }
+  } else {
+    console.warn("No session or token found");
+    return res.status(401).json({ message: "Unauthorized, please SignIn" });
+  }
+  req.verifiedEmail = verifyMethod;
+  next();
+};
+
+
+ 
+
 import { getSession } from "next-auth/react";
 import { verify } from "jsonwebtoken";
 

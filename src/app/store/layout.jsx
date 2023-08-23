@@ -49,13 +49,12 @@ export default function Layout({ children }) {
         const data = await response.json();
 
         if (response.ok) {
-          console.log("Esto es el cart:", data);
           setUserData(data);
         } else {
           console.error("Error fetching user data:", data);
         }
       } catch (error) {
-        console.error("Error during the request:", error);
+        console.error("Error during the request:", error.message);
       }
     };
 
