@@ -16,19 +16,23 @@ import Review from "../components/review/review";
 
 function Landing(props) {
   return (
-    <div className={styles.backgroundColor}>
-      <div className={styles.navBar}>
-        <NavBar />
-      </div>
-      <Pictures />
-      {/* Contenedor con el fondo deseado */}
-      <div className={styles.backgroundContainer}>
-        <GridComponents />
-        <br />
-        <br />
-        <Review />
-        <div></div>
-        <div className={styles.contactanos}>{/* <Contactanos /> */}</div>
+    <div className={styles.container}>
+      <div className={styles.backgroundColor}>
+        <div className={styles.navBar}>
+          <NavBar />
+        </div>
+        <Pictures />
+        {/* Contenedor con el fondo deseado */}
+        <div className={styles.backgroundContainer}>
+          <br />
+          <br />
+          <GridComponents />
+          <br />
+          <br />
+          <Review />
+          <div></div>
+          <div className={styles.contactanos}>{/* <Contactanos /> */}</div>
+        </div>
       </div>
     </div>
   );

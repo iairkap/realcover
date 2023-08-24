@@ -8,20 +8,20 @@
 .generalReviews {
   display: flex;
   flex-direction: row;
-  place-self: self-end;
   color: #232323;
   gap: 1;
   font-family: "Roboto", sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.975rem;
   font-style: normal;
   font-weight: 400;
   line-height: 139%; /* 1.21625rem */
   letter-spacing: -0.00963rem;
+  justify-content: center;
 }
 
 .cardContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .button {
@@ -38,13 +38,16 @@
 }
 
 .title {
-  color: #232323;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.25rem;
+  color: #000;
+  font-family: Roboto;
+  font-size: 1.875rem;
   font-style: normal;
   font-weight: 900;
-  line-height: 9.21875rem;
-  place-self: center;
+  line-height: 139%;
+  letter-spacing: -0.02063rem;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
 }
 
 .divisor {
@@ -53,4 +56,11 @@
   height: 2px;
   background-color: rgba(41, 40, 40, 0.513);
   margin-top: 3rem;
+}
+
+.containerI {
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+  margin-bottom: 2rem;
 }

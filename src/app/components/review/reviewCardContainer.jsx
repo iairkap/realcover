@@ -4,6 +4,8 @@ import StarRating from "./starRating";
 import ReviewCard from "./reviewCard";
 import { getReviewTotal } from "./reviewtotal";
 import styles from "./cardContainer.module.css";
+import Image from "next/image";
+import PhotoGrid from "../pictureGrid/pictureGrid";
 
 function ReviewCardContainer(props) {
   const { totalKvs, averageRating, excellentReviews } = getReviewTotal();
@@ -70,8 +72,9 @@ function ReviewCardContainer(props) {
           {">"}
         </button>
       </div>
-      <br />
-      <br />
+      <div className={styles.containerI}>
+        <PhotoGrid />
+      </div>
     </div>
   );
 }
