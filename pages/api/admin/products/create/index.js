@@ -43,7 +43,7 @@ async function handler(req, res, verifyMethod) {
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
             3290
           );
-          /*          const valijas = await mapAndSaveImages(
+          /*         const valijas = await mapAndSaveImages(
             "CubreValijas",
             "CUBRE_VALIJAS",
             ["S", "M", "L"],
@@ -55,7 +55,7 @@ async function handler(req, res, verifyMethod) {
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
             2990
           ); */
-          /*  const fundas = await mapAndSaveImages(
+          /*    const fundas = await mapAndSaveImages(
             "Fundas",
             "NEOPRENE_COVER",
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
@@ -67,7 +67,7 @@ async function handler(req, res, verifyMethod) {
           //   ["14_1", "15_6"],
           //   5990
           // );
-          const tablet = await mapAndSaveImages(
+          /*        const tablet = await mapAndSaveImages(
             "Tablets",
             "TABLET_COVER",
             ["Size7", "Size8", "Size9", "Size10"],
@@ -79,7 +79,7 @@ async function handler(req, res, verifyMethod) {
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
             3290
           );
-
+ */
           return res.status(200).json({ message: "Products created" });
         } catch (error) {
           return res

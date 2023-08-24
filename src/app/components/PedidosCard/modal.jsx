@@ -165,8 +165,8 @@ function ModalDireccion({
             backdropFilter: "blur(1px)",
             zIndex: 10,
             display: "flex",
-            justifyContent: "center", // Centrar contenido horizontalmente
-            alignItems: "center", // Centrar contenido verticalmente
+            justifyContent: "center",
+            alignItems: "center",
           },
           content: {
             background: "#232323",
@@ -174,15 +174,15 @@ function ModalDireccion({
             borderColor: "#46b02b",
             borderWidth: "1rem",
             overflow: "auto",
-            position: "relative", // Esto es importante para que el modal se posicione en el centro
+            position: "relative",
             top: "auto",
             left: "auto",
             right: "auto",
             bottom: "auto",
             width: "30rem",
-            transform: "none", // Remover la transformación anterior para centrar
+            transform: "none",
             padding: "2rem",
-            boxSizing: "border-box", // Asegurar que el padding no afecte el tamaño total
+            boxSizing: "border-box",
           },
         }}
       >

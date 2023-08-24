@@ -8,6 +8,9 @@ import vendidosb from "./vendidos.js";
 import trapeciob from "../../../../public/trapeciob.svg";
 import Link from "next/link";
 import GridItem from "./gridHook";
+import { GlobalContext } from "../../store/layout";
+import { useContext } from "react";
+import { useRouter } from "next/navigation";
 
 export default function GridComponents(props) {
   const vendidos = vendidosb;
@@ -18,6 +21,8 @@ export default function GridComponents(props) {
     hover: [],
     imagenesModal: [],
     descriptionModal: "",
+    buttonLinkMenor: "",
+    displayType: "",
   });
   const [currentImage, setCurrentImage] = useState("");
   const [hoverImgIndices, setHoverImgIndices] = useState(vendidos.map(() => 0));
@@ -27,7 +32,11 @@ export default function GridComponents(props) {
     setCurrentImage(item.imagenesModal[0]);
     setModalOpen(true);
     setHoverImgIndices(vendidos.map(() => 0));
+    updateDisplayType(item.displayType); // <-- Añade esta línea
   };
+  const { setGlobalState } = useContext(GlobalContext);
+  const router = useRouter();
+
   const handleMouseEnter = (index) => {
     if (isModalOpen) return;
     imgIntervals.current[index] = setInterval(() => {
@@ -47,6 +56,13 @@ export default function GridComponents(props) {
       newIndices[index] = 0;
       return newIndices;
     });
+  };
+  const updateDisplayType = (newType) => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      displayType: newType,
+    }));
+    localStorage.setItem("displayType", newType);
   };
   return (
     <div className={styles.contenedor}>
@@ -71,27 +87,44 @@ export default function GridComponents(props) {
             overlay: {
               backgroundColor: "rgba(0, 0, 0, 0.8)",
               backdropFilter: "blur(1px)",
-              zIndex: 10000000,
+              zIndex: 10,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             },
             content: {
-              top: "50%",
-              left: "50%",
-
-              transform: "translate(25%, 15%)",
-              maxWidth: "70vw",
-              maxHeight: "auto",
+              background: "#232323",
+              border: "solid",
+              borderColor: "#46b02b",
+              borderWidth: "1rem",
               overflow: "auto",
+              position: "relative",
+              top: "auto",
+              left: "auto",
+              right: "auto",
+              width: "80vw",
+              bottom: "auto",
+              transform: "none",
+              padding: "2rem",
+              boxSizing: "border-box",
             },
           }}
           className={styles.modal}
         >
+          <div className={styles.buttonClose}>
+            <button
+              className={styles.cerrar}
+              onClick={() => setModalOpen(false)}
+            >
+              X
+            </button>
+          </div>
           <div className={styles.modal}>
             <div className={styles.modalImages}>
               <Image
                 src={currentImage}
                 alt={modalContent.title}
                 width={500}
-                height={500}
                 className={styles.imagenModal}
               />
               <div className={styles.modalThumbnails}>
@@ -103,7 +136,6 @@ export default function GridComponents(props) {
                       src={img}
                       alt={modalContent.title}
                       width={150}
-                      height={150}
                       onClick={() => setCurrentImage(img)}
                       className={styles.imagenModal}
                     />
@@ -129,11 +161,18 @@ export default function GridComponents(props) {
                     <button className={styles.boton}>Compra por menor</button>
                   </a>
                 )}
-                <Link
-                  href={`/store/fundas?displayType=${modalContent.setDisplayType}`}
+                <button
+                  className={styles.boton}
+                  onClick={() => {
+                    setGlobalState((prevState) => ({
+                      ...prevState,
+                      displayType: modalContent.displayType,
+                    }));
+                    router.push("/store/fundas");
+                  }}
                 >
-                  <button className={styles.boton}>Compra por mayor</button>
-                </Link>
+                  Compra por mayor
+                </button>
               </div>{" "}
             </div>
           </div>

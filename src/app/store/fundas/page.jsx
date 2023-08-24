@@ -16,10 +16,14 @@ function Fundas() {
     maletines,
     tablets,
     conBolsillo,
+    globalState,
+    setGlobalState,
     userData,
     setUserData,
     isAuthenticated, // Nota que ya no se utiliza setIsAuthenticated aquí, pues no estamos cambiando su valor en este componente.
   } = useContext(GlobalContext);
+
+  const displayType = globalState.displayType;
 
   useEffect(() => {
     //peticion para registrar correo de google en bdd
@@ -40,6 +44,19 @@ function Fundas() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const savedDisplayType = localStorage.getItem("displayType");
+
+    if (savedDisplayType) {
+      setGlobalState((prevState) => ({
+        ...prevState,
+        displayType: savedDisplayType,
+      }));
+    }
+
+    // ... el resto de tu código useEffect aquí ...
+  }, []); // Nota: el array vacío significa que este efecto se ejecutará sólo una vez, cuando el componente se monte
 
   return (
     <div className={styles.background}>

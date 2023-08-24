@@ -17,18 +17,23 @@ function CardsContainer({
   tablets,
   conBolsillo,
 }) {
+  const { globalState, setGlobalState } = useContext(GlobalContext);
   const [page, setPage] = useState(0);
-  const router = useRouter();
-  const [displayType, setDisplayType] = useState("");
-
-  useEffect(() => {
-    if (router.query && router.query.displayType) {
-      setDisplayType(router.query.displayType);
-    }
-  }, [router.query]);
+  const displayType = globalState.displayType;
 
   const itemsPerPage = 12;
   const maxPageButtons = 5;
+
+  useEffect(() => {
+    const savedDisplayType = localStorage.getItem("displayType");
+
+    if (savedDisplayType) {
+      setGlobalState((prevState) => ({
+        ...prevState,
+        displayType: savedDisplayType,
+      }));
+    }
+  }, []);
 
   if (isLoading) {
     return <div></div>;
@@ -44,7 +49,6 @@ function CardsContainer({
         items.splice(index178, 1);
         items.unshift(item178);
       }
-
       break;
     case "maletines":
       items = maletines.map((item) => ({ ...item, type: "maletines" }));
@@ -108,7 +112,10 @@ function CardsContainer({
           className={styles.mobileSelector}
           value={displayType}
           onChange={(e) => {
-            setDisplayType(e.target.value);
+            setGlobalState((prevState) => ({
+              ...prevState,
+              displayType: e.target.value,
+            }));
             setPage(0);
           }}
         >
@@ -121,7 +128,10 @@ function CardsContainer({
         </select>
         <button
           onClick={() => {
-            setDisplayType("covers");
+            setGlobalState((prevState) => ({
+              ...prevState,
+              displayType: "covers",
+            }));
             setPage(0);
           }}
           className={`${styles.botonOpciones} ${
@@ -132,7 +142,10 @@ function CardsContainer({
         </button>
         <button
           onClick={() => {
-            setDisplayType("maletines");
+            setGlobalState((prevState) => ({
+              ...prevState,
+              displayType: "maletines",
+            }));
             setPage(0);
           }}
           className={`${styles.botonOpciones} ${
@@ -143,8 +156,10 @@ function CardsContainer({
         </button>
         <button
           onClick={() => {
-            setDisplayType("fullColor");
-            setPage(0);
+            setGlobalState((prevState) => ({
+              ...prevState,
+              displayType: "fullColor",
+            }));
           }}
           className={`${styles.botonOpciones} ${
             displayType === "fullColor" ? styles.botonOpcionesActivo : ""
@@ -154,8 +169,10 @@ function CardsContainer({
         </button>
         <button
           onClick={() => {
-            setDisplayType("conBolsillo");
-            setPage(0);
+            setGlobalState((prevState) => ({
+              ...prevState,
+              displayType: "conBolsillo",
+            }));
           }}
           className={`${styles.botonOpciones} ${
             displayType === "conBolsillo" ? styles.botonOpcionesActivo : ""
@@ -165,8 +182,10 @@ function CardsContainer({
         </button>
         <button
           onClick={() => {
-            setDisplayType("tablets");
-            setPage(0);
+            setGlobalState((prevState) => ({
+              ...prevState,
+              displayType: "tablets",
+            }));
           }}
           className={`${styles.botonOpciones} ${
             displayType === "tablets" ? styles.botonOpcionesActivo : ""
@@ -176,8 +195,10 @@ function CardsContainer({
         </button>
         <button
           onClick={() => {
-            setDisplayType("cubrevalijas");
-            setPage(0);
+            setGlobalState((prevState) => ({
+              ...prevState,
+              displayType: "cubrevalijas",
+            }));
           }}
           className={`${styles.botonOpciones} ${
             displayType === "cubrevalijas" ? styles.botonOpcionesActivo : ""

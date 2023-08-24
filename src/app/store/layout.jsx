@@ -16,6 +16,9 @@ export default function Layout({ children }) {
   const [currentOrderDetails, setCurrentOrderDetails] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [globalState, setGlobalState] = useState({
+    displayType: "",
+  });
 
   const loadCart = () => {
     if (typeof window !== "undefined") {
@@ -185,6 +188,8 @@ export default function Layout({ children }) {
         userData,
         setUserData,
         cart,
+        globalState,
+        setGlobalState,
       }}
     >
       {children}
