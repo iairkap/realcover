@@ -150,7 +150,7 @@
   flex-direction: row;
   margin-top: -2rem;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .mots {
@@ -160,7 +160,8 @@
 }
 
 .picture {
-  margin: 0rem;
+  width: 50%;
+  height: 36%;
 }
 
 .cardFront {

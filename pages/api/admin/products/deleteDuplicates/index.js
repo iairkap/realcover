@@ -7,16 +7,14 @@ export default async function handle(req, res) {
       await prisma.product.deleteMany({
         where: {
           id: {
-            gte: 477,
+            gte: 624,
           },
         },
       });
 
-      res
-        .status(200)
-        .json({
-          message: "Products with ID 477 and above deleted successfully.",
-        });
+      res.status(200).json({
+        message: "Products with ID 477 and above deleted successfully.",
+      });
     } catch (error) {
       res
         .status(500)
