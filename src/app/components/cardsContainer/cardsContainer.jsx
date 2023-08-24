@@ -4,7 +4,10 @@ import Card from "../card/card";
 import { aprevious, nextArrow } from "../../../../public/imagnes";
 import Image from "next/image";
 import Loading from "../loader/loading";
-
+import { useRouter } from "next/navigation"; // Cambiado de "next/navigation" a "next/router"
+import { useEffect } from "react";
+import { GlobalContext } from "../../store/layout";
+import { useContext } from "react";
 function CardsContainer({
   covers,
   maletines,
@@ -12,9 +15,18 @@ function CardsContainer({
   cubrevalijas,
   isLoading,
   tablets,
+  conBolsillo,
 }) {
   const [page, setPage] = useState(0);
-  const [displayType, setDisplayType] = useState("covers");
+  const router = useRouter();
+  const [displayType, setDisplayType] = useState("");
+
+  useEffect(() => {
+    if (router.query && router.query.displayType) {
+      setDisplayType(router.query.displayType);
+    }
+  }, [router.query]);
+
   const itemsPerPage = 12;
   const maxPageButtons = 5;
 
@@ -26,6 +38,12 @@ function CardsContainer({
   switch (displayType) {
     case "covers":
       items = covers.map((item) => ({ ...item, type: "neopreneCover" }));
+      const index178 = items.findIndex((item) => item.id === 178);
+      if (index178 !== -1) {
+        const item178 = items[index178];
+        items.splice(index178, 1);
+        items.unshift(item178);
+      }
 
       break;
     case "maletines":
@@ -42,6 +60,9 @@ function CardsContainer({
       break;
     case "cubrevalijas":
       items = cubrevalijas.map((item) => ({ ...item, type: "cubrevalijas" }));
+      break;
+    case "conBolsillo":
+      items = conBolsillo.map((item) => ({ ...item, type: "conBolsillo" }));
       break;
     default:
       items = [];
@@ -96,6 +117,7 @@ function CardsContainer({
           <option value="fullColor">FULL COLOR</option>
           <option value="tablets">FUNDAS RIGIDAS</option>
           <option value="cubrevalijas">CUBRE VALIJAS</option>
+          <option value="conBolsillo">FUNDSA CON BOLSILLO</option>
         </select>
         <button
           onClick={() => {
@@ -129,6 +151,17 @@ function CardsContainer({
           }`}
         >
           FULL COLOR
+        </button>
+        <button
+          onClick={() => {
+            setDisplayType("conBolsillo");
+            setPage(0);
+          }}
+          className={`${styles.botonOpciones} ${
+            displayType === "conBolsillo" ? styles.botonOpcionesActivo : ""
+          }`}
+        >
+          FUNDAS CON BOLSILLO
         </button>
         <button
           onClick={() => {

@@ -8,6 +8,7 @@ export default function Layout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [covers, setCovers] = useState([]);
   const [fullColor, setFullColor] = useState([]);
+  const [conBolsillo, setConBolsillo] = useState([]);
   const [cubrevalijas, setCubrevalijas] = useState([]);
   const [maletines, setMaletines] = useState([]);
   const [checkoutVisible, setCheckoutVisible] = useState(false);
@@ -87,12 +88,16 @@ export default function Layout({ children }) {
         const tabletsData = response.data.filter(
           (product) => product.productType === "TABLET_COVER"
         );
+        const boslilloData = response.data.filter(
+          (product) => product.productType === "CON_BOLSILLO"
+        );
 
         setCovers(coversData);
         setMaletines(maletinesData);
         setFullColor(fullColorData);
         setCubrevalijas(cubrevalijasData);
         setTablets(tabletsData);
+        setConBolsillo(boslilloData);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -164,6 +169,7 @@ export default function Layout({ children }) {
         maletines,
         cubrevalijas,
         tablets,
+        conBolsillo,
         isLoading,
         cart,
         addToCart,

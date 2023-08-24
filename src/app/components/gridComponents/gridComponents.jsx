@@ -129,7 +129,9 @@ export default function GridComponents(props) {
                     <button className={styles.boton}>Compra por menor</button>
                   </a>
                 )}
-                <Link href={"/store/fundas"}>
+                <Link
+                  href={`/store/fundas?displayType=${modalContent.setDisplayType}`}
+                >
                   <button className={styles.boton}>Compra por mayor</button>
                 </Link>
               </div>{" "}

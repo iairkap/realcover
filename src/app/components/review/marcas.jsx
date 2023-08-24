@@ -30,7 +30,6 @@ function Marcas() {
     "oia 1.png",
     "sebigus.png",
     "remax.png",
-
     "techint 1.png",
     "amsel.png",
     "fibertel.png",

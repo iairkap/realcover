@@ -15,6 +15,7 @@ function Fundas() {
     cubrevalijas,
     maletines,
     tablets,
+    conBolsillo,
     userData,
     setUserData,
     isAuthenticated, // Nota que ya no se utiliza setIsAuthenticated aquí, pues no estamos cambiando su valor en este componente.
@@ -50,6 +51,7 @@ function Fundas() {
         fullColor={fullColor}
         cubrevalijas={cubrevalijas}
         tablets={tablets}
+        conBolsillo={conBolsillo}
       />
       <Cart />
     </div>
