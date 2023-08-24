@@ -1,18 +1,20 @@
 import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
+
 export default async (req, res) => {
-  // Asegúrate de que el usuario está autenticado
-  const session = await getSession({ req });
-  if (!session) {
+  const userId = req.body.userId;
+
+  if (!userId) {
     return res
       .status(401)
-      .json({ error: "Por favor, inicie sesión para obtener cupones." });
+      .json({ error: "Por favor, envíe el userId para obtener cupones." });
   }
 
   try {
     const coupons = await prisma.coupon.findMany({
       where: {
-        userId: session.userId,
+        userId: userId,
       },
     });
 

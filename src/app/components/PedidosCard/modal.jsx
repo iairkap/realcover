@@ -5,13 +5,13 @@ import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import styles from "./backup.module.css";
-import { useSession } from "next-auth/react";
 function ModalDireccion({
   userFormData,
   setUserFormData,
   isShippingModalOpen,
   setIsShippingModalOpen,
   userData,
+  isAuthenticated,
 }) {
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(null);
@@ -22,9 +22,6 @@ function ModalDireccion({
   const closeDropdown = () => {
     setIsOpen(false);
   };
-
-  const { data: session } = useSession();
-  console.log(session);
 
   const updateUserField = (field, value) => {
     setUserFormData((prevData) => ({
@@ -123,11 +120,6 @@ function ModalDireccion({
       });
 
       const responseData = await response.json();
-      if (!session) {
-        console.error("User is not authenticated. Please sign in first.");
-        return;
-      }
-      console.log("Attempting to update user with data:", userFormData);
 
       if (response.ok) {
         console.log("User updated successfully:", responseData);

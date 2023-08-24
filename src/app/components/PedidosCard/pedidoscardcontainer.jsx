@@ -5,22 +5,13 @@ import axios from "axios";
 import PedidosCard from "./pedidoscard";
 import styles from "./pedidoscontainer.module.css";
 import { GlobalContext } from "../../store/layout";
-import { useSession } from "next-auth/react";
 
-function PedidosContainer() {
+function PedidosContainer({ userData, setUserData }) {
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
   const ordersPerPage = 4; // 4 pedidos por página
 
-  const { userData, setUserData } = useContext(GlobalContext);
-  const { data: session } = useSession();
-
-  if (!session) {
-    // No hay sesión, redirige o muestra un mensaje al usuario.
-    return <p>Please sign in to view this content.</p>;
-  }
-
-  console.log(session);
   useEffect(() => {
     const fetchOrders = async (userId) => {
       try {
@@ -49,14 +40,13 @@ function PedidosContainer() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.titulo}>Mis Pedidos</h1>
-
       {currentOrders.map((order) => (
         <PedidosCard
           key={order.id}
           {...order}
           className={styles.separacion}
           userData={userData}
+          setUserData={setUserData}
         />
       ))}
       <div className={styles.pagination}>

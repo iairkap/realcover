@@ -1,8 +1,8 @@
 "use client";
+import GlobalContextProvider from "../app/store/layout";
 
 import React from "react";
-import { SessionProvider } from "next-auth/react";
 
 export default function AppProvider({ children }) {
-  return <SessionProvider>{children}</SessionProvider>;
+  return <GlobalContextProvider>{children}</GlobalContextProvider>;
 }

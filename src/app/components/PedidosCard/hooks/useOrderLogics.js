@@ -3,7 +3,6 @@
 import { useState, useEffect, useContext } from "react";
 import styles from "../pedidoscard.module.css";
 import { GlobalContext } from "../../../store/layout";
-import { useSession } from "next-auth/react";
 
 export const useOrderLogic = (
   date,
@@ -20,7 +19,6 @@ export const useOrderLogic = (
   const [isUpdateSuccess, setIsUpdateSuccess] = useState(false);
   const productCountByType = {};
   const { userData, setUserData } = useContext(GlobalContext);
-  const { data: session } = useSession();
 
   orderDetails.forEach((detail) => {
     const productType = detail.products.productType;
@@ -146,13 +144,13 @@ export const useOrderLogic = (
   };
 
   const [userFormData, setUserFormData] = useState({
-    address: userData.address || "",
-    city: userData.city || "",
-    localidad: userData.localidad || "",
-    postalCode: userData.postalCode || "",
-    phone: userData.phone || "",
-    shopName: userData.shopName || "",
-    cuit: userData.cuit || "",
+    address: userData?.address || "",
+    city: userData?.city || "",
+    localidad: userData?.localidad || "",
+    postalCode: userData?.postalCode || "",
+    phone: userData?.phone || "",
+    shopName: userData?.shopName || "",
+    cuit: userData?.cuit || "",
   });
 
   function updateUserField(fieldName, value) {

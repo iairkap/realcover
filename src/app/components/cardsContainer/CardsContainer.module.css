@@ -56,17 +56,10 @@
   font-style: normal;
 }
 
-.numberButton:hover,
-.botonOpcionesActivo {
+.numberButton:hover {
   background: #56b947;
   color: #000;
   border: none;
-}
-
-.botonOpcionesActivo {
-  background: #56b947 !important;
-  color: #ffffff !important;
-  border: none !important;
 }
 
 .currentButton {
@@ -74,29 +67,6 @@
   background: #fff;
   color: #000;
   font-style: normal;
-}
-
-.botonOpciones {
-  display: flex;
-  width: 100%;
-  max-width: 15.9375rem;
-  height: 4.3125rem;
-  padding: 1.0625rem 3rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  background: #232323;
-  border: none;
-  color: #fff;
-  font-style: normal;
-  font-weight: 900;
-  margin-bottom: 1em;
-  border-radius: 0.5rem;
-  transition: ease-in-out 0.1s;
-}
-
-.botonOpciones:hover {
-  color: #56b947;
 }
 
 /* Media Queries */
@@ -144,4 +114,27 @@
   .mobileSelector {
     display: block;
   }
+}
+
+.botonOpciones {
+  background-color: transparent;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.botonOpciones:hover {
+  color: #56b947;
+}
+
+.botonOpciones:focus {
+  outline: none;
+  color: #56b947;
+}
+
+.botoneraB {
+  display: flex;
+  gap: 5rem;
 }

@@ -81,11 +81,11 @@ function PedidosCard({
           Modificar Datos de Envio{" "}
         </button>
         <p className={styles.detallePedidoB}>
-          Direccion: {userData.address},Ciudad: {userData.city},Localidad:{" "}
-          {userData.localidad},Codigo Postal: {userData.postalCode},Telefono:{" "}
-          {userData.phone},Nombre del Local: {userData.shopName}, CUITL{" "}
-          {userData.cuit}
-          ,Nombre: {userData.name}, Apellido: {userData.lastname}
+          Direccion: {userData?.address},Ciudad: {userData?.city},Localidad:{" "}
+          {userData?.localidad},Codigo Postal: {userData?.postalCode},Telefono:{" "}
+          {userData?.phone},Nombre del Local: {userData?.shopName}, CUIT{" "}
+          {userData?.cuit}
+          ,Nombre: {userData?.name}, Apellido: {userData?.lastname}
         </p>
       </div>
       <ModalDireccion

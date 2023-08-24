@@ -1,0 +1,21 @@
+.container {
+  display: inline-flex;
+  width: 1rem; /* Ajusta a tu preferencia */
+  height: 1rem; /* Asegúrate de que sea igual al width */
+  padding: 0rem 0.125rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 50%; /* Esto hace que sea un círculo perfecto */
+  background: #70b756;
+}
+
+.numeros {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 0.575rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: -0.00413rem;
+}

@@ -1,0 +1,19 @@
+.cuponContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Esto crea un grid con 3 columnas de igual tamaño */
+  gap: 20px; /* Espacio entre cada cupón */
+  padding: 20px; /* Espacio alrededor del contenedor */
+}
+
+/* Ajustes para pantallas más pequeñas, si es necesario */
+@media (max-width: 768px) {
+  .cuponContainer {
+    grid-template-columns: 1fr 1fr; /* En pantallas más pequeñas, muestra solo 2 columnas */
+  }
+}
+
+@media (max-width: 500px) {
+  .cuponContainer {
+    grid-template-columns: 1fr; /* En pantallas muy pequeñas, muestra solo 1 columna */
+  }
+}

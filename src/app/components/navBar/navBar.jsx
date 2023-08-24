@@ -15,18 +15,18 @@ import { getLayout } from "../../store/layout";
 import { useRouter, usePathname } from "next/navigation"; // Importa esto
 import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
+import NumeroCarrito from "../numeroCarrito/numeroCarrito";
 
 function NavBar(props) {
   const {
     setCheckoutVisible,
-    isUserAuthenticated,
+    isAuthenticated,
     userData,
     setUserData,
     setIsAuthenticated,
   } = useContext(GlobalContext);
-  const [showLogoutMenu, setShowLogoutMenu] = useState(false);
 
-  const isAuthenticated = Boolean(userData); // Suponiendo que userData es null si el usuario no está autenticado
+  const [showLogoutMenu, setShowLogoutMenu] = useState(false);
 
   const router = useRouter(); // Añade esto
   const pathName = usePathname();
@@ -41,24 +41,22 @@ function NavBar(props) {
 
   const handleLoginClick = () => {
     if (isAuthenticated) {
-      setShowLogoutMenu(!showLogoutMenu); // Mostrar/ocultar el menú de deslogueo
+      setShowLogoutMenu(!showLogoutMenu);
     } else {
       router.push("/logIn");
     }
   };
   const handleLogout = async () => {
     if (userData?.provider === "GOOGLE") {
-      // Cierre de sesión para usuarios de Google usando next-auth del lado del cliente
-      signOut({ callbackUrl: "/" }); // Redirige al inicio después de cerrar sesión
+      signOut({ callbackUrl: "/" });
     } else {
-      // Cierre de sesión para usuarios que no son de Google usando tu ruta personalizada
       try {
         const response = await fetch("/api/logout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include", // Asegúrate de enviar las cookies
+          credentials: "include",
         });
 
         const data = await response.json();
@@ -101,16 +99,19 @@ function NavBar(props) {
           </Link>
         </div>
         <Link href="/store/fundas">
-          <Image
-            src={market}
-            alt="image"
-            onClick={handleCartOpen}
-            className={styles.icono}
-            title="Store"
-          />
+          <div>
+            <Image
+              src={market}
+              alt="image"
+              onClick={handleCartOpen}
+              className={styles.icono}
+              title="Store"
+            />
+            <NumeroCarrito />
+          </div>
         </Link>
+
         {isAuthenticated ? (
-          // Si está autenticado, mostrar el ícono de logout
           <Image
             src={logout}
             alt="Logout"
@@ -119,7 +120,6 @@ function NavBar(props) {
             title="Log Out"
           />
         ) : (
-          // Si no está autenticado, mostrar el ícono de login
           <Link href="/logIn">
             <Image
               src={signIn}

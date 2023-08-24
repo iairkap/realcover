@@ -2,7 +2,7 @@ import prisma from "../../../prisma/client";
 import { v4 as uuidv4 } from "uuid";
 export default async function handler(req, res) {
   const { method } = req;
-  const { userId, total, status, products } = req.body;
+  const { userId, total, status, products, couponId } = req.body;
 
   switch (method) {
     case "POST":
@@ -17,6 +17,7 @@ export default async function handler(req, res) {
             total,
             status,
             userId,
+            couponId: couponId, // Aquí usas el ID del cupón que se envió desde el frontend.
           },
         });
 

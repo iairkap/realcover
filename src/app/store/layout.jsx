@@ -50,8 +50,9 @@ export default function Layout({ children }) {
 
         if (response.ok) {
           setUserData(data);
+          setIsAuthenticated(true);
         } else {
-          console.error("Error fetching user data:", data);
+          setIsAuthenticated(false);
         }
       } catch (error) {
         console.error("Error during the request:", error.message);
@@ -60,6 +61,7 @@ export default function Layout({ children }) {
 
     fetchUserData();
   }, []);
+
   useEffect(() => {
     saveCart(cart);
   }, [cart]);
@@ -176,8 +178,7 @@ export default function Layout({ children }) {
         setIsAuthenticated,
         userData,
         setUserData,
-        isAuthenticated,
-        setIsAuthenticated,
+        cart,
       }}
     >
       {children}

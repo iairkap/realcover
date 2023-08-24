@@ -23,6 +23,8 @@ export const verifyMiddleware = (handler) => async (req, res) => {
     } else {
       throw new Error("No valid session or token available.");
     }
+    req.verifiedEmail = verifyMethod; // Añadir el email verificado al objeto req
+
     return handler(req, res, verifyMethod);
   } catch (error) {
     console.error("Error in middleware verification:", error.message);

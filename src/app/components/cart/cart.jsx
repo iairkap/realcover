@@ -183,7 +183,9 @@ function Cart() {
         const emailData = {
           cartData: cart,
           email: userData.email,
-          orderId: response.data.order.id, // Ensure you are accessing the ID correctly based on your response structure
+          orderId: response.data.order.id,
+          total: totalAfterDiscount,
+          couponCode: coupon.id ? coupon.id : null, // Código del cupón aplicado (si existe)
         };
 
         // Añadiendo el console.log aquí para ver la data del email:
