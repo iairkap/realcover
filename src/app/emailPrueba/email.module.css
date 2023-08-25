@@ -1,0 +1,132 @@
+.generalContainer {
+  width: 40rem;
+  height: 67.375rem;
+  background: #b9b9b9;
+}
+
+.header {
+  height: 3.5625rem;
+  flex-shrink: 0;
+  background: #232323;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  padding: 0 2rem 0 2rem;
+}
+
+.nombreUsuario {
+  color: #56b947;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.011rem;
+}
+
+.firstPart {
+  display: flex;
+  width: 40rem;
+  height: 18.1875rem;
+  padding: 3.0625rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 3.3125rem;
+  flex-shrink: 0;
+  background: #56b947;
+}
+
+.izq {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 139%;
+  letter-spacing: -0.00963rem;
+  gap: 0;
+  margin-top: 4rem;
+}
+
+.dias {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 139%;
+  letter-spacing: -0.0275rem;
+  margin-top: 0;
+}
+
+.containerB {
+  display: inline-flex;
+  padding: 1.875rem 2.3125rem;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0.1875rem;
+  background: #fff;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-top: -4rem;
+  position: absolute;
+  margin-left: 2rem;
+  width: 30rem;
+  gap: 0;
+}
+
+.containerBTitle {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 139%; /* 1.7375rem */
+  letter-spacing: -0.01375rem;
+}
+
+.desglose,
+.desgloseb {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 139%; /* 1.7375rem */
+  letter-spacing: -0.01375rem;
+}
+
+.desgloseb {
+  font-weight: 700;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.boton {
+  display: flex;
+  padding: 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: #56b947;
+  border: none;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 139%;
+  letter-spacing: -0.01375rem;
+}
+.botonera {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

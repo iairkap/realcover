@@ -17,7 +17,7 @@ export default async function handler(req, res) {
             total,
             status,
             userId,
-            couponId: couponId, // Aquí usas el ID del cupón que se envió desde el frontend.
+            // couponId: couponId, // Aquí usas el ID del cupón que se envió desde el frontend.
           },
         });
 

@@ -53,7 +53,11 @@ function PedidosContainer({ userData, setUserData }) {
         {Array(Math.ceil(orders.length / ordersPerPage))
           .fill()
           .map((_, idx) => (
-            <button key={idx} onClick={() => paginate(idx + 1)}>
+            <button
+              className={styles.buttons}
+              key={idx}
+              onClick={() => paginate(idx + 1)}
+            >
               {idx + 1}
             </button>
           ))}

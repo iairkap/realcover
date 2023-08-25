@@ -1,11 +1,20 @@
-/* import nodemailer from "nodemailer";
-import htmlToText from "nodemailer-html-to-text";
-
+import nodemailer from "nodemailer";
+import renderToString from "../../../src/app/helpers/renderToString";
+import Email from "../../../src/app/emailPrueba/emailPrueba";
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { cartData, email } = req.body;
+    const emailContent = renderToString(Email, {
+      cartData: req.body.cartData,
+      email: req.body.email,
+      orderId: req.body.orderId,
+      total: req.body.total,
+      couponCode: req.body.couponCode,
+      name: req.body.name,
+      // ... cualquier otro dato que necesites
+    });
 
-    let transporter = nodemailer.createTransport({
+    // Configura Nodemailer con las credenciales de tu proveedor de correo
+    const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.GMAIL_ACCOUNT,
@@ -13,77 +22,21 @@ export default async function handler(req, res) {
       },
     });
 
-    transporter.use("compile", htmlToText.htmlToText());
-
-    let cartItemsHTML = cartData
-      .map((item) => {
-        return item.selectedSizes.map(
-          (sizeItem) => `
-        <table style="width: 70%; border: 1px solid black; margin-bottom: 20px;">
-          <tr>
-            <td rowspan="4" style="width: 100px;">
-              <img src="${
-                item.picture
-              }" alt="Product image" style="width: 100px; height: 100px;"/>
-            </td>
-            <td style="padding-left: 10px;">${item.name}</td>
-            <td rowspan="4" style="text-align: right;">${item.price *
-              sizeItem.quantity}$</td>
-          </tr>
-          <tr>
-            <td style="padding-left: 10px;">Size: ${sizeItem.size}</td>
-          </tr>
-          <tr>
-            <td style="padding-left: 10px;">Price: ${item.price}$</td>
-          </tr>
-          <tr>
-            <td style="padding-left: 10px;">Quantity: ${sizeItem.quantity}</td>
-          </tr>
-        </table>
-      `
-        );
-      })
-      .flat()
-      .join("");
-
-    let total = cartData.reduce(
-      (sum, item) =>
-        sum +
-        item.selectedSizes.reduce(
-          (innerSum, sizeItem) => innerSum + item.price * sizeItem.quantity,
-          0
-        ),
-      0
-    );
-
-    let mailOptions = {
-      from: process.env.GMAIL_ACCOUNT, // Use the email from environment variable here
-      to: `${email}, iairkap@gmail.com`,
-      subject: "Orden de Compra",
-      html: `
-        <div>
-          <h1>CARRITO DE COMPRA</h1>
-          <h2>Producto</h2>
-          <h2>Subtotal</h2>
-          ${cartItemsHTML}
-          <p>Total: ${total}$</p>
-        </div>
-      `,
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: "iairkap@gmail.com",
+      subject: "Asunto del correo",
+      html: emailContent,
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        res
-          .status(500)
-          .json({ error: "Error al enviar el correo electrónico" });
-      } else {
-        res.status(200).json({ success: true });
-      }
-    });
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      res.status(200).send("Correo enviado: " + info.response);
+    } catch (error) {
+      console.error("Hubo un error al enviar el correo: ", error);
+      res.status(500).send("Error al enviar el correo.");
+    }
   } else {
-    // Handle any other HTTP method
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    res.status(405).send("Método no permitido");
   }
 }
- */

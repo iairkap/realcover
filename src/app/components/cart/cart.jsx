@@ -185,10 +185,10 @@ function Cart() {
           email: userData.email,
           orderId: response.data.order.id,
           total: totalAfterDiscount,
-          couponCode: coupon.id ? coupon.id : null, // Código del cupón aplicado (si existe)
+          name: userData.name,
+          //   couponCode: coupon.id ? coupon.id : null, // Código del cupón aplicado (si existe)
         };
 
-        // Añadiendo el console.log aquí para ver la data del email:
         console.log("Sending email data to /api/emailorder:", emailData);
 
         axios
