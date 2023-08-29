@@ -15,6 +15,7 @@ function Fundas() {
     cubrevalijas,
     maletines,
     tablets,
+    portafolios,
     conBolsillo,
     globalState,
     setGlobalState,
@@ -68,6 +69,7 @@ function Fundas() {
         fullColor={fullColor}
         cubrevalijas={cubrevalijas}
         tablets={tablets}
+        portafolios={portafolios}
         conBolsillo={conBolsillo}
       />
       <Cart />

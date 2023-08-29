@@ -16,6 +16,7 @@ function CardsContainer({
   isLoading,
   tablets,
   conBolsillo,
+  portafolios,
 }) {
   const { globalState, setGlobalState } = useContext(GlobalContext);
   const [page, setPage] = useState(0);
@@ -68,6 +69,8 @@ function CardsContainer({
     case "conBolsillo":
       items = conBolsillo.map((item) => ({ ...item, type: "conBolsillo" }));
       break;
+    case "portafolios":
+      items = portafolios.map((item) => ({ ...item, type: "portafolios" }));
     default:
       items = [];
   }
@@ -125,6 +128,7 @@ function CardsContainer({
           <option value="tablets">FUNDAS RIGIDAS</option>
           <option value="cubrevalijas">CUBRE VALIJAS</option>
           <option value="conBolsillo">FUNDSA CON BOLSILLO</option>
+          <option value="portafolios">PORTAFOLIOS</option>
         </select>
         <button
           onClick={() => {
@@ -184,6 +188,19 @@ function CardsContainer({
           onClick={() => {
             setGlobalState((prevState) => ({
               ...prevState,
+              displayType: "portafolios",
+            }));
+          }}
+          className={`${styles.botonOpciones} ${
+            displayType === "portafolios" ? styles.botonOpcionesActivo : ""
+          }`}
+        >
+          PORTAFOLIOS
+        </button>
+        <button
+          onClick={() => {
+            setGlobalState((prevState) => ({
+              ...prevState,
               displayType: "tablets",
             }));
           }}
@@ -207,6 +224,7 @@ function CardsContainer({
           CUBRE VALIJAS
         </button>
       </div>
+
       <div className={styles.cardsContainer} key={displayType}>
         {pagedItems.map((item) => (
           <Card key={item.id} {...item} />

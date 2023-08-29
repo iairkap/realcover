@@ -43,18 +43,18 @@ async function handler(req, res, verifyMethod) {
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
             3290
           ); */
-          /*         const valijas = await mapAndSaveImages(
+          const valijas = await mapAndSaveImages(
             "CubreValijas",
             "CUBRE_VALIJAS",
             ["S", "M", "L"],
             6290
-          ); */
-          const maletinesfc = await mapAndSaveImages(
+          );
+          /*       const maletinesfc = await mapAndSaveImages(
             "FullColor",
             "MALETINES_FULL_COLOR",
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
             2990
-          );
+          ); */
           /*    const fundas = await mapAndSaveImages(
             "Fundas",
             "NEOPRENE_COVER",

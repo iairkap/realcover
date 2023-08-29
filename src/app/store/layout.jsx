@@ -10,6 +10,7 @@ export default function Layout({ children }) {
   const [fullColor, setFullColor] = useState([]);
   const [conBolsillo, setConBolsillo] = useState([]);
   const [cubrevalijas, setCubrevalijas] = useState([]);
+  const [portafolios, setPortafolios] = useState([]);
   const [maletines, setMaletines] = useState([]);
   const [checkoutVisible, setCheckoutVisible] = useState(false);
   const [tablets, setTablets] = useState([]);
@@ -94,6 +95,9 @@ export default function Layout({ children }) {
         const boslilloData = response.data.filter(
           (product) => product.productType === "CON_BOLSILLO"
         );
+        const portafoliosData = response.data.filter(
+          (product) => product.productType === "PORTAFOLIOS"
+        );
 
         setCovers(coversData);
         setMaletines(maletinesData);
@@ -101,6 +105,7 @@ export default function Layout({ children }) {
         setCubrevalijas(cubrevalijasData);
         setTablets(tabletsData);
         setConBolsillo(boslilloData);
+        setPortafolios(portafoliosData);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -168,6 +173,8 @@ export default function Layout({ children }) {
   return (
     <GlobalContext.Provider
       value={{
+        portafolios,
+        setPortafolios,
         covers,
         maletines,
         cubrevalijas,
