@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     // Opciones de correo
     let mailOptions = {
       from: process.env.GMAIL_ACCOUNT,
-      to: `${email}, iairkap@gmail.com`,
+      to: `${email}, iairkap@gmail.com, realcover@gmail.com`,
       subject: "Confirmación de Envío de Compra",
       html: `
         <div>
@@ -28,7 +28,6 @@ export default async function handler(req, res) {
           <ul>
             <li><strong>Nombre de encomienda:</strong> ${encomiendaName}</li>
             <li><strong>Número de seguimiento:</strong> ${trackingNumber}</li>
-            <li><strong>Comprobante de envío:</strong> [Aquí puedes incluir el link de descarga del comprobante en Firebase]</li>
           </ul>
           <p>Te agradecemos por confiar en nosotros. Si tienes alguna consulta, no dudes en comunicarte.</p>
           <p>Saludos cordiales,</p>

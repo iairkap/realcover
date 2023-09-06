@@ -526,7 +526,7 @@ function PedidosCardDashboard({
               alignItems: "center", // Centrar contenido verticalmente
             },
             content: {
-              background: "#232323",
+              background: "#d9d9d9",
 
               overflow: "auto",
               position: "relative", // Esto es importante para que el modal se posicione en el centro
@@ -541,7 +541,7 @@ function PedidosCardDashboard({
           }}
         >
           <div className={styles.contenedorModal}>
-            <h2>
+            <h2 className={styles.modalTitle}>
               Confirmar Envío para {user.email} {user.lastName} {user.shopName}
             </h2>
             <br />

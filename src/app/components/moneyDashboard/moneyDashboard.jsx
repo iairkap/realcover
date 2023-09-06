@@ -5,19 +5,9 @@ import styles from "./moneyDashboard.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
 
-function MoneyDashboard(props) {
-  const [orders, setOrders] = useState([]);
+function MoneyDashboard({ setFetchCount, orders }) {
   const [isLoading, setIsLoading] = useState(true);
   const [earnings, setEarnings] = useState(0);
-
-  useEffect(() => {
-    fetch("/api/admin/orders")
-      .then((response) => response.json())
-      .then((data) => {
-        setOrders(data);
-        setIsLoading(false);
-      });
-  }, []);
 
   function filterOrdersByDay(orders, date) {
     const startOfDay = new Date(date);

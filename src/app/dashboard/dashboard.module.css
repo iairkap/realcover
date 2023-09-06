@@ -23,3 +23,11 @@
 .secondPart {
   margin-top: 5rem;
 }
+
+.ContainerLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #232323;
+}

@@ -20,9 +20,9 @@ async function handler(req, res, verifyMethod) {
               },
             },
           });
-          res.status(200).json(orders);
+          return res.status(200).json(orders);
         } catch (error) {
-          res
+          return res
             .status(500)
             .json({ message: "Error fetching orders", error: error.message });
         }

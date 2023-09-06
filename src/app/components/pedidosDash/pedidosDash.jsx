@@ -9,19 +9,7 @@ import {
 } from "../../../../public/imagnes";
 import LoadingContainer from "../loading/loading";
 
-function PedidosDash(props) {
-  const [orders, setOrders] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Nuevo estado
-
-  useEffect(() => {
-    fetch("/api/admin/orders")
-      .then((response) => response.json())
-      .then((data) => {
-        setOrders(data);
-        setIsLoading(false); // Establecer isLoading a false una vez que hayas recibido los datos
-      });
-  }, []);
-
+function PedidosDash({ setFetchCount, orders, isLoading }) {
   const getPedidosEnviados = (orders) => {
     return orders.filter((order) => order.status === "Enviado");
   };

@@ -387,57 +387,24 @@
 
 .modalTextB {
   flex-shrink: 0;
-  color: #fff;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: normal;
-  background-color: #56b947;
+  background-color: transparent;
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 0.5rem;
   border-radius: 0.3125rem;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 1rem;
+  border: solid 1px;
 }
 
-.modalTextB::placeholder {
-  color: white;
-  opacity: 1; /* Firefox */
-}
-
-.modalTextB:-ms-input-placeholder {
-  color: white;
-}
-
-.modalTextB::-ms-input-placeholder {
-  color: white;
-}
-
-/* Firefox < 19 */
-.modalTextB:-moz-placeholder {
-  color: white;
-  opacity: 1;
-}
-
-/* Firefox > 19 */
-.modalTextB::-moz-placeholder {
-  color: white;
-  opacity: 1;
-}
-
-/* Internet Explorer 10-11 */
-.modalTextB:-ms-input-placeholder {
-  color: white;
-}
-
-/* Edge */
-.modalTextB::-ms-input-placeholder {
-  color: white;
-}
-
-/* Safari and Chrome */
-.modalTextB::-webkit-input-placeholder {
-  color: white;
+.modalTextB:focus {
+  outline: solid 2px #a4ca92;
+  border: none;
 }
 
 .modalSelect {
@@ -543,4 +510,7 @@
   background-color: #f5f5f5;
   border-radius: 0.5rem;
   padding: 0.2rem 1rem;
+}
+
+.modalTitle {
 }
