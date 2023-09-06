@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
 .container {
   display: flex;
   flex-direction: column;
@@ -44,4 +46,33 @@
 
 .buttons:active {
   color: #56b947;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.pagination {
+  margin-bottom: 2rem;
+}
+
+.filter {
+  color: #fff;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.1875rem;
+  background: #56b947;
+  border: none;
 }

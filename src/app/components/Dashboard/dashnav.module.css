@@ -35,4 +35,25 @@
   font-weight: 900;
   line-height: 139%; /* 1.39rem */
   letter-spacing: -0.011rem;
+  text-decoration: none;
+}
+
+.iconTitle,
+.iconTitle:hover,
+.iconTitle:active,
+.titles,
+.titles:hover,
+.ttles:active {
+  text-decoration: none;
+}
+
+.iconTitle a,
+.iconTitle a:hover,
+.iconTitle a:active {
+  text-decoration: none;
+  color: inherit; /* Esto hará que el enlace tome el color de su contenedor padre */
+}
+
+.Link {
+  text-decoration: none;
 }

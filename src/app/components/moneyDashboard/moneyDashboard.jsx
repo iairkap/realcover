@@ -8,6 +8,7 @@ import { useEffect } from "react";
 function MoneyDashboard({ setFetchCount, orders }) {
   const [isLoading, setIsLoading] = useState(true);
   const [earnings, setEarnings] = useState(0);
+  const [activeButton, setActiveButton] = useState("A");
 
   function filterOrdersByDay(orders, date) {
     const startOfDay = new Date(date);
@@ -75,6 +76,7 @@ function MoneyDashboard({ setFetchCount, orders }) {
   }
 
   const handleTimeframeChange = (timeframe) => {
+    setActiveButton(timeframe); // Establece el botón activo
     const now = new Date();
     let filteredOrders = [];
 
@@ -98,6 +100,9 @@ function MoneyDashboard({ setFetchCount, orders }) {
     const totalEarnings = calculateTotalEarnings(filteredOrders);
     setEarnings(totalEarnings);
   };
+  useEffect(() => {
+    handleTimeframeChange("A");
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -106,25 +111,33 @@ function MoneyDashboard({ setFetchCount, orders }) {
         <div className={styles.botonera}>
           <button
             onClick={() => handleTimeframeChange("D")}
-            className={styles.boton}
+            className={`${styles.boton} ${
+              activeButton === "D" ? styles.active : ""
+            }`}
           >
             D
           </button>
           <button
             onClick={() => handleTimeframeChange("S")}
-            className={styles.boton}
+            className={`${styles.boton} ${
+              activeButton === "S" ? styles.active : ""
+            }`}
           >
             S
           </button>
           <button
             onClick={() => handleTimeframeChange("M")}
-            className={styles.boton}
+            className={`${styles.boton} ${
+              activeButton === "M" ? styles.active : ""
+            }`}
           >
             M
           </button>
           <button
             onClick={() => handleTimeframeChange("A")}
-            className={styles.boton}
+            className={`${styles.boton} ${
+              activeButton === "A" ? styles.active : ""
+            }`}
           >
             A
           </button>

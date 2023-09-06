@@ -4,8 +4,6 @@
   flex-direction: column;
   border-radius: 0.3125rem;
   background-color: #f5f5f5;
-  margin-top: 1rem;
-  height: 12.375rem;
   width: 30%;
   flex: 1;
   margin-left: 2rem;
@@ -20,7 +18,7 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
-
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -49,6 +47,10 @@
   border: none;
 }
 
+.boton:active {
+  background-color: black;
+}
+
 .plata {
   color: #000;
   font-family: "Roboto", sans-serif;
@@ -58,7 +60,6 @@
   line-height: 139%; /* 5.64688rem */
   letter-spacing: -0.04469rem;
   display: flex;
-  margin-top: 1rem;
   place-self: end;
 }
 
@@ -68,14 +69,18 @@
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 900;
-  line-height: 139%; /* 2.085rem */
+  line-height: 139%;
   letter-spacing: -0.0165rem;
 }
 
 @media (max-width: 768px) {
   .container {
-    width: 90%; /* Ajusta según tus necesidades */
-    margin-left: 5%; /* Centramos el contenedor dejando un margen del 5% a cada lado */
+    width: 90%;
+    margin-left: 5%;
     margin-right: 5%;
   }
+}
+
+.boton.active {
+  background-color: black;
 }

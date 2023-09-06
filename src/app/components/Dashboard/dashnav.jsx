@@ -28,7 +28,7 @@ function DashNav(props) {
         data-tooltip-content=" homepage"
       />
       <div className={styles.iconsContainer}>
-        <Link href="/dashboard">
+        <Link href="/dashboard" className={styles.Link}>
           <div className={styles.iconTitle}>
             <div>
               <Image src={pedidosDash} alt="dashnav" />
@@ -36,31 +36,31 @@ function DashNav(props) {
             <h4 className={styles.titles}>Pedidos</h4>
           </div>
         </Link>
-        <Link href="/dashboard/clientes">
+        <Link href="/dashboard/clientes" className={styles.Link}>
           <div className={styles.iconTitle}>
             <Image src={clientesDash} alt="dashnav" />
             <h4 className={styles.titles}>Clientes</h4>
           </div>
         </Link>
-        <Link href="/dashboard/precios" alt="dashnav">
+        <Link href="/dashboard/precios" alt="dashnav" className={styles.Link}>
           <div className={styles.iconTitle}>
             <Image src={preciosDash} />
             <h4 className={styles.titles}>Precios</h4>
           </div>
         </Link>
-        <Link href="/dashboard/stock" alt="dashnav">
+        <Link href="/dashboard/stock" alt="dashnav" className={styles.Link}>
           <div className={styles.iconTitle}>
             <Image src={stockDash} />
             <h4 className={styles.titles}>Stock</h4>
           </div>
         </Link>
-        <Link href="/dashboard/productos" alt="dashnav">
+        <Link href="/dashboard/productos" alt="dashnav" className={styles.Link}>
           <div className={styles.iconTitle}>
             <Image src={productosDash} />
             <h4 className={styles.titles}>Productos</h4>
           </div>
         </Link>
-        <Link href="/dashboard/cupones" alt="dashnav">
+        <Link href="/dashboard/cupones" alt="dashnav" className={styles.Link}>
           <div className={styles.iconTitle}>
             <Image src={voucherDash} />
             <h4 className={styles.titles}>Cupones</h4>
