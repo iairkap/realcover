@@ -11,8 +11,22 @@ const firebaseConfig = {
   measurementId: "G-RQFL8DH01N",
 };
 
+const firebaseConfig2 = {
+  apiKey: process.env.FIRE_API_KEY_2,
+  authDomain: "real-de130.firebaseapp.com",
+  projectId: "real-de130",
+  storageBucket: "real-de130.appspot.com",
+  messagingSenderId: "411615273883",
+  appId: "1:411615273883:web:a1571b15413dc276fcb73e",
+  measurementId: "G-Z29JBD80BZ"
+};
+
+
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
+
+const app2 = initializeApp(firebaseConfig2);
+const storage2 = getStorage(app2);
 
 function extractImageNameFromURL(url) {
   let urlParts = url.split("/");
@@ -21,4 +35,4 @@ function extractImageNameFromURL(url) {
   return imageNameParts[0];
 }
 
-export { storage, ref, listAll, getDownloadURL, extractImageNameFromURL };
+export { storage, storage2, ref, listAll, getDownloadURL, extractImageNameFromURL };
