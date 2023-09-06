@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./dashnav.module.css";
-import logoDashboard from "../../../../public/logoDashboard.png";
+import logo from "../../../../public/imagnes";
 import Image from "next/image";
 import {
   clientesDash,
@@ -17,7 +17,16 @@ function DashNav(props) {
   return (
     <div className={styles.navBarContainer}>
       <div className={styles.logo}></div>
-      <br /> <Image src={logoDashboard} className={styles.logo} alt="dashnav" />
+      <br />{" "}
+      <Image
+        src="/logonav.svg"
+        alt="image"
+        className={styles.logo}
+        width={30}
+        height={30}
+        data-tooltip-id="Inicio"
+        data-tooltip-content=" homepage"
+      />
       <div className={styles.iconsContainer}>
         <Link href="/dashboard">
           <div className={styles.iconTitle}>

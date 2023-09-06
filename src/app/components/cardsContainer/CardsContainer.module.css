@@ -5,6 +5,8 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 100%;
+  justify-content: space-around;
 }
 
 .cardsContainer {
@@ -15,8 +17,7 @@
   margin-bottom: 3rem;
 }
 
-.botonera,
-.botoneraB {
+.botonera {
   display: flex;
   gap: 1.1875rem;
   justify-content: center;
@@ -26,6 +27,12 @@
 
 .botoneraB {
   margin-top: 5rem;
+}
+.botoneraB {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .paginationButton,
@@ -123,6 +130,9 @@
   font-weight: 900;
   font-size: 1rem;
   transition: 0.3s;
+  width: max-content;
+  padding-right: 2rem;
+  padding-right: 2rem;
 }
 
 .botonOpciones:hover {
@@ -131,10 +141,12 @@
 
 .botonOpciones:focus {
   outline: none;
-  color: #56b947;
+  color: white;
+  background-color: #56b947;
 }
 
 .botoneraB {
   display: flex;
-  gap: 5rem;
+  width: 80%;
+  height: 4rem;
 }

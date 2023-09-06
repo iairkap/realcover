@@ -5,6 +5,7 @@ import { GlobalContext } from "../../store/layout";
 import Image from "next/image";
 import axios from "axios";
 import ModalApply from "../applyCoupon/Coupon";
+import ModalConfirmacion from "../../components/confirmationOrder/modalConfirmacion";
 
 function Cart() {
   const {
@@ -23,6 +24,7 @@ function Cart() {
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
 
   const handleCouponApply = async () => {
     try {
@@ -180,6 +182,7 @@ function Cart() {
       if (response.status === 200) {
         console.log("Order successfully dispatched", response.data);
         setOrderSuccess(true); // Mostrar mensaje de éxito
+        setIsModalConfirmOpen(true); // Abrir el modal de confirmación
         const emailData = {
           cartData: cart,
           email: userData.email,
@@ -245,7 +248,15 @@ function Cart() {
   };
 
   if (orderSuccess) {
-    return <div className={styles.modal}>Orden realizada con éxito!</div>;
+    return (
+      <div className={styles.modal}>
+        Orden realizada con éxito!
+        <ModalConfirmacion
+          isModalOpen={isModalConfirmOpen}
+          setIsModalOpen={setIsModalConfirmOpen}
+        />
+      </div>
+    );
   }
   return (
     <div className={styles.modal}>

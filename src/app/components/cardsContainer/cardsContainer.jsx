@@ -71,6 +71,7 @@ function CardsContainer({
       break;
     case "portafolios":
       items = portafolios.map((item) => ({ ...item, type: "portafolios" }));
+      break;
     default:
       items = [];
   }

@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/client";
-import verifyMiddleware from "../../jwt-session/verifyMiddleware";
+import { verifyMiddleware } from "../../jwt-session/verifyMiddleware";
 
 async function handler(req, res, verifyMethod) {
   if (verifyMethod === process.env.ADMIN_EMAIL) {

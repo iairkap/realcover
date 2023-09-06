@@ -16,6 +16,8 @@ import { useRouter, usePathname } from "next/navigation"; // Importa esto
 import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import NumeroCarrito from "../numeroCarrito/numeroCarrito";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 function NavBar(props) {
   const {
@@ -82,9 +84,16 @@ function NavBar(props) {
 
   return (
     <div className={styles.contenedor}>
+      <Tooltip />
       <div className={styles.trapezoid}>
         <Link href="/">
-          <Image src={logo} alt="image" className={styles.logo} />
+          <Image
+            src={logo}
+            alt="image"
+            className={styles.logo}
+            data-tooltip-id="Inicio"
+            data-tooltip-content=" homepage"
+          />
         </Link>
       </div>
       <div className={styles.botonera}>
@@ -95,6 +104,8 @@ function NavBar(props) {
               alt="image"
               className={styles.icono}
               title="Mis pedidos"
+              data-tooltip-id="Mis Pedidos"
+              data-tooltip-content="Mis Pedidos"
             />
           </Link>
         </div>
@@ -105,7 +116,8 @@ function NavBar(props) {
               alt="image"
               onClick={handleCartOpen}
               className={styles.icono}
-              title="Store"
+              data-tooltip-id="Carrito"
+              data-tooltip-content="Carrito"
             />
             <NumeroCarrito />
           </div>
@@ -117,7 +129,8 @@ function NavBar(props) {
             alt="Logout"
             onClick={handleLogout}
             className={styles.icono}
-            title="Log Out"
+            data-tooltip-id="Cerrar sesión"
+            data-tooltip-content="Cerrar sesión"
           />
         ) : (
           <Link href="/logIn">
@@ -127,10 +140,17 @@ function NavBar(props) {
               onClick={handleLoginClick}
               className={styles.icono}
               title="Log In"
+              data-tooltip-id="Iniciar sesión"
+              data-tooltip-content="Iniciar sesión / Registrarse"
             />
           </Link>
         )}
       </div>
+      <Tooltip id="Inicio" place="bottom" />
+      <Tooltip id="Mis Pedidos" place="bottom" />
+      <Tooltip id="Carrito" place="bottom" />
+      <Tooltip id="Cerrar sesión" place="bottom" />
+      <Tooltip id="Iniciar sesión" place="bottom" />
     </div>
   );
 }
