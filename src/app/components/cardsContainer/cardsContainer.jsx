@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"; // Cambiado de "next/navigation" a 
 import { useEffect } from "react";
 import { GlobalContext } from "../../store/layout";
 import { useContext } from "react";
+
 function CardsContainer({
   covers,
   maletines,
