@@ -25,32 +25,18 @@ async function mapAndSaveImages(
 
   const products = [];
 
-  for (const file of files) {
-    const url = await getDownloadURL(file);
-
+  for (const [i, file] of files.entries()) {
+    const url1 = await getDownloadURL(file);
+    const url2 = await getDownloadURL(files2[i]); 
     const product = {
-      name: extractImageNameFromURL(url),
-      picture: url,
+      name: extractImageNameFromURL(url1),
+      picture: [url1, url2],
       price: productPrice,
       productType: productType,
       sizes: productSizes,
     };
 
     products.push(product);
-  }
-
-  for (const file of files2) {
-    const url = await getDownloadURL(file);
-
-    const existingProduct = products.find(
-      (product) => product.name === extractImageNameFromURL(url)
-    );
-
-    if (existingProduct) {
-      existingProduct.picture.push(url);
-    } else {
-      console.log('Todo salio mal pa');
-    }
   }
 
   const productsCreated = await prisma.product.createMany({
