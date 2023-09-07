@@ -20,7 +20,21 @@ function ReviewCardContainer(props) {
 
   const shuffledReviews = [...filteredReviews].sort(() => 0.5 - Math.random());
 
-  const REVIEWS_PER_PAGE = 3;
+  const [REVIEWS_PER_PAGE, setREVIEWS_PER_PAGE] = useState(3);
+
+  useEffect(() => {
+    const updateReviewsPerPage = () => {
+      setREVIEWS_PER_PAGE(window.innerWidth <= 768 ? 1 : 3);
+    };
+
+    window.addEventListener("resize", updateReviewsPerPage);
+
+    updateReviewsPerPage();
+
+    return () => {
+      window.removeEventListener("resize", updateReviewsPerPage);
+    };
+  }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const maxPage = Math.ceil(shuffledReviews.length / REVIEWS_PER_PAGE);
 
@@ -40,9 +54,12 @@ function ReviewCardContainer(props) {
 
   return (
     <div className={styles.generalContainer}>
-      <h2 className={styles.title}>
-        No solo escuches lo que decimos, mira lo que nuestros clientes opinan
-      </h2>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>
+          No solo escuches lo que decimos, <br /> mira lo que nuestros clientes
+          opinan
+        </h2>
+      </div>
       <div className={styles.generalReviews}>
         <h5>
           <StarRating rating={averageRating} />

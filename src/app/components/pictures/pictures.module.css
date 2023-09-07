@@ -60,3 +60,39 @@
   width: 490px;
   height: 205px;
 }
+
+@media (max-width: 768px) {
+  .background2 {
+    display: none;
+  }
+
+  .firstContainer {
+    background-color: #232323;
+  }
+  .logoReal {
+    width: 90%;
+    max-width: 100%;
+    margin-bottom: -3rem;
+  }
+  .center {
+    width: 80%;
+    align-self: center;
+    display: flex;
+  }
+  .logoImage {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: -2rem;
+  }
+
+  .subTitulo {
+    margin-bottom: -2rem;
+  }
+  .mayorista {
+    position: relative;
+    text-align: -webkit-center;
+  }
+}

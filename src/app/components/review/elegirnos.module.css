@@ -199,3 +199,28 @@
   background-color: #232323;
   align-self: center;
 }
+
+@media screen and (max-width: 768px) {
+  .picture {
+    display: none;
+  }
+  .divisor {
+    display: none;
+  }
+  .cardFront {
+    background-color: #232323;
+    margin-top: 2rem;
+  }
+  .reviewCardContainer {
+    display: none;
+  }
+  .downContainer {
+    display: none;
+  }
+  .marcasContainer {
+    display: none;
+  }
+  .titleb {
+    display: none;
+  }
+}

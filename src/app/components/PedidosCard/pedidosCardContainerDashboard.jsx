@@ -31,7 +31,7 @@ function PedidosContainerDashboard({ setFetchCount, orders }) {
 
   return (
     <div className={styles.container}>
-      <div>
+      {/*       <div>
         <label className={styles.filter}>Filtrar por estado:</label>
         <select
           value={filterStatus}
@@ -39,10 +39,9 @@ function PedidosContainerDashboard({ setFetchCount, orders }) {
         >
           <option value="">Todos</option>
           <option value="En proceso">En proceso</option>
-          {/* Puedes agregar más opciones si es necesario */}
         </select>
       </div>
-
+ */}
       <Modal isOpen={isPDFVisible} onRequestClose={() => setPDFVisible(false)}>
         <Etiquetas
           orders={orders.filter((order) => order.status === "En proceso")}

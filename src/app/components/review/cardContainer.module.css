@@ -46,8 +46,25 @@
   line-height: 139%;
   letter-spacing: -0.02063rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center; /* Centramos el texto */
   margin-bottom: 2rem;
+  text-align: center; /* Aseguramos que el texto esté centrado */
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    flex-direction: column; /* Esto permite que el contenido se muestre en columna */
+    white-space: normal;
+    font-size: 1.4rem;
+    display: none;
+  }
+  .titleContainer {
+    align-items: center;
+  }
+
+  .containerI {
+    display: none;
+  }
 }
 
 .divisor {

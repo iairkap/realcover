@@ -260,3 +260,21 @@
   height: 20px; /* ajusta según el tamaño de tu imagen */
   width: auto;
 }
+
+@media screen and (max-width: 768px) {
+  .generalContainer {
+    width: fit-content;
+  }
+  .socialMedia {
+    display: none;
+  }
+  .parrafo {
+    width: 90%;
+  }
+  .textContainer {
+    padding-left: 2rem;
+  }
+  .iconsContainer {
+    padding-left: 2rem;
+  }
+}

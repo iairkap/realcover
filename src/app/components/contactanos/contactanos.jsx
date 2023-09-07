@@ -29,7 +29,7 @@ function Contactanos(props) {
     <div className={styles.generalContainer}>
       <div className={styles.contactanosInfo}>
         <div className={styles.textContainer}>
-          <h1 className={styles.titulo}>CONTACTANOS!</h1>
+          <h1 className={styles.titulo}>Contactanos!</h1>
           <p className={styles.parrafo}>
             Completa el formulario y con gusto te responderemos en las proximas
             24 horas.

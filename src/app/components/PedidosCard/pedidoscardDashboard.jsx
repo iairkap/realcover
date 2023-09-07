@@ -334,9 +334,6 @@ function PedidosCardDashboard({
             </tr>
           ))}
         </tbody>
-        <button onClick={handleExportToCSV} className={styles.exportButton}>
-          Exportar a CSV
-        </button>
       </table>
     );
   }
@@ -364,11 +361,14 @@ function PedidosCardDashboard({
           <h2 className={statusClass}>{status}</h2>
           {formattedDeliveryDate && <h1>Enviado el {formattedDeliveryDate}</h1>}
 
-          {Object.entries(productCountByType).map(([type, count]) => (
+          {/*    {Object.entries(productCountByType).map(([type, count]) => (
             <p key={type} className={styles.detallePedido}>
               {type.replace(/_/g, " ")}: {count} unidades
             </p>
-          ))}
+          ))} */}
+          <h4>
+            {user.name} {user.lastName}
+          </h4>
         </div>
       </div>
       <div>
@@ -436,10 +436,25 @@ function PedidosCardDashboard({
             },
           }}
         >
-          <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
-          <button onClick={() => setTableOption(1)}>Tabla 1</button>
-          <button onClick={() => setTableOption(2)}>Tabla 2</button>
-          <h1 className={styles.titulo}>
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className={styles.closeButton}
+          >
+            X{" "}
+          </button>
+          <button
+            onClick={() => setTableOption(1)}
+            className={styles.buttonTable}
+          >
+            Tabla 1
+          </button>
+          <button
+            onClick={() => setTableOption(2)}
+            className={styles.buttonTable}
+          >
+            Tabla 2
+          </button>
+          <h1 className={styles.titulob}>
             Pedido realizado el: {formattedOrderDate}
           </h1>
           <div className={styles.line}></div>

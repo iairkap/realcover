@@ -18,6 +18,7 @@ import { signOut } from "next-auth/react";
 import NumeroCarrito from "../numeroCarrito/numeroCarrito";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import menuNav from "../../../../public/menuNav.svg";
 
 function NavBar(props) {
   const {
@@ -29,6 +30,7 @@ function NavBar(props) {
   } = useContext(GlobalContext);
 
   const [showLogoutMenu, setShowLogoutMenu] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const router = useRouter(); // Añade esto
   const pathName = usePathname();
@@ -146,6 +148,23 @@ function NavBar(props) {
           </Link>
         )}
       </div>
+      <div
+        className={styles.mobileMenuIcon}
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      >
+        <Image src={menuNav} alt="Menu" />
+      </div>
+      {isMobileMenuOpen && (
+        <div className={styles.mobileMenu}>
+          <div onClick={handlePedidosClick}>Mi perfil</div>
+          <div onClick={handleCartOpen}>Carrito</div>
+          {isAuthenticated ? (
+            <div onClick={handleLogout}>Cerrar sesión</div>
+          ) : (
+            <div onClick={handleLoginClick}>Iniciar sesión / Registrarse</div>
+          )}
+        </div>
+      )}
       <Tooltip id="Inicio" place="bottom" />
       <Tooltip id="Mis Pedidos" place="bottom" />
       <Tooltip id="Carrito" place="bottom" />

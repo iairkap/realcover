@@ -303,8 +303,8 @@
 }
 
 .tr {
-  border-bottom: 3px solid white; /* Línea blanca debajo de cada fila */
-  height: 100px; /* Alto fijo para las filas */
+  border-bottom: 3pdx solid white; /* Línea blanca debajo de cada fila */
+  height: 100px;
 }
 
 .th,
@@ -513,4 +513,44 @@
 }
 
 .modalTitle {
+}
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  align-self: flex-end;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  color: #56b947;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.titulob {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.01375rem;
+}
+
+.buttonTable {
+  background-color: transparent;
+  border: none;
+  align-self: flex-start;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  color: #56b947;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.buttonTable:hover {
+  color: #45a037;
 }
