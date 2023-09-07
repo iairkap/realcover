@@ -1,5 +1,6 @@
 import prisma from "../../../../../prisma/client";
 import mapAndSaveImages from "../../../firebase/mapnsave";
+import mapAndSaveImagesB from "../../../firebase/mapnsaveb";
 /* import verifyMiddleware from "../../../jwt-session/verifyMiddleware";
  */
 async function handler(req, res, verifyMethod) {

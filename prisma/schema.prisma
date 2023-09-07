@@ -19,6 +19,7 @@ model Product {
   sizes        Sizes[]
   stock        Int?          @default(0)
   orderDetails OrderDetail[]
+  pictureB    String? 
 }
 
 model User {

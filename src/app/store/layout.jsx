@@ -6,19 +6,16 @@ export const GlobalContext = createContext();
 
 export default function Layout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [covers, setCovers] = useState([]);
-  const [fullColor, setFullColor] = useState([]);
-  const [conBolsillo, setConBolsillo] = useState([]);
-  const [cubrevalijas, setCubrevalijas] = useState([]);
-  const [portafolios, setPortafolios] = useState([]);
-  const [maletines, setMaletines] = useState([]);
   const [checkoutVisible, setCheckoutVisible] = useState(false);
-  const [tablets, setTablets] = useState([]);
   const [currentOrderDetails, setCurrentOrderDetails] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState(null);
+  const [page, setPage] = useState(0);
+  const itemsPerPage = 12;
+
   const [globalState, setGlobalState] = useState({
-    displayType: "",
+    displayType: "NEOPRENE_COVER",
   });
 
   const loadCart = () => {
@@ -75,55 +72,58 @@ export default function Layout({ children }) {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("/api/product");
-
-        const coversData = response.data.filter(
-          (product) => product.productType === "NEOPRENE_COVER"
-        );
-        const maletinesData = response.data.filter(
-          (product) => product.productType === "MALETINES"
-        );
-        const fullColorData = response.data.filter(
-          (product) => product.productType === "MALETINES_FULL_COLOR"
-        );
-        const cubrevalijasData = response.data.filter(
-          (product) => product.productType === "CUBRE_VALIJAS"
-        );
-        const tabletsData = response.data.filter(
-          (product) => product.productType === "TABLET_COVER"
-        );
-        const boslilloData = response.data.filter(
-          (product) => product.productType === "CON_BOLSILLO"
-        );
-        const portafoliosData = response.data.filter(
-          (product) => product.productType === "PORTAFOLIOS"
-        );
-
-        setCovers(coversData);
-        setMaletines(maletinesData);
-        setFullColor(fullColorData);
-        setCubrevalijas(cubrevalijasData);
-        setTablets(tabletsData);
-        setConBolsillo(boslilloData);
-        setPortafolios(portafoliosData);
+        const response = await axios.get("/api/product", {
+          params: {
+            page: page,
+            itemsPerPage: itemsPerPage,
+            productType: globalState.displayType.toUpperCase(),
+          },
+        });
+        setProducts(response.data);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error(error.message);
       } finally {
         setIsLoading(false);
       }
     };
     fetchProducts();
-  }, []);
+  }, [page, globalState.displayType]);
+
+  const covers = products.filter(
+    (product) => product.productType === "NEOPRENE_COVER"
+  );
+  console.log("Covers:", covers);
+  const maletines = products.filter(
+    (product) => product.productType === "MALETINES"
+  );
+  console.log("Maletines:", maletines);
+  const fullColor = products.filter(
+    (product) => product.productType === "MALETINES_FULL_COLOR"
+  );
+  console.log("Full Color:", fullColor);
+  const cubrevalijas = products.filter(
+    (product) => product.productType === "CUBRE_VALIJAS"
+  );
+  console.log("Cubre Valijas:", cubrevalijas);
+  const tablets = products.filter(
+    (product) => product.productType === "TABLET_COVER"
+  );
+  console.log("Tablets:", tablets);
+  const conBolsillo = products.filter(
+    (product) => product.productType === "CON_BOLSILLO"
+  );
+  console.log("Con Bolsillo:", conBolsillo);
+  const portafolios = products.filter(
+    (product) => product.productType === "PORTAFOLIOS"
+  );
+  console.log("Portafolios:", portafolios);
   const addToCart = (product, selectedSizes) => {
-    // Clone the current cart
     const updatedCart = [...cart];
 
-    // Loop through each selectedSize
     selectedSizes.forEach((selectedSize) => {
       let foundProduct = false;
       let productIndex = -1;
 
-      // Check if the product is already in the cart
       for (let i = 0; i < updatedCart.length; i++) {
         if (updatedCart[i].id === product.id) {
           productIndex = i;
@@ -138,15 +138,12 @@ export default function Layout({ children }) {
         );
 
         if (sizeIndex !== -1) {
-          // If size already exists for the product, update its quantity
           updatedCart[productIndex].selectedSizes[sizeIndex].quantity =
             parseInt(selectedSize.quantity);
         } else {
-          // If the product exists but not the size, add the new size to the product
           updatedCart[productIndex].selectedSizes.push(selectedSize);
         }
       } else {
-        // If product wasn't found in the cart at all, add the product with the selected size
         updatedCart.push({
           ...product,
           selectedSizes: [selectedSize],
@@ -174,7 +171,6 @@ export default function Layout({ children }) {
     <GlobalContext.Provider
       value={{
         portafolios,
-        setPortafolios,
         covers,
         maletines,
         cubrevalijas,
@@ -197,6 +193,7 @@ export default function Layout({ children }) {
         cart,
         globalState,
         setGlobalState,
+        setPage,
       }}
     >
       {children}

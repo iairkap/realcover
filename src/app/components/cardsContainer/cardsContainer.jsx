@@ -9,18 +9,21 @@ import { useEffect } from "react";
 import { GlobalContext } from "../../store/layout";
 import { useContext } from "react";
 
-function CardsContainer({
-  covers,
-  maletines,
-  fullColor,
-  cubrevalijas,
-  isLoading,
-  tablets,
-  conBolsillo,
-  portafolios,
-}) {
-  const { globalState, setGlobalState } = useContext(GlobalContext);
-  const [page, setPage] = useState(0);
+function CardsContainer({}) {
+  const {
+    covers,
+    maletines,
+    fullColor,
+    cubrevalijas,
+    isLoading,
+    tablets,
+    conBolsillo,
+    portafolios,
+    globalState,
+    setGlobalState,
+    setPage,
+    page,
+  } = useContext(GlobalContext);
   const displayType = globalState.displayType;
 
   const itemsPerPage = 12;
@@ -34,17 +37,24 @@ function CardsContainer({
         ...prevState,
         displayType: savedDisplayType,
       }));
+    } else {
+      setGlobalState((prevState) => ({
+        ...prevState,
+        displayType: "NEOPRENE_COVER",
+      }));
     }
-  }, []);
-
+    setPage(0); // Restablece la página a 0 cuando el tipo de visualización cambia
+  }, [displayType]); // Agrega displayType como una dependencia aquí
   if (isLoading) {
     return <div></div>;
   }
 
+  console.log("Current displayType:", displayType); // Añade esta línea para verificar el valor de displayType
+
   let items;
   switch (displayType) {
-    case "covers":
-      items = covers.map((item) => ({ ...item, type: "neopreneCover" }));
+    case "NEOPRENE_COVER":
+      items = covers.map((item) => ({ ...item, type: "NEOPRENE_COVER" }));
       const index178 = items.findIndex((item) => item.id === 178);
       if (index178 !== -1) {
         const item178 = items[index178];
@@ -52,30 +62,31 @@ function CardsContainer({
         items.unshift(item178);
       }
       break;
-    case "maletines":
-      items = maletines.map((item) => ({ ...item, type: "maletines" }));
+    case "MALETINES":
+      items = maletines.map((item) => ({ ...item, type: "MALETINES" }));
       break;
-    case "tablets":
-      items = tablets.map((item) => ({ ...item, type: "tablets" }));
+    case "TABLET_COVER":
+      items = tablets.map((item) => ({ ...item, type: "TABLET_COVER" }));
       break;
-    case "fullColor":
+    case "MALETINES_FULL_COLOR":
       items = fullColor.map((item) => ({
         ...item,
-        type: "maletinesFUllColor",
+        type: "MALETINES_FULL_COLOR",
       }));
       break;
-    case "cubrevalijas":
-      items = cubrevalijas.map((item) => ({ ...item, type: "cubrevalijas" }));
+    case "CUBRE_VALIJAS":
+      items = cubrevalijas.map((item) => ({ ...item, type: "CUBRE_VALIJAS" }));
       break;
-    case "conBolsillo":
-      items = conBolsillo.map((item) => ({ ...item, type: "conBolsillo" }));
+    case "CON_BOLSILLO":
+      items = conBolsillo.map((item) => ({ ...item, type: "CON_BOLSILLO" }));
       break;
-    case "portafolios":
-      items = portafolios.map((item) => ({ ...item, type: "portafolios" }));
+    case "PORTAFOLIOS":
+      items = portafolios.map((item) => ({ ...item, type: "PORTAFOLIOS" }));
       break;
     default:
       items = [];
   }
+  console.log("Items before sorting:", items); // Verifica los items antes de ser ordenados
 
   const sortedItems = [...items].sort((a, b) => {
     const numA = parseInt(
@@ -95,14 +106,20 @@ function CardsContainer({
     return numA - numB;
   });
 
+  console.log("Sorted items:", sortedItems); // Verifica los items después de ser ordenados
+
   const pagedItems = sortedItems.slice(
     page * itemsPerPage,
     (page + 1) * itemsPerPage
   );
+  console.log("Paged items:", pagedItems); // Verifica los items que deberían mostrarse en la página actual
 
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
-  const startPage = Math.max(0, page - Math.floor(maxPageButtons / 2));
+  const startPage = Math.max(
+    0,
+    page - Math.floor(maxPageButtons / 2) // Cambiado de globalState.page a page
+  );
   const endPage = Math.min(totalPages, startPage + maxPageButtons);
 
   const pageNumbers = [];
@@ -124,24 +141,24 @@ function CardsContainer({
             setPage(0);
           }}
         >
-          <option value="covers">FUNDAS NEOPRENE</option>
-          <option value="maletines">MALETINES</option>
-          <option value="fullColor">FULL COLOR</option>
-          <option value="tablets">FUNDAS RIGIDAS</option>
-          <option value="cubrevalijas">CUBRE VALIJAS</option>
-          <option value="conBolsillo">FUNDSA CON BOLSILLO</option>
-          <option value="portafolios">PORTAFOLIOS</option>
+          <option value="NEOPRENE_COVER">FUNDAS NEOPRENE</option>
+          <option value="MALETINES">MALETINES</option>
+          <option value="MALETINES_FULL_COLOR">FULL COLOR</option>
+          <option value="TABLET_COVER">FUNDAS RIGIDAS</option>
+          <option value="CUBRE_VALIJAS">CUBRE VALIJAS</option>
+          <option value="CON_BOLSILLO">FUNDSA CON BOLSILLO</option>
+          <option value="PORTAFOLIOS">PORTAFOLIOS</option>
         </select>
         <button
           onClick={() => {
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "covers",
+              displayType: "NEOPRENE_COVER",
             }));
             setPage(0);
           }}
           className={`${styles.botonOpciones} ${
-            displayType === "covers" ? styles.botonOpcionesActivo : ""
+            displayType === "NEOPRENE_COVER" ? styles.botonOpcionesActivo : ""
           }`}
         >
           FUNDAS NEOPRENE
@@ -150,12 +167,12 @@ function CardsContainer({
           onClick={() => {
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "maletines",
+              displayType: "MALETINES",
             }));
             setPage(0);
           }}
           className={`${styles.botonOpciones} ${
-            displayType === "maletines" ? styles.botonOpcionesActivo : ""
+            displayType === "MALETINES" ? styles.botonOpcionesActivo : ""
           }`}
         >
           MALETINES
@@ -164,11 +181,13 @@ function CardsContainer({
           onClick={() => {
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "fullColor",
+              displayType: "MALETINES_FULL_COLOR",
             }));
           }}
           className={`${styles.botonOpciones} ${
-            displayType === "fullColor" ? styles.botonOpcionesActivo : ""
+            displayType === "MALETINES_FULL_COLOR"
+              ? styles.botonOpcionesActivo
+              : ""
           }`}
         >
           FULL COLOR
@@ -177,11 +196,11 @@ function CardsContainer({
           onClick={() => {
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "conBolsillo",
+              displayType: "CON_BOLSILLO",
             }));
           }}
           className={`${styles.botonOpciones} ${
-            displayType === "conBolsillo" ? styles.botonOpcionesActivo : ""
+            displayType === "CON_BOLSILLO" ? styles.botonOpcionesActivo : ""
           }`}
         >
           FUNDAS CON BOLSILLO
@@ -190,11 +209,11 @@ function CardsContainer({
           onClick={() => {
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "portafolios",
+              displayType: "PORTAFOLIOS",
             }));
           }}
           className={`${styles.botonOpciones} ${
-            displayType === "portafolios" ? styles.botonOpcionesActivo : ""
+            displayType === "PORTAFOLIOS" ? styles.botonOpcionesActivo : ""
           }`}
         >
           PORTAFOLIOS
@@ -203,11 +222,11 @@ function CardsContainer({
           onClick={() => {
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "tablets",
+              displayType: "TABLET_COVER",
             }));
           }}
           className={`${styles.botonOpciones} ${
-            displayType === "tablets" ? styles.botonOpcionesActivo : ""
+            displayType === "TABLET_COVER" ? styles.botonOpcionesActivo : ""
           }`}
         >
           FUNDAS RIGIDAS{" "}
@@ -216,11 +235,11 @@ function CardsContainer({
           onClick={() => {
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "cubrevalijas",
+              displayType: "CUBRE_VALIJAS",
             }));
           }}
           className={`${styles.botonOpciones} ${
-            displayType === "cubrevalijas" ? styles.botonOpcionesActivo : ""
+            displayType === "CUBRE_VALIJAS" ? styles.botonOpcionesActivo : ""
           }`}
         >
           CUBRE VALIJAS
