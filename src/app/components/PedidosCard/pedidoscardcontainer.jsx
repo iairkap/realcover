@@ -5,12 +5,14 @@ import axios from "axios";
 import PedidosCard from "./pedidoscard";
 import styles from "./pedidoscontainer.module.css";
 import { GlobalContext } from "../../store/layout";
+import LoadingContainer from "../loading/loading";
 
 function PedidosContainer({ userData, setUserData }) {
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-  const ordersPerPage = 4; // 4 pedidos por página
+  const ordersPerPage = 4;
 
   useEffect(() => {
     const fetchOrders = async (userId) => {
@@ -30,6 +32,12 @@ function PedidosContainer({ userData, setUserData }) {
     }
   }, [userData]);
 
+  useEffect(() => {
+    if (orders.length !== 0 || !userData || !userData.id) {
+      setLoading(false);
+    }
+  }, [orders, userData]);
+
   // Lógica para mostrar pedidos de acuerdo con la paginación
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
@@ -40,28 +48,34 @@ function PedidosContainer({ userData, setUserData }) {
 
   return (
     <div className={styles.container}>
-      {currentOrders.map((order) => (
-        <PedidosCard
-          key={order.id}
-          {...order}
-          className={styles.separacion}
-          userData={userData}
-          setUserData={setUserData}
-        />
-      ))}
-      <div className={styles.pagination}>
-        {Array(Math.ceil(orders.length / ordersPerPage))
-          .fill()
-          .map((_, idx) => (
-            <button
-              className={styles.buttons}
-              key={idx}
-              onClick={() => paginate(idx + 1)}
-            >
-              {idx + 1}
-            </button>
+      {loading ? (
+        <LoadingContainer /> // Mostrar LoadingContainer si está cargando
+      ) : (
+        <>
+          {currentOrders.map((order) => (
+            <PedidosCard
+              key={order.id}
+              {...order}
+              className={styles.separacion}
+              userData={userData}
+              setUserData={setUserData}
+            />
           ))}
-      </div>
+          <div className={styles.pagination}>
+            {Array(Math.ceil(orders.length / ordersPerPage))
+              .fill()
+              .map((_, idx) => (
+                <button
+                  className={styles.buttons}
+                  key={idx}
+                  onClick={() => paginate(idx + 1)}
+                >
+                  {idx + 1}
+                </button>
+              ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
