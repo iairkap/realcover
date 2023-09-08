@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
+  url      = env("EXTERNAL_DATA_BASE_URL")
   // directUrl         = env("POSTGRES_URL_NON_POOLING")
   // shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
@@ -12,7 +12,7 @@ datasource db {
 model Product {
   id           Int           @id @default(autoincrement())
   name         String
-  picture      String
+  picture      String[]
   price        Float
   productType  ProductType
   description  String?

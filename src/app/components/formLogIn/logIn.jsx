@@ -121,7 +121,7 @@ function LogIn({ toggleForm }) {
             <button
               className={styles.button3}
               onClick={async () => {
-                const res = await signIn("google", {
+                const res = await signIn("facebook", {
                   callbackUrl: "http://localhost:3000/store/fundas",
                 });
                 setIsAuthenticated(true);

@@ -87,17 +87,15 @@ function NavBar(props) {
   return (
     <div className={styles.contenedor}>
       <Tooltip />
-      <div className={styles.trapezoid}>
-        <Link href="/">
-          <Image
-            src={logo}
-            alt="image"
-            className={styles.logo}
-            data-tooltip-id="Inicio"
-            data-tooltip-content=" homepage"
-          />
-        </Link>
-      </div>
+      <Link href="/">
+        <Image
+          src={logo}
+          alt="image"
+          className={styles.logo}
+          data-tooltip-id="Inicio"
+          data-tooltip-content=" homepage"
+        />
+      </Link>
       <div className={styles.botonera}>
         <div onClick={handlePedidosClick}>
           <Link href="/profile">
@@ -112,7 +110,7 @@ function NavBar(props) {
           </Link>
         </div>
         <Link href="/store/fundas">
-          <div>
+          <div className={styles.carrito}>
             <Image
               src={market}
               alt="image"

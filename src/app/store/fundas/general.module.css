@@ -7,3 +7,11 @@
   background-color: #d9d9d9;
   min-height: 100vh;
 }
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}

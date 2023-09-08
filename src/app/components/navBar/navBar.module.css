@@ -4,7 +4,6 @@
   z-index: 10000;
   height: 44px;
   background: #232323e2;
-
   position: fixed;
   top: 0;
   left: 0;
@@ -14,35 +13,27 @@
   justify-content: space-between;
 }
 
-.trapezoid {
-  width: 17.9375rem;
-  height: 44px;
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+.botonera {
+  display: inline-flex;
+  align-items: flex-start;
+  width: 10rem;
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
 
 .logo {
-  margin-left: -2em;
-}
-
-.botonera {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 1.75rem;
-  margin-right: 6.54em;
-}
-
-.misCompras {
+  margin-left: 2rem;
 }
 
 .icono:hover {
   transform: scale(1.1);
   transition: transform 0.3s ease;
 }
-
+.carrito {
+  display: flex;
+  width: 3.5rem;
+}
 .contenedor {
   z-index: 10000;
   height: 44px;
@@ -56,26 +47,11 @@
   justify-content: space-between;
 }
 
-.trapezoid {
-  width: 17.9375rem;
-  height: 44px;
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-  align-items: center;
-}
-
-.logo {
-  margin-left: -2em;
-}
-
 .botonera {
   display: inline-flex;
   align-items: flex-start;
-  gap: 1.75rem;
-  margin-right: 6.54em;
+  margin-right: 2rem;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -121,16 +97,13 @@
 
 @media (max-width: 768px) {
   .contenedor {
-    background: #56b947;
+    background: #232323e2;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
   .logo {
-    margin-left: 0rem;
-  }
-  .trapezoid {
-    display: none;
+    margin-left: 2rem;
   }
 
   .mobileMenuIcon {

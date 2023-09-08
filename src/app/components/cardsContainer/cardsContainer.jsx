@@ -28,17 +28,8 @@ function CardsContainer({}) {
         ...prevState,
         displayType: savedDisplayType,
       }));
-    } else {
-      setGlobalState((prevState) => ({
-        ...prevState,
-        displayType: "NEOPRENE_COVER",
-      }));
     }
   }, []);
-
-  if (isLoading) {
-    return <div></div>;
-  }
 
   console.log("Current displayType:", displayType);
 
@@ -53,6 +44,8 @@ function CardsContainer({}) {
   const endPage = Math.min(totalPages, startPage + maxPageButtons);
 
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i);
+  console.log("Current page:", page);
+
   return (
     <div className={styles.generalContainer}>
       <div className={styles.botoneraB}>
@@ -60,10 +53,12 @@ function CardsContainer({}) {
           className={styles.mobileSelector}
           value={displayType}
           onChange={(e) => {
+            const newDisplayType = e.target.value;
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: e.target.value,
+              displayType: newDisplayType,
             }));
+            localStorage.setItem("displayType", newDisplayType);
             setPage(0);
           }}
         >
@@ -77,10 +72,12 @@ function CardsContainer({}) {
         </select>
         <button
           onClick={() => {
+            const newDisplayType = "NEOPRENE_COVER";
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "NEOPRENE_COVER",
+              displayType: newDisplayType,
             }));
+            localStorage.setItem("displayType", newDisplayType);
             setPage(0);
           }}
           className={`${styles.botonOpciones} ${
@@ -91,10 +88,12 @@ function CardsContainer({}) {
         </button>
         <button
           onClick={() => {
+            const newDisplayType = "MALETINES";
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "MALETINES",
+              displayType: newDisplayType,
             }));
+            localStorage.setItem("displayType", newDisplayType);
             setPage(0);
           }}
           className={`${styles.botonOpciones} ${
@@ -105,10 +104,13 @@ function CardsContainer({}) {
         </button>
         <button
           onClick={() => {
+            const newDisplayType = "MALETINES_FULL_COLOR";
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "MALETINES_FULL_COLOR",
+              displayType: newDisplayType,
             }));
+            localStorage.setItem("displayType", newDisplayType);
+            setPage(0);
           }}
           className={`${styles.botonOpciones} ${
             displayType === "MALETINES_FULL_COLOR"
@@ -120,10 +122,13 @@ function CardsContainer({}) {
         </button>
         <button
           onClick={() => {
+            const newDisplayType = "CON_BOLSILLO";
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "CON_BOLSILLO",
+              displayType: newDisplayType,
             }));
+            localStorage.setItem("displayType", newDisplayType);
+            setPage(0);
           }}
           className={`${styles.botonOpciones} ${
             displayType === "CON_BOLSILLO" ? styles.botonOpcionesActivo : ""
@@ -133,10 +138,13 @@ function CardsContainer({}) {
         </button>
         <button
           onClick={() => {
+            const newDisplayType = "PORTAFOLIOS";
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "PORTAFOLIOS",
+              displayType: newDisplayType,
             }));
+            localStorage.setItem("displayType", newDisplayType);
+            setPage(0);
           }}
           className={`${styles.botonOpciones} ${
             displayType === "PORTAFOLIOS" ? styles.botonOpcionesActivo : ""
@@ -146,10 +154,13 @@ function CardsContainer({}) {
         </button>
         <button
           onClick={() => {
+            const newDisplayType = "TABLET_COVER";
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "TABLET_COVER",
+              displayType: newDisplayType,
             }));
+            localStorage.setItem("displayType", newDisplayType);
+            setPage(0);
           }}
           className={`${styles.botonOpciones} ${
             displayType === "TABLET_COVER" ? styles.botonOpcionesActivo : ""
@@ -159,10 +170,13 @@ function CardsContainer({}) {
         </button>
         <button
           onClick={() => {
+            const newDisplayType = "CUBRE_VALIJAS";
             setGlobalState((prevState) => ({
               ...prevState,
-              displayType: "CUBRE_VALIJAS",
+              displayType: newDisplayType,
             }));
+            localStorage.setItem("displayType", newDisplayType);
+            setPage(0);
           }}
           className={`${styles.botonOpciones} ${
             displayType === "CUBRE_VALIJAS" ? styles.botonOpcionesActivo : ""

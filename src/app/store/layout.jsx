@@ -13,7 +13,6 @@ export default function Layout({ children }) {
   const [totalProducts, setTotalProducts] = useState(0); // Nuevo estado para almacenar el total de productos
   const [page, setPage] = useState(0);
   const itemsPerPage = 12;
-
   const [globalState, setGlobalState] = useState({
     displayType: "NEOPRENE_COVER",
   });
@@ -80,6 +79,7 @@ export default function Layout({ children }) {
         });
         setProducts(response.data.products); // Actualizado para manejar el objeto de respuesta modificado
         setTotalProducts(response.data.totalProducts); // Establecer el total de productos
+        console.log("Response data:", response.data); // Add this to log the response data
       } catch (error) {
         console.error(error.message);
       } finally {
