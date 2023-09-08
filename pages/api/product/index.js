@@ -32,7 +32,11 @@ export default async function handler(req, res) {
         where: productType ? { productType } : undefined,
       });
 
-      return res.status(200).json(products);
+      const totalProducts = await prisma.product.count({
+        where: productType ? { productType } : undefined,
+      });
+
+      return res.status(200).json({ products, totalProducts });
 
     default:
       return res.status(405).json({ message: "We only support GET" });

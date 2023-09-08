@@ -9,14 +9,8 @@ import styles from "./general.module.css";
 
 function Fundas() {
   const {
-    covers,
     isLoading,
-    fullColor,
-    cubrevalijas,
-    maletines,
-    tablets,
-    portafolios,
-    conBolsillo,
+
     globalState,
     setGlobalState,
     userData,
@@ -55,23 +49,12 @@ function Fundas() {
         displayType: savedDisplayType,
       }));
     }
-
-    // ... el resto de tu código useEffect aquí ...
   }, []); // Nota: el array vacío significa que este efecto se ejecutará sólo una vez, cuando el componente se monte
 
   return (
     <div className={styles.background}>
       <NavBar className={styles.NavBar} />
-      <CardsContainer
-        covers={covers}
-        isLoading={isLoading}
-        maletines={maletines}
-        fullColor={fullColor}
-        cubrevalijas={cubrevalijas}
-        tablets={tablets}
-        portafolios={portafolios}
-        conBolsillo={conBolsillo}
-      />
+      <CardsContainer isLoading={isLoading} />
       <Cart />
     </div>
   );

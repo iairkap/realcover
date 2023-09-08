@@ -1,5 +1,4 @@
 "use client";
-
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 export const GlobalContext = createContext();
@@ -9,8 +8,9 @@ export default function Layout({ children }) {
   const [checkoutVisible, setCheckoutVisible] = useState(false);
   const [currentOrderDetails, setCurrentOrderDetails] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]); // Asegúrate de que products se inicializa como un array vacío
   const [userData, setUserData] = useState(null);
+  const [totalProducts, setTotalProducts] = useState(0); // Nuevo estado para almacenar el total de productos
   const [page, setPage] = useState(0);
   const itemsPerPage = 12;
 
@@ -67,7 +67,6 @@ export default function Layout({ children }) {
   useEffect(() => {
     saveCart(cart);
   }, [cart]);
-
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
@@ -79,7 +78,8 @@ export default function Layout({ children }) {
             productType: globalState.displayType.toUpperCase(),
           },
         });
-        setProducts(response.data);
+        setProducts(response.data.products); // Actualizado para manejar el objeto de respuesta modificado
+        setTotalProducts(response.data.totalProducts); // Establecer el total de productos
       } catch (error) {
         console.error(error.message);
       } finally {
@@ -87,36 +87,9 @@ export default function Layout({ children }) {
       }
     };
     fetchProducts();
-  }, [page, globalState.displayType]);
+  }, [page, globalState.displayType, setProducts, setTotalProducts]);
 
-  const covers = products.filter(
-    (product) => product.productType === "NEOPRENE_COVER"
-  );
-  console.log("Covers:", covers);
-  const maletines = products.filter(
-    (product) => product.productType === "MALETINES"
-  );
-  console.log("Maletines:", maletines);
-  const fullColor = products.filter(
-    (product) => product.productType === "MALETINES_FULL_COLOR"
-  );
-  console.log("Full Color:", fullColor);
-  const cubrevalijas = products.filter(
-    (product) => product.productType === "CUBRE_VALIJAS"
-  );
-  console.log("Cubre Valijas:", cubrevalijas);
-  const tablets = products.filter(
-    (product) => product.productType === "TABLET_COVER"
-  );
-  console.log("Tablets:", tablets);
-  const conBolsillo = products.filter(
-    (product) => product.productType === "CON_BOLSILLO"
-  );
-  console.log("Con Bolsillo:", conBolsillo);
-  const portafolios = products.filter(
-    (product) => product.productType === "PORTAFOLIOS"
-  );
-  console.log("Portafolios:", portafolios);
+  console.log("Products:", products);
   const addToCart = (product, selectedSizes) => {
     const updatedCart = [...cart];
 
@@ -170,17 +143,10 @@ export default function Layout({ children }) {
   return (
     <GlobalContext.Provider
       value={{
-        portafolios,
-        covers,
-        maletines,
-        cubrevalijas,
-        tablets,
-        conBolsillo,
         isLoading,
         cart,
         addToCart,
         removeFromCart,
-        fullColor,
         checkoutVisible,
         setCheckoutVisible,
         setCart,
@@ -194,6 +160,8 @@ export default function Layout({ children }) {
         globalState,
         setGlobalState,
         setPage,
+        products, // Asegúrate de incluir products y totalProducts aquí
+        totalProducts, // Nuevo
       }}
     >
       {children}

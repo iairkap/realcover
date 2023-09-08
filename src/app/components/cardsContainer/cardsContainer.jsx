@@ -1,28 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./CardsContainer.module.css";
 import Card from "../card/card";
 import { aprevious, nextArrow } from "../../../../public/imagnes";
 import Image from "next/image";
-import Loading from "../loader/loading";
-import { useRouter } from "next/navigation"; // Cambiado de "next/navigation" a "next/router"
-import { useEffect } from "react";
 import { GlobalContext } from "../../store/layout";
-import { useContext } from "react";
 
 function CardsContainer({}) {
   const {
-    covers,
-    maletines,
-    fullColor,
-    cubrevalijas,
+    products, // Usamos directamente los productos
     isLoading,
-    tablets,
-    conBolsillo,
-    portafolios,
     globalState,
     setGlobalState,
     setPage,
     page,
+    totalProducts, // Nuevo: accede a totalProducts desde el contexto
   } = useContext(GlobalContext);
   const displayType = globalState.displayType;
 
@@ -43,90 +34,25 @@ function CardsContainer({}) {
         displayType: "NEOPRENE_COVER",
       }));
     }
-    setPage(0); // Restablece la página a 0 cuando el tipo de visualización cambia
-  }, [displayType]); // Agrega displayType como una dependencia aquí
+  }, []);
+
   if (isLoading) {
     return <div></div>;
   }
 
-  console.log("Current displayType:", displayType); // Añade esta línea para verificar el valor de displayType
+  console.log("Current displayType:", displayType);
 
-  let items;
-  switch (displayType) {
-    case "NEOPRENE_COVER":
-      items = covers.map((item) => ({ ...item, type: "NEOPRENE_COVER" }));
-      const index178 = items.findIndex((item) => item.id === 178);
-      if (index178 !== -1) {
-        const item178 = items[index178];
-        items.splice(index178, 1);
-        items.unshift(item178);
-      }
-      break;
-    case "MALETINES":
-      items = maletines.map((item) => ({ ...item, type: "MALETINES" }));
-      break;
-    case "TABLET_COVER":
-      items = tablets.map((item) => ({ ...item, type: "TABLET_COVER" }));
-      break;
-    case "MALETINES_FULL_COLOR":
-      items = fullColor.map((item) => ({
-        ...item,
-        type: "MALETINES_FULL_COLOR",
-      }));
-      break;
-    case "CUBRE_VALIJAS":
-      items = cubrevalijas.map((item) => ({ ...item, type: "CUBRE_VALIJAS" }));
-      break;
-    case "CON_BOLSILLO":
-      items = conBolsillo.map((item) => ({ ...item, type: "CON_BOLSILLO" }));
-      break;
-    case "PORTAFOLIOS":
-      items = portafolios.map((item) => ({ ...item, type: "PORTAFOLIOS" }));
-      break;
-    default:
-      items = [];
-  }
-  console.log("Items before sorting:", items); // Verifica los items antes de ser ordenados
+  const totalPages = totalProducts
+    ? Math.ceil(totalProducts / itemsPerPage)
+    : 0;
 
-  const sortedItems = [...items].sort((a, b) => {
-    const numA = parseInt(
-      (a.imageName
-        ? a.imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "")
-        : ""
-      ).match(/\d+/),
-      10
-    );
-    const numB = parseInt(
-      (b.imageName
-        ? b.imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "")
-        : ""
-      ).match(/\d+/),
-      10
-    );
-    return numA - numB;
-  });
+  console.log("Total products:", totalProducts);
+  console.log("Total pages:", totalPages);
 
-  console.log("Sorted items:", sortedItems); // Verifica los items después de ser ordenados
-
-  const pagedItems = sortedItems.slice(
-    page * itemsPerPage,
-    (page + 1) * itemsPerPage
-  );
-  console.log("Paged items:", pagedItems); // Verifica los items que deberían mostrarse en la página actual
-
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-
-  const startPage = Math.max(
-    0,
-    page - Math.floor(maxPageButtons / 2) // Cambiado de globalState.page a page
-  );
+  const startPage = Math.max(0, page - Math.floor(maxPageButtons / 2));
   const endPage = Math.min(totalPages, startPage + maxPageButtons);
 
-  const pageNumbers = [];
-  for (let i = startPage; i < endPage; i++) {
-    pageNumbers.push(i);
-  }
-
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i);
   return (
     <div className={styles.generalContainer}>
       <div className={styles.botoneraB}>
@@ -247,7 +173,7 @@ function CardsContainer({}) {
       </div>
 
       <div className={styles.cardsContainer} key={displayType}>
-        {pagedItems.map((item) => (
+        {products.map((item) => (
           <Card key={item.id} {...item} />
         ))}
       </div>
