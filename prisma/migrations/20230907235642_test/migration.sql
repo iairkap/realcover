@@ -8,7 +8,7 @@ CREATE TYPE "Sizes" AS ENUM ('Size7', 'Size8', 'Size9', 'Size10', 'Size12', 'Siz
 CREATE TABLE "Product" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "picture" TEXT NOT NULL,
+    "picture" TEXT[],
     "price" DOUBLE PRECISION NOT NULL,
     "productType" "ProductType" NOT NULL,
     "description" TEXT,

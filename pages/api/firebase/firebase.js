@@ -25,7 +25,7 @@ const firebaseConfig2 = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-const app2 = initializeApp(firebaseConfig2);
+const app2 = initializeApp(firebaseConfig2, "app2");
 const storage2 = getStorage(app2);
 
 function extractImageNameFromURL(url) {
