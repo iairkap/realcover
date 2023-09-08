@@ -53,7 +53,7 @@ function Contactanos(props) {
             <p className={styles.number}>+5491154231080</p>
           </a>
           <div
-            className={styles.whatsappContainer}
+            className={styles.whatsappContainerb}
             onMouseEnter={() => setIsEmailHovered(true)}
             onMouseLeave={() => setIsEmailHovered(false)}
           >

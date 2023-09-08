@@ -1,35 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-/*.contenedorCard {
-    display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  height: 10.875rem;
-  flex-shrink: 0;
-  background: #f5f5f5;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  justify-content: space-between; 
-  align-items: center; 
-  margin-bottom: 2rem;
-  border-radius: 0.3125rem;
-  margin-left: 2rem;
-  margin-right: 4rem;
-}
-*/
-/* 
-.contenedorCard {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  place-self: flex-end;
-  background-color: #f5f5f5;
-  margin-bottom: 2rem;
-  padding: 1rem 2rem 1rem 2rem;
-  align-items: center;
-  border-radius: 10px;
-} */
 
 .productImage {
   height: 118px;
@@ -43,7 +12,8 @@
 }
 
 .detailButton,
-.repeatButton {
+.repeatButton,
+.repeatButtonB {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -100,7 +70,8 @@
   background-color: #45a037; /* Cambio de color al hacer hover */
 }
 
-.repeatButton {
+.repeatButton,
+.repeatButtonB {
   height: 2.3125rem;
   flex-shrink: 0;
   color: #56b947;
@@ -115,7 +86,8 @@
   transition: background-color 0.3s ease; /* Transición suave al cambiar el color de fondo */
 }
 
-.repeatButton:hover {
+.repeatButton:hover,
+.repeatButtonB:hover {
   background-color: #a4ca92; /* Cambio de color al hacer hover */
 }
 
@@ -204,6 +176,11 @@
   height: 0.0625rem;
 }
 
+.lineb {
+  background-color: black;
+  width: 30rem; /* Haz que la línea ocupe todo el ancho disponible */
+  height: 0.0625rem;
+}
 .titulo {
   color: #000;
   font-family: "Roboto", sans-serif;
@@ -553,4 +530,80 @@
 
 .buttonTable:hover {
   color: #45a037;
+}
+@media screen and (min-width: 768px) {
+  .threeDotsButton {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contenedorCard {
+    width: 100%;
+  }
+  .leftContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: -2rem;
+  }
+  .repeatButton {
+    display: none;
+  }
+  .detallePedidoB {
+    display: none;
+  }
+  .productImage {
+    width: 100px;
+    height: 100px;
+    margin-left: 6px;
+    margin-top: -3px;
+  }
+
+  .threeDotsButton {
+    background-color: transparent;
+    border: none;
+    place-self: self-start;
+    padding-right: 2rem;
+  }
+  .orderInfo {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .orderInfo {
+    margin-bottom: -20px;
+    gap: -2px;
+  }
+  .detallePedido {
+    margin-bottom: -1rem;
+  }
+  .lineb {
+    width: 10rem;
+  }
+}
+
+.close {
+  background-color: transparent;
+  border: none;
+  align-self: flex-end;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  color: #56b947;
+  font-size: 1.5rem;
+}
+
+.titulo {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 139%;
+  letter-spacing: -0.01375rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -238,6 +238,18 @@
   outline: none;
 }
 
+.modal {
+  background-color: #232323;
+  height: auto;
+  max-height: 80vh; /* Asegura que el modal no exceda la altura de la ventana de visualización */
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+  display: flex;
+  width: 100%;
+  gap: 4rem;
+  padding: 2rem;
+  align-items: center;
+}
+
 @media screen and (max-width: 768px) {
   .modal {
     flex-direction: column;
@@ -255,5 +267,12 @@
   .modalText {
     width: 100%;
     align-items: center;
+  }
+  .botonera {
+    flex-direction: column;
+    width: 100%;
+  }
+  .boton {
+    width: 100%;
   }
 }

@@ -9,44 +9,42 @@ function ModalRepetirOrder({ isConfirmModalOpen, setIsConfirmModalOpen }) {
         onRequestClose={() => setIsConfirmModalOpen(false)}
         style={{
           overlay: {
-            position: "fixed",
-            top: 0,
-            right: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.829)",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backdropFilter: "blur(1px)",
             zIndex: 10,
-            backdropFilter: "blur(4.5px)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           },
           content: {
-            backgroundColor: "white",
-            position: "fixed",
-            top: 0,
-            left: "auto", // Añade esta línea
-            right: 0,
+            background: "#232323",
+            overflow: "auto",
+            position: "relative",
+            top: "auto",
+            left: "auto",
+            right: "auto",
+            bottom: "auto",
+            width: "20rem",
+            transform: "none",
             padding: "2rem",
-            width: "80%",
-            maxWidth: "30%",
-            maxHeight: "90vh",
-            zIndex: 20,
-            overflowY: "auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
+            boxSizing: "border-box",
           },
         }}
       >
-        <p>Pedido realizado con éxito</p>
-        <button
-          onClick={() => {
-            setIsConfirmModalOpen(false);
-            if (typeof window !== "undefined") {
-              window.location.reload();
-            }
-          }}
-        >
-          Aceptar
-        </button>
+        <div className={styles.container}>
+          <p className={styles.titulo}>Pedido realizado con éxito</p>
+          <button
+            onClick={() => {
+              setIsConfirmModalOpen(false);
+              if (typeof window !== "undefined") {
+                window.location.reload();
+              }
+            }}
+            className={styles.detailButton}
+          >
+            Aceptar
+          </button>
+        </div>
       </Modal>
     </div>
   );

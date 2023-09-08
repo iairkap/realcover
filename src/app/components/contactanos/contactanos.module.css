@@ -130,7 +130,8 @@
   width: 70%;
 }
 
-.whatsappContainer {
+.whatsappContainer,
+.whatsappContainerb {
   display: flex;
   flex-direction: row;
   color: #fff;
@@ -276,5 +277,11 @@
   }
   .iconsContainer {
     padding-left: 2rem;
+  }
+  .whatsappContainerb {
+    display: none;
+  }
+  .formContainer {
+    margin-top: 2rem;
   }
 }

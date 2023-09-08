@@ -170,9 +170,6 @@ function ModalDireccion({
           },
           content: {
             background: "#232323",
-            border: "solid",
-            borderColor: "#46b02b",
-            borderWidth: "1rem",
             overflow: "auto",
             position: "relative",
             top: "auto",

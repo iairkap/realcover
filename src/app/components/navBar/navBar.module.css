@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
 .contenedor {
   z-index: 10000;
   height: 44px;
@@ -133,5 +135,14 @@
 
   .mobileMenuIcon {
     padding-right: 2rem;
+  }
+  .mobileMenu {
+    padding-left: 3rem;
+  }
+  .spanm {
+    font-family: "Roboto", sans-serif;
+    color: white;
+    font-weight: 900;
+    padding-left: 1rem;
   }
 }

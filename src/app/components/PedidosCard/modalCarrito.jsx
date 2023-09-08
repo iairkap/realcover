@@ -10,6 +10,8 @@ function ModalCarrito({
   formatProductName,
   formatSize,
 }) {
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <div>
       <Modal
@@ -19,7 +21,7 @@ function ModalCarrito({
           overlay: {
             position: "fixed",
             top: 0,
-            right: 0,
+            right: isMobile ? "20px" : "auto", // Añade esta línea
             width: "100%",
             height: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.829)",
@@ -29,13 +31,13 @@ function ModalCarrito({
           content: {
             backgroundColor: "white",
             position: "fixed",
-            top: 0,
+            top: "44px",
             left: "auto", // Añade esta línea
             right: 0,
             padding: "2rem",
             width: "80%",
-            maxWidth: "30%",
-            maxHeight: "90vh",
+            maxWidth: isMobile ? "100%" : "30%",
+            maxHeight: isMobile ? "100vh" : "90vh",
             zIndex: 20,
             overflowY: "auto",
             display: "flex",
@@ -44,7 +46,9 @@ function ModalCarrito({
           },
         }}
       >
-        <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
+        <button onClick={() => setIsModalOpen(false)} className={styles.close}>
+          X
+        </button>
         <h1 className={styles.titulo}>
           Pedido realizado el: {formattedOrderDate}
         </h1>
@@ -70,7 +74,7 @@ function ModalCarrito({
                 ))}
               </div>
             </div>
-            <div className={styles.line}></div>
+            <div className={styles.lineb}></div>
           </div>
         ))}
       </Modal>

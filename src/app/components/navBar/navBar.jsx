@@ -156,12 +156,20 @@ function NavBar(props) {
       </div>
       {isMobileMenuOpen && (
         <div className={styles.mobileMenu}>
-          <div onClick={handlePedidosClick}>Mi perfil</div>
-          <div onClick={handleCartOpen}>Carrito</div>
+          <div onClick={handlePedidosClick}>
+            <span className={styles.spanm}>Mi perfil</span>
+          </div>
+          <div onClick={handleCartOpen}>
+            <span className={styles.spanm}>Carrito</span>
+          </div>
           {isAuthenticated ? (
-            <div onClick={handleLogout}>Cerrar sesión</div>
+            <div onClick={handleLogout}>
+              <span className={styles.spanm}>Cerrar sesión</span>
+            </div>
           ) : (
-            <div onClick={handleLoginClick}>Iniciar sesión / Registrarse</div>
+            <div onClick={handleLoginClick}>
+              <span className={styles.spanm}>Iniciar sesión / Registrarse</span>
+            </div>
           )}
         </div>
       )}
