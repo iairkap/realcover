@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import React, { useEffect, useContext } from "react";
 import { GlobalContext } from "../layout";
 import CardsContainer from "../../components/cardsContainer/cardsContainer";

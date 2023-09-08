@@ -35,7 +35,9 @@
   height: 3rem;
   justify-content: space-between;
 }
-
+.optionContainer {
+  position: relative;
+}
 .selector {
   display: flex;
   width: 50%;
@@ -87,4 +89,12 @@
   background-color: transparent;
   border: none;
   color: #70b756; /* color original del SVG */
+}
+
+.ticContainer {
+  position: absolute;
+  right: 20px; /* Ajusta según sea necesario */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Esto asegura que el icono no interfiera con los clics del usuario */
 }

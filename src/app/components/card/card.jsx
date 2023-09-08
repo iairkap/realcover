@@ -6,6 +6,7 @@ import imagenDefault from "../../../../public/fundas/loading.png";
 import NextImage from "next/image";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import tic from "../../../../public/tic.svg";
 
 function Card({
   id,
@@ -19,6 +20,7 @@ function Card({
   productType,
 }) {
   const sizeNames = sizes || size || cubreValijaSize || [];
+  const [addedSuccessfully, setAddedSuccessfully] = useState([]);
 
   const cleanImageName = imageName
     ? imageName.replace(/(Fundas%2F|Valijas%2FV20)/, "")
@@ -27,7 +29,7 @@ function Card({
     "https://firebasestorage.googleapis.com/v0/b/real-cover.appspot.com/o/loading.png?alt=media&token=56c478e1-1bd3-45b5-82df-e65695c460f4";
 
   const [imageSrc, setImageSrc] = useState(imagenDefault);
-  const [mainImageSrc, setMainImageSrc] = useState(picture);
+  const [mainImageSrc, setMainImageSrc] = useState(picture[0]);
   const { addToCart, removeFromCart } = useContext(GlobalContext);
   const [addedSizes, setAddedSizes] = useState([]);
   const [selectedSizeSubmitted, setSelectedSizeSubmitted] = useState(false);
@@ -61,17 +63,24 @@ function Card({
 
   useEffect(() => {
     const mainImage = new Image();
-    mainImage.src = picture;
+    mainImage.src = picture[0]; // Aquí también deberías utilizar picture[0]
     mainImage.onload = () => {
-      setMainImageSrc(picture);
+      setMainImageSrc(picture[0]); // Y aquí
     };
   }, [picture]);
   const handleAddToCart = () => {
     // Filtrar tamaños que no están vacíos
     const sizesToAdd = selectedSizes.filter((ss) => ss.size && ss.quantity);
 
-    addToCart({ id, picture, price, productType, name }, sizesToAdd);
-    setSelectedSizeSubmitted(true);
+    if (sizesToAdd.length > 0) {
+      addToCart({ id, picture, price, productType, name }, sizesToAdd);
+      setSelectedSizeSubmitted(true);
+
+      // Marcamos los ítems que se agregaron con éxito como "true" en la matriz
+      setAddedSuccessfully(
+        selectedSizes.map((size, index) => sizesToAdd.includes(size))
+      );
+    }
   };
 
   const handleRemoveFromCart = (idx) => {
@@ -131,6 +140,16 @@ function Card({
                 placeholder="Cantidad"
                 className={styles.input}
               />
+              {addedSuccessfully[idx] && (
+                <div className={styles.ticContainer}>
+                  <NextImage
+                    src={tic}
+                    alt="Item agregado con éxito"
+                    width={16}
+                    height={16}
+                  />
+                </div>
+              )}
             </div>
           ))}
           <div className={styles.botonera}>

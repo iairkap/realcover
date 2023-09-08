@@ -247,6 +247,14 @@ function Cart() {
     [ProductType.CON_BOLSILLO]: "Con Bolsillo",
   };
 
+  console.log(itemsToDisplay);
+  const getFirstImage = (pictureArray) => {
+    return pictureArray &&
+      Array.isArray(pictureArray) &&
+      pictureArray.length > 0
+      ? pictureArray[0]
+      : "https://firebasestorage.googleapis.com/v0/b/real-de130.appspot.com/o/Fundas%2F1.png?alt=media&token=8e393e4b-eb11-4987-8ac8-b7a73e63a658";
+  };
   if (orderSuccess) {
     return (
       <div className={styles.modal}>
@@ -262,6 +270,11 @@ function Cart() {
     <div className={styles.modal}>
       <div className={styles.modalBackground} onClick={handleModalClose} />
       <div className={styles.modalContent}>
+        <div className={styles.closeButton}>
+          <button onClick={handleModalClose} className={styles.closeButton}>
+            X
+          </button>
+        </div>
         <div className={styles.nameContainer}>
           {userData && (
             <h2 className={styles.name}>
@@ -283,7 +296,13 @@ function Cart() {
         {Object.values(itemsToDisplay).map((item, index) => (
           <div key={index} className={styles.ab}>
             <div className={styles.contenedorImagen}>
-              <Image src={item.picture} width={100} height={100} alt={"fa"} />
+              <Image
+                src={getFirstImage(item.picture)}
+                width={100}
+                height={100}
+                alt={"fa"}
+              />
+
               <h2 className={styles.nombre}>
                 {ProductDisplayName[item.productType] || item.productType}
               </h2>

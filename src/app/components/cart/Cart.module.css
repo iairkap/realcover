@@ -2,7 +2,7 @@
 .modal {
   position: fixed;
   right: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -22,6 +22,7 @@
 
 .modalContent {
   background-color: white;
+  overflow: scroll;
   position: fixed;
   top: 44px;
   right: 0;
@@ -32,7 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: calc(100vh - 44px); /* Resta el alto de la barra de navegación */
+  max-height: 90%;
 }
 
 .button {
@@ -290,4 +291,28 @@
 
 .numberdisc {
   color: rgb(118, 11, 11);
+}
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #56b947;
+  align-self: flex-end;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .modalContent {
+    width: fit-content;
+    left: 0;
+    overflow: scroll;
+  }
+
+  .modal {
+    width: 100%;
+    overflow: scroll;
+  }
 }

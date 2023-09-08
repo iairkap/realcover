@@ -31,16 +31,18 @@ export const useOrderLogic = (
   let isCubreValijas = false; // Definición fuera del bloque if
 
   if (orderDetails && orderDetails.length > 0 && orderDetails[0].products) {
-    imageUrl = orderDetails[0].products.picture;
+    imageUrl = orderDetails[0].products.picture[0];
     isCubreValijas = imageUrl.includes("CubreValijas%"); // Asignación dentro del bloque if
-    console.log(orderDetails[0].products.picture);
+    console.log(orderDetails[0].products.picture[0]);
   } else {
     console.log(
       "El usuario no ha hecho ninguna orden o la estructura de datos no es la esperada."
     );
   }
-  console.log(orderDetails[0].products.picture);
-
+  /*   console.log(orderDetails[0].products.picture);
+   */
+  /*   console.log(products);
+   */
   const statusClass =
     status === "En proceso" ? styles.enProceso : styles.entregado;
 
