@@ -5,19 +5,23 @@ import { aprevious, nextArrow } from "../../../../public/imagnes";
 import Image from "next/image";
 import { GlobalContext } from "../../store/layout";
 import LoadingContainer from "../loading/loading";
-import NumeroCarrito from "../numeroCarrito/numeroCarrito";
+import NumeroCarrito from "../numeroCarrito/numeroCarrito copy";
+import CartComponent from "../cart/cart";
 
 function CardsContainer({}) {
   const {
-    products, // Usamos directamente los productos
+    products,
     isLoading,
     globalState,
     setGlobalState,
     setPage,
     page,
-    totalProducts, // Nuevo: accede a totalProducts desde el contexto
+    totalProducts,
+    setCheckoutVisible,
+    checkoutVisible,
   } = useContext(GlobalContext);
   const displayType = globalState.displayType;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const itemsPerPage = 12;
   const maxPageButtons = 5;
@@ -41,153 +45,174 @@ function CardsContainer({}) {
   const endPage = Math.min(totalPages, startPage + maxPageButtons);
 
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Este efecto solo se ejecuta una vez cuando el componente se monta
 
   return (
     <div className={styles.generalContainer}>
       <div className={styles.botoneraB}>
-        <div className={styles.botoneraMobile}>
-          <select
-            className={styles.mobileSelector}
-            value={displayType}
-            onChange={(e) => {
-              const newDisplayType = e.target.value;
-              setGlobalState((prevState) => ({
-                ...prevState,
-                displayType: newDisplayType,
-              }));
-              localStorage.setItem("displayType", newDisplayType);
-              setPage(0);
-            }}
-          >
-            <option value="NEOPRENE_COVER">FUNDAS NEOPRENE</option>
-            <option value="MALETINES">MALETINES</option>
-            <option value="MALETINES_FULL_COLOR">FULL COLOR</option>
-            <option value="TABLET_COVER">FUNDAS RIGIDAS</option>
-            <option value="CUBRE_VALIJAS">CUBRE VALIJAS</option>
-            <option value="CON_BOLSILLO">FUNDSA CON BOLSILLO</option>
-            <option value="PORTAFOLIOS">PORTAFOLIOS</option>
-          </select>
-          <button
-            className={styles.mobileSelector}
-            onClick={() => setCheckoutVisible(true)} // Agregamos un manejador de clics aquí
-          >
-            VER CARRITO {NumeroCarrito}
-          </button>
-        </div>
-        <button
-          onClick={() => {
-            const newDisplayType = "NEOPRENE_COVER";
-            setGlobalState((prevState) => ({
-              ...prevState,
-              displayType: newDisplayType,
-            }));
-            localStorage.setItem("displayType", newDisplayType);
-            setPage(0);
-          }}
-          className={`${styles.botonOpciones} ${
-            displayType === "NEOPRENE_COVER" ? styles.botonOpcionesActivo : ""
-          }`}
-        >
-          FUNDAS NEOPRENE
-        </button>
-        <button
-          onClick={() => {
-            const newDisplayType = "MALETINES";
-            setGlobalState((prevState) => ({
-              ...prevState,
-              displayType: newDisplayType,
-            }));
-            localStorage.setItem("displayType", newDisplayType);
-            setPage(0);
-          }}
-          className={`${styles.botonOpciones} ${
-            displayType === "MALETINES" ? styles.botonOpcionesActivo : ""
-          }`}
-        >
-          MALETINES
-        </button>
-        <button
-          onClick={() => {
-            const newDisplayType = "MALETINES_FULL_COLOR";
-            setGlobalState((prevState) => ({
-              ...prevState,
-              displayType: newDisplayType,
-            }));
-            localStorage.setItem("displayType", newDisplayType);
-            setPage(0);
-          }}
-          className={`${styles.botonOpciones} ${
-            displayType === "MALETINES_FULL_COLOR"
-              ? styles.botonOpcionesActivo
-              : ""
-          }`}
-        >
-          FULL COLOR
-        </button>
-        <button
-          onClick={() => {
-            const newDisplayType = "CON_BOLSILLO";
-            setGlobalState((prevState) => ({
-              ...prevState,
-              displayType: newDisplayType,
-            }));
-            localStorage.setItem("displayType", newDisplayType);
-            setPage(0);
-          }}
-          className={`${styles.botonOpciones} ${
-            displayType === "CON_BOLSILLO" ? styles.botonOpcionesActivo : ""
-          }`}
-        >
-          FUNDAS CON BOLSILLO
-        </button>
-        <button
-          onClick={() => {
-            const newDisplayType = "PORTAFOLIOS";
-            setGlobalState((prevState) => ({
-              ...prevState,
-              displayType: newDisplayType,
-            }));
-            localStorage.setItem("displayType", newDisplayType);
-            setPage(0);
-          }}
-          className={`${styles.botonOpciones} ${
-            displayType === "PORTAFOLIOS" ? styles.botonOpcionesActivo : ""
-          }`}
-        >
-          PORTAFOLIOS
-        </button>
-        <button
-          onClick={() => {
-            const newDisplayType = "TABLET_COVER";
-            setGlobalState((prevState) => ({
-              ...prevState,
-              displayType: newDisplayType,
-            }));
-            localStorage.setItem("displayType", newDisplayType);
-            setPage(0);
-          }}
-          className={`${styles.botonOpciones} ${
-            displayType === "TABLET_COVER" ? styles.botonOpcionesActivo : ""
-          }`}
-        >
-          FUNDAS RIGIDAS{" "}
-        </button>
-        <button
-          onClick={() => {
-            const newDisplayType = "CUBRE_VALIJAS";
-            setGlobalState((prevState) => ({
-              ...prevState,
-              displayType: newDisplayType,
-            }));
-            localStorage.setItem("displayType", newDisplayType);
-            setPage(0);
-          }}
-          className={`${styles.botonOpciones} ${
-            displayType === "CUBRE_VALIJAS" ? styles.botonOpcionesActivo : ""
-          }`}
-        >
-          CUBRE VALIJAS
-        </button>
+        {isMobile && (
+          <div className={styles.botoneraMobile}>
+            <button
+              className={styles.mobileSelectorB}
+              onClick={() => setCheckoutVisible(true)} // Now it should work as expected
+            >
+              VER CARRITO {<NumeroCarrito />}{" "}
+            </button>
+            <select
+              className={styles.mobileSelector}
+              value={displayType}
+              onChange={(e) => {
+                const newDisplayType = e.target.value;
+                setGlobalState((prevState) => ({
+                  ...prevState,
+                  displayType: newDisplayType,
+                }));
+                localStorage.setItem("displayType", newDisplayType);
+                setPage(0);
+              }}
+            >
+              <option value="NEOPRENE_COVER">FUNDAS NEOPRENE</option>
+              <option value="MALETINES">MALETINES</option>
+              <option value="MALETINES_FULL_COLOR">FULL COLOR</option>
+              <option value="TABLET_COVER">FUNDAS RIGIDAS</option>
+              <option value="CUBRE_VALIJAS">CUBRE VALIJAS</option>
+              <option value="CON_BOLSILLO">FUNDSA CON BOLSILLO</option>
+              <option value="PORTAFOLIOS">PORTAFOLIOS</option>
+            </select>
+          </div>
+        )}
+        {!isMobile && (
+          <div className={styles.botoneraD}>
+            <button
+              onClick={() => {
+                const newDisplayType = "NEOPRENE_COVER";
+                setGlobalState((prevState) => ({
+                  ...prevState,
+                  displayType: newDisplayType,
+                }));
+                localStorage.setItem("displayType", newDisplayType);
+                setPage(0);
+              }}
+              className={`${styles.botonOpciones} ${
+                displayType === "NEOPRENE_COVER"
+                  ? styles.botonOpcionesActivo
+                  : ""
+              }`}
+            >
+              FUNDAS NEOPRENE
+            </button>
+            <button
+              onClick={() => {
+                const newDisplayType = "MALETINES";
+                setGlobalState((prevState) => ({
+                  ...prevState,
+                  displayType: newDisplayType,
+                }));
+                localStorage.setItem("displayType", newDisplayType);
+                setPage(0);
+              }}
+              className={`${styles.botonOpciones} ${
+                displayType === "MALETINES" ? styles.botonOpcionesActivo : ""
+              }`}
+            >
+              MALETINES
+            </button>
+            <button
+              onClick={() => {
+                const newDisplayType = "MALETINES_FULL_COLOR";
+                setGlobalState((prevState) => ({
+                  ...prevState,
+                  displayType: newDisplayType,
+                }));
+                localStorage.setItem("displayType", newDisplayType);
+                setPage(0);
+              }}
+              className={`${styles.botonOpciones} ${
+                displayType === "MALETINES_FULL_COLOR"
+                  ? styles.botonOpcionesActivo
+                  : ""
+              }`}
+            >
+              FULL COLOR
+            </button>
+            <button
+              onClick={() => {
+                const newDisplayType = "CON_BOLSILLO";
+                setGlobalState((prevState) => ({
+                  ...prevState,
+                  displayType: newDisplayType,
+                }));
+                localStorage.setItem("displayType", newDisplayType);
+                setPage(0);
+              }}
+              className={`${styles.botonOpciones} ${
+                displayType === "CON_BOLSILLO" ? styles.botonOpcionesActivo : ""
+              }`}
+            >
+              FUNDAS CON BOLSILLO
+            </button>
+            <button
+              onClick={() => {
+                const newDisplayType = "PORTAFOLIOS";
+                setGlobalState((prevState) => ({
+                  ...prevState,
+                  displayType: newDisplayType,
+                }));
+                localStorage.setItem("displayType", newDisplayType);
+                setPage(0);
+              }}
+              className={`${styles.botonOpciones} ${
+                displayType === "PORTAFOLIOS" ? styles.botonOpcionesActivo : ""
+              }`}
+            >
+              PORTAFOLIOS
+            </button>
+            <button
+              onClick={() => {
+                const newDisplayType = "TABLET_COVER";
+                setGlobalState((prevState) => ({
+                  ...prevState,
+                  displayType: newDisplayType,
+                }));
+                localStorage.setItem("displayType", newDisplayType);
+                setPage(0);
+              }}
+              className={`${styles.botonOpciones} ${
+                displayType === "TABLET_COVER" ? styles.botonOpcionesActivo : ""
+              }`}
+            >
+              FUNDAS RIGIDAS{" "}
+            </button>
+            <button
+              onClick={() => {
+                const newDisplayType = "CUBRE_VALIJAS";
+                setGlobalState((prevState) => ({
+                  ...prevState,
+                  displayType: newDisplayType,
+                }));
+                localStorage.setItem("displayType", newDisplayType);
+                setPage(0);
+              }}
+              className={`${styles.botonOpciones} ${
+                displayType === "CUBRE_VALIJAS"
+                  ? styles.botonOpcionesActivo
+                  : ""
+              }`}
+            >
+              CUBRE VALIJAS
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={styles.cardsContainer} key={displayType}>
@@ -230,6 +255,7 @@ function CardsContainer({}) {
           )}
         </div>
       )}
+      {checkoutVisible && <CartComponent />}
     </div>
   );
 }

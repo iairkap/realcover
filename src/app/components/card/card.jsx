@@ -101,6 +101,20 @@ function Card({
       );
     }
   };
+  const sizeMapping = {
+    Size7: '7"',
+    Size8: '8"',
+    Size9: '9"',
+    Size10: '10"',
+    Size12: '12"',
+    Size14: '14"',
+    Size14_1: '14.1"',
+    Size15_6: '15.6"',
+    Size17: '17"',
+    S: "S",
+    M: "M",
+    L: "L",
+  };
 
   const handleRemoveFromCart = (idx) => {
     const sizeToRemove = selectedSizes[idx].size;
@@ -147,7 +161,8 @@ function Card({
                 </option>
                 {sizeNames.map((sizeName, sizeIdx) => (
                   <option key={sizeIdx} value={sizeName}>
-                    {sizeName}
+                    {sizeMapping[sizeName] || sizeName}{" "}
+                    {/* Usamos el valor mapeado si está disponible, de lo contrario usamos el valor original */}
                   </option>
                 ))}
               </select>

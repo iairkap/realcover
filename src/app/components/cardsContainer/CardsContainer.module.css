@@ -15,6 +15,7 @@
   gap: 2rem;
   width: 90;
   margin-bottom: 3rem;
+  margin-top: 3rem;
 }
 
 .botonera {
@@ -27,13 +28,11 @@
 }
 
 .botoneraB {
-  margin-top: 5rem;
-}
-.botoneraB {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
+  margin-top: 2rem;
 }
 
 .paginationButton,
@@ -115,6 +114,22 @@
   transition: ease-in-out 0.1s;
   cursor: pointer;
 }
+.mobileSelectorB {
+  width: 100%;
+  max-width: 16rem;
+  padding: 1rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  background: #232323;
+  color: #fff;
+  border-radius: 0.5rem;
+  border: none;
+  transition: ease-in-out 0.1s;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
 
 .mobileSelector:focus {
   outline: none;
@@ -123,7 +138,7 @@
 @media screen and (max-width: 864px) {
   /* Oculta la botonera para móvil */
   .botoneraB .botonOpciones {
-    display: none;
+    display: empty;
   }
 
   /* Muestra el selector para móvil */
@@ -151,7 +166,8 @@
 .botoneraB {
   display: flex;
   width: 80%;
-  height: 4rem;
+  height: fit-content;
+  margin-top: 7rem;
 }
 
 .botonOpcionesActivo {
@@ -169,7 +185,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .carritoMobile {
+  .botoneraMobile {
     display: none;
   }
 }
@@ -183,4 +199,12 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 3rem;
+}
+
+.botoneraD {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 5rem;
 }
