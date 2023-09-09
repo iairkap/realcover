@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { decode } from "next-auth/jwt";
 
-export const verifyMiddleware = (handler) => async (req, res) => {
+const verifyMiddleware = (handler) => async (req, res) => {
   const googleToken = req.cookies["next-auth.session-token"];
   const emailToken = req.cookies["token"];
   const JWT_SECRET = process.env.JWT_SECRET;
@@ -31,3 +31,5 @@ export const verifyMiddleware = (handler) => async (req, res) => {
     return res.status(401).json({ message: "Unauthorized, please SignIn" });
   }
 };
+
+export default verifyMiddleware;
