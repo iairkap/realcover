@@ -86,7 +86,6 @@ function Email({ cartData, email, orderId, total, name }) {
   };
 
   const summarizedDetails = aggregateOrderDetailsFromCartData(cartData);
-  console.log(summarizedDetails);
   const detailStrings =
     summarizedDetails &&
     summarizedDetails.map(

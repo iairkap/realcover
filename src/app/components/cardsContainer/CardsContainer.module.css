@@ -23,6 +23,7 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 80%;
+  margin-bottom: 2rem;
 }
 
 .botoneraB {
@@ -47,6 +48,7 @@
   font-weight: 900;
   line-height: 139%;
   letter-spacing: -0.011rem;
+  border-radius: 0.2rem;
 }
 
 .paginationButton {
@@ -77,14 +79,21 @@
 }
 
 /* Media Queries */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1260px) {
+  .cardsContainer {
+    grid-template-columns: repeat(3, 1fr);
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 930px) {
   .cardsContainer {
     grid-template-columns: repeat(2, 1fr);
     align-self: center;
   }
 }
 
-@media screen and (max-width: 864px) {
+@media screen and (max-width: 585px) {
   .cardsContainer {
     grid-template-columns: 1fr;
     align-self: center;
@@ -139,14 +148,39 @@
   color: #56b947;
 }
 
-.botonOpciones:focus {
-  outline: none;
-  color: white;
-  background-color: #56b947;
-}
-
 .botoneraB {
   display: flex;
   width: 80%;
   height: 4rem;
+}
+
+.botonOpcionesActivo {
+  outline: none;
+  color: #56b947;
+}
+
+.LoadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  min-height: 80vh;
+  justify-content: space-around;
+}
+
+@media screen and (min-width: 768px) {
+  .carritoMobile {
+    display: none;
+  }
+}
+
+.carritoMobile {
+  background-color: #232323;
+  border: none;
+}
+
+.botoneraMobile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

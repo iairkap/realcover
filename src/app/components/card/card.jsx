@@ -60,14 +60,33 @@ function Card({
   const handleImageLoad = () => {
     setImageSrc(mainImageSrc);
   };
-
   useEffect(() => {
-    const mainImage = new Image();
-    mainImage.src = picture[0]; // Aquí también deberías utilizar picture[0]
-    mainImage.onload = () => {
-      setMainImageSrc(picture[0]); // Y aquí
+    const loadImage = async () => {
+      try {
+        const mainImage = new Image();
+        mainImage.src = picture[0];
+        mainImage.onload = () => {
+          setMainImageSrc(picture[0]);
+        };
+        mainImage.onerror = () => {
+          // Si la primera imagen falla, intentamos con la segunda
+          const fallbackImage = new Image();
+          fallbackImage.src = picture[1]; // Asegúrate de que picture[1] exista
+          fallbackImage.onload = () => {
+            setMainImageSrc(picture[1]);
+          };
+          fallbackImage.onerror = () => {
+            console.error("Ambas imágenes fallaron al cargar.");
+          };
+        };
+      } catch (error) {
+        console.error("Error cargando la imagen:", error);
+      }
     };
+
+    loadImage();
   }, [picture]);
+
   const handleAddToCart = () => {
     // Filtrar tamaños que no están vacíos
     const sizesToAdd = selectedSizes.filter((ss) => ss.size && ss.quantity);

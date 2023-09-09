@@ -8,8 +8,13 @@
   letter-spacing: -0.011rem;
   color: white;
   width: 100%;
-
+  margin-top: 2rem;
   text-align: -webkit-center;
+}
+
+.containerGeneral {
+  display: flex;
+  flex-direction: column;
 }
 
 .closeButton {
@@ -30,4 +35,37 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.button {
+  display: inline-flex;
+  padding: 0.625rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.1875rem;
+  background: #56b947;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  border: none;
+  align-self: center;
+  margin-top: 2rem;
+}
+
+.button:hover {
+  background: #45903a;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.center {
+  align-self: center;
 }

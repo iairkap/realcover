@@ -10,17 +10,18 @@ function Etiquetas({ order, orders = [], user }) {
 
   useEffect(() => {
     if (qrCanvasRef.current) {
-      QRCode.toCanvas(qrCanvasRef.current, "https://realcover.com.ar", function(
-        error
-      ) {
-        if (error) console.error(error);
-      });
+      QRCode.toCanvas(
+        qrCanvasRef.current,
+        "https://realcover.com.ar",
+        function (error) {
+          if (error) console.error(error);
+        }
+      );
     }
   }, []);
 
   const allOrders = order ? [order] : orders;
-  console.log(allOrders);
-  console.log(order);
+
   return (
     <div className={styles.Contenedor}>
       {allOrders.map((currentOrder) => {

@@ -17,12 +17,10 @@ export default function Login() {
       .post("/api/login", credentials)
       .then((res) => {
         if (res.status === 200) {
-          console.log("res", res);
           setValidated(true);
         }
       })
       .catch((err) => {
-        console.log("err", err);
         setValidated(false);
       });
   };
@@ -33,12 +31,10 @@ export default function Login() {
       .post("/api/logout")
       .then((res) => {
         if (res.status === 200) {
-          console.log("res", res);
           setValidated(false);
         }
       })
       .catch((err) => {
-        console.log("err", err);
         setValidated(true);
       });
   };

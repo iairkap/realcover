@@ -16,7 +16,6 @@ export default NextAuth({
   ],
   events: {
     async signIn(message) {
-      console.log("Event signIn triggered", message);
       postUserRegistration(message);
     },
   },

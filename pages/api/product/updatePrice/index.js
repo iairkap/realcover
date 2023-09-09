@@ -4,8 +4,6 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { productType, newPrice } = req.body;
 
-    console.log("Received POST request with:", req.body);
-
     if (!productType || !newPrice) {
       return res.status(400).json({
         message: "productType and newPrice are required in the request body.",
@@ -17,8 +15,6 @@ export default async function handler(req, res) {
         where: { productType: productType },
         data: { price: newPrice },
       });
-
-      console.log("Updated products:", updatedProducts);
 
       if (updatedProducts.count > 0) {
         res.status(200).send({ message: "Price updated successfully" });

@@ -56,8 +56,6 @@ async function handler(req, res, verifyMethod) {
         }
         break;
       case "PUT":
-        console.log("Recibiendo solicitud PUT con data:", req.body);
-
         try {
           const { orderId, status, deliveryDate } = req.body;
 

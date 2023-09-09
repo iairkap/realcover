@@ -19,6 +19,10 @@ import NumeroCarrito from "../numeroCarrito/numeroCarrito";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import menuNav from "../../../../public/menuNav.svg";
+import pedidosM from "../../../../public/pedidoswhite.svg";
+import marketM from "../../../../public/marketwhite.svg";
+import signinM from "../../../../public/signinwhite.svg";
+import logOutM from "../../../../public/logoutwhite.svg";
 
 function NavBar(props) {
   const {
@@ -153,20 +157,63 @@ function NavBar(props) {
         <Image src={menuNav} alt="Menu" />
       </div>
       {isMobileMenuOpen && (
-        <div className={styles.mobileMenu}>
+        <div
+          className={
+            isMobileMenuOpen
+              ? `${styles.mobileMenu} ${styles.mobileMenuOpen}`
+              : styles.mobileMenu
+          }
+        >
           <div onClick={handlePedidosClick}>
-            <span className={styles.spanm}>Mi perfil</span>
+            <div className={styles.contenedorMob}>
+              <span className={styles.spanm}>Mi perfil</span>
+              <Image
+                src={pedidosM}
+                alt="image"
+                className={styles.icono}
+                title="Mis pedidos"
+              />
+            </div>
           </div>
           <div onClick={handleCartOpen}>
-            <span className={styles.spanm}>Carrito</span>
+            <div className={styles.contenedorMob}>
+              <span className={styles.spanm}>Carrito</span>
+              <Image
+                src={marketM}
+                alt="image"
+                className={styles.icono}
+                title="Mis pedidos"
+                height={"10px"}
+              />
+            </div>
           </div>
           {isAuthenticated ? (
             <div onClick={handleLogout}>
-              <span className={styles.spanm}>Cerrar sesión</span>
+              <div className={styles.contenedorMob}>
+                <span className={styles.spanm}>Cerrar sesión</span>
+                <Image
+                  src={logOutM}
+                  alt="image"
+                  className={styles.icono}
+                  title="Mis pedidos"
+                  height={"10px"}
+                />
+              </div>
             </div>
           ) : (
             <div onClick={handleLoginClick}>
-              <span className={styles.spanm}>Iniciar sesión / Registrarse</span>
+              <div className={styles.contenedorMob}>
+                <span className={styles.spanm}>
+                  Iniciar sesión / Registrarse
+                </span>
+                <Image
+                  src={signinM}
+                  alt="image"
+                  className={styles.icono}
+                  title="Mis pedidos"
+                  height={"10px"}
+                />
+              </div>
             </div>
           )}
         </div>

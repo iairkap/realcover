@@ -26,8 +26,6 @@ function CuponContainer({ userData }) {
     fetchCoupons();
   }, []); // El array vacío significa que useEffect se ejecutará solo una vez, similar a componentDidMount.
 
-  console.log(coupons);
-
   return (
     <div className={styles.cuponContainer}>
       {coupons.map((coupon) => (

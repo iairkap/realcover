@@ -25,7 +25,6 @@ function GridItem({
 
   const isDark =
     Math.floor(index / 4) % 2 === 0 ? index % 2 === 0 : index % 2 === 1;
-  console.log(item);
 
   return (
     <div

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./form.module.css";
 import Confirmacion from "../confirmationRegister/Confirmacion.jsx";
+import { FiEye, FiEyeOff } from "react-icons/fi"; // Importa los iconos que necesitarás
 
 function FormSignIn({ toggleForm }) {
   const [name, setName] = useState("");
@@ -25,6 +26,14 @@ function FormSignIn({ toggleForm }) {
   const handleSuccessfulRegistration = () => {
     setIsRegistered(true);
   };
+  const [hasStartedTypingPassword, setHasStartedTypingPassword] =
+    useState(false);
+  const [hasStartedTypingConfirmPassword, setHasStartedTypingConfirmPassword] =
+    useState(false);
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -117,69 +126,112 @@ function FormSignIn({ toggleForm }) {
             <span className={styles.formSubs}>Nombre</span>
             <input
               type="text"
-              placeholder=""
-              className={styles.input}
+              placeholder={nameError ? nameError : ""}
+              className={`${styles.input} ${nameError ? styles.error : ""}`}
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onFocus={() => setNameError("")}
             />
-            {nameError && <span>{nameError}</span>}
           </div>
           <div className={styles.inputContenedor}>
             <span className={styles.formSubs}>Apellido</span>
             <input
               type="text"
-              placeholder=""
+              placeholder={lastNameError ? lastNameError : ""}
+              className={`${styles.input} ${lastNameError ? styles.error : ""}`}
               value={lastName}
-              className={styles.input}
               onChange={(e) => setLastName(e.target.value)}
+              onFocus={() => setLastNameError("")}
             />
-            {lastNameError && <span>{lastNameError}</span>}
           </div>
           <div className={styles.inputContenedor}>
             <span className={styles.formSubs}>Email</span>
             <input
-              type="email"
-              placeholder=""
+              type="text"
+              placeholder={emailError ? emailError : ""}
+              className={`${styles.input} ${emailError ? styles.error : ""}`}
               value={email}
-              className={styles.input}
               onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setEmailError("")}
             />
-            {emailError && <span>{emailError}</span>}
           </div>
         </div>
         <div className={styles.columna}>
           <div className={styles.inputContenedor}>
             <span className={styles.formSubs}>Contraseña</span>
-            <input
-              type="password"
-              placeholder=""
-              value={password}
-              className={styles.input}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {passwordError && <span>{passwordError}</span>}
+            <div style={{ position: "relative" }}>
+              <input
+                type={isPasswordVisible ? "text" : "password"}
+                placeholder={passwordError ? passwordError : ""}
+                className={`${styles.input} ${
+                  passwordError ? styles.error : ""
+                }`}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setHasStartedTypingPassword(true); // Actualización del estado cuando el usuario empieza a escribir
+                }}
+                onFocus={() => setPasswordError("")}
+              />
+              {hasStartedTypingPassword && ( // El ícono sólo se mostrará si el usuario ha empezado a escribir
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px", // Ajustado para estar más cerca del borde
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setIsPasswordVisible((prev) => !prev)}
+                >
+                  {isPasswordVisible ? <FiEyeOff /> : <FiEye />}
+                </span>
+              )}
+            </div>
           </div>
+
           <div className={styles.inputContenedor}>
             <span className={styles.formSubs}>Repita su contraseña</span>
-            <input
-              type="password"
-              placeholder=""
-              value={confirmPassword}
-              className={styles.input}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            {confirmPasswordError && <span>{confirmPasswordError}</span>}
+            <div style={{ position: "relative" }}>
+              <input
+                type={isConfirmPasswordVisible ? "text" : "password"}
+                placeholder={confirmPasswordError ? confirmPasswordError : ""}
+                className={`${styles.input} ${
+                  confirmPasswordError ? styles.error : ""
+                }`}
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setHasStartedTypingConfirmPassword(true); // Actualización del estado cuando el usuario empieza a escribir
+                }}
+                onFocus={() => setConfirmPasswordError("")}
+              />
+              {hasStartedTypingConfirmPassword && ( // El ícono sólo se mostrará si el usuario ha empezado a escribir
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px", // Ajustado para estar más cerca del borde
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setIsConfirmPasswordVisible((prev) => !prev)}
+                >
+                  {isConfirmPasswordVisible ? <FiEyeOff /> : <FiEye />}
+                </span>
+              )}
+            </div>
           </div>
           <div className={styles.inputContenedor}>
             <span className={styles.formSubs}>Teléfono</span>
             <input
               type="text"
-              placeholder=""
+              placeholder={phoneError ? phoneError : ""}
+              className={`${styles.input} ${phoneError ? styles.error : ""}`}
               value={phone}
-              className={styles.input}
               onChange={(e) => setPhone(e.target.value)}
+              onFocus={() => setPhoneError("")}
             />
-            {phoneError && <span>{phoneError}</span>}
           </div>
         </div>
       </div>

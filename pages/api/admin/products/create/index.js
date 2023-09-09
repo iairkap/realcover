@@ -1,5 +1,5 @@
 import prisma from "../../../../../prisma/client";
-import { mapAndSaveImages } from "../../../firebase/mapnsave";
+import mapAndSaveImages from "../../../firebase/mapnsave";
 /* import verifyMiddleware from "../../../jwt-session/verifyMiddleware";
  */
 async function handler(req, res, verifyMethod) {
@@ -29,12 +29,12 @@ async function handler(req, res, verifyMethod) {
         }
       } else {
         try {
-          /*     const bolsillo = await mapAndSaveImages(
+          const bolsillo = await mapAndSaveImages(
             "ConBolsillo",
             "CON_BOLSILLO",
             ["Size10", "Size12", "Size14", "Size15_6", "Size17"],
             3290
-          ); */
+          );
           const valijas = await mapAndSaveImages(
             "CubreValijas",
             "CUBRE_VALIJAS",
@@ -74,10 +74,9 @@ async function handler(req, res, verifyMethod) {
 
           return res.status(200).json({ message: "Products created" });
         } catch (error) {
-          return res.status(500).json({
-            message: "Error creating many products",
-            error: error.message,
-          });
+          return res
+            .status(500)
+            .json({ message: "Error creating many products", error: error });
         }
       }
 

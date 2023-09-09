@@ -16,7 +16,6 @@ function PreciosCardContainer(props) {
       try {
         const response = await axios.get("/api/product/firstProductType");
         setProducts(response.data);
-        console.log("Fetched products:", response.data);
       } catch (error) {
         console.error("Error fetching first products:", error);
       }
@@ -29,7 +28,6 @@ function PreciosCardContainer(props) {
   };
 
   const handlePriceUpdateClick = (productType) => {
-    console.log("Selected product type:", productType);
     setSelectedProductType(productType);
     setIsModalOpen(true);
   };
@@ -37,7 +35,6 @@ function PreciosCardContainer(props) {
 
   const handleConfirmPriceUpdate = async () => {
     const newPriceValue = parseFloat(newPriceInputRef.current.value); // <-- Usa la referencia aquí
-    console.log("New Price Value:", newPriceValue);
     if (!newPriceValue || newPriceValue <= 0) {
       alert("Por favor, introduce un precio válido.");
       return;
@@ -48,7 +45,6 @@ function PreciosCardContainer(props) {
         productType: selectedProductType,
         newPrice: newPriceValue,
       });
-      console.log("Price update response:", response.data);
 
       setProducts((prevState) => ({
         ...prevState,

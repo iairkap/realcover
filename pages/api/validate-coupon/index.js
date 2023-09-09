@@ -4,9 +4,7 @@ const handleRequest = async (req, res) => {
   const prisma = new PrismaClient();
 
   if (req.method === "POST") {
-    const { code } = req.body;
-
-    // Obtener el userId a partir del email verificado
+    const { code, totalUnits } = req.body;
     const currentUser = await prisma.user.findUnique({
       where: { email: req.verifiedEmail },
     });
@@ -24,6 +22,15 @@ const handleRequest = async (req, res) => {
 
       if (!coupon) {
         return res.json({ isValid: false });
+      }
+
+      // Verifica si totalUnits cumple con minPurchaseUnits
+      if (coupon.minPurchaseUnits && totalUnits < coupon.minPurchaseUnits) {
+        return res.json({
+          isValid: false,
+          message:
+            "El total de unidades es insuficiente para aplicar este cupón.",
+        });
       }
 
       if (coupon.used || coupon.userId !== currentUserId) {

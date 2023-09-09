@@ -563,8 +563,8 @@
   .threeDotsButton {
     background-color: transparent;
     border: none;
-    place-self: self-start;
-    padding-right: 2rem;
+    place-self: flex-start;
+    margin-top: 10px;
   }
   .orderInfo {
     display: flex;

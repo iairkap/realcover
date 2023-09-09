@@ -1,10 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 .contenedorGeneral {
-  display: flex;
-  justify-content: space-between;
-  /* gap: 2rem; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   margin-right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .contenedorGeneral {
+    grid-template-columns: 1fr;
+  }
+  .form {
+    margin: 1rem;
+  }
+  .input,
+  .boton {
+    width: 100%;
+  }
+  .inputContenedor > div {
+    width: 100%;
+  }
 }
 
 .form {
@@ -43,16 +59,18 @@
 }
 
 .input {
-  width: 100%;
+  width: calc(100% - 44px); /* Ajustado para tener en cuenta el padding */
   background-color: #d9d9d9;
   border: solid 0.2px #000000;
   border-radius: 0.2rem;
-  padding: 0.5rem 0.25rem 0.5rem 2.2rem; /* Simplificado */
+  padding: 0.5rem 2.2rem 0.5rem 1.2rem; /* Ajustado para tener un padding uniforme */
 }
+
 .input:focus {
   outline: solid 2px #a4ca92;
   border: none;
 }
+
 .boton {
   background-color: #56b947;
   color: white;
@@ -94,11 +112,23 @@
   font-family: "Roboto", sans-serif;
   font-weight: 200;
   color: white;
-  transition: 0.2s;
   background: none;
   border: none;
 }
 
 .toggle:hover {
   color: #56b947;
+}
+
+/* Nuevos estilos para los mensajes de error */
+.error {
+  color: #ff4f4f;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 942px) {
+  .formSubs {
+    font-size: 0.8rem;
+  }
 }

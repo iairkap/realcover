@@ -110,7 +110,8 @@ function LogIn({ toggleForm }) {
               className={styles.button3}
               onClick={async () => {
                 const res = await signIn("google", {
-                  callbackUrl: "http://localhost:3000/store/fundas",
+                  callbackUrl:
+                    "https://realcover-git-cardscontaineroptimization-iairkap.vercel.app/store/fundas",
                 });
                 setIsAuthenticated(true);
               }}

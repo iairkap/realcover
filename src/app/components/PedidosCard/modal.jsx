@@ -107,7 +107,6 @@ function ModalDireccion({
 
   const handleUpdateUserInfo = async (e) => {
     e.preventDefault();
-    console.log("Attempting to update user with data:", userFormData);
 
     try {
       const response = await fetch(`/api/user/fafa`, {
@@ -122,7 +121,6 @@ function ModalDireccion({
       const responseData = await response.json();
 
       if (response.ok) {
-        console.log("User updated successfully:", responseData);
         setUserFormData({
           address: responseData.address || "",
           city: responseData.city || "",

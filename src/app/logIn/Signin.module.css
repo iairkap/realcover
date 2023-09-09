@@ -249,6 +249,9 @@
   .picture {
     height: 690px;
   }
+  .container {
+    background-color: #232323;
+  }
 }
 
 @media only screen and (min-width: 3072px) and (max-width: 3240px) and (min-height: 1920px) and (max-height: 2100px) {
@@ -262,3 +265,5 @@
     margin-top: 2rem;
   }
 }
+
+@media screen and;

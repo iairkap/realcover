@@ -21,7 +21,6 @@ function PedidosContainer({ userData, setUserData }) {
         if (response.status === 200) {
           setOrders(response.data);
         }
-        console.log("Orders:", response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);
       }

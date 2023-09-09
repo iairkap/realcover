@@ -2,7 +2,7 @@ import prisma from "../../../prisma/client";
 import { v4 as uuidv4 } from "uuid";
 export default async function handler(req, res) {
   const { method } = req;
-  const { userId, total, status, products, couponId } = req.body;
+  const { userId, total, status, products, couponId = null } = req.body;
 
   switch (method) {
     case "POST":
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
             total,
             status,
             userId,
-            // couponId: couponId, // Aquí usas el ID del cupón que se envió desde el frontend.
+            ...(couponId && { couponId }), // Solo se añadirá si couponId es definido y truthy
           },
         });
 
@@ -56,6 +56,7 @@ export default async function handler(req, res) {
         }
         res.status(200).json({ order, message: "Order created" });
       } catch (error) {
+        console.error(error);
         res
           .status(500)
           .json({ message: "Error creating one order", error: error.message });
@@ -112,8 +113,6 @@ export default async function handler(req, res) {
       }
       break;
     case "PUT":
-      console.log("Recibiendo solicitud PUT con data:", req.body);
-
       try {
         const { orderId, status } = req.body;
 

@@ -33,18 +33,9 @@ export const useOrderLogic = (
   if (orderDetails && orderDetails.length > 0 && orderDetails[0].products) {
     imageUrl = orderDetails[0].products.picture[0];
     isCubreValijas = imageUrl.includes("CubreValijas%"); // Asignación dentro del bloque if
-    console.log(orderDetails[0].products.picture[0]);
   } else {
-    console.log(
-      "El usuario no ha hecho ninguna orden o la estructura de datos no es la esperada."
-    );
   }
-  /*   console.log(orderDetails[0].products.picture);
-   */
-  /*   console.log(products);
-   */
-  const statusClass =
-    status === "En proceso" ? styles.enProceso : styles.entregado;
+  statusClass = status === "En proceso" ? styles.enProceso : styles.entregado;
 
   const formattedDeliveryDate = deliveryDate
     ? new Intl.DateTimeFormat("es-ES", {
@@ -125,10 +116,6 @@ export const useOrderLogic = (
         size: detail.size,
       })),
     };
-    console.log(
-      "Enviando orden con datos:",
-      JSON.stringify(newOrderData, null, 2)
-    );
 
     try {
       const response = await fetch("/api/order", {
@@ -144,7 +131,6 @@ export const useOrderLogic = (
       }
 
       const data = await response.json();
-      console.log(data);
 
       // Puede que quieras actualizar el UI de alguna manera, por ejemplo mostrando un mensaje de éxito.
       setIsConfirmModalOpen(true);
@@ -172,7 +158,6 @@ export const useOrderLogic = (
   }
   const handleUpdateUserInfo = async (e) => {
     e.preventDefault();
-    console.log("Attempting to update user with data:", userFormData);
 
     try {
       const response = await fetch(`/api/user/fafa`, {
@@ -189,10 +174,8 @@ export const useOrderLogic = (
         console.error("User is not authenticated. Please sign in first.");
         return;
       }
-      console.log("Attempting to update user with data:", userFormData);
 
       if (response.ok) {
-        console.log("User updated successfully:", responseData);
         setUserFormData({
           address: responseData.address || "",
           city: responseData.city || "",

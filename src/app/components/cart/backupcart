@@ -37,13 +37,10 @@ function Cart() {
   };
 
   const handleQuantityChange = (itemId, size, quantityChange) => {
-    console.log("Original cart:", cart);
-
     const updatedCart = [...cart];
     const itemIndex = updatedCart.findIndex((item) => item.id === itemId);
 
     if (itemIndex === -1) {
-      console.log(`El ítem con ID ${itemId} no se encontró en el carrito`);
       return;
     }
 
@@ -51,26 +48,13 @@ function Cart() {
       (s) => s.size === size
     );
     if (sizeIndex === -1) {
-      console.log(
-        `El tamaño ${size} no se encontró para el ítem con ID ${itemId}`
-      );
       return;
     }
-
-    console.log(
-      "Before change:",
-      updatedCart[itemIndex].selectedSizes[sizeIndex].quantity
-    );
 
     // Asegurarse de que ambos valores sean números antes de sumarlos
     updatedCart[itemIndex].selectedSizes[sizeIndex].quantity =
       Number(updatedCart[itemIndex].selectedSizes[sizeIndex].quantity) +
       Number(quantityChange);
-
-    console.log(
-      "After change:",
-      updatedCart[itemIndex].selectedSizes[sizeIndex].quantity
-    );
 
     if (updatedCart[itemIndex].selectedSizes[sizeIndex].quantity <= 0) {
       updatedCart[itemIndex].selectedSizes.splice(sizeIndex, 1);
@@ -143,7 +127,6 @@ function Cart() {
       console.error("UserId not found in localStorage");
       return;
     }
-    console.log("UserId:", userId);
 
     const products = cart
       .map((item) => {
@@ -156,8 +139,6 @@ function Cart() {
       })
       .flat();
 
-    console.log("Products:", products);
-
     const orderData = {
       userId: JSON.parse(userId).id,
       total: calculateTotals(),
@@ -165,13 +146,9 @@ function Cart() {
       products,
     };
 
-    // Añadiendo el console.log aquí para ver la data de la orden:
-    console.log("Sending order data to /api/order:", orderData);
-
     try {
       const response = await axios.post("/api/order", orderData);
       if (response.status === 200) {
-        console.log("Order successfully dispatched", response.data);
         setOrderSuccess(true); // Mostrar mensaje de éxito
         const emailData = {
           cartData: cart,
@@ -179,14 +156,9 @@ function Cart() {
           orderId: response.data.order.id, // Ensure you are accessing the ID correctly based on your response structure
         };
 
-        // Añadiendo el console.log aquí para ver la data del email:
-        console.log("Sending email data to /api/emailorder:", emailData);
-
         axios
           .post("/api/emailorder", emailData)
-          .then((res) => {
-            console.log("Email dispatched successfully:", res);
-          })
+          .then((res) => {})
           .catch((error) => {
             console.error("Error dispatching the email:", error);
           });

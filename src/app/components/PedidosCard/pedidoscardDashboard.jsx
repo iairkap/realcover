@@ -47,9 +47,6 @@ function PedidosCardDashboard({
   const confirmSend = async () => {
     setIsLoading(true);
     try {
-      console.log("Enviando orden con ID:", orderId);
-
-      // Actualizar la orden en la base de datos o donde sea necesario
       const updateResponse = await fetch("api/order", {
         method: "PUT",
         headers: {
@@ -100,7 +97,6 @@ function PedidosCardDashboard({
       await fetchOrders();
     } catch (error) {
       setError(error.message);
-      console.log(error);
     } finally {
       setIsLoading(false);
       closeModal();
@@ -116,8 +112,6 @@ function PedidosCardDashboard({
   });
   const imageUrl = orderDetails[0].products.picture;
   const isCubreValijas = imageUrl.includes("CubreValijas%");
-
-  console.log(orderDetails[0].products.picture);
 
   const statusClass =
     status === "En proceso" ? styles.enProceso : styles.entregado;
@@ -345,7 +339,6 @@ function PedidosCardDashboard({
     setPDFVisible(true);
   };
 
-  console.log(groupedOrderDetails);
   return (
     <div className={styles.contenedorCard}>
       <div className={styles.leftContainer}>

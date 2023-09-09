@@ -25,22 +25,7 @@ function Cart() {
   const [discount, setDiscount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
-
-  const handleCouponApply = async () => {
-    try {
-      const response = await axios.post("/api/validate-coupon", {
-        code: couponCode,
-      });
-      if (response.data.isValid) {
-        setDiscount(response.data.discountValue);
-        alert("Cupón aplicado exitosamente!");
-      } else {
-        alert("Cupón inválido o ya ha sido usado.");
-      }
-    } catch (error) {
-      console.error("Error al validar el cupón:", error);
-    }
-  };
+  const [couponId, setCouponId] = useState(null); // Añade un nuevo estado para almacenar el ID del cupón
 
   const handleModalOpen = () => {
     setIsOpen(true);
@@ -56,13 +41,10 @@ function Cart() {
   };
 
   const handleQuantityChange = (itemId, size, quantityChange) => {
-    console.log("Original cart:", cart);
-
     const updatedCart = [...cart];
     const itemIndex = updatedCart.findIndex((item) => item.id === itemId);
 
     if (itemIndex === -1) {
-      console.log(`El ítem con ID ${itemId} no se encontró en el carrito`);
       return;
     }
 
@@ -70,16 +52,8 @@ function Cart() {
       (s) => s.size === size
     );
     if (sizeIndex === -1) {
-      console.log(
-        `El tamaño ${size} no se encontró para el ítem con ID ${itemId}`
-      );
       return;
     }
-
-    console.log(
-      "Before change:",
-      updatedCart[itemIndex].selectedSizes[sizeIndex].quantity
-    );
 
     updatedCart[itemIndex].selectedSizes[sizeIndex].quantity =
       Number(updatedCart[itemIndex].selectedSizes[sizeIndex].quantity) +
@@ -109,15 +83,40 @@ function Cart() {
 
   const calculateTotalUnits = () => {
     let totalUnits = 0;
-    cart.forEach((item) => {
-      item.selectedSizes.forEach((sizeItem) => {
-        totalUnits += sizeItem.quantity;
-      });
-    });
+    if (!cart) {
+      console.error("El carrito está indefinido");
+      return totalUnits;
+    }
+
+    totalUnits = cart.reduce((total, product) => {
+      const productTotal = product.selectedSizes.reduce(
+        (subtotal, size) => subtotal + parseInt(size.quantity, 10),
+        0
+      );
+      return total + productTotal;
+    }, 0);
 
     return totalUnits;
   };
 
+  const handleCouponApply = async () => {
+    try {
+      const totalUnits = calculateTotalUnits();
+      const response = await axios.post("/api/validate-coupon", {
+        code: couponCode,
+        totalUnits,
+      });
+      if (response.data.isValid) {
+        setDiscount(response.data.discountValue);
+        setCouponId(response.data.id); // Almacenar el ID del cupón en el estado
+        alert("Cupón aplicado exitosamente!");
+      } else {
+        alert("Cupón inválido o ya ha sido usado.");
+      }
+    } catch (error) {
+      console.error("Error al validar el cupón:", error);
+    }
+  };
   const [hasAttemptedToOrder, setHasAttemptedToOrder] = useState(false);
   if (!checkoutVisible) {
     return null;
@@ -167,20 +166,17 @@ function Cart() {
       })
       .flat();
 
-    console.log("Products:", products);
-
     const orderData = {
       userId: JSON.parse(userData.id),
       total: calculateTotals(),
       status: "En proceso",
       products,
+      ...(couponId && { couponId }), // Utiliza el ID del cupón aquí
     };
-    console.log("Sending order data to /api/order:", orderData);
 
     try {
       const response = await axios.post("/api/order", orderData);
       if (response.status === 200) {
-        console.log("Order successfully dispatched", response.data);
         setOrderSuccess(true); // Mostrar mensaje de éxito
         setIsModalConfirmOpen(true); // Abrir el modal de confirmación
         const emailData = {
@@ -192,13 +188,9 @@ function Cart() {
           //   couponCode: coupon.id ? coupon.id : null, // Código del cupón aplicado (si existe)
         };
 
-        console.log("Sending email data to /api/emailorder:", emailData);
-
         axios
           .post("/api/emailorder", emailData)
-          .then((res) => {
-            console.log("Email dispatched successfully:", res);
-          })
+          .then((res) => {})
           .catch((error) => {
             console.error("Error dispatching the email:", error);
           });
@@ -212,7 +204,6 @@ function Cart() {
   const itemsToDisplay = currentOrderDetails.length
     ? currentOrderDetails
     : cart;
-  console.log(itemsToDisplay);
   const sizeMapping = {
     Size7: '7"',
     Size8: '8"',
@@ -247,7 +238,6 @@ function Cart() {
     [ProductType.CON_BOLSILLO]: "Con Bolsillo",
   };
 
-  console.log(itemsToDisplay);
   const getFirstImage = (pictureArray) => {
     return pictureArray &&
       Array.isArray(pictureArray) &&

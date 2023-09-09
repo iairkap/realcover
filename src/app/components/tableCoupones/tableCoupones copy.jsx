@@ -9,7 +9,6 @@ import Image from "next/image";
 function TableCouponesDashboard({ coupons = [] }) {
   const [selectedCoupons, setSelectedCoupons] = useState({});
 
-  console.log(coupons);
   function formatDate(inputDate) {
     const date = new Date(inputDate);
     const day = String(date.getDate()).padStart(2, "0");
@@ -80,13 +79,8 @@ function TableCouponesDashboard({ coupons = [] }) {
     [selectedCoupons]
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data: coupons });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data: coupons });
 
   const handleCheckboxChange = (id) => {
     setSelectedCoupons((prev) => ({

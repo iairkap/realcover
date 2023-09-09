@@ -2,7 +2,6 @@ import nodemailer from "nodemailer";
 import renderToString from "../../../src/app/helpers/renderToString";
 import Email from "../../../src/app/emailPrueba/emailPrueba";
 export default async function handler(req, res) {
-  console.log("Request received:", req.body); // Agregado
   if (req.method === "POST") {
     const emailContent = renderToString(Email, {
       cartData: req.body.cartData,
@@ -29,7 +28,6 @@ export default async function handler(req, res) {
       subject: "Asunto del correo",
       html: emailContent,
     };
-    console.log("Mail options:", mailOptions); // Agregado
 
     try {
       const info = await transporter.sendMail(mailOptions);

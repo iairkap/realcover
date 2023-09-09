@@ -39,8 +39,10 @@ function ModalConfirmacion({ isModalOpen, setIsModalOpen }) {
           </button>
           <div className={styles.containerInfo}>
             <h1 className={styles.titulo}>Pedido realizado con exito!</h1>
-            <Link href="/profile">
-              <button>Agregar Direccion de Envio</button>
+            <Link href="/profile" className={styles.center}>
+              <button className={styles.button}>
+                Agregar Direccion de Envio
+              </button>
             </Link>
           </div>
         </div>

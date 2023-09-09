@@ -45,7 +45,7 @@ export default async function handler(req, res) {
       const expiryDateISO = expiryDate.toISOString();
 
       const couponData = {
-        code: `AUTO${user.id}`,
+        code: `REALCOVER&&${user.name}`,
         discountValue: discountValue,
         description: `Descuento de $${discountValue} para compras que superen las 35 unidades.`,
         useOnce: true,

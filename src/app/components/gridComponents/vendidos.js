@@ -34,7 +34,7 @@ const vendidos = [
     Protege tu notebook con elegancia con nuestros maletines de cordura melange, con envíos a todo Argentina.`,
     buttonLinkMenor: `https://articulo.mercadolibre.com.ar/MLA-1308107543-maletin-portafolio-morral-con-division-real-cover-_JM#position=3&search_layout=stack&type=item&tracking_id=da6c2641-5150-4eea-9440-da2ad0e65af7`,
     buttonLinkMayor: "",
-    displayType: "",
+    displayType: "PORTAFOLIOS",
   },
   {
     id: 7,
@@ -65,7 +65,7 @@ const vendidos = [
     Fabricadas con neoprene auténtico de 3 mm de espesor, superan la calidad de las fundas de neoprene sintético o goma espuma comunes.<br>Estampadas en ambas caras para un estilo inigualable, nuestras fundas incorporan manijas flexibles para un fácil almacenamiento en mochilas o carteras y un bolsillo externo para accesorios.<br> Destacan por su resistencia y durabilidad, nuestras fundas son además completamente lavables. Protege tu notebook con estilo con nuestras fundas full color de neoprene, con envíos a todo Argentina.`,
 
     buttonLinkMenor: `https://articulo.mercadolibre.com.ar/MLA-749658795-funda-tipo-maletin-notebook-neoprene-para-14-y-156-bolsillo-y-manijas-disenos-surtidos-real-cover-_JM#reco_item_pos=0&reco_backend=machinalis-seller-items-pdp&reco_backend_type=low_level&reco_client=vip-seller_items-above&reco_id=7df82faf-306f-4b77-96a2-7ace02dd3e9e`,
-    displayType: "fullColor",
+    displayType: "MALETINES_FULL_COLOR",
   },
   {
     id: 1,
@@ -100,7 +100,7 @@ const vendidos = [
 
     El diseño negro de estos maletines se complementa con un bolsillo estampado, aportando un toque de estilo inconfundible. Cada uno viene equipado conmanijas de neopreno flexibles, lo que permite un almacenamiento cómodo en mochilas o carteras. Además, cuentan con un bolsillo externo, perfecto para llevar a mano tus accesorios esenciales.`,
     buttonLinkMenor: `https://articulo.mercadolibre.com.ar/MLA-868477884-funda-maletin-notebook-neoprene-bolsillo-estampado-disenos-_JM#reco_item_pos=2&reco_backend=machinalis-seller-items-pdp&reco_backend_type=low_level&reco_client=vip-seller_items-above&reco_id=bf903670-6c9d-411f-ac88-886de6b4c9fb`,
-    displayType: "maletines",
+    displayType: "MALETINES",
   },
   {
     id: 4,
@@ -135,7 +135,7 @@ const vendidos = [
       cubrevalijasImages.cubrevalijas14,
       cubrevalijasImages.cubrevalijas16,
     ],
-    displayType: "cubrevalijas",
+    displayType: "CUBRE_VALIJAS",
   },
   {
     id: 5,
@@ -169,7 +169,7 @@ const vendidos = [
     Estampadas en ambas caras para un estilo inigualable Destacan por su resistencia y durabilidad, nuestras fundas son además completamente lavables.
     
     Protege tu notebook con estilo con nuestras fundas de neopreno, con envíos a todo Argentina.`,
-    displayType: "conBolsillo",
+    displayType: "CON_BOLSILLO",
   },
   {
     id: 3,
@@ -204,7 +204,7 @@ const vendidos = [
     Confeccionadas en su interior con cuerina de alta calidad y en su exterior forradas en poliset resistente.<br>Estas fundas poseen un cierre magnético con dos posiciones de uso para máxima conveniencia.<br>
     Superan la calidad de las fundas comunes, ofreciendo una protección superior para tu tablet.<br>Estas fundas no solo protegen tu tablet, sino que también aportan un estilo inigualable a tus dispositivos.<br>
     Destacan por su resistencia y durabilidad, nuestras fundas son además muy fáciles de manejar y usar.<br>Protege tu tablet con estilo con nuestras fundas rígidas, con envíos a toda Argentina.`,
-    displayType: "tablets",
+    displayType: "TABLET_COVER",
   },
   {
     id: 2,
@@ -232,7 +232,7 @@ const vendidos = [
       fundasImages.funda15,
       fundasImages.funda11,
     ],
-    displayType: "covers",
+    displayType: "NEOPRENE_COVER",
   },
 
   {

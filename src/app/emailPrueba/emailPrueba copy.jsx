@@ -59,7 +59,6 @@ function Email({ CartData, email, orderId, total }) {
       try {
         const response = await axioss.get("/api/order/");
         setOrders(response.data);
-        console.log("Fetched order:", response.data);
       } catch (error) {
         console.error("Error fetching order:", error);
       }
@@ -67,7 +66,6 @@ function Email({ CartData, email, orderId, total }) {
     fetchOrders();
   }, []);
 
-  console.log(orders);
   const aggregateOrderDetails = (orderDetails) => {
     const details = orderDetails.reduce((acc, detail) => {
       const productDisplayName =
@@ -103,7 +101,6 @@ function Email({ CartData, email, orderId, total }) {
 
   if (order) {
     summarizedDetails = aggregateOrderDetails(order.orderDetails);
-    console.log(summarizedDetails);
   }
 
   const detailStrings =

@@ -29,7 +29,6 @@ function Fundas() {
         const data = await response.json();
 
         if (response.ok) {
-          console.log("Login exitoso:", data);
         } else {
           console.error("Error en el login:", data);
         }
@@ -57,16 +56,8 @@ function Fundas() {
   return (
     <div className={styles.background}>
       <NavBar className={styles.NavBar} />
-      {isLoading ? (
-        <div className={styles.loadingContainer}>
-          <LoadingContainer />
-        </div>
-      ) : (
-        <>
-          <CardsContainer isLoading={isLoading} />
-          <Cart />
-        </>
-      )}
+      <CardsContainer isLoading={isLoading} />
+      <Cart />
     </div>
   );
 }

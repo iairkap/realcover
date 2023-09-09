@@ -13,8 +13,6 @@ export async function postUserRegistration(event) {
 
     // Si no existe el usuario en la base de datos, entonces es un nuevo registro.
     if (!existingUser) {
-      console.log("Creating coupon for new user:", email);
-
       const [firstName, ...lastNameParts] = event.user.name.split(" ");
       const lastName = lastNameParts.join(" ");
 
@@ -54,7 +52,6 @@ export async function postUserRegistration(event) {
       };
 
       await prisma.coupon.create({ data: couponData });
-      console.log("Coupon created:", couponData);
     } else {
       console.log("User already exists:", email);
     }

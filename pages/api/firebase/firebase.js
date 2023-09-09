@@ -1,7 +1,7 @@
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 
-/* const firebaseConfig = {
+const firebaseConfig = {
   apiKey: process.env.FIRE_API_KEY,
   authDomain: "real-cover.firebaseapp.com",
   projectId: "real-cover",
@@ -9,7 +9,7 @@ import { initializeApp } from "firebase/app";
   messagingSenderId: "308908780968",
   appId: "1:308908780968:web:8a3176ab8b84c34acc019d",
   measurementId: "G-RQFL8DH01N",
-}; */
+};
 
 const firebaseConfig2 = {
   apiKey: process.env.FIRE_API_KEY_2,
@@ -21,8 +21,8 @@ const firebaseConfig2 = {
   measurementId: "G-Z29JBD80BZ",
 };
 
-/* const app = initializeApp(firebaseConfig);
-const storage = getStorage(app); */
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 
 const app2 = initializeApp(firebaseConfig2, "app2");
 const storage2 = getStorage(app2);
@@ -35,7 +35,7 @@ function extractImageNameFromURL(url) {
 }
 
 export {
-  // storage,
+  storage,
   storage2,
   ref,
   listAll,

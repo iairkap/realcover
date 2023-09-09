@@ -22,7 +22,6 @@ export default async function handler(req, res) {
       await sgMail.send(content);
       res.status(200).json({ status: "Ok" });
     } catch (error) {
-      console.log("ERROR", error);
       res.status(500).json({ error: error.toString() });
     }
   } else {

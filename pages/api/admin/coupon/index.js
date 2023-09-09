@@ -17,7 +17,6 @@ export default async function handler(req, res) {
       break;
     case "POST":
       try {
-        console.log("Received request to create coupon with data:", req.body);
         const newCoupon = {
           ...req.body,
           userId: req.body.userId, // Use userId from the request body directly
@@ -25,7 +24,6 @@ export default async function handler(req, res) {
 
         const createdCoupon = await prisma.coupon.create({ data: newCoupon });
 
-        console.log("Successfully created coupon:", createdCoupon);
         res.status(201).json(createdCoupon);
       } catch (error) {
         console.error("Error creating coupon:", error);

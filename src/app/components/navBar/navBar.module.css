@@ -73,11 +73,19 @@
 .mobileMenu {
   display: none;
   flex-direction: column;
-  background-color: #56b947;
+  background-color: #56b947e6;
   position: absolute;
   top: 44px;
   width: 100%;
-  padding: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.mobileMenuOpen {
+  max-height: 300px; /* Ajusta según tus necesidades */
+  opacity: 1;
 }
 
 .mobileMenu > div {
@@ -100,7 +108,6 @@
     background: #232323e2;
     display: flex;
     align-items: center;
-    justify-content: space-between;
   }
   .logo {
     margin-left: 2rem;
@@ -109,13 +116,18 @@
   .mobileMenuIcon {
     padding-right: 2rem;
   }
-  .mobileMenu {
-    padding-left: 3rem;
-  }
+
   .spanm {
     font-family: "Roboto", sans-serif;
     color: white;
     font-weight: 900;
     padding-left: 1rem;
   }
+}
+
+.contenedorMob {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -3,8 +3,6 @@ import styles from "./preciosCard.module.css";
 import Image from "next/image";
 
 function PreciosCard({ product, onPriceUpdateClick }) {
-  console.log("Rendering product:", product);
-
   if (typeof product === "string") {
     return <div>{product}</div>;
   }

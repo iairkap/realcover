@@ -5,8 +5,6 @@ import StarRating from "./starRating";
 const ReviewCard = (props) => {
   const { review } = props;
 
-  console.log(review);
-
   // Función para formatear la fecha
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
